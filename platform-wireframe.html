@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trillet Platform Page Wireframe — Why Full-Stack Matters</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', system-ui, sans-serif; }
+  </style>
+</head>
+<body class="min-h-screen bg-stone-50 text-neutral-950">
+
+  <!-- Header -->
+  <header class="sticky top-0 z-50 border-b border-neutral-200/80 bg-stone-50/90 backdrop-blur-xl">
+    <div class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-10">
+      <div class="flex items-center gap-3">
+        <div class="flex h-9 w-9 items-center justify-center rounded-full border border-neutral-300 bg-white text-xs font-semibold tracking-tight shadow-sm">T</div>
+        <div>
+          <div class="text-sm font-semibold tracking-tight">Trillet</div>
+          <div class="text-[10px] uppercase tracking-[0.22em] text-neutral-500">Platform</div>
+        </div>
+      </div>
+      <nav class="hidden items-center gap-8 text-sm text-neutral-600 md:flex">
+        <a href="homepage-wireframe.html">Home</a>
+        <span class="font-medium text-neutral-950">Platform</span>
+        <a href="solutions-wireframe.html">Solutions</a>
+        <a href="pricing-wireframe.html">Pricing</a>
+        <a href="enterprise-wireframe.html">Enterprise</a>
+
+      </nav>
+      <div class="flex items-center gap-3">
+        <button class="hidden sm:inline-flex rounded-xl border border-neutral-300 bg-white px-4 py-2 text-sm text-neutral-700 shadow-sm">Login</button>
+        <button class="rounded-xl bg-neutral-950 px-3 py-2 text-sm font-medium text-white shadow-sm sm:px-4">Get Started</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- DECISION LEGEND -->
+  <div class="mx-auto max-w-7xl px-6 py-4 lg:px-10">
+    <div class="rounded-2xl border border-neutral-300 bg-white p-4 shadow-sm">
+      <div class="text-xs font-bold uppercase tracking-[0.22em] text-neutral-700 mb-3">Platform page wireframe — Phase 3</div>
+      <div class="flex flex-wrap gap-4 text-[12px]">
+        <div class="flex items-center gap-2">
+          <div class="h-3 w-6 rounded border border-neutral-200 bg-neutral-50"></div>
+          <span class="text-neutral-600">Page sections (structural skeleton + copy direction)</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-base">🌐</span>
+          <span class="text-neutral-600">Live agent options (working Trillet agents embedded in-page)</span>
+        </div>
+      </div>
+      <div class="mt-3 text-[11px] text-neutral-500 leading-5">
+        <strong>Page job:</strong> Comparison-shopper depth. The buyer has seen the homepage and wants to know WHY Trillet is structurally different from Stammer, Insighto, Assistable, and the rest. Concrete, verifiable claims. Not brand language.
+      </div>
+    </div>
+  </div>
+
+  <main>
+
+    <!-- 01. Hero -->
+    <section class="relative overflow-hidden border-b border-neutral-200">
+      <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(59,130,246,0.08),transparent_30%),radial-gradient(circle_at_bottom_right,rgba(15,23,42,0.05),transparent_34%)]"></div>
+      <div class="relative mx-auto grid max-w-7xl gap-12 px-6 py-16 lg:grid-cols-12 lg:px-10 lg:py-24">
+        <div class="lg:col-span-7">
+          <div class="mb-6 inline-flex rounded-full border border-blue-200 bg-blue-50 px-3 py-1 text-[11px] font-medium uppercase tracking-[0.22em] text-blue-700">
+            Why full-stack matters
+          </div>
+          <h1 class="max-w-4xl text-3xl font-semibold tracking-tight text-neutral-950 sm:text-5xl md:text-6xl" style="line-height:1.05">
+            Most voice AI platforms are wrappers. This is the engine.
+          </h1>
+          <p class="mt-6 max-w-3xl text-base leading-7 text-neutral-600 sm:text-lg sm:leading-8">
+            Competitors assemble voice agents from third-party STT, TTS, LLM, and telephony providers. When something breaks, no one owns the problem. Trillet controls the full stack -- from speech recognition to call routing to agent logic -- so there's one team accountable for every call.
+          </p>
+          <div class="mt-8 flex flex-wrap gap-4">
+            <button class="rounded-2xl bg-neutral-950 px-5 py-3 text-sm font-medium text-white shadow-sm">See Pricing</button>
+            <button class="rounded-2xl border border-neutral-300 bg-white px-5 py-3 text-sm font-medium text-neutral-800 shadow-sm">Talk to Sales</button>
+          </div>
+        </div>
+
+        <!-- Platform stack visual -->
+        <div class="lg:col-span-5">
+          <div class="rounded-[32px] border border-neutral-200 bg-white/95 p-5 shadow-[0_20px_80px_rgba(0,0,0,0.06)]">
+            <div class="rounded-[26px] border border-neutral-200 bg-neutral-50 p-4 sm:p-5">
+              <div class="mb-4 flex items-center justify-between border-b border-dashed border-neutral-300 pb-3 text-[11px] uppercase tracking-[0.22em] text-neutral-500">
+                <span>Platform stack</span>
+                <span>Trillet-owned layers</span>
+              </div>
+              <div class="space-y-2">
+                <div class="rounded-2xl border border-blue-200 bg-blue-50 px-4 py-3 shadow-sm">
+                  <div class="text-sm font-medium text-neutral-950">Agency commercial layer</div>
+                  <div class="mt-1 text-xs text-neutral-600">White-label, rebilling, sub-accounts, branded workspaces</div>
+                </div>
+                <div class="rounded-2xl border border-neutral-200 bg-white px-4 py-3 shadow-sm">
+                  <div class="text-sm font-medium text-neutral-950">Workspace + deployment</div>
+                  <div class="mt-1 text-xs text-neutral-600">Agent management, client isolation, configuration, permissions</div>
+                </div>
+                <div class="rounded-2xl border border-neutral-200 bg-white px-4 py-3 shadow-sm">
+                  <div class="text-sm font-medium text-neutral-950">Agent logic + orchestration</div>
+                  <div class="mt-1 text-xs text-neutral-600">Conversation engine, knowledge retrieval, action execution, routing</div>
+                </div>
+                <div class="rounded-2xl border border-neutral-200 bg-white px-4 py-3 shadow-sm">
+                  <div class="text-sm font-medium text-neutral-950">Voice + telephony</div>
+                  <div class="mt-1 text-xs text-neutral-600">Speech-to-text, text-to-speech, call handling, number management</div>
+                </div>
+                <div class="rounded-2xl border border-neutral-300 bg-neutral-100 px-4 py-3">
+                  <div class="text-sm font-medium text-neutral-950">Infrastructure</div>
+                  <div class="mt-1 text-xs text-neutral-600">Compute, storage, global routing, uptime SLA</div>
+                </div>
+              </div>
+              <div class="mt-3 text-[10px] text-neutral-500 text-center">Competitors own 1-2 of these layers. Trillet owns all five.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 02. What "full-stack" actually means -->
+    <section class="mx-auto max-w-7xl px-6 py-12 lg:px-10 lg:py-20">
+      <div class="max-w-3xl">
+        <div class="text-xs uppercase tracking-[0.22em] text-neutral-500">What "full-stack" actually means</div>
+        <h2 class="mt-3 text-2xl font-semibold tracking-tight text-neutral-950 sm:text-3xl md:text-4xl">Three things that change when one team owns the whole path.</h2>
+      </div>
+      <div class="mt-8 grid gap-4 md:grid-cols-3">
+        <div class="rounded-[24px] border border-neutral-200 bg-white p-5 shadow-sm sm:p-6">
+          <div class="text-lg font-semibold tracking-tight text-neutral-950">One failure surface</div>
+          <div class="mt-3 text-sm leading-6 text-neutral-600">When a call drops, latency spikes, or an agent gives wrong information, there's one team to call. Not a chain of vendors pointing at each other. Wrapper platforms can't debug across layers they don't own.</div>
+        </div>
+        <div class="rounded-[24px] border border-neutral-200 bg-white p-5 shadow-sm sm:p-6">
+          <div class="text-lg font-semibold tracking-tight text-neutral-950">Optimized end-to-end</div>
+          <div class="mt-3 text-sm leading-6 text-neutral-600">Voice latency compounds across every layer. When STT, LLM, TTS, and telephony are separate vendors with separate APIs, each handoff adds 50-200ms. Full-stack means one optimization path from speech input to speech output.</div>
+        </div>
+        <div class="rounded-[24px] border border-neutral-200 bg-white p-5 shadow-sm sm:p-6">
+          <div class="text-lg font-semibold tracking-tight text-neutral-950">No dependency ceiling</div>
+          <div class="mt-3 text-sm leading-6 text-neutral-600">Wrapper platforms inherit their vendors' limits. When Retell changes pricing, every Retell wrapper reprices. When Twilio has an outage, every Twilio wrapper goes down. Owning the stack means your growth isn't capped by someone else's roadmap.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 03. Concrete comparison -->
+    <section class="border-y border-neutral-200 bg-white">
+      <div class="mx-auto max-w-7xl px-6 py-12 lg:px-10 lg:py-20">
+        <div class="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
+          <div>
+            <div class="text-xs uppercase tracking-[0.22em] text-neutral-500">Platform comparison</div>
+            <h2 class="mt-3 text-2xl font-semibold tracking-tight text-neutral-950 sm:text-3xl md:text-4xl">What you're actually comparing.</h2>
+            <p class="mt-4 max-w-xl text-base leading-7 text-neutral-600">Not features. Architecture. The more serious the deployment, the more these differences compound.</p>
+          </div>
+
+          <div class="overflow-hidden rounded-[28px] border border-neutral-200 bg-stone-50 shadow-sm">
+            <!-- Desktop table -->
+            <div class="hidden md:block">
+              <div class="grid grid-cols-3 border-b border-neutral-200 bg-neutral-100 px-4 py-3 text-[11px] uppercase tracking-[0.22em] text-neutral-500">
+                <div>Component</div>
+                <div>Typical wrapper platform</div>
+                <div>Trillet</div>
+              </div>
+              <div class="grid grid-cols-3 border-b border-neutral-200 bg-white px-4 py-4 text-sm text-neutral-700">
+                <div class="font-medium text-neutral-950">Speech (STT/TTS)</div>
+                <div>Third-party API (Deepgram, ElevenLabs)</div>
+                <div class="font-medium text-neutral-950">Owned pipeline, tuned for telephony audio</div>
+              </div>
+              <div class="grid grid-cols-3 border-b border-neutral-200 bg-white px-4 py-4 text-sm text-neutral-700">
+                <div class="font-medium text-neutral-950">Telephony</div>
+                <div>Twilio/Vonage resale</div>
+                <div class="font-medium text-neutral-950">Direct carrier relationships + Twilio fallback</div>
+              </div>
+              <div class="grid grid-cols-3 border-b border-neutral-200 bg-white px-4 py-4 text-sm text-neutral-700">
+                <div class="font-medium text-neutral-950">Agent logic</div>
+                <div>Prompt wrapper on OpenAI/Anthropic</div>
+                <div class="font-medium text-neutral-950">Custom orchestration with model flexibility</div>
+              </div>
+              <div class="grid grid-cols-3 border-b border-neutral-200 bg-white px-4 py-4 text-sm text-neutral-700">
+                <div class="font-medium text-neutral-950">Concurrency</div>
+                <div>Stammer: 1 concurrent, $15/slot. Assistable: 10-20, hard ceiling. Insighto: 50-100, tiered.</div>
+                <div class="font-medium text-neutral-950">Unlimited -- every tier, every plan</div>
+              </div>
+              <div class="grid grid-cols-3 bg-white px-4 py-4 text-sm text-neutral-700">
+                <div class="font-medium text-neutral-950">Failure accountability</div>
+                <div>"Contact our provider" / blame loop</div>
+                <div class="font-medium text-neutral-950">One team, one ticket, one resolution path</div>
+              </div>
+            </div>
+            <!-- Mobile stacked -->
+            <div class="md:hidden divide-y divide-neutral-200">
+              <div class="p-4 bg-white">
+                <div class="font-medium text-neutral-950 text-sm">Speech (STT/TTS)</div>
+                <div class="mt-1 text-xs text-neutral-500">Others: Third-party API (Deepgram, ElevenLabs)</div>
+                <div class="mt-1 text-sm font-medium text-emerald-700">Trillet: Owned pipeline, tuned for telephony audio</div>
+              </div>
+              <div class="p-4 bg-white">
+                <div class="font-medium text-neutral-950 text-sm">Telephony</div>
+                <div class="mt-1 text-xs text-neutral-500">Others: Twilio/Vonage resale</div>
+                <div class="mt-1 text-sm font-medium text-emerald-700">Trillet: Direct carrier relationships + Twilio fallback</div>
+              </div>
+              <div class="p-4 bg-white">
+                <div class="font-medium text-neutral-950 text-sm">Agent logic</div>
+                <div class="mt-1 text-xs text-neutral-500">Others: Prompt wrapper on OpenAI/Anthropic</div>
+                <div class="mt-1 text-sm font-medium text-emerald-700">Trillet: Custom orchestration with model flexibility</div>
+              </div>
+              <div class="p-4 bg-white">
+                <div class="font-medium text-neutral-950 text-sm">Concurrency</div>
+                <div class="mt-1 text-xs text-neutral-500">Others: Stammer 1/$15 slot, Assistable 10-20, Insighto 50-100</div>
+                <div class="mt-1 text-sm font-medium text-emerald-700">Trillet: Unlimited -- every tier, every plan</div>
+              </div>
+              <div class="p-4 bg-white">
+                <div class="font-medium text-neutral-950 text-sm">Failure accountability</div>
+                <div class="mt-1 text-xs text-neutral-500">Others: "Contact our provider" / blame loop</div>
+                <div class="mt-1 text-sm font-medium text-emerald-700">Trillet: One team, one ticket, one resolution path</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LIVE AGENT OPTION: Technical Q&A for comparison shoppers -->
+    <section class="mx-auto max-w-7xl px-6 pb-8 lg:px-10">
+      <div class="rounded-[28px] border-2 border-dashed border-emerald-400 bg-emerald-50/30 p-5 sm:p-6">
+        <div class="mb-4 flex items-center gap-2">
+          <div class="rounded-full bg-emerald-100 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.22em] text-emerald-700">Live agent option</div>
+          <span class="text-xs text-neutral-500">Sits below the comparison table. Answers technical and competitive questions.</span>
+        </div>
+        <div class="mx-auto max-w-lg rounded-2xl border border-neutral-200 bg-white p-5 shadow-sm">
+          <div class="mb-3 flex items-center gap-3">
+            <div class="flex h-9 w-9 items-center justify-center rounded-full bg-neutral-950 text-xs font-bold text-white">T</div>
+            <div>
+              <div class="text-sm font-semibold text-neutral-950">Platform Expert</div>
+              <div class="flex items-center gap-1.5 text-[10px] text-emerald-600 font-medium"><span class="inline-block h-1.5 w-1.5 rounded-full bg-emerald-500"></span> Live -- comparing platforms? Ask me anything.</div>
+            </div>
+          </div>
+          <div class="rounded-xl bg-neutral-50 p-4 space-y-3 text-[13px] leading-5">
+            <div class="flex gap-2"><span class="font-semibold text-neutral-400 w-12 flex-shrink-0">You</span><span class="text-neutral-600">"How is Trillet different from Stammer or Assistable? They both say they're white-label too."</span></div>
+            <div class="flex gap-2"><span class="font-semibold text-emerald-700 w-12 flex-shrink-0">Agent</span><span class="text-neutral-600">"Stammer and Assistable are wrapper platforms -- they assemble agents from Retell or Vapi for voice, third-party LLMs for logic, and Twilio for telephony. That means three separate vendors in the call path. Trillet owns the voice pipeline, agent orchestration, and telephony layer directly, so there's one team responsible when something breaks. The practical difference: lower latency, no concurrency ceilings, and no surprise repricing when an upstream vendor changes terms."</span></div>
+          </div>
+          <div class="mt-3 flex items-center gap-3">
+            <div class="flex-1 rounded-xl border border-neutral-200 bg-neutral-50 px-3 py-2 text-[12px] text-neutral-400 italic">How does Trillet compare to...?</div>
+            <button class="rounded-xl bg-neutral-950 px-3 py-2 text-[11px] font-medium text-white">Ask</button>
+          </div>
+        </div>
+        <div class="mt-3 text-xs text-neutral-500">The comparison shopper's ideal surface. This agent knows Trillet's architecture AND competitors' public specs. Every conversation captures what the buyer is comparing and why -- high-intent lead data.</div>
+      </div>
+    </section>
+
+    <!-- 04. What agencies get from this -->
+    <section class="mx-auto max-w-7xl px-6 py-12 lg:px-10 lg:py-20">
+      <div class="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
+        <div>
+          <div class="text-xs uppercase tracking-[0.22em] text-neutral-500">What agencies get from this</div>
+          <h2 class="mt-3 text-2xl font-semibold tracking-tight text-neutral-950 sm:text-3xl md:text-4xl">Platform depth changes how you sell.</h2>
+          <p class="mt-4 max-w-xl text-base leading-7 text-neutral-600">When the platform underneath is stronger, the agency's pitch gets stronger too. These are the concrete differences an agency can point to.</p>
+        </div>
+        <div class="grid gap-4 sm:grid-cols-2">
+          <div class="rounded-[24px] border border-neutral-200 bg-white p-5 shadow-sm">
+            <div class="text-base font-semibold text-neutral-950">Sell with more confidence</div>
+            <div class="mt-2 text-sm leading-6 text-neutral-600">"We run on our own platform" is a fundamentally different pitch than "we resell someone else's API." Agency credibility goes up when the infrastructure story is real.</div>
+          </div>
+          <div class="rounded-[24px] border border-neutral-200 bg-white p-5 shadow-sm">
+            <div class="text-base font-semibold text-neutral-950">Hold bigger clients</div>
+            <div class="mt-2 text-sm leading-6 text-neutral-600">The client who's putting voice AI on their main business line asks harder questions. Full-stack means you have answers about uptime, latency, and failure handling -- not "we'll check with our provider."</div>
+          </div>
+          <div class="rounded-[24px] border border-neutral-200 bg-white p-5 shadow-sm">
+            <div class="text-base font-semibold text-neutral-950">No surprise repricing</div>
+            <div class="mt-2 text-sm leading-6 text-neutral-600">Wrapper platforms inherit upstream pricing changes. When Retell raises rates, every Retell reseller reprices or eats the margin. Your unit economics don't depend on someone else's pricing decisions.</div>
+          </div>
+          <div class="rounded-[24px] border border-neutral-200 bg-white p-5 shadow-sm">
+            <div class="text-base font-semibold text-neutral-950">No platform ceiling</div>
+            <div class="mt-2 text-sm leading-6 text-neutral-600">Growing from 5 clients to 50 shouldn't force a platform migration. Same stack, same team, same deployment model at every scale. The upgrade path is commercial, not architectural.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 05. The wrapper problem (concrete) -->
+    <section class="border-y border-neutral-200 bg-white">
+      <div class="mx-auto max-w-7xl px-6 py-12 lg:px-10 lg:py-20">
+        <div class="max-w-3xl">
+          <div class="text-xs uppercase tracking-[0.22em] text-neutral-500">The wrapper problem</div>
+          <h2 class="mt-3 text-2xl font-semibold tracking-tight text-neutral-950 sm:text-3xl md:text-4xl">What happens when your platform is someone else's API.</h2>
+          <p class="mt-4 text-base leading-7 text-neutral-600 md:text-lg">This is not theoretical. These are real failure modes agencies on wrapper platforms deal with.</p>
+        </div>
+        <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <div class="rounded-[24px] border border-red-100 bg-red-50/50 p-5">
+            <div class="text-sm font-semibold text-red-900">Upstream outage</div>
+            <div class="mt-2 text-sm leading-6 text-red-800/70">Twilio goes down for 45 minutes. Every agent on every wrapper platform using Twilio goes silent. Your clients' phones stop being answered. Your SLA is someone else's SLA.</div>
+          </div>
+          <div class="rounded-[24px] border border-red-100 bg-red-50/50 p-5">
+            <div class="text-sm font-semibold text-red-900">Surprise repricing</div>
+            <div class="mt-2 text-sm leading-6 text-red-800/70">Retell raises per-minute pricing by 30%. You find out on a blog post. Your margins collapse overnight on contracts you've already signed with clients. Renegotiate or absorb.</div>
+          </div>
+          <div class="rounded-[24px] border border-red-100 bg-red-50/50 p-5">
+            <div class="text-sm font-semibold text-red-900">Debug dead end</div>
+            <div class="mt-2 text-sm leading-6 text-red-800/70">Call quality drops. Is it STT latency? LLM response time? TTS rendering? Telephony jitter? When you don't own the layers, you can't see across them. You submit tickets to three vendors and wait.</div>
+          </div>
+          <div class="rounded-[24px] border border-red-100 bg-red-50/50 p-5">
+            <div class="text-sm font-semibold text-red-900">Feature ceiling</div>
+            <div class="mt-2 text-sm leading-6 text-red-800/70">Client needs custom call routing logic. Your platform vendor says "that's not on the roadmap." You wait, work around it, or migrate. Your product roadmap is someone else's backlog.</div>
+          </div>
+          <div class="rounded-[24px] border border-red-100 bg-red-50/50 p-5">
+            <div class="text-sm font-semibold text-red-900">Latency stacking</div>
+            <div class="mt-2 text-sm leading-6 text-red-800/70">STT API: 150ms. LLM API: 400ms. TTS API: 200ms. Telephony roundtrip: 100ms. Total: 850ms before the agent speaks. Each vendor is "within spec." The caller hears dead air.</div>
+          </div>
+          <div class="rounded-[24px] border border-red-100 bg-red-50/50 p-5">
+            <div class="text-sm font-semibold text-red-900">Vendor lock-in</div>
+            <div class="mt-2 text-sm leading-6 text-red-800/70">You've built 200 agents on a wrapper platform. That platform's provider changes terms or shuts down. Your agents, your clients' configurations, your brand -- all hostage to a dependency you chose once.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 06. FAQ -->
+    <section class="mx-auto max-w-7xl px-6 py-12 lg:px-10 lg:py-20">
+      <div class="max-w-3xl">
+        <div class="text-xs uppercase tracking-[0.22em] text-neutral-500">Common questions</div>
+        <h2 class="mt-3 text-2xl font-semibold tracking-tight text-neutral-950 sm:text-3xl md:text-4xl">What comparison shoppers ask us.</h2>
+      </div>
+      <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div class="rounded-[24px] border border-neutral-200 bg-white p-5 shadow-sm sm:p-6">
+          <div class="text-sm font-semibold text-neutral-950">"Do you actually own the speech layer or do you use Deepgram/ElevenLabs?"</div>
+          <div class="mt-3 text-sm leading-6 text-neutral-600">Trillet operates its own speech pipeline optimized for telephony-grade audio. We're not reselling Deepgram or ElevenLabs -- the speech-to-text and text-to-speech processing runs on our infrastructure.</div>
+        </div>
+        <div class="rounded-[24px] border border-neutral-200 bg-white p-5 shadow-sm sm:p-6">
+          <div class="text-sm font-semibold text-neutral-950">"What happens if Twilio has an outage?"</div>
+          <div class="mt-3 text-sm leading-6 text-neutral-600">Trillet maintains direct carrier relationships alongside Twilio as a fallback path. Most wrapper platforms are Twilio-only -- when Twilio goes down, they go down. Our telephony layer has redundancy built in.</div>
+        </div>
+        <div class="rounded-[24px] border border-neutral-200 bg-white p-5 shadow-sm sm:p-6">
+          <div class="text-sm font-semibold text-neutral-950">"Can I deploy on-prem or in a private cloud?"</div>
+          <div class="mt-3 text-sm leading-6 text-neutral-600">Yes. Trillet is one of the only voice AI platforms that supports full on-premise deployment inside client infrastructure. This matters for healthcare, financial services, and government clients with strict data residency requirements.</div>
+        </div>
+        <div class="rounded-[24px] border border-neutral-200 bg-white p-5 shadow-sm sm:p-6">
+          <div class="text-sm font-semibold text-neutral-950">"Why is there no concurrency limit?"</div>
+          <div class="mt-3 text-sm leading-6 text-neutral-600">Concurrency limits exist because wrapper platforms pay per-slot to their upstream provider. Since Trillet owns the voice pipeline and telephony, there's no per-slot cost to pass through. Your clients don't get busy signals during peak hours.</div>
+        </div>
+        <div class="rounded-[24px] border border-neutral-200 bg-white p-5 shadow-sm sm:p-6">
+          <div class="text-sm font-semibold text-neutral-950">"What's the actual latency?"</div>
+          <div class="mt-3 text-sm leading-6 text-neutral-600">Sub-500ms first-token response time in production, including STT + LLM + TTS. Wrapper platforms typically land 700-1200ms because each vendor handoff adds latency that can't be optimized across boundaries.</div>
+        </div>
+        <div class="rounded-[24px] border border-neutral-200 bg-white p-5 shadow-sm sm:p-6">
+          <div class="text-sm font-semibold text-neutral-950">"Is the white-label actually full, or do you restrict it on lower tiers?"</div>
+          <div class="mt-3 text-sm leading-6 text-neutral-600">Full white-label on every plan. Your domain, your logo, your login page, your client-facing emails. No "powered by" badges. No feature-gating the brand. Entry, Core, and Scale all get the same white-label depth.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LIVE AGENT OPTION: FAQ agent -->
+    <section class="mx-auto max-w-7xl px-6 pb-8 lg:px-10">
+      <div class="rounded-[28px] border-2 border-dashed border-emerald-400 bg-emerald-50/30 p-5 sm:p-6">
+        <div class="mb-4 flex items-center gap-2">
+          <div class="rounded-full bg-emerald-100 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.22em] text-emerald-700">Live agent option</div>
+          <span class="text-xs text-neutral-500">Replaces or augments the static FAQ grid. Agent handles unlimited questions, not just the 6 above.</span>
+        </div>
+        <div class="mx-auto max-w-lg rounded-2xl border border-neutral-200 bg-white p-5 shadow-sm">
+          <div class="mb-3 flex items-center gap-3">
+            <div class="flex h-9 w-9 items-center justify-center rounded-full bg-neutral-950 text-xs font-bold text-white">T</div>
+            <div>
+              <div class="text-sm font-semibold text-neutral-950">Ask Trillet</div>
+              <div class="flex items-center gap-1.5 text-[10px] text-emerald-600 font-medium"><span class="inline-block h-1.5 w-1.5 rounded-full bg-emerald-500"></span> Live -- any platform question, any competitor comparison</div>
+            </div>
+          </div>
+          <div class="rounded-xl bg-neutral-50 p-4 space-y-3 text-[13px] leading-5">
+            <div class="flex gap-2"><span class="font-semibold text-neutral-400 w-12 flex-shrink-0">You</span><span class="text-neutral-600">"Can you handle HIPAA? My biggest client is a healthcare network."</span></div>
+            <div class="flex gap-2"><span class="font-semibold text-emerald-700 w-12 flex-shrink-0">Agent</span><span class="text-neutral-600">"Yes. Trillet supports HIPAA-compliant deployments with BAA, encrypted call handling, and on-premise options for organizations that need full data residency control. We currently serve healthcare clients in Australia and the US. Want me to connect you with our enterprise team to scope a deployment?"</span></div>
+          </div>
+          <div class="mt-3 flex items-center gap-3">
+            <div class="flex-1 rounded-xl border border-neutral-200 bg-neutral-50 px-3 py-2 text-[12px] text-neutral-400 italic">Ask about architecture, compliance, pricing, competitors...</div>
+            <button class="rounded-xl bg-neutral-950 px-3 py-2 text-[11px] font-medium text-white">Ask</button>
+          </div>
+        </div>
+        <div class="mt-3 text-xs text-neutral-500">The FAQ section handles the top 6 questions. This agent handles the next 600. It also demonstrates the product: if Trillet's AI can answer complex platform questions this well, imagine what it does on a dental office phone line.</div>
+      </div>
+    </section>
+
+    <!-- 07. Close -->
+    <section class="border-t border-neutral-200 bg-white">
+      <div class="mx-auto max-w-7xl px-6 py-12 lg:px-10 lg:py-20">
+        <div class="rounded-[24px] sm:rounded-[32px] border border-neutral-900 bg-neutral-950 px-5 py-10 text-white shadow-[0_20px_80px_rgba(0,0,0,0.12)] sm:px-8 sm:py-14 md:px-12">
+          <div class="max-w-3xl">
+            <div class="mb-4 text-xs uppercase tracking-[0.22em] text-neutral-400">The bottom line</div>
+            <h2 class="text-3xl font-semibold tracking-tight sm:text-4xl md:text-5xl">Easier to resell is table stakes. Harder to break is the real advantage.</h2>
+            <p class="mt-5 max-w-2xl text-base leading-7 text-neutral-300 md:text-lg">Every voice AI platform lets you white-label and rebill. The difference is what happens at 2am when your biggest client's phones stop ringing.</p>
+            <div class="mt-8 flex flex-wrap gap-4">
+              <button class="rounded-2xl bg-white px-5 py-3 text-sm font-medium text-neutral-950">See Pricing</button>
+              <button class="rounded-2xl border border-neutral-700 px-5 py-3 text-sm font-medium text-white">Talk to Sales</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="border-t border-neutral-200 bg-stone-50">
+    <div class="mx-auto max-w-7xl px-6 py-8 lg:px-10">
+      <div class="flex flex-wrap gap-x-8 gap-y-4 text-sm text-neutral-500">
+        <div class="font-medium text-neutral-700">Trillet</div>
+        <a href="homepage-wireframe.html" class="hover:text-neutral-700">Home</a>
+        <a href="solutions-wireframe.html" class="hover:text-neutral-700">Solutions</a>
+        <a href="pricing-wireframe.html" class="hover:text-neutral-700">Pricing</a>
+        <a href="enterprise-wireframe.html" class="hover:text-neutral-700">Enterprise</a>
+        <span class="text-neutral-300">|</span>
+        <a href="individual-wireframe.html" class="hover:text-neutral-700">Individual</a>
+        <span class="hover:text-neutral-700 cursor-pointer">Login</span>
+        <span class="text-neutral-300">|</span>
+        <span>Privacy</span>
+        <span>Terms</span>
+        <span>Contact</span>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

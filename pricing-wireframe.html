@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trillet Pricing Page Wireframe — Agency Ladder</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', system-ui, sans-serif; }
+  </style>
+</head>
+<body class="min-h-screen bg-stone-50 text-neutral-950">
+
+  <!-- Header -->
+  <header class="sticky top-0 z-50 border-b border-neutral-200/80 bg-stone-50/90 backdrop-blur-xl">
+    <div class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-10">
+      <div class="flex items-center gap-3">
+        <div class="flex h-9 w-9 items-center justify-center rounded-full border border-neutral-300 bg-white text-xs font-semibold tracking-tight shadow-sm">T</div>
+        <div>
+          <div class="text-sm font-semibold tracking-tight">Trillet</div>
+          <div class="text-[10px] uppercase tracking-[0.22em] text-neutral-500">Pricing</div>
+        </div>
+      </div>
+      <nav class="hidden items-center gap-8 text-sm text-neutral-600 md:flex">
+        <a href="homepage-wireframe.html">Home</a>
+        <a href="platform-wireframe.html">Platform</a>
+        <a href="solutions-wireframe.html">Solutions</a>
+        <span class="font-medium text-neutral-950">Pricing</span>
+        <a href="enterprise-wireframe.html">Enterprise</a>
+
+      </nav>
+      <div class="flex items-center gap-3">
+        <button class="hidden sm:inline-flex rounded-xl border border-neutral-300 bg-white px-4 py-2 text-sm text-neutral-700 shadow-sm">Login</button>
+        <button class="rounded-xl bg-neutral-950 px-3 py-2 text-sm font-medium text-white shadow-sm sm:px-4">Get Started</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- DECISION LEGEND -->
+  <div class="mx-auto max-w-7xl px-6 py-4 lg:px-10">
+    <div class="rounded-2xl border border-neutral-300 bg-white p-4 shadow-sm">
+      <div class="text-xs font-bold uppercase tracking-[0.22em] text-neutral-700 mb-3">Pricing page wireframe — Phase 5</div>
+      <div class="flex flex-wrap gap-4 text-[12px]">
+        <div class="flex items-center gap-2">
+          <div class="h-3 w-6 rounded border border-neutral-200 bg-neutral-50"></div>
+          <span class="text-neutral-600">Page sections</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-base">🌐</span>
+          <span class="text-neutral-600">Live agent options</span>
+        </div>
+      </div>
+      <div class="mt-3 text-[11px] text-neutral-500 leading-5">
+        <strong>Page job:</strong> Make the agency ladder legible in under 60 seconds. Same platform at every tier. What changes: sub-accounts, automation, support closeness. Per-minute pricing shown here (not on homepage).
+      </div>
+    </div>
+  </div>
+
+  <main>
+
+    <!-- 01. Hero -->
+    <section class="relative overflow-hidden border-b border-neutral-200">
+      <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(59,130,246,0.08),transparent_30%),radial-gradient(circle_at_bottom_right,rgba(15,23,42,0.05),transparent_34%)]"></div>
+      <div class="relative mx-auto max-w-7xl px-6 py-16 lg:px-10 lg:py-24">
+        <div class="max-w-3xl mx-auto text-center">
+          <div class="mb-6 inline-flex rounded-full border border-blue-200 bg-blue-50 px-3 py-1 text-[11px] font-medium uppercase tracking-[0.22em] text-blue-700">
+            Same core platform at every tier
+          </div>
+          <h1 class="text-3xl font-semibold tracking-tight text-neutral-950 sm:text-5xl md:text-6xl" style="line-height:1.05">
+            Three plans. One product ladder.
+          </h1>
+          <p class="mt-6 max-w-2xl mx-auto text-base leading-7 text-neutral-600 sm:text-lg sm:leading-8">
+            Full white-label, full markup, unlimited concurrency, and operational API access are included on every plan. What changes is how many clients you can serve, how much automation you unlock, and how close the relationship gets.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 02. Tier cards -->
+    <section class="mx-auto max-w-7xl px-6 py-12 lg:px-10 lg:py-20">
+      <div class="grid gap-5 md:grid-cols-3">
+
+        <!-- Entry -->
+        <div class="rounded-[28px] border border-neutral-200 bg-white p-6 shadow-sm sm:p-8 flex flex-col">
+          <div class="text-xs uppercase tracking-[0.22em] text-neutral-500">Entry</div>
+          <div class="mt-3 text-4xl font-semibold tracking-tight text-neutral-950">$149<span class="text-lg font-normal text-neutral-500">/mo</span></div>
+          <div class="mt-3 text-lg font-medium text-neutral-950">Prove the model.</div>
+          <div class="mt-3 text-sm leading-6 text-neutral-600">For agencies launching their first client deployments. The full core platform, no feature gating. Start with 3 clients and validate the business.</div>
+          <div class="mt-6 space-y-2 flex-1">
+            <div class="rounded-xl border border-neutral-200 bg-neutral-50 px-3 py-2 text-sm text-neutral-700">3 sub-accounts</div>
+            <div class="rounded-xl border border-neutral-200 bg-neutral-50 px-3 py-2 text-sm text-neutral-700">Full white-label</div>
+            <div class="rounded-xl border border-neutral-200 bg-neutral-50 px-3 py-2 text-sm text-neutral-700">Full markup control</div>
+            <div class="rounded-xl border border-neutral-200 bg-neutral-50 px-3 py-2 text-sm text-neutral-700">Unlimited concurrency</div>
+            <div class="rounded-xl border border-neutral-200 bg-neutral-50 px-3 py-2 text-sm text-neutral-700">Operational API</div>
+            <div class="rounded-xl border border-neutral-200 bg-neutral-50 px-3 py-2 text-sm text-neutral-700">Docs + email support</div>
+          </div>
+          <button class="mt-6 w-full rounded-2xl bg-neutral-950 px-5 py-3 text-sm font-medium text-white shadow-sm">Get Started</button>
+        </div>
+
+        <!-- Core -->
+        <div class="rounded-[28px] border border-neutral-200 bg-white p-6 shadow-sm sm:p-8 flex flex-col">
+          <div class="text-xs uppercase tracking-[0.22em] text-neutral-500">Core</div>
+          <div class="mt-3 text-4xl font-semibold tracking-tight text-neutral-950">$299<span class="text-lg font-normal text-neutral-500">/mo</span></div>
+          <div class="mt-3 text-lg font-medium text-neutral-950">Run the agency.</div>
+          <div class="mt-3 text-sm leading-6 text-neutral-600">For agencies with repeatable client demand. More room to operate, faster support, implementation guidance. The same platform -- more headroom.</div>
+          <div class="mt-6 space-y-2 flex-1">
+            <div class="rounded-xl border border-neutral-200 bg-neutral-50 px-3 py-2 text-sm text-neutral-700">10 sub-accounts</div>
+            <div class="rounded-xl border border-neutral-200 bg-neutral-50 px-3 py-2 text-sm text-neutral-700">Full white-label</div>
+            <div class="rounded-xl border border-neutral-200 bg-neutral-50 px-3 py-2 text-sm text-neutral-700">Full markup control</div>
+            <div class="rounded-xl border border-neutral-200 bg-neutral-50 px-3 py-2 text-sm text-neutral-700">Unlimited concurrency</div>
+            <div class="rounded-xl border border-neutral-200 bg-neutral-50 px-3 py-2 text-sm text-neutral-700">Operational API</div>
+            <div class="rounded-xl border border-neutral-200 bg-neutral-50 px-3 py-2 text-sm text-neutral-700">Priority support</div>
+            <div class="rounded-xl border border-neutral-200 bg-neutral-50 px-3 py-2 text-sm text-neutral-700">Implementation guidance</div>
+          </div>
+          <button class="mt-6 w-full rounded-2xl bg-neutral-950 px-5 py-3 text-sm font-medium text-white shadow-sm">Start Core</button>
+        </div>
+
+        <!-- Scale -->
+        <div class="rounded-[28px] border border-neutral-200 bg-white p-6 shadow-sm sm:p-8 flex flex-col">
+          <div class="text-xs uppercase tracking-[0.22em] text-neutral-500">Scale</div>
+          <div class="mt-3 text-4xl font-semibold tracking-tight text-neutral-950">$497<span class="text-lg font-normal text-neutral-500">/mo</span></div>
+          <div class="mt-3 text-lg font-medium text-neutral-950">Build the machine.</div>
+          <div class="mt-3 text-sm leading-6 text-neutral-600">Unlimited sub-accounts. Client self-signup. Commercial API. Distribution rights. Named contact, architecture partnership. The tier where your agency becomes a software business.</div>
+          <div class="mt-6 space-y-2 flex-1">
+            <div class="rounded-xl border border-neutral-200 bg-neutral-50 px-3 py-2 text-sm text-neutral-700">Unlimited sub-accounts</div>
+            <div class="rounded-xl border border-neutral-200 bg-neutral-50 px-3 py-2 text-sm text-neutral-700">Full white-label</div>
+            <div class="rounded-xl border border-neutral-200 bg-neutral-50 px-3 py-2 text-sm text-neutral-700">Full markup control</div>
+            <div class="rounded-xl border border-neutral-200 bg-neutral-50 px-3 py-2 text-sm text-neutral-700">Unlimited concurrency</div>
+            <div class="rounded-xl border border-neutral-200 bg-neutral-50 px-3 py-2 text-sm text-neutral-700">Operational API</div>
+            <div class="rounded-xl border border-neutral-200 bg-neutral-50 px-3 py-2 text-sm text-neutral-700">Named relationship</div>
+            <div class="rounded-xl border border-neutral-200 bg-neutral-50 px-3 py-2 text-sm text-neutral-700">Client self-signup</div>
+            <div class="rounded-xl border border-neutral-200 bg-neutral-50 px-3 py-2 text-sm text-neutral-700">SaaS mode + marketplace</div>
+          </div>
+          <button class="mt-6 w-full rounded-2xl bg-neutral-950 px-5 py-3 text-sm font-medium text-white shadow-sm">Talk to Sales</button>
+        </div>
+
+      </div>
+
+      <!-- Per-minute pricing -->
+      <div class="mt-8 rounded-[24px] border border-neutral-200 bg-white p-5 shadow-sm sm:p-6">
+        <div class="grid gap-4 sm:grid-cols-[1fr_auto] sm:items-center">
+          <div>
+            <div class="text-base font-semibold text-neutral-950">Flat per-minute pricing across all agency tiers: $0.12/min</div>
+            <div class="mt-1 text-sm text-neutral-600">No per-minute markup between tiers. No surprise pricing as volume grows. Scale-tier agencies doing higher volume can have a separate conversation about volume rates.</div>
+          </div>
+          <div class="text-center sm:text-right">
+            <div class="text-3xl font-bold tracking-tight text-neutral-950">$0.12</div>
+            <div class="text-xs text-neutral-500">per minute, all tiers</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 03. Comparison table -->
+    <section class="border-y border-neutral-200 bg-white">
+      <div class="mx-auto max-w-7xl px-6 py-12 lg:px-10 lg:py-20">
+        <div class="max-w-3xl mb-8">
+          <div class="text-xs uppercase tracking-[0.22em] text-neutral-500">What changes between tiers</div>
+          <h2 class="mt-3 text-2xl font-semibold tracking-tight text-neutral-950 sm:text-3xl md:text-4xl">Five rows. That's the whole difference.</h2>
+        </div>
+
+        <div class="overflow-hidden rounded-[28px] border border-neutral-200 bg-stone-50 shadow-sm">
+          <!-- Desktop 4-col -->
+          <div class="hidden md:block">
+            <div class="grid grid-cols-4 border-b border-neutral-200 bg-neutral-100 px-4 py-3 text-[11px] uppercase tracking-[0.22em] text-neutral-500">
+              <div></div>
+              <div>Entry $149</div>
+              <div>Core $299</div>
+              <div>Scale $497</div>
+            </div>
+            <div class="grid grid-cols-4 border-b border-neutral-200 bg-white px-4 py-4 text-sm text-neutral-700">
+              <div class="font-medium text-neutral-950">Sub-accounts</div>
+              <div>3</div>
+              <div>10</div>
+              <div class="font-medium text-neutral-950">Unlimited</div>
+            </div>
+            <div class="grid grid-cols-4 border-b border-neutral-200 bg-white px-4 py-4 text-sm text-neutral-700">
+              <div class="font-medium text-neutral-950">Client self-signup</div>
+              <div class="text-neutral-400">--</div>
+              <div class="text-neutral-400">--</div>
+              <div class="font-medium text-neutral-950">Included</div>
+            </div>
+            <div class="grid grid-cols-4 border-b border-neutral-200 bg-white px-4 py-4 text-sm text-neutral-700">
+              <div class="font-medium text-neutral-950">Commercial automation</div>
+              <div class="text-neutral-400">--</div>
+              <div class="text-neutral-400">--</div>
+              <div class="font-medium text-neutral-950">SaaS mode + marketplace</div>
+            </div>
+            <div class="grid grid-cols-4 border-b border-neutral-200 bg-white px-4 py-4 text-sm text-neutral-700">
+              <div class="font-medium text-neutral-950">Support</div>
+              <div>Docs + email</div>
+              <div>Priority</div>
+              <div class="font-medium text-neutral-950">Named relationship</div>
+            </div>
+            <div class="grid grid-cols-4 bg-white px-4 py-4 text-sm text-neutral-700">
+              <div class="font-medium text-neutral-950">Per-minute rate</div>
+              <div>$0.12</div>
+              <div>$0.12</div>
+              <div>$0.12 (volume rates available)</div>
+            </div>
+          </div>
+          <!-- Mobile stacked -->
+          <div class="md:hidden divide-y divide-neutral-200">
+            <div class="p-4 bg-white">
+              <div class="font-medium text-neutral-950 text-sm">Sub-accounts</div>
+              <div class="mt-2 grid grid-cols-3 gap-2 text-xs">
+                <div class="rounded-lg bg-neutral-50 p-2 text-center"><span class="block text-neutral-500">Entry</span><span class="font-medium text-neutral-950">3</span></div>
+                <div class="rounded-lg bg-neutral-50 p-2 text-center"><span class="block text-neutral-500">Core</span><span class="font-medium text-neutral-950">10</span></div>
+                <div class="rounded-lg bg-neutral-50 p-2 text-center"><span class="block text-neutral-500">Scale</span><span class="font-semibold text-neutral-950">Unlimited</span></div>
+              </div>
+            </div>
+            <div class="p-4 bg-white">
+              <div class="font-medium text-neutral-950 text-sm">Client self-signup</div>
+              <div class="mt-2 grid grid-cols-3 gap-2 text-xs">
+                <div class="rounded-lg bg-neutral-50 p-2 text-center"><span class="block text-neutral-500">Entry</span><span class="text-neutral-400">--</span></div>
+                <div class="rounded-lg bg-neutral-50 p-2 text-center"><span class="block text-neutral-500">Core</span><span class="text-neutral-400">--</span></div>
+                <div class="rounded-lg bg-neutral-50 p-2 text-center"><span class="block text-neutral-500">Scale</span><span class="font-semibold text-neutral-950">Yes</span></div>
+              </div>
+            </div>
+            <div class="p-4 bg-white">
+              <div class="font-medium text-neutral-950 text-sm">Support</div>
+              <div class="mt-2 grid grid-cols-3 gap-2 text-xs">
+                <div class="rounded-lg bg-neutral-50 p-2 text-center"><span class="block text-neutral-500">Entry</span><span class="font-medium text-neutral-950">Email</span></div>
+                <div class="rounded-lg bg-neutral-50 p-2 text-center"><span class="block text-neutral-500">Core</span><span class="font-medium text-neutral-950">Priority</span></div>
+                <div class="rounded-lg bg-neutral-50 p-2 text-center"><span class="block text-neutral-500">Scale</span><span class="font-semibold text-neutral-950">Named</span></div>
+              </div>
+            </div>
+            <div class="p-4 bg-white">
+              <div class="font-medium text-neutral-950 text-sm">Per-minute rate</div>
+              <div class="mt-2 text-sm text-emerald-700 font-medium">$0.12/min across all tiers</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LIVE AGENT OPTION: Pricing advisor -->
+    <section class="mx-auto max-w-7xl px-6 py-8 lg:px-10">
+      <div class="rounded-[28px] border-2 border-dashed border-emerald-400 bg-emerald-50/30 p-5 sm:p-6">
+        <div class="mb-4 flex items-center gap-2">
+          <div class="rounded-full bg-emerald-100 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.22em] text-emerald-700">Live agent option</div>
+          <span class="text-xs text-neutral-500">Below the comparison table. Helps buyers pick their tier and calculates their economics.</span>
+        </div>
+        <div class="mx-auto max-w-lg rounded-2xl border border-neutral-200 bg-white p-5 shadow-sm">
+          <div class="mb-3 flex items-center gap-3">
+            <div class="flex h-9 w-9 items-center justify-center rounded-full bg-neutral-950 text-xs font-bold text-white">T</div>
+            <div>
+              <div class="text-sm font-semibold text-neutral-950">Pricing Advisor</div>
+              <div class="flex items-center gap-1.5 text-[10px] text-emerald-600 font-medium"><span class="inline-block h-1.5 w-1.5 rounded-full bg-emerald-500"></span> Live -- tell me about your agency</div>
+            </div>
+          </div>
+          <div class="rounded-xl bg-neutral-50 p-4 space-y-3 text-[13px] leading-5">
+            <div class="flex gap-2"><span class="font-semibold text-neutral-400 w-12 flex-shrink-0">You</span><span class="text-neutral-600">"I have 8 clients right now, doing about 150 calls each per month. What should I be on?"</span></div>
+            <div class="flex gap-2"><span class="font-semibold text-emerald-700 w-12 flex-shrink-0">Agent</span><span class="text-neutral-600">"Core at $299/mo. You're using 8 of the 10 sub-accounts, so you have room for 2 more clients before needing Scale. At 1,200 calls/month, your usage cost is about $144/mo in per-minute charges. If you're charging clients $200-300 each, you're looking at $1,600-2,400 in revenue against $443 total cost -- roughly 72-82% gross margin."</span></div>
+          </div>
+          <div class="mt-3 flex items-center gap-3">
+            <div class="flex-1 rounded-xl border border-neutral-200 bg-neutral-50 px-3 py-2 text-[12px] text-neutral-400 italic">How many clients do you have?</div>
+            <button class="rounded-xl bg-neutral-950 px-3 py-2 text-[11px] font-medium text-white">Ask</button>
+          </div>
+        </div>
+        <div class="mt-3 text-xs text-neutral-500">Combines tier recommendation with personalized economics. Every conversation captures agency size, client count, and pricing intent -- high-quality lead data.</div>
+      </div>
+    </section>
+
+    <!-- 04. FAQ -->
+    <section class="border-y border-neutral-200 bg-white">
+      <div class="mx-auto max-w-7xl px-6 py-12 lg:px-10 lg:py-20">
+        <div class="max-w-3xl mb-8">
+          <div class="text-xs uppercase tracking-[0.22em] text-neutral-500">Common questions</div>
+          <h2 class="mt-3 text-2xl font-semibold tracking-tight text-neutral-950 sm:text-3xl md:text-4xl">Pricing questions we hear most.</h2>
+        </div>
+        <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <div class="rounded-[24px] border border-neutral-200 bg-white p-5 shadow-sm sm:p-6">
+            <div class="text-sm font-semibold text-neutral-950">"What's included on every plan?"</div>
+            <div class="mt-3 text-sm leading-6 text-neutral-600">Full white-label, full markup, unlimited concurrency, and operational API. The core platform is the same across all three tiers. You never pay to unlock features you need from day one.</div>
+          </div>
+          <div class="rounded-[24px] border border-neutral-200 bg-white p-5 shadow-sm sm:p-6">
+            <div class="text-sm font-semibold text-neutral-950">"What actually changes between tiers?"</div>
+            <div class="mt-3 text-sm leading-6 text-neutral-600">Sub-account count (3 / 10 / Unlimited), commercial automation (self-signup, SaaS mode on Scale), and support closeness (email -> priority -> named partner). That's it.</div>
+          </div>
+          <div class="rounded-[24px] border border-neutral-200 bg-white p-5 shadow-sm sm:p-6">
+            <div class="text-sm font-semibold text-neutral-950">"Does per-minute pricing change by tier?"</div>
+            <div class="mt-3 text-sm leading-6 text-neutral-600">No. $0.12/min across all agency tiers. Scale-tier agencies with high volume can have a conversation about volume rates, but there's no built-in tier markup on usage.</div>
+          </div>
+          <div class="rounded-[24px] border border-neutral-200 bg-white p-5 shadow-sm sm:p-6">
+            <div class="text-sm font-semibold text-neutral-950">"What if I just need it for my own business?"</div>
+            <div class="mt-3 text-sm leading-6 text-neutral-600">There's a separate individual plan at $49/mo for businesses that want a voice AI receptionist without the agency tooling. Different path, same underlying platform.</div>
+          </div>
+          <div class="rounded-[24px] border border-neutral-200 bg-white p-5 shadow-sm sm:p-6">
+            <div class="text-sm font-semibold text-neutral-950">"Is there a free trial?"</div>
+            <div class="mt-3 text-sm leading-6 text-neutral-600">Yes. Start on Entry with a free trial period. Deploy an agent, test it with real calls, and see the platform before committing. No credit card until you're ready to go live with clients.</div>
+          </div>
+          <div class="rounded-[24px] border border-neutral-200 bg-white p-5 shadow-sm sm:p-6">
+            <div class="text-sm font-semibold text-neutral-950">"Can I upgrade mid-month?"</div>
+            <div class="mt-3 text-sm leading-6 text-neutral-600">Yes, instantly. If you sign a 4th client on Entry, upgrade to Core and the new sub-account limit applies immediately. Prorated billing, no disruption.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 05. Separate paths -->
+    <section class="mx-auto max-w-7xl px-6 py-12 lg:px-10 lg:py-20">
+      <div class="grid gap-5 md:grid-cols-2">
+        <div class="rounded-[28px] border border-neutral-200 bg-white p-6 shadow-sm sm:p-8">
+          <div class="text-xs uppercase tracking-[0.22em] text-neutral-500 mb-3">For your own business</div>
+          <div class="text-2xl font-semibold tracking-tight text-neutral-950 sm:text-3xl">$49<span class="text-lg font-normal text-neutral-500">/mo</span></div>
+          <div class="mt-3 text-sm leading-6 text-neutral-600">AI receptionist for your business. Answers calls, qualifies leads, books appointments. 150 included minutes. No agency tooling, no sub-accounts. Just a phone that always answers.</div>
+          <button class="mt-6 rounded-2xl border border-neutral-300 bg-white px-5 py-3 text-sm font-medium text-neutral-800 shadow-sm">Start free trial</button>
+        </div>
+        <div class="rounded-[24px] sm:rounded-[28px] border border-neutral-900 bg-neutral-950 p-6 shadow-sm sm:p-8 text-white">
+          <div class="text-xs uppercase tracking-[0.22em] text-neutral-400 mb-3">Enterprise</div>
+          <div class="text-2xl font-semibold tracking-tight sm:text-3xl">Custom deployment</div>
+          <div class="mt-3 text-sm leading-6 text-neutral-300">On-premise, custom integrations, managed implementation, compliance requirements. For organizations where voice AI is an operating layer, not a trial. Separate pricing, separate engagement.</div>
+          <button class="mt-6 rounded-2xl bg-white px-5 py-3 text-sm font-medium text-neutral-950">Talk to Sales</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 06. Close -->
+    <section class="border-t border-neutral-200 bg-white">
+      <div class="mx-auto max-w-7xl px-6 py-12 lg:px-10 lg:py-20">
+        <div class="rounded-[24px] sm:rounded-[32px] border border-neutral-900 bg-neutral-950 px-5 py-10 text-white shadow-[0_20px_80px_rgba(0,0,0,0.12)] sm:px-8 sm:py-14 md:px-12">
+          <div class="max-w-3xl">
+            <div class="mb-4 text-xs uppercase tracking-[0.22em] text-neutral-400">Start building</div>
+            <h2 class="text-3xl font-semibold tracking-tight sm:text-4xl md:text-5xl">$149 to start. The same platform at every step.</h2>
+            <p class="mt-5 max-w-2xl text-base leading-7 text-neutral-300 md:text-lg">Every agency feature is live from day one. You're not buying access to the real product -- you already have it. The upgrade trigger is success, not frustration.</p>
+            <div class="mt-8 flex flex-wrap gap-4">
+              <button class="rounded-2xl bg-white px-5 py-3 text-sm font-medium text-neutral-950">Get Started</button>
+              <button class="rounded-2xl border border-neutral-700 px-5 py-3 text-sm font-medium text-white">Talk to Sales</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="border-t border-neutral-200 bg-stone-50">
+    <div class="mx-auto max-w-7xl px-6 py-8 lg:px-10">
+      <div class="flex flex-wrap gap-x-8 gap-y-4 text-sm text-neutral-500">
+        <div class="font-medium text-neutral-700">Trillet</div>
+        <a href="homepage-wireframe.html" class="hover:text-neutral-700">Home</a>
+        <a href="platform-wireframe.html" class="hover:text-neutral-700">Platform</a>
+        <a href="solutions-wireframe.html" class="hover:text-neutral-700">Solutions</a>
+        <a href="enterprise-wireframe.html" class="hover:text-neutral-700">Enterprise</a>
+        <span class="text-neutral-300">|</span>
+        <a href="individual-wireframe.html" class="hover:text-neutral-700">Individual</a>
+        <span class="hover:text-neutral-700 cursor-pointer">Login</span>
+        <span class="text-neutral-300">|</span>
+        <span>Privacy</span>
+        <span>Terms</span>
+        <span>Contact</span>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

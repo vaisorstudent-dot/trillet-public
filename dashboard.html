@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trillet AI — Strategic Redesign</title>
+<link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;500;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #111114;
+  --surface: #1A1A1F;
+  --surface-hover: #1F1F25;
+  --text: #E8E8EB;
+  --text-dim: #B8BFC8;
+  --text-muted: #8E96A3;
+  --accent: #0066FF;
+  --accent-dim: rgba(0, 102, 255, 0.07);
+  --accent-border: rgba(0, 102, 255, 0.22);
+  --border: rgba(255,255,255,0.07);
+  --border-hover: rgba(255,255,255,0.12);
+  --green: #34D399;
+  --green-dim: rgba(52, 211, 153, 0.12);
+  --amber: #FBBF24;
+  --amber-dim: rgba(251, 191, 36, 0.12);
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'DM Sans', system-ui, sans-serif;
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* --- Grain texture overlay --- */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  opacity: 0.035;
+  pointer-events: none;
+  z-index: 9999;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 200px;
+}
+
+/* --- Cursor halo --- */
+.cursor-halo {
+  position: fixed;
+  width: 280px;
+  height: 280px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  background: radial-gradient(circle, rgba(0,102,255,0.06) 0%, rgba(0,102,255,0.02) 40%, transparent 70%);
+  transform: translate(-50%, -50%);
+  transition: opacity 0.3s;
+  mix-blend-mode: screen;
+}
+
+/* --- Animations --- */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(22px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+@keyframes subtleGlow {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+.animate {
+  opacity: 0;
+  animation: fadeUp 0.6s ease-out forwards;
+}
+
+/* --- Container --- */
+.container {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 72px 32px 100px;
+}
+
+/* --- Header --- */
+.header {
+  text-align: center;
+  margin-bottom: 64px;
+  position: relative;
+}
+
+.header::before {
+  content: '';
+  position: absolute;
+  top: -120px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 600px;
+  height: 400px;
+  background: radial-gradient(ellipse at 50% 50%, rgba(0,102,255,0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.header-badge {
+  display: inline-block;
+  font-size: 0.65em;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  border: 1px solid var(--accent-border);
+  padding: 6px 16px;
+  border-radius: 100px;
+  margin-bottom: 32px;
+  background: var(--accent-dim);
+}
+
+.header-title {
+  font-family: 'Urbanist', sans-serif;
+  font-weight: 800;
+  font-size: 4.2em;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  margin-bottom: 10px;
+  position: relative;
+}
+
+.header-title span {
+  color: var(--accent);
+}
+
+.header-subtitle {
+  font-family: 'Urbanist', sans-serif;
+  font-weight: 300;
+  font-size: 1.35em;
+  color: var(--text-muted);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* --- Entity row --- */
+.entities {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 48px;
+  margin-top: 40px;
+  padding-top: 32px;
+  border-top: 1px solid var(--border);
+}
+
+.entity {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.entity img {
+  width: 42px;
+  height: auto;
+  opacity: 0.9;
+}
+
+.entity-name {
+  font-family: 'Urbanist', sans-serif;
+  font-weight: 700;
+  font-size: 1.65em;
+  color: var(--text-dim);
+  letter-spacing: -0.02em;
+}
+
+.entity-region {
+  font-family: 'Urbanist', sans-serif;
+  font-weight: 800;
+  font-size: 1.05em;
+  color: var(--accent);
+  letter-spacing: 0.1em;
+  margin-left: 4px;
+}
+
+.entity-sep {
+  width: 1px;
+  height: 36px;
+  background: var(--border);
+}
+
+/* --- Section labels --- */
+.section-group {
+  margin-bottom: 48px;
+}
+
+.section-label {
+  font-weight: 600;
+  font-size: 0.68em;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 18px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.section-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+/* --- Card grid --- */
+.card-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+/* --- Cards --- */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 28px 28px 24px;
+  position: relative;
+  transition: all 0.25s ease;
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--accent-border);
+  transition: background 0.25s ease;
+}
+
+.card:hover {
+  background: var(--surface-hover);
+  border-color: var(--border-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+}
+
+.card:hover::before {
+  background: var(--accent);
+}
+
+.card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.card-num {
+  font-family: 'Urbanist', sans-serif;
+  font-weight: 800;
+  font-size: 1.6em;
+  color: var(--accent);
+  opacity: 0.15;
+  line-height: 1;
+}
+
+.card-status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.68em;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+}
+
+.status-ready .status-dot {
+  background: var(--green);
+  box-shadow: 0 0 8px rgba(52, 211, 153, 0.4);
+  animation: subtleGlow 3s ease-in-out infinite;
+}
+.status-ready { color: var(--green); }
+
+.status-progress .status-dot {
+  background: var(--amber);
+  box-shadow: 0 0 8px rgba(251, 191, 36, 0.3);
+  animation: pulse 2.5s ease-in-out infinite;
+}
+.status-progress { color: var(--amber); }
+
+.status-upcoming .status-dot {
+  background: var(--text-muted);
+  opacity: 0.4;
+}
+.status-upcoming { color: var(--text-muted); opacity: 0.6; }
+
+.card-title {
+  font-family: 'Urbanist', sans-serif;
+  font-weight: 700;
+  font-size: 1.3em;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin-bottom: 10px;
+}
+
+.card-desc {
+  font-size: 0.88em;
+  font-weight: 300;
+  color: var(--text-dim);
+  line-height: 1.55;
+  flex: 1;
+}
+
+.card-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 20px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+}
+
+.card-type {
+  font-size: 0.65em;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 100px;
+}
+
+.card-type.type-presentation {
+  color: var(--accent);
+  background: var(--accent-dim);
+  border: 1px solid var(--accent-border);
+}
+
+.card-type.type-whitepage {
+  color: var(--green);
+  background: var(--green-dim);
+  border: 1px solid rgba(52, 211, 153, 0.25);
+}
+
+.card-arrow {
+  font-size: 0.9em;
+  color: var(--accent);
+  opacity: 0;
+  transform: translateX(-6px);
+  transition: all 0.25s ease;
+}
+
+.card:hover .card-arrow {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* --- Upcoming cards (dimmed) --- */
+.card.upcoming {
+  opacity: 0.45;
+  cursor: default;
+}
+
+.card.upcoming:hover {
+  transform: none;
+  box-shadow: none;
+  background: var(--surface);
+  border-color: var(--border);
+}
+
+.card.upcoming::before {
+  background: var(--border);
+}
+
+.card.upcoming:hover::before {
+  background: var(--border);
+}
+
+.card.upcoming:hover .card-arrow {
+  opacity: 0;
+}
+
+/* --- Footer --- */
+.footer {
+  text-align: center;
+  margin-top: 56px;
+  padding-top: 32px;
+  border-top: 1px solid var(--border);
+  font-size: 0.72em;
+  color: var(--text-muted);
+  opacity: 0.5;
+  line-height: 1.7;
+}
+
+/* --- Responsive --- */
+@media (max-width: 640px) {
+  .container { padding: 48px 20px 72px; }
+  .header-title { font-size: 2.8em; }
+  .header-subtitle { font-size: 1em; }
+  .card-grid { grid-template-columns: 1fr; }
+  .entities { gap: 24px; flex-direction: column; }
+  .entity-sep { width: 40px; height: 1px; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="cursor-halo" id="halo"></div>
+
+<div class="container">
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-badge animate" style="animation-delay:0s;">Internal Working Document</div>
+    <h1 class="header-title animate" style="animation-delay:0.1s;">Trillet <span>AI</span></h1>
+    <p class="header-subtitle animate" style="animation-delay:0.18s;">Strategic Redesign</p>
+
+    <div class="entities animate" style="animation-delay:0.3s;">
+      <div class="entity">
+        <img src="https://trillet.ai/trillet-icon.png" alt="">
+        <span class="entity-name">trillet</span>
+        <span class="entity-region">AU</span>
+      </div>
+      <div class="entity-sep"></div>
+      <div class="entity">
+        <img src="https://trillet.ai/trillet-icon.png" alt="">
+        <span class="entity-name">trillet</span>
+        <span class="entity-region">US</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ACTIVE ARTIFACTS -->
+  <div class="section-group">
+    <div class="section-label animate" style="animation-delay:0.4s;">Active Artifacts</div>
+    <div class="card-grid">
+
+      <a href="strategic-frame.html" class="card animate" style="animation-delay:0.48s;">
+        <div class="card-head">
+          <div class="card-num">01</div>
+          <div class="card-status status-progress"><span class="status-dot"></span> Open</div>
+        </div>
+        <div class="card-title">Decision Brief: Strategic Architecture</div>
+        <div class="card-desc">Enterprise proof. Economics. Product lines. Tier architecture and reasoning. Revenue model. Agency economics. Custom work. Operating formula.</div>
+        <div class="card-meta">
+          <span class="card-type type-presentation">Presentation</span>
+          <span class="card-arrow">&rarr;</span>
+        </div>
+      </a>
+
+      <a href="product-architecture.html" class="card animate" style="animation-delay:0.56s;">
+        <div class="card-head">
+          <div class="card-num">02</div>
+          <div class="card-status status-ready"><span class="status-dot"></span> Ready</div>
+        </div>
+        <div class="card-title">Product Architecture</div>
+        <div class="card-desc">Decision Brief. Product ladder. Template architecture. Entitlements. Economics. Design rationale.</div>
+        <div class="card-meta">
+          <span class="card-type type-whitepage">White Page</span>
+          <span class="card-arrow">&rarr;</span>
+        </div>
+      </a>
+
+      <a href="template-deep-dive.html" class="card animate" style="animation-delay:0.64s;">
+        <div class="card-head">
+          <div class="card-num">03</div>
+          <div class="card-status status-ready"><span class="status-dot"></span> Ready</div>
+        </div>
+        <div class="card-title">Template Architecture</div>
+        <div class="card-desc">Deep dive. Five-object ontology. Competitive gap. Worked example. H1 build scope. Questions for Ming and Laurence.</div>
+        <div class="card-meta">
+          <span class="card-type type-presentation">Presentation</span>
+          <span class="card-arrow">&rarr;</span>
+        </div>
+      </a>
+
+      <a href="brand-positioning.html" class="card animate" style="animation-delay:0.7s;">
+        <div class="card-head">
+          <div class="card-num">04</div>
+          <div class="card-status status-ready"><span class="status-dot"></span> Ready</div>
+        </div>
+        <div class="card-title">Brand & Positioning</div>
+        <div class="card-desc">Six pillars. Competitive context. Support as differentiator. Tier structure. Agency-first positioning.</div>
+        <div class="card-meta">
+          <span class="card-type type-presentation">Presentation</span>
+          <span class="card-arrow">&rarr;</span>
+        </div>
+      </a>
+
+      <a href="ming-questions.html" class="card animate" style="animation-delay:0.78s;">
+        <div class="card-head">
+          <div class="card-num">05</div>
+          <div class="card-status status-progress"><span class="status-dot"></span> Open</div>
+        </div>
+        <div class="card-title">Decision Brief: Ming</div>
+        <div class="card-desc">Open questions that block tier lockdown. D2C channel conflict, onboarding, API scope, marketplace, custom build fee, enterprise pricing.</div>
+        <div class="card-meta">
+          <span class="card-type">Decision Brief</span>
+          <span class="card-arrow">&rarr;</span>
+        </div>
+      </a>
+
+      <a href="flagship-deployment.html" class="card animate" style="animation-delay:0.86s;">
+        <div class="card-head">
+          <div class="card-num">06</div>
+          <div class="card-status status-ready"><span class="status-dot"></span> Ready</div>
+        </div>
+        <div class="card-title">Flagship Deployment Thesis</div>
+        <div class="card-desc">Why the meta demo agents are a category-defining move. Pattern matching, clonability test, reference-deployment flywheel, execution sequence.</div>
+        <div class="card-meta">
+          <span class="card-type type-whitepage">Strategic Brief</span>
+          <span class="card-arrow">&rarr;</span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- IN DEVELOPMENT -->
+  <div class="section-group">
+    <div class="section-label animate" style="animation-delay:0.82s;">In Development</div>
+    <div class="card-grid">
+
+      <div class="card upcoming animate" style="animation-delay:0.88s;">
+        <div class="card-head">
+          <div class="card-num">05</div>
+          <div class="card-status status-upcoming"><span class="status-dot"></span> Upcoming</div>
+        </div>
+        <div class="card-title">SaaS Configurator</div>
+        <div class="card-desc">Self-serve enterprise deployment interface. Redesign direction and scope definition.</div>
+        <div class="card-meta">
+          <span class="card-type">Design direction pending</span>
+          <span class="card-arrow">&rarr;</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer animate" style="animation-delay:1.2s;">
+    Founding Team &middot; March 2026<br>
+    Each piece is presented and ratified independently. Website comes after alignment.
+  </div>
+
+</div>
+
+<!-- Cursor halo script -->
+<script>
+const halo = document.getElementById('halo');
+let hx = -200, hy = -200;
+let cx = -200, cy = -200;
+
+document.addEventListener('mousemove', e => { hx = e.clientX; hy = e.clientY; });
+
+function updateHalo() {
+  cx += (hx - cx) * 0.12;
+  cy += (hy - cy) * 0.12;
+  halo.style.left = cx + 'px';
+  halo.style.top = cy + 'px';
+  requestAnimationFrame(updateHalo);
+}
+updateHalo();
+</script>
+
+</body>
+</html>
