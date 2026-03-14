@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trillet - Build Brief: Flagship Agents</title>
+<link rel="icon" type="image/svg+xml" href="https://trillet.ai/favicon.svg">
+<link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #FFFFFF;
+  --bg-warm: #FAFBFC;
+  --bg-inset: #F0F4FA;
+  --bg-highlight: #EFF6FF;
+  --bg-dark: #171717;
+  --text: #171717;
+  --text-secondary: #374151;
+  --text-muted: #9CA3AF;
+  --text-on-dark: #E8E8EB;
+  --border: #E5E7EB;
+  --border-light: #F3F4F6;
+  --accent: #0066FF;
+  --accent-light: rgba(0, 102, 255, 0.08);
+  --accent-border: rgba(0, 102, 255, 0.20);
+  --green: #059669;
+  --green-light: rgba(5, 150, 105, 0.08);
+  --green-border: rgba(5, 150, 105, 0.20);
+  --amber: #D97706;
+  --amber-light: rgba(217, 119, 6, 0.08);
+  --red: #DC2626;
+  --red-light: rgba(220, 38, 38, 0.06);
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.55s ease-out, transform 0.55s ease-out;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.rd1 { transition-delay: 0.06s; }
+.rd2 { transition-delay: 0.12s; }
+.rd3 { transition-delay: 0.18s; }
+
+/* --- Top bar --- */
+.topbar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 48px;
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  padding: 0 32px;
+  gap: 14px;
+}
+.topbar-logo { height: 16px; opacity: 0.85; }
+.topbar-sep { width: 1px; height: 18px; background: var(--border); }
+.topbar-type {
+  font-size: 11px; font-weight: 600; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--accent);
+}
+.topbar-back {
+  margin-left: auto; font-size: 12px; font-weight: 500;
+  color: var(--text-muted); text-decoration: none; transition: color 0.2s;
+}
+.topbar-back:hover { color: var(--accent); }
+
+/* --- Container --- */
+.container {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 100px 32px 120px;
+}
+
+/* --- Header --- */
+.header {
+  margin-bottom: 56px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--border);
+}
+.header-badge {
+  display: inline-block;
+  font-size: 11px; font-weight: 600; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--accent);
+  background: var(--accent-light); border: 1px solid var(--accent-border);
+  padding: 5px 14px; border-radius: 100px; margin-bottom: 24px;
+}
+.header h1 {
+  font-family: 'Urbanist', sans-serif;
+  font-weight: 800; font-size: 2.6em; line-height: 1.1;
+  letter-spacing: -0.035em; color: var(--text); margin-bottom: 14px;
+}
+.header h1 span { color: var(--accent); }
+.header-sub {
+  font-family: 'Urbanist', sans-serif;
+  font-weight: 400; font-size: 1.15em; color: var(--text-secondary); line-height: 1.5;
+}
+.header-meta {
+  margin-top: 24px; display: flex; gap: 24px;
+  font-size: 13px; color: var(--text-muted);
+}
+.header-nav {
+  margin-top: 28px; display: flex; flex-wrap: wrap; gap: 8px;
+}
+.header-nav a {
+  font-size: 12px; font-weight: 500; color: var(--accent);
+  background: var(--accent-light); border: 1px solid var(--accent-border);
+  padding: 5px 12px; border-radius: 100px; text-decoration: none;
+  transition: all 0.2s;
+}
+.header-nav a:hover { background: var(--accent); color: white; }
+
+/* --- Prose --- */
+.prose { margin-bottom: 40px; }
+.prose p { margin-bottom: 18px; color: var(--text-secondary); }
+.prose p:last-child { margin-bottom: 0; }
+.prose strong { color: var(--text); font-weight: 600; }
+
+/* --- Section --- */
+.section-marker {
+  display: flex; align-items: center; gap: 14px;
+  margin-bottom: 24px; margin-top: 56px;
+}
+.section-num {
+  font-family: 'Urbanist', sans-serif; font-weight: 800; font-size: 13px;
+  color: var(--accent); background: var(--accent-light);
+  width: 32px; height: 32px; border-radius: 8px;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.section-title {
+  font-family: 'Urbanist', sans-serif; font-weight: 700; font-size: 1.45em;
+  letter-spacing: -0.02em; color: var(--text); line-height: 1.2;
+}
+
+/* --- Pull quote --- */
+.pull-quote {
+  font-family: 'Urbanist', sans-serif;
+  font-weight: 700; font-size: 1.25em; line-height: 1.4;
+  letter-spacing: -0.015em; color: var(--text);
+  padding: 28px 0 28px 24px; border-left: 3px solid var(--accent);
+  margin: 32px 0;
+}
+.pull-quote .accent { color: var(--accent); }
+
+/* --- Inset --- */
+.inset {
+  background: var(--bg-highlight); border: 1px solid var(--accent-border);
+  border-radius: 12px; padding: 24px 28px; margin: 32px 0;
+}
+.inset-label {
+  font-size: 11px; font-weight: 600; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--accent); margin-bottom: 12px;
+}
+.inset p { color: var(--text-secondary); margin-bottom: 10px; font-size: 15px; line-height: 1.6; }
+.inset p:last-child { margin-bottom: 0; }
+
+/* --- Conversation mock --- */
+.conversation {
+  margin: 32px 0;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.conv-header {
+  background: var(--bg-warm);
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--border);
+  font-size: 12px; font-weight: 600;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--text-muted);
+  display: flex; align-items: center; gap: 8px;
+}
+.conv-header .dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--green);
+}
+.conv-body { padding: 20px; }
+
+.conv-msg {
+  margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+}
+.conv-msg:last-child { margin-bottom: 0; }
+
+.conv-agent {
+  align-self: flex-start;
+  max-width: 85%;
+}
+.conv-visitor {
+  align-self: flex-end;
+  max-width: 85%;
+}
+
+.conv-bubble {
+  padding: 12px 16px;
+  border-radius: 12px;
+  font-size: 14px;
+  line-height: 1.55;
+}
+.conv-agent .conv-bubble {
+  background: var(--bg-highlight);
+  color: var(--text-secondary);
+  border-bottom-left-radius: 4px;
+}
+.conv-visitor .conv-bubble {
+  background: var(--accent);
+  color: white;
+  border-bottom-right-radius: 4px;
+}
+
+.conv-label {
+  font-size: 10px; font-weight: 600; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--text-muted);
+  margin-bottom: 4px;
+}
+.conv-agent .conv-label { margin-left: 4px; }
+.conv-visitor .conv-label { margin-right: 4px; text-align: right; }
+
+.conv-buttons {
+  display: flex; flex-wrap: wrap; gap: 8px;
+  margin-top: 10px;
+}
+.conv-btn {
+  font-size: 13px; font-weight: 500;
+  padding: 8px 16px; border-radius: 100px;
+  border: 1px solid var(--accent-border);
+  color: var(--accent); background: white;
+}
+
+.conv-annotation {
+  font-size: 12px; color: var(--text-muted); font-style: italic;
+  padding: 8px 16px; margin-top: 8px;
+  border-left: 2px solid var(--border-light);
+}
+
+/* --- Voice mock --- */
+.voice-mock {
+  margin: 32px 0;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.voice-header {
+  background: var(--bg-dark);
+  color: var(--text-on-dark);
+  padding: 16px 20px;
+  display: flex; align-items: center; gap: 12px;
+}
+.voice-icon {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: var(--accent);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; color: white;
+}
+.voice-info { flex: 1; }
+.voice-info .name {
+  font-family: 'Urbanist', sans-serif; font-weight: 700;
+  font-size: 15px;
+}
+.voice-info .scenario {
+  font-size: 12px; color: var(--text-muted);
+}
+.voice-duration {
+  font-family: 'Inter', sans-serif; font-size: 13px;
+  color: var(--green); font-weight: 600;
+}
+
+.voice-transcript {
+  padding: 20px;
+  background: var(--bg-warm);
+}
+.voice-line {
+  margin-bottom: 14px; font-size: 14px; line-height: 1.6;
+  color: var(--text-secondary);
+}
+.voice-line:last-child { margin-bottom: 0; }
+.voice-line .speaker {
+  font-weight: 600; color: var(--text); font-size: 11px;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  display: block; margin-bottom: 2px;
+}
+.voice-line .speaker.agent-speaker { color: var(--accent); }
+
+/* --- Table --- */
+.spec-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 28px 0;
+  font-size: 14px;
+}
+.spec-table th {
+  text-align: left;
+  padding: 10px 14px;
+  background: var(--accent);
+  color: white;
+  font-family: 'Urbanist', sans-serif;
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.spec-table th:first-child { border-radius: 8px 0 0 0; }
+.spec-table th:last-child { border-radius: 0 8px 0 0; }
+.spec-table td {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border-light);
+  color: var(--text-secondary);
+  vertical-align: top;
+}
+.spec-table tr:nth-child(even) td { background: var(--bg-warm); }
+.spec-table td:first-child { font-weight: 500; color: var(--text); }
+
+/* --- Status badges --- */
+.badge {
+  display: inline-block; font-size: 11px; font-weight: 600;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  padding: 3px 10px; border-radius: 100px;
+}
+.badge-fixed { color: var(--accent); background: var(--accent-light); border: 1px solid var(--accent-border); }
+.badge-bounded { color: var(--amber); background: var(--amber-light); border: 1px solid rgba(217,119,6,0.2); }
+.badge-content { color: var(--green); background: var(--green-light); border: 1px solid var(--green-border); }
+
+/* --- Quality bar --- */
+.quality-bar {
+  display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px;
+  margin: 28px 0;
+}
+.quality-item {
+  padding: 16px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+}
+.quality-item.exceptional { border-color: var(--green-border); background: var(--green-light); }
+.quality-item.adequate { border-color: var(--border); background: var(--bg-warm); }
+.quality-item.anti { border-color: rgba(220,38,38,0.2); background: var(--red-light); }
+.quality-label {
+  font-size: 11px; font-weight: 600; letter-spacing: 0.08em;
+  text-transform: uppercase; margin-bottom: 6px;
+}
+.quality-item.exceptional .quality-label { color: var(--green); }
+.quality-item.adequate .quality-label { color: var(--text-muted); }
+.quality-item.anti .quality-label { color: var(--red); }
+.quality-item p { font-size: 13px; line-height: 1.5; color: var(--text-secondary); }
+
+/* --- Footer --- */
+.footer {
+  margin-top: 56px; padding-top: 20px;
+  border-top: 1px solid var(--border);
+  font-size: 12px; color: var(--text-muted);
+  display: flex; justify-content: space-between;
+}
+
+/* --- Responsive --- */
+@media (max-width: 640px) {
+  .container { padding: 80px 20px 80px; }
+  .header h1 { font-size: 2em; }
+  .pull-quote { font-size: 1.1em; padding-left: 18px; }
+  .topbar { padding: 0 16px; }
+  .header-meta { flex-direction: column; gap: 8px; }
+  .quality-bar { grid-template-columns: 1fr; }
+  .footer { flex-direction: column; gap: 8px; }
+  .header-nav { gap: 6px; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="topbar">
+  <img src="https://trillet.ai/trillet-text.png" alt="trillet" class="topbar-logo">
+  <div class="topbar-sep"></div>
+  <span class="topbar-type">Build Brief</span>
+  <a href="dashboard.html" class="topbar-back">&larr; Dashboard</a>
+</div>
+
+<div class="container">
+
+  <!-- HEADER -->
+  <header class="header reveal">
+    <div class="header-badge">Implementation Spec</div>
+    <h1>Build Brief:<br><span>Flagship Agents</span></h1>
+    <p class="header-sub">Two MVP agents. One template architecture. The interaction design that makes the flagship deployment real.</p>
+    <div class="header-meta">
+      <span>March 2026</span>
+      <span>Companion to: Flagship Deployment Thesis</span>
+    </div>
+    <nav class="header-nav">
+      <a href="#mvps">The Two MVPs</a>
+      <a href="#concierge">Concierge Flow</a>
+      <a href="#voice">Voice Demo Flow</a>
+      <a href="#template">Template Architecture</a>
+      <a href="#patterns">Premium Patterns</a>
+      <a href="#questions">Questions for Ming</a>
+    </nav>
+  </header>
+
+  <!-- SECTION 1: THE TWO MVPs -->
+  <div class="section-marker reveal" id="mvps">
+    <div class="section-num">01</div>
+    <div class="section-title">Two Agents, Two Proof Jobs</div>
+  </div>
+
+  <div class="prose reveal rd1">
+    <p>Start with two, not five. Each MVP has a distinct job. The homepage concierge is a <strong>router-plus-prefill instrument</strong>: it reduces friction, reflects the visitor's business back to them, and hands the next page structured context. The solutions voice demo is a <strong>proof-of-quality instrument</strong>: it produces one vivid belief update -- "this sounds deployable."</p>
+    <p>Both are built on the same template primitives agencies will use. If the site agents require custom one-off logic, we prove the product in marketing while failing to create a reusable asset.</p>
+  </div>
+
+  <table class="spec-table reveal rd2">
+    <tr>
+      <th>Agent</th>
+      <th>Job</th>
+      <th>Format</th>
+      <th>Phase</th>
+    </tr>
+    <tr>
+      <td>Homepage Concierge</td>
+      <td>Qualify, route, prefill downstream</td>
+      <td>Text, opt-in, embedded in hero</td>
+      <td><span class="badge badge-fixed">MVP</span></td>
+    </tr>
+    <tr>
+      <td>Solutions Voice Demo</td>
+      <td>Prove voice quality in 30 seconds</td>
+      <td>Live voice call from browser</td>
+      <td><span class="badge badge-fixed">MVP</span></td>
+    </tr>
+    <tr>
+      <td>Enterprise Intake</td>
+      <td>Qualify enterprise, capture scope</td>
+      <td>Text, dark-mode styled</td>
+      <td><span class="badge badge-bounded">Phase 2</span></td>
+    </tr>
+    <tr>
+      <td>Pricing Advisor</td>
+      <td>Recommend tier, calculate margin</td>
+      <td>Text</td>
+      <td><span class="badge badge-content">Phase 3</span></td>
+    </tr>
+    <tr>
+      <td>Platform Expert</td>
+      <td>Handle competitive questions</td>
+      <td>Text</td>
+      <td><span class="badge badge-content">Phase 3</span></td>
+    </tr>
+  </table>
+
+  <div class="prose reveal rd3">
+    <p>Additionally, the homepage includes an <strong>economics calculator</strong> (flat form, no AI, instant math) with an optional <strong>"Voice to discuss with the Economic Advisor"</strong> escalation button. The form captures data even from visitors who never engage with voice.</p>
+  </div>
+
+  <!-- SECTION 2: HOMEPAGE CONCIERGE -->
+  <div class="section-marker reveal" id="concierge">
+    <div class="section-num">02</div>
+    <div class="section-title">Homepage Concierge</div>
+  </div>
+
+  <div class="prose reveal rd1">
+    <p>Lives inside a conventional hero section. Headline, one-liner, and value prop remain visible above the fold. The concierge is an opt-in element below them -- the page works for scrollers and engagers alike. Always includes a dismiss control.</p>
+    <p>The design principle: <strong>service posture first, qualification second.</strong> The agent welcomes and orients. It does not classify and extract. The difference between a concierge that receives you and a chatbot that sorts you.</p>
+  </div>
+
+  <div class="conversation reveal rd2">
+    <div class="conv-header"><span class="dot"></span> Homepage Concierge -- Agency Path</div>
+    <div class="conv-body">
+      <div class="conv-msg conv-agent">
+        <div class="conv-label">Trillet</div>
+        <div class="conv-bubble">Welcome -- if you'd like, I can show you the version of Trillet that fits how you work.</div>
+        <div class="conv-buttons">
+          <span class="conv-btn">For agencies serving clients</span>
+          <span class="conv-btn">For teams across locations</span>
+          <span class="conv-btn">For a single business</span>
+        </div>
+      </div>
+      <div class="conv-annotation">Three invitations, not three buckets. The visitor feels guided, not sorted.</div>
+
+      <div class="conv-msg conv-visitor">
+        <div class="conv-label">Visitor</div>
+        <div class="conv-bubble">For agencies serving clients</div>
+      </div>
+
+      <div class="conv-msg conv-agent">
+        <div class="conv-label">Trillet</div>
+        <div class="conv-bubble">Most agencies start by packaging one proven workflow and cloning it across accounts. I can take you to that setup.</div>
+      </div>
+      <div class="conv-annotation">Give before ask. A useful insight about their industry before any qualifying question. The hotel places water before asking for your reservation.</div>
+
+      <div class="conv-msg conv-agent">
+        <div class="conv-label">Trillet</div>
+        <div class="conv-bubble">How many client locations would you likely manage in the first 90 days?</div>
+        <div class="conv-buttons">
+          <span class="conv-btn">1 - 5</span>
+          <span class="conv-btn">6 - 20</span>
+          <span class="conv-btn">21+</span>
+        </div>
+      </div>
+
+      <div class="conv-msg conv-visitor">
+        <div class="conv-label">Visitor</div>
+        <div class="conv-bubble">6 - 20</div>
+      </div>
+
+      <div class="conv-msg conv-agent">
+        <div class="conv-label">Trillet</div>
+        <div class="conv-bubble">This would let you launch AI answering as a client service without building custom agents from scratch. I'll take you to the agency page with your numbers ready.</div>
+      </div>
+      <div class="conv-annotation">Transferability close. The visitor sees their own use case reflected back. Route to agency page with economics calculator pre-filled at 6-20 clients.</div>
+    </div>
+  </div>
+
+  <div class="conversation reveal rd3">
+    <div class="conv-header"><span class="dot"></span> Homepage Concierge -- Enterprise Path</div>
+    <div class="conv-body">
+      <div class="conv-msg conv-visitor">
+        <div class="conv-label">Visitor</div>
+        <div class="conv-bubble">For teams across locations</div>
+      </div>
+
+      <div class="conv-msg conv-agent">
+        <div class="conv-label">Trillet</div>
+        <div class="conv-bubble">For multi-location teams, the critical layer is centralized control with local adaptation -- same quality standard everywhere.</div>
+      </div>
+      <div class="conv-annotation">Give: domain-relevant framing that demonstrates understanding. Tone: confidence and discretion.</div>
+
+      <div class="conv-msg conv-agent">
+        <div class="conv-label">Trillet</div>
+        <div class="conv-bubble">How many locations or teams would use this first?</div>
+        <div class="conv-buttons">
+          <span class="conv-btn">2 - 5</span>
+          <span class="conv-btn">6 - 20</span>
+          <span class="conv-btn">21+</span>
+        </div>
+      </div>
+
+      <div class="conv-msg conv-agent">
+        <div class="conv-label">Trillet</div>
+        <div class="conv-bubble">This is for standardizing how locations answer and qualify inbound calls. I'll take you to the enterprise path.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="conversation reveal">
+    <div class="conv-header"><span class="dot"></span> Concierge -- Fallback &amp; Exit</div>
+    <div class="conv-body">
+      <div class="conv-msg conv-visitor">
+        <div class="conv-label">Visitor types freeform</div>
+        <div class="conv-bubble">what do you guys do exactly</div>
+      </div>
+
+      <div class="conv-msg conv-agent">
+        <div class="conv-label">Trillet</div>
+        <div class="conv-bubble">I can point you the right way fastest if you pick one of the three paths above.</div>
+        <div class="conv-buttons">
+          <span class="conv-btn">For agencies serving clients</span>
+          <span class="conv-btn">For teams across locations</span>
+          <span class="conv-btn">For a single business</span>
+        </div>
+      </div>
+      <div class="conv-annotation">Reduction under confusion: simpler, not more. Re-present choices. Do not continue open-ended chatting.</div>
+
+      <div class="conv-msg conv-agent" style="margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--border-light);">
+        <div class="conv-label">Always visible</div>
+        <div class="conv-bubble" style="background: var(--bg-warm); color: var(--text-muted); font-size: 13px;">Prefer to browse? No problem -- the page works just as well on its own. <span style="color: var(--accent); cursor: pointer;">[Dismiss]</span></div>
+      </div>
+      <div class="conv-annotation">Exit grace: warm, one sentence, no re-engagement. Always available.</div>
+    </div>
+  </div>
+
+  <div class="quality-bar reveal">
+    <div class="quality-item exceptional">
+      <div class="quality-label">Exceptional</div>
+      <p>Zero confusion. One follow-up max. Route visibly changes next page. Under 15 seconds total.</p>
+    </div>
+    <div class="quality-item adequate">
+      <div class="quality-label">Adequate</div>
+      <p>Correct routing. Reasonable pace. Page loads the right content.</p>
+    </div>
+    <div class="quality-item anti">
+      <div class="quality-label">Anti-marketing</div>
+      <p>Too many questions. Misclassifies obvious users. Feels like disguised lead capture.</p>
+    </div>
+  </div>
+
+  <!-- SECTION 3: VOICE DEMO -->
+  <div class="section-marker reveal" id="voice">
+    <div class="section-num">03</div>
+    <div class="section-title">Solutions Voice Demo</div>
+  </div>
+
+  <div class="prose reveal rd1">
+    <p>The centerpiece. This is where the visitor hears the product. Not a recording, not a simulation -- a live voice call from the browser. The emotional target: <strong>"I would trust this to represent me when I'm not available."</strong></p>
+    <p>Two-level selection before the call: pick a vertical, then pick a scenario. This is not open-ended -- the demo is scenario-bounded. Tightly controlled experiences outperform open sandboxes because they can be made exceptional rather than merely adequate.</p>
+  </div>
+
+  <table class="spec-table reveal rd2">
+    <tr><th>Vertical</th><th>Scenarios</th></tr>
+    <tr><td>Dental</td><td>New patient booking &middot; Insurance question &middot; After-hours emergency triage</td></tr>
+    <tr><td>Legal</td><td>New case intake &middot; Consult scheduling &middot; Existing client status</td></tr>
+    <tr><td>Real Estate</td><td>Buyer inquiry &middot; Listing inquiry &middot; After-hours lead capture</td></tr>
+    <tr><td>Home Services</td><td>Emergency service call &middot; Quote request &middot; Schedule reschedule</td></tr>
+  </table>
+
+  <div class="inset reveal rd3">
+    <div class="inset-label">Pre-Call Framing</div>
+    <p>Before the call starts, the visitor sees: <strong>"Hear how a Trillet agent would answer a real [vertical] call. This is a live demo based on a common [scenario]. Takes about 30 seconds."</strong></p>
+    <p>This sets expectations, reduces anxiety about open-ended conversation, and frames the experience as proof, not test.</p>
+  </div>
+
+  <div class="voice-mock reveal">
+    <div class="voice-header">
+      <div class="voice-icon">&#9742;</div>
+      <div class="voice-info">
+        <div class="name">River Oak Dental</div>
+        <div class="scenario">Scenario: New Patient Booking</div>
+      </div>
+      <div class="voice-duration">0:34</div>
+    </div>
+    <div class="voice-transcript">
+      <div class="voice-line">
+        <span class="speaker agent-speaker">Agent</span>
+        Thanks for calling River Oak Dental. I can help you book a first appointment, answer insurance questions, or take a message for the office. What are you calling about today?
+      </div>
+      <div class="voice-line">
+        <span class="speaker">Caller</span>
+        I'd like to book a first appointment, a cleaning.
+      </div>
+      <div class="voice-line">
+        <span class="speaker agent-speaker">Agent</span>
+        Great -- I can get that set up. Do you have a preference for morning or afternoon, and is there a day that works best this week or next?
+      </div>
+      <div class="voice-line">
+        <span class="speaker">Caller</span>
+        Wednesday afternoon if possible.
+      </div>
+      <div class="voice-line">
+        <span class="speaker agent-speaker">Agent</span>
+        Wednesday afternoon works. I have a 2:30 with Dr. Patel. I'll put you down and text you a confirmation with the office address and parking info. Anything else I can help with?
+      </div>
+    </div>
+  </div>
+
+  <div class="prose reveal">
+    <p><strong>The first 3 seconds matter most.</strong> The opening should sound like someone who has already oriented to the caller's likely need -- poised, warm, lightly anticipatory. Not an IVR menu. Not a generic "how can I help you." A greeting that signals: I know what people usually call about, and I'm ready.</p>
+    <p><strong>Recovery is the real differentiator.</strong> When something goes wrong, a premium agent reduces effort for the caller: "No problem -- the simplest way is for me to ask two quick questions and point you the right way." Never repeats menu options mechanically. Never blames the caller. If recovery fails, exits gracefully: "I'm going to hand this back to the demo page so you can try another scenario."</p>
+    <p><strong>Post-call reflection:</strong> "That was a sample of how Trillet handles [scenario] for [vertical] businesses -- greeting callers, collecting key details, and moving them to the next action." Then a CTA framed as continuation of service: "See how this would be configured for your business."</p>
+  </div>
+
+  <div class="quality-bar reveal">
+    <div class="quality-item exceptional">
+      <div class="quality-label">Exceptional</div>
+      <p>No audible hesitation. Correct terminology. One moment where the visitor thinks "that sounded like a real front desk."</p>
+    </div>
+    <div class="quality-item adequate">
+      <div class="quality-label">Adequate</div>
+      <p>Understandable and on-topic. Completes the scenario. No errors.</p>
+    </div>
+    <div class="quality-item anti">
+      <div class="quality-label">Anti-marketing</div>
+      <p>Latency >4 seconds. Wrong terminology. Awkward barge-in. Fails to capture the scenario premise.</p>
+    </div>
+  </div>
+
+  <table class="spec-table reveal">
+    <tr><th>Metric</th><th>Target</th></tr>
+    <tr><td>Time to first audio</td><td>&lt; 2 seconds</td></tr>
+    <tr><td>First turn completion</td><td>&lt; 3 seconds end-to-end</td></tr>
+    <tr><td>Strong lead signal</td><td>Selects scenario + completes 20s + clicks CTA</td></tr>
+    <tr><td>Anti-pattern threshold</td><td>Latency &gt; 4s = pull the demo offline</td></tr>
+  </table>
+
+  <!-- SECTION 4: TEMPLATE ARCHITECTURE -->
+  <div class="section-marker reveal" id="template">
+    <div class="section-num">04</div>
+    <div class="section-title">Template Architecture: Three Layers</div>
+  </div>
+
+  <div class="prose reveal rd1">
+    <p>The site agents are not one-off builds. They are the first deployments of a template system. The template has three layers: invariants that Trillet enforces, bounded policies that agencies can tune within safe ranges, and content that agencies fully own.</p>
+    <p><strong>Agencies parameterize what the agent says. Trillet controls how it says it.</strong></p>
+  </div>
+
+  <div class="pull-quote reveal rd2">
+    The premium feel is not polish on top of mechanics.<br>
+    It is the <span class="accent">highest-value part of what gets cloned.</span>
+  </div>
+
+  <table class="spec-table reveal rd3">
+    <tr>
+      <th>Layer</th>
+      <th>What</th>
+      <th>Control</th>
+    </tr>
+    <tr>
+      <td><span class="badge badge-fixed">Invariant</span></td>
+      <td>No pressure. Exit grace. Reduce effort under confusion. No mechanical repetition. Continuity of attention. Service before extraction. Permission sensitivity.</td>
+      <td>Non-negotiable. Trillet enforces. Agencies cannot override.</td>
+    </tr>
+    <tr>
+      <td><span class="badge badge-bounded">Bounded</span></td>
+      <td>Message length (1-4 sentences). Choice presentation (1-3 options). Pacing. Generosity pattern. Bonus elements. Restraint level.</td>
+      <td>Strong defaults. Tunable within safe ranges. Can't break the quality floor.</td>
+    </tr>
+    <tr>
+      <td><span class="badge badge-content">Content</span></td>
+      <td>Brand. Vertical. Domain knowledge. Scenarios. Opening lines. Routes. Tone profiles. Intake fields.</td>
+      <td>Fully agency-owned. This is their creative space.</td>
+    </tr>
+  </table>
+
+  <div class="prose reveal">
+    <p>The concierge is a <strong>single template</strong> with parameterized paths. The voice demo is a <strong>template family</strong> -- one per vertical, with scenario-level parameterization. Both share the same invariant layer.</p>
+    <p>Why constraints? Agencies who want full control and are willing to build bad experiences can use raw APIs. Trillet's value to agencies IS the quality floor: "Your agents sound premium because our templates enforce it." The guardrails are the feature.</p>
+  </div>
+
+  <!-- SECTION 5: PREMIUM PATTERNS -->
+  <div class="section-marker reveal" id="patterns">
+    <div class="section-num">05</div>
+    <div class="section-title">What Makes It Feel Premium</div>
+  </div>
+
+  <div class="prose reveal rd1">
+    <p>Premium is not decoration. It is structural. These patterns are encoded into the template architecture -- some as invariants, some as bounded policies, some as content guidance.</p>
+  </div>
+
+  <table class="spec-table reveal rd2">
+    <tr>
+      <th>Pattern</th>
+      <th>What It Means</th>
+      <th>Layer</th>
+    </tr>
+    <tr>
+      <td>Anticipatory posture</td>
+      <td>Agent demonstrates understanding of visitor's world before asking for anything. "We prepared for you."</td>
+      <td><span class="badge badge-content">Content</span></td>
+    </tr>
+    <tr>
+      <td>Pace control</td>
+      <td>One thought, one choice per exchange. Never dumps. Deliberate spacing.</td>
+      <td><span class="badge badge-bounded">Bounded</span></td>
+    </tr>
+    <tr>
+      <td>Service before extraction</td>
+      <td>Give a useful insight before asking a qualifying question. Earn the ask.</td>
+      <td><span class="badge badge-fixed">Invariant</span></td>
+    </tr>
+    <tr>
+      <td>Reduction under confusion</td>
+      <td>Fallback simplifies. Recovery reframes. Never repeats mechanically.</td>
+      <td><span class="badge badge-fixed">Invariant</span></td>
+    </tr>
+    <tr>
+      <td>Named competence</td>
+      <td>Shows domain knowledge through observation, not assertion. "Most new patient calls come in after hours."</td>
+      <td><span class="badge badge-content">Content</span></td>
+    </tr>
+    <tr>
+      <td>Confident restraint</td>
+      <td>Says what it needs to say and stops. No filler. No overselling. Silence signals confidence.</td>
+      <td><span class="badge badge-bounded">Bounded</span></td>
+    </tr>
+    <tr>
+      <td>Continuity of attention</td>
+      <td>Downstream pages reflect upstream choices. The visitor is never re-introduced to a system that already knows them.</td>
+      <td><span class="badge badge-fixed">Invariant</span></td>
+    </tr>
+    <tr>
+      <td>Slightly more than expected</td>
+      <td>One unrequested value-add per interaction. Calculator gives margin AND payback period. Not dramatic -- just slightly more.</td>
+      <td><span class="badge badge-bounded">Bounded</span></td>
+    </tr>
+    <tr>
+      <td>Exit grace</td>
+      <td>Leave anytime without friction or guilt. No "are you sure?" The absence of desperation signals quality.</td>
+      <td><span class="badge badge-fixed">Invariant</span></td>
+    </tr>
+    <tr>
+      <td>Permission sensitivity</td>
+      <td>Ask only for what the moment has earned. No email on turn two. No budget before self-identification.</td>
+      <td><span class="badge badge-fixed">Invariant</span></td>
+    </tr>
+    <tr>
+      <td>Emotional calibration</td>
+      <td>Enterprise: confidence + discretion. Agency: taste + capability. SMB: relief + competence.</td>
+      <td><span class="badge badge-content">Content</span></td>
+    </tr>
+  </table>
+
+  <!-- SECTION 6: QUESTIONS FOR MING -->
+  <div class="section-marker reveal" id="questions">
+    <div class="section-num">06</div>
+    <div class="section-title">Questions for Ming</div>
+  </div>
+
+  <div class="prose reveal rd1">
+    <p>The strategic question from the Flagship Deployment thesis was: <strong>can we build the winning interactions so they become repeatable deployment primitives?</strong></p>
+    <p>The implementation questions that follow from it:</p>
+  </div>
+
+  <div class="inset reveal rd2">
+    <div class="inset-label">Template Architecture</div>
+    <p><strong>1.</strong> Can the concierge and voice demo be built as actual templates on the existing engine -- same primitives agencies would deploy?</p>
+    <p><strong>2.</strong> Can service invariants (no pressure, exit grace, service-before-extraction) be enforced at the engine level so agencies inherit them automatically?</p>
+    <p><strong>3.</strong> Can bounded policies (message length, pacing, choice limits) be exposed as configurable-within-range rather than binary on/off?</p>
+  </div>
+
+  <div class="inset reveal rd3">
+    <div class="inset-label">Voice Quality</div>
+    <p><strong>4.</strong> Can we hit first-audio &lt;2 seconds and first-turn &lt;3 seconds consistently? What infrastructure changes are needed?</p>
+    <p><strong>5.</strong> Can scenario-bounded demos be built so the agent stays on-script without feeling robotic? What's the prompt engineering approach?</p>
+    <p><strong>6.</strong> What's the voice quality ceiling with current ElevenLabs / voice stack? Is the "holy shit" moment achievable today?</p>
+  </div>
+
+  <div class="inset reveal">
+    <div class="inset-label">Cross-Agent &amp; Data</div>
+    <p><strong>7.</strong> Can session state pass between the concierge and the economics calculator (and later, between pages)?</p>
+    <p><strong>8.</strong> How do conversation data and lead signals reach the sales team -- CRM integration, webhook, or manual?</p>
+    <p><strong>9.</strong> What's realistically achievable before China? Concierge prototype? Voice demo prototype? Template schema design?</p>
+  </div>
+
+  <!-- CLOSING -->
+  <div class="closing reveal" style="margin-top: 64px; padding-top: 40px; border-top: 1px solid var(--border);">
+    <div style="font-family: 'Urbanist', sans-serif; font-weight: 700; font-size: 1.4em; line-height: 1.35; color: var(--text); margin-bottom: 20px;">
+      The site agents are not marketing widgets.<br><br>
+      They are the first deployments of a template system where <span style="color: var(--accent);">the premium interaction architecture is infrastructure, not polish.</span><br><br>
+      If we build them right, every agency that deploys a Trillet template inherits the quality standard automatically.
+    </div>
+    <p style="color: var(--text-secondary); font-size: 15px;">Read the strategic frame: <a href="flagship-deployment.html" style="color: var(--accent);">Flagship Deployment Thesis</a></p>
+  </div>
+
+  <div class="footer reveal">
+    <span>Trillet US + AU &middot; Founding Team &middot; Internal</span>
+    <span>March 2026</span>
+  </div>
+
+</div>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) entry.target.classList.add('visible');
+  });
+}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
