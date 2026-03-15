@@ -6,7 +6,7 @@
 <title>Trillet AI — Strategic Redesign</title>
 <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;500;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-:root {
+:root, [data-theme="dark"] {
   --bg: #111114;
   --surface: #1A1A1F;
   --surface-hover: #1F1F25;
@@ -22,6 +22,40 @@
   --green-dim: rgba(52, 211, 153, 0.12);
   --amber: #FBBF24;
   --amber-dim: rgba(251, 191, 36, 0.12);
+  --grain-opacity: 0.035;
+  --halo-r: 0; --halo-g: 102; --halo-b: 255;
+  --shadow-hero: rgba(0, 102, 255, 0.08);
+  --hero-browser-bg: #0D0D12;
+  --hero-browser-bar: #1E1E26;
+  --hero-browser-dot1: #ff5f57;
+  --hero-browser-dot2: #febc2e;
+  --hero-browser-dot3: #28c840;
+}
+
+[data-theme="light"] {
+  --bg: #F4F5F7;
+  --surface: #FFFFFF;
+  --surface-hover: #F0F1F4;
+  --text: #1A1A2E;
+  --text-dim: #4A4A68;
+  --text-muted: #8E8EA8;
+  --accent: #0055DD;
+  --accent-dim: rgba(0, 85, 221, 0.06);
+  --accent-border: rgba(0, 85, 221, 0.18);
+  --border: rgba(0,0,0,0.07);
+  --border-hover: rgba(0,0,0,0.13);
+  --green: #10B981;
+  --green-dim: rgba(16, 185, 129, 0.08);
+  --amber: #D97706;
+  --amber-dim: rgba(217, 119, 6, 0.08);
+  --grain-opacity: 0.018;
+  --halo-r: 0; --halo-g: 85; --halo-b: 221;
+  --shadow-hero: rgba(0, 85, 221, 0.06);
+  --hero-browser-bg: #FFFFFF;
+  --hero-browser-bar: #F0F1F4;
+  --hero-browser-dot1: #ff5f57;
+  --hero-browser-dot2: #febc2e;
+  --hero-browser-dot3: #28c840;
 }
 
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -34,6 +68,13 @@ body {
   position: relative;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
+  transition: background 0.4s ease, color 0.4s ease;
+}
+
+.card, .card-title, .card-desc, .card-meta, .section-label, .header-badge,
+.hero-wireframe-link, .hero-wireframe-desc, .browser-frame, .browser-bar,
+.browser-url, .footer {
+  transition: background 0.4s ease, color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
 }
 
 /* --- Grain texture overlay --- */
@@ -41,7 +82,7 @@ body::after {
   content: '';
   position: fixed;
   inset: 0;
-  opacity: 0.035;
+  opacity: var(--grain-opacity);
   pointer-events: none;
   z-index: 9999;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
@@ -56,10 +97,337 @@ body::after {
   border-radius: 50%;
   pointer-events: none;
   z-index: 9998;
-  background: radial-gradient(circle, rgba(0,102,255,0.06) 0%, rgba(0,102,255,0.02) 40%, transparent 70%);
+  background: radial-gradient(circle, rgba(var(--halo-r),var(--halo-g),var(--halo-b),0.06) 0%, rgba(var(--halo-r),var(--halo-g),var(--halo-b),0.02) 40%, transparent 70%);
   transform: translate(-50%, -50%);
   transition: opacity 0.3s;
   mix-blend-mode: screen;
+}
+
+[data-theme="light"] .cursor-halo { mix-blend-mode: multiply; }
+
+/* --- Theme toggle --- */
+.theme-toggle {
+  position: fixed;
+  top: 24px;
+  right: 28px;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.theme-toggle-label {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.65em;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  transition: color 0.4s;
+}
+
+.theme-toggle-track {
+  width: 40px;
+  height: 22px;
+  border-radius: 11px;
+  background: var(--surface);
+  border: 1px solid var(--border-hover);
+  position: relative;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.theme-toggle-thumb {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--accent);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+}
+
+.theme-toggle-track.active .theme-toggle-thumb {
+  left: 20px;
+}
+
+/* --- Homepage hero block --- */
+.hero-wireframe {
+  margin-bottom: 48px;
+}
+
+.hero-wireframe-link {
+  display: block;
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  background: linear-gradient(135deg, var(--accent-dim), transparent 60%);
+  border: 1px solid var(--accent-border);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hero-wireframe-link:hover {
+  border-color: var(--accent);
+  transform: translateY(-3px);
+  box-shadow:
+    0 20px 60px var(--shadow-hero),
+    0 0 0 1px var(--accent-border),
+    inset 0 1px 0 rgba(255,255,255,0.04);
+}
+
+.hero-wireframe-inner {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 0;
+  min-height: 220px;
+}
+
+.hero-wireframe-text {
+  padding: 36px 36px 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.hero-wireframe-eyebrow {
+  font-size: 0.6em;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.hero-wireframe-eyebrow::before {
+  content: '';
+  width: 20px;
+  height: 2px;
+  background: var(--accent);
+  border-radius: 1px;
+}
+
+.hero-wireframe-title {
+  font-family: 'Urbanist', sans-serif;
+  font-weight: 800;
+  font-size: 2em;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  margin-bottom: 12px;
+}
+
+.hero-wireframe-desc {
+  font-size: 0.88em;
+  font-weight: 300;
+  color: var(--text-dim);
+  line-height: 1.6;
+  max-width: 340px;
+}
+
+.hero-wireframe-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 20px;
+  font-size: 0.78em;
+  font-weight: 600;
+  color: var(--accent);
+  letter-spacing: 0.04em;
+  transition: gap 0.3s ease;
+}
+
+.hero-wireframe-link:hover .hero-wireframe-cta {
+  gap: 14px;
+}
+
+.hero-wireframe-preview {
+  position: relative;
+  padding: 20px 20px 0 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  overflow: hidden;
+}
+
+/* Mini browser chrome */
+.browser-frame {
+  width: 100%;
+  max-width: 420px;
+  border-radius: 10px 10px 0 0;
+  overflow: hidden;
+  background: var(--hero-browser-bg);
+  border: 1px solid var(--border-hover);
+  border-bottom: none;
+  box-shadow: 0 -8px 40px rgba(0,0,0,0.15);
+  transform: translateY(1px);
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hero-wireframe-link:hover .browser-frame {
+  transform: translateY(-4px);
+}
+
+.browser-bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  background: var(--hero-browser-bar);
+  border-bottom: 1px solid var(--border);
+}
+
+.browser-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.browser-dot:nth-child(1) { background: var(--hero-browser-dot1); }
+.browser-dot:nth-child(2) { background: var(--hero-browser-dot2); }
+.browser-dot:nth-child(3) { background: var(--hero-browser-dot3); }
+
+.browser-url {
+  flex: 1;
+  margin-left: 8px;
+  height: 18px;
+  border-radius: 4px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  padding: 0 8px;
+  font-size: 0.6em;
+  color: var(--text-muted);
+  font-family: 'DM Sans', sans-serif;
+}
+
+.browser-content {
+  padding: 16px;
+  min-height: 140px;
+}
+
+/* Mini wireframe skeleton inside browser */
+.skel-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+}
+
+.skel-logo {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 1.5px solid var(--border-hover);
+  background: var(--accent-dim);
+}
+
+.skel-nav-links {
+  display: flex;
+  gap: 10px;
+}
+
+.skel-nav-link {
+  width: 32px;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--border-hover);
+}
+
+.skel-hero-row {
+  display: flex;
+  gap: 14px;
+}
+
+.skel-hero-left { flex: 1; }
+
+.skel-badge {
+  width: 60px;
+  height: 8px;
+  border-radius: 4px;
+  background: var(--accent-dim);
+  border: 1px solid var(--accent-border);
+  margin-bottom: 10px;
+}
+
+.skel-h1 {
+  height: 10px;
+  width: 85%;
+  border-radius: 3px;
+  background: var(--text-muted);
+  opacity: 0.25;
+  margin-bottom: 6px;
+}
+
+.skel-h1-2 {
+  height: 10px;
+  width: 55%;
+  border-radius: 3px;
+  background: var(--accent);
+  opacity: 0.2;
+  margin-bottom: 10px;
+}
+
+.skel-p {
+  height: 4px;
+  width: 90%;
+  border-radius: 2px;
+  background: var(--border-hover);
+  margin-bottom: 4px;
+}
+
+.skel-btns {
+  display: flex;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.skel-btn {
+  height: 12px;
+  width: 40px;
+  border-radius: 6px;
+}
+
+.skel-btn-primary {
+  background: var(--text);
+  opacity: 0.15;
+}
+
+.skel-btn-secondary {
+  background: var(--border-hover);
+}
+
+.skel-hero-right {
+  flex: 0.8;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  padding: 8px;
+}
+
+.skel-card-line {
+  height: 4px;
+  border-radius: 2px;
+  background: var(--border-hover);
+  margin-bottom: 5px;
+}
+
+.skel-card-line:last-child { width: 60%; margin-bottom: 0; }
+
+@media (max-width: 640px) {
+  .hero-wireframe-inner { grid-template-columns: 1fr; }
+  .hero-wireframe-preview { display: none; }
+  .hero-wireframe-title { font-size: 1.6em; }
+  .theme-toggle { top: 16px; right: 16px; }
 }
 
 /* --- Animations --- */
@@ -431,6 +799,13 @@ body::after {
 
 <div class="cursor-halo" id="halo"></div>
 
+<div class="theme-toggle" id="themeToggle" onclick="toggleTheme()">
+  <span class="theme-toggle-label" id="themeLabel">Light</span>
+  <div class="theme-toggle-track" id="themeTrack">
+    <div class="theme-toggle-thumb"></div>
+  </div>
+</div>
+
 <div class="container">
 
   <!-- HEADER -->
@@ -453,6 +828,60 @@ body::after {
       </div>
     </div>
   </header>
+
+  <!-- HOMEPAGE WIREFRAME -->
+  <div class="hero-wireframe animate" style="animation-delay:0.36s;">
+    <a href="homepage-wireframe.html" class="hero-wireframe-link">
+      <div class="hero-wireframe-inner">
+        <div class="hero-wireframe-text">
+          <div class="hero-wireframe-eyebrow">Website Direction</div>
+          <div class="hero-wireframe-title">Homepage Wireframe</div>
+          <div class="hero-wireframe-desc">Full-page wireframe for the new trillet.ai. Agency-first positioning, enterprise proof points, and the three-tier product ladder.</div>
+          <div class="hero-wireframe-cta">View wireframe &rarr;</div>
+        </div>
+        <div class="hero-wireframe-preview">
+          <div class="browser-frame">
+            <div class="browser-bar">
+              <div class="browser-dot"></div>
+              <div class="browser-dot"></div>
+              <div class="browser-dot"></div>
+              <div class="browser-url">trillet.ai</div>
+            </div>
+            <div class="browser-content">
+              <div class="skel-nav">
+                <div class="skel-logo"></div>
+                <div class="skel-nav-links">
+                  <div class="skel-nav-link"></div>
+                  <div class="skel-nav-link"></div>
+                  <div class="skel-nav-link"></div>
+                  <div class="skel-nav-link"></div>
+                </div>
+              </div>
+              <div class="skel-hero-row">
+                <div class="skel-hero-left">
+                  <div class="skel-badge"></div>
+                  <div class="skel-h1"></div>
+                  <div class="skel-h1-2"></div>
+                  <div class="skel-p"></div>
+                  <div class="skel-p" style="width:70%"></div>
+                  <div class="skel-btns">
+                    <div class="skel-btn skel-btn-primary"></div>
+                    <div class="skel-btn skel-btn-secondary"></div>
+                  </div>
+                </div>
+                <div class="skel-hero-right">
+                  <div class="skel-card-line"></div>
+                  <div class="skel-card-line"></div>
+                  <div class="skel-card-line"></div>
+                  <div class="skel-card-line"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </a>
+  </div>
 
   <!-- ACTIVE ARTIFACTS -->
   <div class="section-group">
@@ -569,8 +998,9 @@ body::after {
 
 </div>
 
-<!-- Cursor halo script -->
+<!-- Scripts -->
 <script>
+// Cursor halo
 const halo = document.getElementById('halo');
 let hx = -200, hy = -200;
 let cx = -200, cy = -200;
@@ -585,6 +1015,36 @@ function updateHalo() {
   requestAnimationFrame(updateHalo);
 }
 updateHalo();
+
+// Theme toggle
+function toggleTheme() {
+  const html = document.documentElement;
+  const track = document.getElementById('themeTrack');
+  const label = document.getElementById('themeLabel');
+  const isDark = html.getAttribute('data-theme') !== 'light';
+
+  if (isDark) {
+    html.setAttribute('data-theme', 'light');
+    track.classList.add('active');
+    label.textContent = 'Dark';
+    localStorage.setItem('theme', 'light');
+  } else {
+    html.setAttribute('data-theme', 'dark');
+    track.classList.remove('active');
+    label.textContent = 'Light';
+    localStorage.setItem('theme', 'dark');
+  }
+}
+
+// Restore saved theme
+(function() {
+  const saved = localStorage.getItem('theme');
+  if (saved === 'light') {
+    document.documentElement.setAttribute('data-theme', 'light');
+    document.getElementById('themeTrack').classList.add('active');
+    document.getElementById('themeLabel').textContent = 'Dark';
+  }
+})();
 </script>
 
 </body>
