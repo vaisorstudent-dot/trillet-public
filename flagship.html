@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trillet - Flagship Deployment</title>
+<link rel="icon" type="image/svg+xml" href="https://trillet.ai/favicon.svg">
+<link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #FFFFFF;
+  --bg-warm: #FAFBFC;
+  --bg-inset: #F0F4FA;
+  --bg-highlight: #EFF6FF;
+  --bg-dark: #171717;
+  --text: #171717;
+  --text-secondary: #374151;
+  --text-muted: #9CA3AF;
+  --text-on-dark: #E8E8EB;
+  --border: #E5E7EB;
+  --border-light: #F3F4F6;
+  --accent: #0066FF;
+  --accent-light: rgba(0, 102, 255, 0.08);
+  --accent-border: rgba(0, 102, 255, 0.20);
+  --green: #059669;
+  --green-light: rgba(5, 150, 105, 0.08);
+  --green-border: rgba(5, 150, 105, 0.20);
+  --amber: #D97706;
+  --amber-light: rgba(217, 119, 6, 0.08);
+  --red: #DC2626;
+  --red-light: rgba(220, 38, 38, 0.06);
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* --- Scroll reveal --- */
+.reveal { opacity: 0; transform: translateY(14px); transition: opacity 0.5s ease-out, transform 0.5s ease-out; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.rd1 { transition-delay: 0.06s; } .rd2 { transition-delay: 0.12s; } .rd3 { transition-delay: 0.18s; }
+
+/* --- Top bar --- */
+.topbar {
+  position: fixed; top: 0; left: 0; right: 0; height: 48px;
+  background: rgba(255,255,255,0.92); backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border); z-index: 100;
+  display: flex; align-items: center; padding: 0 32px; gap: 14px;
+}
+.topbar-logo { height: 16px; opacity: 0.85; }
+.topbar-sep { width: 1px; height: 18px; background: var(--border); }
+.topbar-type { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); }
+.topbar-back { margin-left: auto; font-size: 12px; font-weight: 500; color: var(--text-muted); text-decoration: none; }
+.topbar-back:hover { color: var(--accent); }
+
+/* --- Container --- */
+.container { max-width: 760px; margin: 0 auto; padding: 100px 32px 120px; }
+
+/* --- Header --- */
+.header { margin-bottom: 0; padding-bottom: 32px; }
+.header-badge {
+  display: inline-block; font-size: 11px; font-weight: 600; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--accent); background: var(--accent-light);
+  border: 1px solid var(--accent-border); padding: 5px 14px; border-radius: 100px; margin-bottom: 24px;
+}
+.header h1 {
+  font-family: 'Urbanist', sans-serif; font-weight: 800; font-size: 2.6em;
+  line-height: 1.1; letter-spacing: -0.035em; margin-bottom: 14px;
+}
+.header h1 span { color: var(--accent); }
+.header-sub { font-family: 'Urbanist', sans-serif; font-weight: 400; font-size: 1.15em; color: var(--text-secondary); line-height: 1.5; }
+.header-meta { margin-top: 20px; display: flex; gap: 24px; font-size: 13px; color: var(--text-muted); }
+
+/* --- Tab navigation --- */
+.tab-nav {
+  position: sticky; top: 48px; z-index: 90;
+  background: rgba(255,255,255,0.92); backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  padding: 12px 0; margin: 0 -32px; padding-left: 32px; padding-right: 32px;
+  display: flex; gap: 6px; margin-bottom: 40px;
+}
+.tab-btn {
+  font-family: 'Urbanist', sans-serif; font-weight: 600; font-size: 13px;
+  letter-spacing: 0.02em; padding: 8px 20px; border-radius: 100px;
+  border: 1px solid var(--border); background: white; color: var(--text-secondary);
+  cursor: pointer; transition: all 0.25s; white-space: nowrap;
+}
+.tab-btn:hover { border-color: var(--accent-border); color: var(--accent); }
+.tab-btn.active { background: var(--accent); color: white; border-color: var(--accent); }
+
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+
+/* --- Prose --- */
+.prose { margin-bottom: 40px; }
+.prose p { margin-bottom: 18px; color: var(--text-secondary); }
+.prose p:last-child { margin-bottom: 0; }
+.prose strong { color: var(--text); font-weight: 600; }
+
+/* --- Section heading --- */
+.section-marker { display: flex; align-items: center; gap: 14px; margin-bottom: 24px; margin-top: 56px; }
+.section-marker:first-child { margin-top: 0; }
+.section-num {
+  font-family: 'Urbanist', sans-serif; font-weight: 800; font-size: 13px;
+  color: var(--accent); background: var(--accent-light);
+  width: 32px; height: 32px; border-radius: 8px;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.section-title { font-family: 'Urbanist', sans-serif; font-weight: 700; font-size: 1.45em; letter-spacing: -0.02em; line-height: 1.2; }
+
+/* --- Pull quote --- */
+.pull-quote {
+  font-family: 'Urbanist', sans-serif; font-weight: 700; font-size: 1.25em; line-height: 1.4;
+  letter-spacing: -0.015em; padding: 28px 0 28px 24px; border-left: 3px solid var(--accent); margin: 32px 0;
+}
+.pull-quote .accent { color: var(--accent); }
+
+/* --- Inset --- */
+.inset { background: var(--bg-highlight); border: 1px solid var(--accent-border); border-radius: 12px; padding: 24px 28px; margin: 32px 0; }
+.inset-label { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
+.inset p { color: var(--text-secondary); margin-bottom: 10px; font-size: 15px; line-height: 1.6; }
+.inset p:last-child { margin-bottom: 0; }
+
+/* --- Parallel cards --- */
+.parallel-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 32px 0; }
+.parallel-card { background: var(--bg-warm); border: 1px solid var(--border); border-radius: 10px; padding: 22px; transition: border-color 0.2s; }
+.parallel-card:hover { border-color: var(--accent-border); }
+.parallel-card-name { font-family: 'Urbanist', sans-serif; font-weight: 700; font-size: 1.02em; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+.parallel-card-name .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+.parallel-card p { font-size: 14px; color: var(--text-secondary); line-height: 1.6; }
+
+/* --- Flow diagram --- */
+.flow { margin: 36px 0; padding: 0 0 0 28px; border-left: 2px solid var(--accent-border); }
+.flow-step { position: relative; padding: 0 0 24px 24px; }
+.flow-step:last-child { padding-bottom: 0; }
+.flow-step::before { content: ''; position: absolute; left: -7px; top: 6px; width: 12px; height: 12px; border-radius: 50%; background: var(--bg); border: 2px solid var(--accent); }
+.flow-step p { color: var(--text-secondary); font-size: 15px; line-height: 1.6; }
+.flow-step strong { color: var(--text); }
+
+/* --- Priority list --- */
+.priority-list { margin: 32px 0; counter-reset: priority; }
+.priority-item { display: flex; gap: 16px; padding: 18px 0; border-bottom: 1px solid var(--border-light); }
+.priority-item:last-child { border-bottom: none; }
+.priority-item::before { counter-increment: priority; content: counter(priority); font-family: 'Urbanist', sans-serif; font-weight: 800; font-size: 28px; color: var(--accent); opacity: 0.25; line-height: 1; flex-shrink: 0; width: 32px; padding-top: 2px; }
+.priority-content h4 { font-family: 'Urbanist', sans-serif; font-weight: 700; font-size: 1em; margin-bottom: 4px; }
+.priority-content p { font-size: 15px; color: var(--text-secondary); line-height: 1.6; }
+
+/* --- Conversation mock --- */
+.conversation { margin: 32px 0; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+.conv-header { background: var(--bg-warm); padding: 14px 20px; border-bottom: 1px solid var(--border); font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); display: flex; align-items: center; gap: 8px; }
+.conv-header .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); }
+.conv-body { padding: 20px; }
+.conv-msg { margin-bottom: 16px; display: flex; flex-direction: column; }
+.conv-msg:last-child { margin-bottom: 0; }
+.conv-agent { align-self: flex-start; max-width: 85%; }
+.conv-visitor { align-self: flex-end; max-width: 85%; }
+.conv-bubble { padding: 12px 16px; border-radius: 12px; font-size: 14px; line-height: 1.55; }
+.conv-agent .conv-bubble { background: var(--bg-highlight); color: var(--text-secondary); border-bottom-left-radius: 4px; }
+.conv-visitor .conv-bubble { background: var(--accent); color: white; border-bottom-right-radius: 4px; }
+.conv-label { font-size: 10px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 4px; }
+.conv-visitor .conv-label { text-align: right; }
+.conv-buttons { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+.conv-btn { font-size: 13px; font-weight: 500; padding: 8px 16px; border-radius: 100px; border: 1px solid var(--accent-border); color: var(--accent); background: white; }
+.conv-annotation { font-size: 12px; color: var(--text-muted); font-style: italic; padding: 8px 16px; margin-top: 8px; border-left: 2px solid var(--border-light); }
+
+/* --- Voice mock --- */
+.voice-mock { margin: 32px 0; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+.voice-header { background: var(--bg-dark); color: var(--text-on-dark); padding: 16px 20px; display: flex; align-items: center; gap: 12px; }
+.voice-icon { width: 36px; height: 36px; border-radius: 50%; background: var(--accent); display: flex; align-items: center; justify-content: center; font-size: 16px; color: white; }
+.voice-info { flex: 1; }
+.voice-info .name { font-family: 'Urbanist', sans-serif; font-weight: 700; font-size: 15px; }
+.voice-info .scenario { font-size: 12px; color: var(--text-muted); }
+.voice-duration { font-size: 13px; color: var(--green); font-weight: 600; }
+.voice-transcript { padding: 20px; background: var(--bg-warm); }
+.voice-line { margin-bottom: 14px; font-size: 14px; line-height: 1.6; color: var(--text-secondary); }
+.voice-line:last-child { margin-bottom: 0; }
+.voice-line .speaker { font-weight: 600; color: var(--text); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; display: block; margin-bottom: 2px; }
+.voice-line .speaker.agent-speaker { color: var(--accent); }
+
+/* --- Table --- */
+.spec-table { width: 100%; border-collapse: collapse; margin: 28px 0; font-size: 14px; }
+.spec-table th { text-align: left; padding: 10px 14px; background: var(--accent); color: white; font-family: 'Urbanist', sans-serif; font-weight: 600; font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; }
+.spec-table th:first-child { border-radius: 8px 0 0 0; }
+.spec-table th:last-child { border-radius: 0 8px 0 0; }
+.spec-table td { padding: 10px 14px; border-bottom: 1px solid var(--border-light); color: var(--text-secondary); vertical-align: top; }
+.spec-table tr:nth-child(even) td { background: var(--bg-warm); }
+.spec-table td:first-child { font-weight: 500; color: var(--text); }
+
+/* --- Badges --- */
+.badge { display: inline-block; font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; padding: 3px 10px; border-radius: 100px; }
+.badge-fixed { color: var(--accent); background: var(--accent-light); border: 1px solid var(--accent-border); }
+.badge-bounded { color: var(--amber); background: var(--amber-light); border: 1px solid rgba(217,119,6,0.2); }
+.badge-content { color: var(--green); background: var(--green-light); border: 1px solid var(--green-border); }
+
+/* --- Quality bar --- */
+.quality-bar { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin: 28px 0; }
+.quality-item { padding: 16px; border-radius: 10px; border: 1px solid var(--border); }
+.quality-item.exceptional { border-color: var(--green-border); background: var(--green-light); }
+.quality-item.adequate { border-color: var(--border); background: var(--bg-warm); }
+.quality-item.anti { border-color: rgba(220,38,38,0.2); background: var(--red-light); }
+.quality-label { font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 6px; }
+.quality-item.exceptional .quality-label { color: var(--green); }
+.quality-item.adequate .quality-label { color: var(--text-muted); }
+.quality-item.anti .quality-label { color: var(--red); }
+.quality-item p { font-size: 13px; line-height: 1.5; color: var(--text-secondary); }
+
+/* --- Footer --- */
+.footer { margin-top: 56px; padding-top: 20px; border-top: 1px solid var(--border); font-size: 12px; color: var(--text-muted); display: flex; justify-content: space-between; }
+
+/* --- Responsive --- */
+@media (max-width: 640px) {
+  .container { padding: 80px 20px 80px; }
+  .header h1 { font-size: 2em; }
+  .pull-quote { font-size: 1.1em; padding-left: 18px; }
+  .topbar { padding: 0 16px; }
+  .parallel-grid { grid-template-columns: 1fr; }
+  .quality-bar { grid-template-columns: 1fr; }
+  .tab-nav { gap: 4px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .tab-btn { font-size: 12px; padding: 7px 14px; }
+  .footer { flex-direction: column; gap: 8px; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="topbar">
+  <img src="https://trillet.ai/trillet-text.png" alt="trillet" class="topbar-logo">
+  <div class="topbar-sep"></div>
+  <span class="topbar-type">Flagship Deployment</span>
+  <a href="dashboard.html" class="topbar-back">&larr; Dashboard</a>
+</div>
+
+<div class="container">
+
+  <!-- HEADER -->
+  <header class="header reveal">
+    <div class="header-badge">Founding Team</div>
+    <h1>The Website Is Not<br>a Website.<br>It's a <span>Flagship Deployment.</span></h1>
+    <p class="header-sub">The strategic question is not whether we can build impressive agents on the site. It is whether those agents can become the first node in a distribution system.</p>
+    <div class="header-meta">
+      <span>March 2026</span>
+      <span>Ori Vaisbort</span>
+      <span>Internal</span>
+    </div>
+  </header>
+
+  <!-- TAB NAVIGATION -->
+  <nav class="tab-nav">
+    <button class="tab-btn active" data-tab="strategic">Strategic Frame</button>
+    <button class="tab-btn" data-tab="experience">Experience Design</button>
+    <button class="tab-btn" data-tab="template">Template Architecture</button>
+  </nav>
+
+  <!-- ============================================================ -->
+  <!-- TAB 1: STRATEGIC FRAME -->
+  <!-- ============================================================ -->
+  <div class="tab-content active" id="tab-strategic">
+
+    <div class="section-marker reveal">
+      <div class="section-num">01</div>
+      <div class="section-title">The GHL Thread</div>
+    </div>
+
+    <div class="prose reveal rd1">
+      <p>You drew the GoHighLevel parallel early, and it's the right instinct. GHL built an infrastructure layer that agencies deploy as their own. White-label, sub-accounts, rebilling. Trillet is doing the same thing for voice AI. Same structural playbook.</p>
+      <p>But there's a move GHL never made.</p>
+      <p>GHL's marketing page describes the platform. It shows screenshots, lists features, and asks you to book a demo. The product sits behind a login wall. You have to imagine what it would feel like to use it.</p>
+      <p><strong>What if Trillet's marketing page didn't describe the platform? What if it deployed the platform?</strong></p>
+      <p>What if a visitor to trillet.ai encountered live Trillet agents on first contact? Not a chatbot widget. Not a recorded demo. Working agents, built on the same engine agencies use, staffing the company's own front door.</p>
+      <p>That is a move beyond GHL. And it connects to a pattern much larger than either company.</p>
+    </div>
+
+    <div class="section-marker reveal">
+      <div class="section-num">02</div>
+      <div class="section-title">The Pattern: First Contact Equals First Use</div>
+    </div>
+
+    <div class="prose reveal rd1">
+      <p>The winning pattern across Apple retail, Tesla demo drives, Stripe documentation, Calendly invites, and Slack collaboration is the same: first contact became first use. The product stopped being explained and started being experienced. That compressed time-to-belief and turned usage into distribution.</p>
+      <p>But not all of these companies did the same thing. There are two distinct patterns here, and the difference matters for what Trillet is actually trying to build.</p>
+    </div>
+
+    <div class="parallel-grid reveal rd2">
+      <div class="parallel-card">
+        <div class="parallel-card-name"><span class="dot"></span>Experience as Proof</div>
+        <p><strong>Apple Retail. Tesla Demo Drives.</strong> The product experience replaced explanation. Visitors walked in skeptical and walked out believing, because they briefly lived inside the future state. But the experience itself did not propagate. It proved the product. It did not distribute the product.</p>
+      </div>
+      <div class="parallel-card">
+        <div class="parallel-card-name"><span class="dot"></span>Experience as Distribution</div>
+        <p><strong>Stripe. Calendly. Slack.</strong> The product experience did not just create belief. It recruited the next user. Stripe's docs turned implementation into trust. Calendly links spread because recipients experienced the product by being scheduled through it. Slack spread because members invited new members. Each encounter became distribution.</p>
+      </div>
+    </div>
+
+    <div class="prose reveal rd3">
+      <p><strong>Trillet is trying to do both at once.</strong></p>
+      <p>The website must prove the product through direct experience, like Apple and Tesla. But the patterns that win on the site must also propagate, like Stripe and Calendly. The strategic opportunity is not just to let visitors experience Trillet on first contact. It is to make Trillet's own website the first reference implementation of a repeatable AI-staffed front door. If those patterns can then be deployed by agencies for themselves and their clients, <strong>the website stops being a marketing asset and becomes the first node in a propagation system.</strong></p>
+    </div>
+
+    <div class="section-marker reveal">
+      <div class="section-num">03</div>
+      <div class="section-title">Is the Wow Clonable?</div>
+    </div>
+
+    <div class="pull-quote reveal">
+      The visible surface is not the moat.<br>
+      The question is not "can we build impressive agents on the website?"<br><br>
+      The question is: <span class="accent">can we build them in a way that makes the winning interactions portable, repeatable, and clonable?</span>
+    </div>
+
+    <div class="prose reveal rd1">
+      <p>This is the divider between a beautiful site that markets the company and a reference implementation that changes the company.</p>
+      <p>If the site experience is exceptional but bespoke, it is brand theater. Beautiful, but disconnected from the business model. If the site experience is exceptional and directly packageable into customer deployments, it becomes infrastructure-led distribution.</p>
+      <p>A competitor can copy the superficial UI. They can add "talk to an agent" to their site. They can imitate the theater. What is much harder to copy is the underlying operating system: the orchestration, the deployment infrastructure, the template quality, the vertical adaptation, the consistency under real traffic.</p>
+    </div>
+
+    <div class="inset reveal rd2">
+      <div class="inset-label">The Clonable Flagship Test</div>
+      <p>Can the concierge become a reusable first-contact agent pattern for agency sites?</p>
+      <p>Can the economics calculator become a clonable commercial agent?</p>
+      <p>Can the browser-call voice demo become a standard agency sales asset?</p>
+      <p>Can the same patterns move from Trillet's site to agency sites to client sites without collapsing in quality?</p>
+      <p><strong>If yes, this is not a website project. It is product strategy, distribution strategy, and category formation collapsing into one object.</strong></p>
+    </div>
+
+    <div class="section-marker reveal">
+      <div class="section-num">04</div>
+      <div class="section-title">The Propagation Path</div>
+    </div>
+
+    <div class="prose reveal rd1">
+      <p>If the flagship experience is clonable, a second-order distribution effect appears. Not a classic network effect. A reference-deployment flywheel.</p>
+    </div>
+
+    <div class="flow reveal rd2">
+      <div class="flow-step"><p><strong>A buyer encounters AI-staffed first contact on Trillet's own site.</strong> They do not hear about conversational qualification, AI routing, or browser-call voice agents. They experience them.</p></div>
+      <div class="flow-step"><p><strong>Their next thought is not "that was interesting."</strong> It is: <em>I want this exact front door for my business.</em></p></div>
+      <div class="flow-step"><p><strong>An agency buys Trillet.</strong> They deploy a similar first-contact pattern on their own site, using the same templates and engine.</p></div>
+      <div class="flow-step"><p><strong>That agency deploys the pattern for their clients.</strong> Dental offices, law firms, real estate agencies, home services companies.</p></div>
+      <div class="flow-step"><p><strong>Those clients' customers begin encountering AI-staffed first contact as normal.</strong> The pattern propagates several hops from Trillet. The market learns the behavior before the market has language for it.</p></div>
+    </div>
+
+    <div class="prose reveal rd3">
+      <p>Trillet's own site becomes the first public proof. That proof becomes a customer deployment pattern. That pattern becomes category normalization.</p>
+      <p>A normal website says: we know how to position ourselves. A flagship public deployment says: <strong>we believe in the product enough to put it on the critical path of our own demand generation.</strong> That is a stronger trust equation than any case study. The visitor does not read that the product works. They watch it work. On them. In real time. Before they have committed anything.</p>
+    </div>
+
+    <div class="section-marker reveal">
+      <div class="section-num">05</div>
+      <div class="section-title">What This Forces on Competitors</div>
+    </div>
+
+    <div class="prose reveal rd1">
+      <p>If Trillet proves this model, competitors are forced to move from promise-based marketing to public operational proof. That is a much harder standard to meet.</p>
+      <p>Right now the category norm is: read copy, compare claims, book a demo, wait to be shown the product later. A flagship deployment forces a different game: <strong>prove latency, voice quality, routing, reasoning, stability, and commercial usefulness, all in public, before the buyer has committed anything.</strong></p>
+      <p>Many can imitate the surface. Fewer can expose the product itself as the first sales interaction without creating anti-marketing. If the experience is laggy, brittle, or shallow, the flagship proves the opposite of what it intended. The standard is brutal in both directions.</p>
+    </div>
+
+    <div class="pull-quote reveal rd2">
+      If this pattern works and propagates, Trillet is no longer just competing as a voice AI vendor. It starts to define the expected architecture of <span class="accent">AI-staffed first contact:</span> conversational, always-on, qualifying, routing, and software-run by default.
+    </div>
+
+    <div class="prose reveal rd3">
+      <p>When buyer expectation shifts, the category bends toward the company that defined the interaction standard first. That is the ceiling on this move.</p>
+    </div>
+
+    <div class="section-marker reveal">
+      <div class="section-num">06</div>
+      <div class="section-title">Execution Sequence</div>
+    </div>
+
+    <div class="prose reveal rd1">
+      <p>The sequence matters. Quality first, then clonability, then breadth. Skip a step and the whole thing inverts: a mediocre flagship deployment is worse than no deployment at all.</p>
+    </div>
+
+    <div class="priority-list reveal rd2">
+      <div class="priority-item"><div class="priority-content"><h4>Quality Floor</h4><p>The site agents must feel exceptional. Not acceptable. Exceptional. This is pre-commitment evaluation, not post-sale tolerance. Every interaction is a first impression with someone who has given you nothing yet. The bar is higher than any internal demo.</p></div></div>
+      <div class="priority-item"><div class="priority-content"><h4>Clonability</h4><p>The winning site patterns must become deployable patterns for agencies and then for their clients. Same templates. Same engine. If the site agents cannot be packaged as deployment primitives, the flywheel does not spin. This is the hinge.</p></div></div>
+      <div class="priority-item"><div class="priority-content"><h4>Breadth</h4><p>Start with two flagship interactions, not five. A homepage concierge and a voice demo on the Solutions page. Make those two exceptional and clonable before expanding to pricing advisor, platform expert, and enterprise intake.</p></div></div>
+      <div class="priority-item"><div class="priority-content"><h4>Category Language</h4><p>Only after the pattern is clearly winning should Trillet explicitly name the category. Let the experience establish the standard first. The language follows the proof, not the other way around.</p></div></div>
+    </div>
+
+    <div style="margin-top: 48px; padding: 24px 28px; background: var(--bg-highlight); border-radius: 12px; border: 1px solid var(--accent-border);" class="reveal">
+      <p style="color: var(--text-secondary); font-size: 15px; margin: 0;">Next: <strong style="color: var(--text);">Experience Design</strong> tab for the two MVP agent flows, conversation mockups, voice demo scenarios, and quality bars.</p>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- TAB 2: EXPERIENCE DESIGN -->
+  <!-- ============================================================ -->
+  <div class="tab-content" id="tab-experience">
+
+    <div class="section-marker">
+      <div class="section-num">01</div>
+      <div class="section-title">Two Agents, Two Proof Jobs</div>
+    </div>
+
+    <div class="prose">
+      <p>Start with two, not five. Each MVP has a distinct job. The homepage concierge is a <strong>router-plus-prefill instrument</strong>: it reduces friction, reflects the visitor's business back to them, and hands the next page structured context. The solutions voice demo is a <strong>proof-of-quality instrument</strong>: it produces one vivid belief update -- "this sounds deployable."</p>
+      <p>Additionally, the homepage includes an <strong>economics calculator</strong> (flat form, no AI, instant math) with an optional <strong>"Voice to discuss with the Economic Advisor"</strong> escalation button. The form captures data even from visitors who never engage with voice.</p>
+    </div>
+
+    <div class="section-marker">
+      <div class="section-num">02</div>
+      <div class="section-title">Homepage Concierge</div>
+    </div>
+
+    <div class="prose">
+      <p>Lives inside a conventional hero section. Headline, one-liner, and value prop remain visible above the fold. The concierge is an opt-in element below them -- the page works for scrollers and engagers alike.</p>
+      <p>The design principle: <strong>service posture first, qualification second.</strong> The agent welcomes and orients. It does not classify and extract. The difference between a concierge that receives you and a chatbot that sorts you.</p>
+    </div>
+
+    <div class="conversation">
+      <div class="conv-header"><span class="dot"></span> Agency Path</div>
+      <div class="conv-body">
+        <div class="conv-msg conv-agent">
+          <div class="conv-label">Trillet</div>
+          <div class="conv-bubble">Welcome -- if you'd like, I can show you the version of Trillet that fits how you work.</div>
+          <div class="conv-buttons">
+            <span class="conv-btn">For agencies serving clients</span>
+            <span class="conv-btn">For teams across locations</span>
+            <span class="conv-btn">For a single business</span>
+          </div>
+        </div>
+        <div class="conv-annotation">Three invitations, not three buckets. The visitor feels guided, not sorted.</div>
+
+        <div class="conv-msg conv-visitor"><div class="conv-label">Visitor</div><div class="conv-bubble">For agencies serving clients</div></div>
+
+        <div class="conv-msg conv-agent">
+          <div class="conv-label">Trillet</div>
+          <div class="conv-bubble">Most agencies start by packaging one proven workflow and cloning it across accounts. I can take you to that setup.</div>
+        </div>
+        <div class="conv-annotation">Give before ask. A useful insight before any qualifying question.</div>
+
+        <div class="conv-msg conv-agent">
+          <div class="conv-label">Trillet</div>
+          <div class="conv-bubble">How many client locations would you likely manage in the first 90 days?</div>
+          <div class="conv-buttons"><span class="conv-btn">1 - 5</span><span class="conv-btn">6 - 20</span><span class="conv-btn">21+</span></div>
+        </div>
+
+        <div class="conv-msg conv-visitor"><div class="conv-label">Visitor</div><div class="conv-bubble">6 - 20</div></div>
+
+        <div class="conv-msg conv-agent">
+          <div class="conv-label">Trillet</div>
+          <div class="conv-bubble">This would let you launch AI answering as a client service without building custom agents from scratch. I'll take you to the agency page with your numbers ready.</div>
+        </div>
+        <div class="conv-annotation">Transferability close. Route to agency page with calculator pre-filled.</div>
+      </div>
+    </div>
+
+    <div class="conversation">
+      <div class="conv-header"><span class="dot"></span> Enterprise Path</div>
+      <div class="conv-body">
+        <div class="conv-msg conv-visitor"><div class="conv-label">Visitor</div><div class="conv-bubble">For teams across locations</div></div>
+        <div class="conv-msg conv-agent"><div class="conv-label">Trillet</div><div class="conv-bubble">For multi-location teams, the critical layer is centralized control with local adaptation -- same quality standard everywhere.</div></div>
+        <div class="conv-annotation">Tone: confidence and discretion.</div>
+        <div class="conv-msg conv-agent"><div class="conv-label">Trillet</div><div class="conv-bubble">How many locations or teams would use this first?</div><div class="conv-buttons"><span class="conv-btn">2 - 5</span><span class="conv-btn">6 - 20</span><span class="conv-btn">21+</span></div></div>
+        <div class="conv-msg conv-agent"><div class="conv-label">Trillet</div><div class="conv-bubble">This is for standardizing how locations answer and qualify inbound calls. I'll take you to the enterprise path.</div></div>
+      </div>
+    </div>
+
+    <div class="conversation">
+      <div class="conv-header"><span class="dot"></span> Fallback &amp; Exit</div>
+      <div class="conv-body">
+        <div class="conv-msg conv-visitor"><div class="conv-label">Visitor</div><div class="conv-bubble">what do you guys do exactly</div></div>
+        <div class="conv-msg conv-agent"><div class="conv-label">Trillet</div><div class="conv-bubble">I can point you the right way fastest if you pick one of the three paths above.</div><div class="conv-buttons"><span class="conv-btn">For agencies serving clients</span><span class="conv-btn">For teams across locations</span><span class="conv-btn">For a single business</span></div></div>
+        <div class="conv-annotation">Reduction under confusion: simpler, not more.</div>
+        <div class="conv-msg conv-agent" style="margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--border-light);">
+          <div class="conv-label">Always visible</div>
+          <div class="conv-bubble" style="background: var(--bg-warm); color: var(--text-muted); font-size: 13px;">Prefer to browse? No problem -- the page works just as well on its own. <span style="color: var(--accent);">[Dismiss]</span></div>
+        </div>
+        <div class="conv-annotation">Exit grace: warm, one sentence, always available.</div>
+      </div>
+    </div>
+
+    <div class="quality-bar">
+      <div class="quality-item exceptional"><div class="quality-label">Exceptional</div><p>Zero confusion. One follow-up max. Route visibly changes next page. Under 15 seconds total.</p></div>
+      <div class="quality-item adequate"><div class="quality-label">Adequate</div><p>Correct routing. Reasonable pace. Page loads the right content.</p></div>
+      <div class="quality-item anti"><div class="quality-label">Anti-marketing</div><p>Too many questions. Misclassifies obvious users. Feels like disguised lead capture.</p></div>
+    </div>
+
+    <div class="section-marker">
+      <div class="section-num">03</div>
+      <div class="section-title">Solutions Voice Demo</div>
+    </div>
+
+    <div class="prose">
+      <p>The centerpiece. This is where the visitor hears the product. Not a recording, not a simulation -- a live voice call from the browser. The emotional target: <strong>"I would trust this to represent me when I'm not available."</strong></p>
+      <p>Two-level selection before the call: pick a vertical, then pick a scenario. This is not open-ended -- the demo is scenario-bounded. Tightly controlled experiences outperform open sandboxes because they can be made exceptional rather than merely adequate.</p>
+    </div>
+
+    <table class="spec-table">
+      <tr><th>Vertical</th><th>Scenarios</th></tr>
+      <tr><td>Dental</td><td>New patient booking &middot; Insurance question &middot; After-hours emergency triage</td></tr>
+      <tr><td>Legal</td><td>New case intake &middot; Consult scheduling &middot; Existing client status</td></tr>
+      <tr><td>Real Estate</td><td>Buyer inquiry &middot; Listing inquiry &middot; After-hours lead capture</td></tr>
+      <tr><td>Home Services</td><td>Emergency service call &middot; Quote request &middot; Schedule reschedule</td></tr>
+    </table>
+
+    <div class="inset">
+      <div class="inset-label">Pre-Call Framing</div>
+      <p><strong>"Hear how a Trillet agent would answer a real [vertical] call. This is a live demo based on a common [scenario]. Takes about 30 seconds."</strong></p>
+      <p>Sets expectations, reduces anxiety, frames the experience as proof, not test.</p>
+    </div>
+
+    <div class="voice-mock">
+      <div class="voice-header">
+        <div class="voice-icon">&#9742;</div>
+        <div class="voice-info"><div class="name">River Oak Dental</div><div class="scenario">Scenario: New Patient Booking</div></div>
+        <div class="voice-duration">0:34</div>
+      </div>
+      <div class="voice-transcript">
+        <div class="voice-line"><span class="speaker agent-speaker">Agent</span>Thanks for calling River Oak Dental. I can help you book a first appointment, answer insurance questions, or take a message for the office. What are you calling about today?</div>
+        <div class="voice-line"><span class="speaker">Caller</span>I'd like to book a first appointment, a cleaning.</div>
+        <div class="voice-line"><span class="speaker agent-speaker">Agent</span>Great -- I can get that set up. Do you have a preference for morning or afternoon, and is there a day that works best this week or next?</div>
+        <div class="voice-line"><span class="speaker">Caller</span>Wednesday afternoon if possible.</div>
+        <div class="voice-line"><span class="speaker agent-speaker">Agent</span>Wednesday afternoon works. I have a 2:30 with Dr. Patel. I'll put you down and text you a confirmation with the office address and parking info. Anything else I can help with?</div>
+      </div>
+    </div>
+
+    <div class="prose">
+      <p><strong>The first 3 seconds matter most.</strong> The opening should sound like someone who has already oriented to the caller's likely need -- poised, warm, lightly anticipatory. Not an IVR menu. Not a generic "how can I help you." A greeting that signals: I know what people usually call about, and I'm ready.</p>
+      <p><strong>Recovery is the real differentiator.</strong> When something goes wrong, a premium agent reduces effort for the caller: "No problem -- the simplest way is for me to ask two quick questions and point you the right way." Never repeats menu options mechanically. Never blames the caller.</p>
+      <p><strong>Post-call reflection:</strong> "That was a sample of how Trillet handles [scenario] for [vertical] businesses." Then a CTA framed as continuation of service: <strong>"See how this would be configured for your business."</strong></p>
+    </div>
+
+    <div class="quality-bar">
+      <div class="quality-item exceptional"><div class="quality-label">Exceptional</div><p>No audible hesitation. Correct terminology. One moment where the visitor thinks "that sounded like a real front desk."</p></div>
+      <div class="quality-item adequate"><div class="quality-label">Adequate</div><p>Understandable and on-topic. Completes the scenario. No errors.</p></div>
+      <div class="quality-item anti"><div class="quality-label">Anti-marketing</div><p>Latency >4 seconds. Wrong terminology. Awkward barge-in. Fails to capture the scenario premise.</p></div>
+    </div>
+
+    <table class="spec-table">
+      <tr><th>Metric</th><th>Target</th></tr>
+      <tr><td>Time to first audio</td><td>&lt; 2 seconds</td></tr>
+      <tr><td>First turn completion</td><td>&lt; 3 seconds end-to-end</td></tr>
+      <tr><td>Strong lead signal</td><td>Selects scenario + completes 20s + clicks CTA</td></tr>
+      <tr><td>Anti-pattern threshold</td><td>Latency &gt; 4s = pull the demo offline</td></tr>
+    </table>
+
+    <div class="inset" style="margin-top: 40px;">
+      <div class="inset-label">The Clonability Question</div>
+      <p>Both MVPs should be built on the same template primitives agencies will use. If these agents require custom one-off logic, we prove the product in marketing while failing to create a reusable asset.</p>
+      <p><strong>Can the concierge become a "site qualifier" template? Can the voice demo become a "vertical demo" template family? If yes, every agency that deploys them inherits the quality standard automatically.</strong></p>
+    </div>
+
+    <div style="margin-top: 40px; padding: 24px 28px; background: var(--bg-highlight); border-radius: 12px; border: 1px solid var(--accent-border);">
+      <p style="color: var(--text-secondary); font-size: 15px; margin: 0;">Next: <strong style="color: var(--text);">Template Architecture</strong> tab for how the quality standard becomes infrastructure that agencies inherit.</p>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- TAB 3: TEMPLATE ARCHITECTURE -->
+  <!-- ============================================================ -->
+  <div class="tab-content" id="tab-template">
+
+    <div class="section-marker">
+      <div class="section-num">01</div>
+      <div class="section-title">Premium as Infrastructure</div>
+    </div>
+
+    <div class="prose">
+      <p>The flagship thesis says the site agents must be clonable. This tab answers: what does clonable quality actually look like as a system?</p>
+      <p>The key insight: the premium feel comes from interaction <strong>structure</strong> -- pacing, sequencing, generosity patterns, recovery behavior, emotional register. Structure is templateable. If Trillet encodes premium interaction patterns into its templates, <strong>every agency that deploys them inherits the quality standard without designing it.</strong></p>
+    </div>
+
+    <div class="pull-quote">
+      Agencies parameterize <span class="accent">what</span> the agent says.<br>
+      Trillet controls <span class="accent">how</span> it says it.
+    </div>
+
+    <div class="section-marker">
+      <div class="section-num">02</div>
+      <div class="section-title">Three Layers</div>
+    </div>
+
+    <div class="prose">
+      <p>The template has three layers. Each has a different owner and a different purpose.</p>
+    </div>
+
+    <table class="spec-table">
+      <tr><th>Layer</th><th>What</th><th>Control</th></tr>
+      <tr>
+        <td><span class="badge badge-fixed">Invariant</span></td>
+        <td>Service principles that define "Trillet-grade" quality. The floor that cannot be broken.</td>
+        <td>Non-negotiable. Trillet enforces. Agencies cannot override.</td>
+      </tr>
+      <tr>
+        <td><span class="badge badge-bounded">Bounded</span></td>
+        <td>Tactical defaults that implement premium feel. Tunable within safe ranges.</td>
+        <td>Strong defaults. Configurable within limits. Can't break the floor.</td>
+      </tr>
+      <tr>
+        <td><span class="badge badge-content">Content</span></td>
+        <td>Brand, vertical, domain knowledge, scenarios, routes, tone. The agency's creative space.</td>
+        <td>Fully agency-owned.</td>
+      </tr>
+    </table>
+
+    <div class="section-marker">
+      <div class="section-num">03</div>
+      <div class="section-title">Service Invariants</div>
+    </div>
+
+    <div class="prose">
+      <p>These are non-negotiable. They define what it means to be a Trillet-deployed agent. An agency deploying a Trillet template cannot turn these off.</p>
+    </div>
+
+    <table class="spec-table">
+      <tr><th>Invariant</th><th>What It Means</th></tr>
+      <tr><td>No pressure</td><td>Never create urgency, scarcity framing, or guilt for disengaging. Pressure is anti-premium. It signals need.</td></tr>
+      <tr><td>Exit grace</td><td>Dismiss always visible. Warm one-sentence exit. No re-engagement attempt. The absence of desperation signals quality.</td></tr>
+      <tr><td>Reduce effort under confusion</td><td>Fallback simplifies: shorter responses, fewer options. Never repeats mechanically. Never blames the caller or visitor.</td></tr>
+      <tr><td>No mechanical repetition</td><td>Recovery always reframes. Never repeats the same options in the same words. Repetition is the signature of a system, not a service.</td></tr>
+      <tr><td>Continuity of attention</td><td>Downstream touchpoints reflect upstream context. The visitor is never re-introduced to a system that already knows them.</td></tr>
+      <tr><td>Service before extraction</td><td>Agent demonstrates value or understanding before requesting information. Never leads with a qualifying question cold.</td></tr>
+      <tr><td>Permission sensitivity</td><td>Ask only for what the moment has earned. No email on turn two. No budget before self-identification. Conversational steps must be earned.</td></tr>
+    </table>
+
+    <div class="inset">
+      <div class="inset-label">For Voice Specifically</div>
+      <p><strong>Latency floor:</strong> First audio &lt;2 seconds, first turn &lt;3 seconds. Non-negotiable. Latency is the #1 destroyer of voice premium.</p>
+      <p><strong>Register:</strong> Warm, unhurried, lightly anticipatory. Recovery reduces caller effort. No generic filler, no rushing, no blame.</p>
+    </div>
+
+    <div class="section-marker">
+      <div class="section-num">04</div>
+      <div class="section-title">Bounded Policies</div>
+    </div>
+
+    <div class="prose">
+      <p>These implement premium behavior with controlled flexibility. Agencies can tune within the range but cannot break the quality floor.</p>
+    </div>
+
+    <table class="spec-table">
+      <tr><th>Policy</th><th>Default</th><th>Range</th></tr>
+      <tr><td>Message length</td><td>2 sentences</td><td>1 - 4 sentences</td></tr>
+      <tr><td>Choice presentation</td><td>Single choice per message</td><td>1 - 3 choices</td></tr>
+      <tr><td>Pacing</td><td>Brief deliberate pause</td><td>0.3s - 1.5s</td></tr>
+      <tr><td>Generosity pattern</td><td>Give-before-ask on every qualifying step</td><td>Minimum: first qualifying step</td></tr>
+      <tr><td>Bonus elements</td><td>One unrequested value-add per interaction</td><td>Minimum: one per interaction</td></tr>
+      <tr><td>Restraint</td><td>No unprompted follow-up</td><td>Agency can enable one contextual follow-up per session</td></tr>
+      <tr><td>Typing indicator</td><td>Disabled</td><td>Agency can enable subtle indicator</td></tr>
+    </table>
+
+    <div class="section-marker">
+      <div class="section-num">05</div>
+      <div class="section-title">Content Parameters</div>
+    </div>
+
+    <div class="prose">
+      <p>This is the agency's creative space. Everything here is fully customizable.</p>
+    </div>
+
+    <table class="spec-table">
+      <tr><th>Parameter</th><th>Examples</th></tr>
+      <tr><td>Brand &amp; welcome</td><td>"River Oak Dental" / "Welcome -- if you'd like..."</td></tr>
+      <tr><td>Tone profile</td><td>Enterprise: confidence + discretion. Agency: taste + capability. SMB: relief + competence.</td></tr>
+      <tr><td>Segment knowledge</td><td>"Most agencies start by packaging one proven workflow..." / "Most new patient calls come in after hours..."</td></tr>
+      <tr><td>Domain observations</td><td>Specific observations that show knowledge without claiming expertise.</td></tr>
+      <tr><td>Qualifying questions</td><td>"How many client locations?" / "What kind of business?"</td></tr>
+      <tr><td>Routes &amp; prefill</td><td>Destination URLs, session state mappings, calculator inputs.</td></tr>
+      <tr><td>Voice scenarios</td><td>Per-vertical: opening lines, bounded options, intake fields, escalation triggers.</td></tr>
+      <tr><td>Post-call CTA</td><td>"See how this would work for your business" (service-continuation, not sales ask).</td></tr>
+    </table>
+
+    <div class="section-marker">
+      <div class="section-num">06</div>
+      <div class="section-title">The Eleven Patterns</div>
+    </div>
+
+    <div class="prose">
+      <p>Premium is structural, not decorative. These patterns are encoded into the three-layer architecture.</p>
+    </div>
+
+    <table class="spec-table">
+      <tr><th>Pattern</th><th>What It Means</th><th>Layer</th></tr>
+      <tr><td>Anticipatory posture</td><td>Agent demonstrates understanding before asking. "We prepared for you."</td><td><span class="badge badge-content">Content</span></td></tr>
+      <tr><td>Pace control</td><td>One thought, one choice per exchange. Never dumps.</td><td><span class="badge badge-bounded">Bounded</span></td></tr>
+      <tr><td>Service before extraction</td><td>Give a useful insight before asking a qualifying question.</td><td><span class="badge badge-fixed">Invariant</span></td></tr>
+      <tr><td>Reduction under confusion</td><td>Fallback simplifies. Recovery reframes.</td><td><span class="badge badge-fixed">Invariant</span></td></tr>
+      <tr><td>Named competence</td><td>Shows knowledge through observation, not assertion.</td><td><span class="badge badge-content">Content</span></td></tr>
+      <tr><td>Confident restraint</td><td>Says what it needs to and stops. No filler.</td><td><span class="badge badge-bounded">Bounded</span></td></tr>
+      <tr><td>Continuity of attention</td><td>Downstream reflects upstream. The visitor is never re-introduced.</td><td><span class="badge badge-fixed">Invariant</span></td></tr>
+      <tr><td>Slightly more than expected</td><td>One unrequested value-add per interaction.</td><td><span class="badge badge-bounded">Bounded</span></td></tr>
+      <tr><td>Exit grace</td><td>Leave anytime. No friction, no guilt.</td><td><span class="badge badge-fixed">Invariant</span></td></tr>
+      <tr><td>Permission sensitivity</td><td>Ask only for what the moment has earned.</td><td><span class="badge badge-fixed">Invariant</span></td></tr>
+      <tr><td>Emotional calibration</td><td>Same structure, different register per audience.</td><td><span class="badge badge-content">Content</span></td></tr>
+    </table>
+
+    <div class="section-marker">
+      <div class="section-num">07</div>
+      <div class="section-title">Why Constraints Are the Feature</div>
+    </div>
+
+    <div class="prose">
+      <p>Agencies who want full control and are willing to build bad experiences can use raw APIs. Trillet's value proposition to agencies IS the quality floor: <strong>"Your agents sound premium because our templates enforce it."</strong></p>
+      <p>This works for the same reason Apple's App Store guidelines work: constraints create a quality ecosystem. The concierge template on an agency's site will feel premium because the invariants -- no pressure, exit grace, service before extraction, recovery that simplifies -- are inherited from the template, not designed per deployment.</p>
+      <p>The target agency doesn't want full control. They want to sell premium AI voice to their clients and need the platform to guarantee quality they can't build themselves.</p>
+    </div>
+
+    <div class="pull-quote">
+      The premium patterns are not polish on top of mechanics.<br>
+      They are the <span class="accent">highest-value part of what gets cloned.</span><br><br>
+      When an agency deploys a Trillet template, their customers get the same premium feel. When those customers' callers encounter those agents, they experience a standard that exceeds most human front desks.<br><br>
+      That is what propagates through the flywheel.
+    </div>
+
+    <div class="section-marker">
+      <div class="section-num">08</div>
+      <div class="section-title">Questions for Ming</div>
+    </div>
+
+    <div class="inset">
+      <div class="inset-label">Template Engine</div>
+      <p><strong>1.</strong> Can service invariants (no pressure, exit grace, service-before-extraction) be enforced at the engine level so agencies inherit them automatically?</p>
+      <p><strong>2.</strong> Can bounded policies (message length, pacing, choice limits) be exposed as configurable-within-range rather than binary on/off?</p>
+      <p><strong>3.</strong> What infrastructure changes does the three-layer model require vs what exists today?</p>
+    </div>
+
+    <div class="inset">
+      <div class="inset-label">Voice &amp; Quality</div>
+      <p><strong>4.</strong> Can we hit first-audio &lt;2s and first-turn &lt;3s consistently? What's needed?</p>
+      <p><strong>5.</strong> Can scenario-bounded demos stay on-script without feeling robotic? What's the prompt engineering approach?</p>
+      <p><strong>6.</strong> What's the voice quality ceiling with the current stack?</p>
+    </div>
+
+    <div class="inset">
+      <div class="inset-label">Feasibility</div>
+      <p><strong>7.</strong> Can session state pass between agents across pages?</p>
+      <p><strong>8.</strong> How do conversation data and lead signals reach sales?</p>
+      <p><strong>9.</strong> What's realistically achievable before China?</p>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <span>Trillet US + AU &middot; Founding Team &middot; Internal</span>
+    <span>March 2026</span>
+  </div>
+
+</div>
+
+<!-- Tab switching + scroll reveal -->
+<script>
+// Tabs
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+    btn.classList.add('active');
+    const tab = document.getElementById('tab-' + btn.dataset.tab);
+    tab.classList.add('active');
+    // Re-trigger reveals for new tab
+    tab.querySelectorAll('.reveal').forEach(el => {
+      el.classList.remove('visible');
+      void el.offsetWidth;
+      observer.observe(el);
+    });
+    window.scrollTo({ top: document.querySelector('.tab-nav').offsetTop - 48, behavior: 'smooth' });
+  });
+});
+
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) entry.target.classList.add('visible');
+  });
+}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
