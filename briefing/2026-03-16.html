@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trillet Briefing -- 2026-03-16</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', system-ui, sans-serif; }
+    .detail { display: none; }
+    .detail.open { display: block; }
+    .toggle-icon { transition: transform 0.2s; }
+    .toggle-icon.open { transform: rotate(90deg); }
+  </style>
+</head>
+<body class="min-h-screen bg-stone-50 text-neutral-950">
+
+  <header class="sticky top-0 z-50 border-b border-neutral-200/80 bg-stone-50/90 backdrop-blur-xl">
+    <div class="mx-auto max-w-3xl px-4 py-3 flex items-center justify-between">
+      <div>
+        <div class="text-sm font-semibold tracking-tight">Trillet Daily Briefing</div>
+        <div class="text-xs text-neutral-500">2026-03-16 -- prepared for Barak</div>
+      </div>
+      <div class="text-xs text-neutral-400">15 items</div>
+    </div>
+  </header>
+
+  <main class="mx-auto max-w-3xl px-4 py-6">
+
+    <!-- 1. CONTRACT SIGNED -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-neutral-200 bg-white px-4 py-3 shadow-sm hover:bg-neutral-50 transition-colors">
+        <span class="toggle-icon text-neutral-400 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-neutral-950">Contract</div>
+          <div class="text-sm text-neutral-600">Contract v5 signed. 12-month pre-merge clock is ticking.</div>
+        </div>
+        <div class="text-xs px-2 py-0.5 bg-emerald-100 text-emerald-700 rounded-full font-medium">Milestone</div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p>Laurence signed the contract and sent it to Ming for co-signing. Signed PDF was delivered to Ori at 00:43 MDT on March 16.</p>
+        <p class="mt-2">Key terms as agreed: Territory = Americas + Israel. 12-month pre-merge period. Merge trigger: Gate Credit of $1.5M (approximately $4.3M in US-generated revenue). Below threshold: partial convergence options (auto-extension, cash bridge, or pro-rata merge).</p>
+        <p class="mt-2">The document reconciliation blocker that was complicating the signing is now moot -- the signed version is the authoritative document.</p>
+        <div class="mt-3 pt-3 border-t border-neutral-100">
+          <div class="text-xs font-semibold uppercase tracking-wide text-neutral-500 mb-2">Action items</div>
+          <p class="text-sm text-neutral-700">Ori: US countersign and review signed PDF.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. BARAK KEY PEOPLE MEETINGS -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-neutral-200 bg-white px-4 py-3 shadow-sm hover:bg-neutral-50 transition-colors">
+        <span class="toggle-icon text-neutral-400 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-neutral-950">Barak / Coalition</div>
+          <div class="text-sm text-neutral-600">Key people meetings with Laurence and Ming happening today (Monday AEST).</div>
+        </div>
+        <div class="text-xs px-2 py-0.5 bg-blue-100 text-blue-700 rounded-full font-medium">You</div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p><strong>Laurence:</strong> Monday 18:00 AEST. Accepted.</p>
+        <p><strong>Ming:</strong> Monday 19:00 AEST. Accepted.</p>
+        <p class="mt-2">Purpose: Ming required this process -- individual meetings with AU co-founders to build confidence and alignment before deeper integration. Ori's assessment: Ming may not wait for this process to complete before moving forward on other decisions, but we do it anyway because it is good for the company. The meetings have intrinsic value for coalition health regardless.</p>
+        <div class="mt-3 pt-3 border-t border-neutral-100">
+          <div class="text-xs font-semibold uppercase tracking-wide text-neutral-500 mb-2">Action items</div>
+          <p class="text-sm text-neutral-700">Barak: Debrief Ori after both meetings.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. MULY $5K CONFIRMED -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-neutral-200 bg-white px-4 py-3 shadow-sm hover:bg-neutral-50 transition-colors">
+        <span class="toggle-icon text-neutral-400 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-neutral-950">Muly / Meta Ads</div>
+          <div class="text-sm text-neutral-600">$5K meta ads confirmed -- but with a 30-day ROI gate. Contradictory signal.</div>
+        </div>
+        <div class="text-xs px-2 py-0.5 bg-amber-100 text-amber-700 rounded-full font-medium">Decision needed</div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p>Muly committed $5K for meta ads (down from $5-10K verbal range on Mar 8), but conditional: 30-day ROI proof or he pulls out.</p>
+        <p class="mt-2">This is a contradictory signal -- commitment paired with a conditional exit. The gate shifted from "close RE/MAX first" to a time-bound ROI test. The problem: "ROI" is undefined. Who defines success? What metrics? What threshold? Without those answers, this is either a real commitment or a polite way to defer indefinitely.</p>
+        <p class="mt-2">Andrew's campaign scope becomes urgent -- the campaign must be designed specifically for fast, attributable ROI given the 30-day window. This is not a brand awareness play.</p>
+        <div class="mt-3 pt-3 border-t border-neutral-100">
+          <div class="text-xs font-semibold uppercase tracking-wide text-neutral-500 mb-2">Action items</div>
+          <p class="text-sm text-neutral-700">Ori + Barak: Define ROI criteria with Muly before spend begins.</p>
+          <p class="text-sm text-neutral-700">Three-way budget call needed (now with concrete $5K anchor).</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. IMLIVE KICKOFF -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-neutral-200 bg-white px-4 py-3 shadow-sm hover:bg-neutral-50 transition-colors">
+        <span class="toggle-icon text-neutral-400 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-neutral-950">ImLive</div>
+          <div class="text-sm text-neutral-600">Kickoff meeting Tuesday 9am IST. Pending confirmation from Kirill and Martin.</div>
+        </div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p>Barak sent the email invite to Kirill and Martin (IML) on Friday Mar 14 for Tuesday Mar 18 at 9am IST. Their confirmation is still pending.</p>
+        <p class="mt-2">Scope for kickoff: Events + Facebook integration. Barak shared sample content via Google Drive. ImLive contract was signed Mar 8, and $4K payment is expected from Muly.</p>
+        <div class="mt-3 pt-3 border-t border-neutral-100">
+          <div class="text-xs font-semibold uppercase tracking-wide text-neutral-500 mb-2">Action items</div>
+          <p class="text-sm text-neutral-700">Barak: Confirm Kirill + Martin's attendance. Prepare for Tuesday.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. QUEBEC -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-neutral-200 bg-white px-4 py-3 shadow-sm hover:bg-neutral-50 transition-colors">
+        <span class="toggle-icon text-neutral-400 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-neutral-950">Quebec / AURAIA</div>
+          <div class="text-sm text-neutral-600">Meeting done. Prompts personalized. Thursday RE/MAX investor pitch is the deadline.</div>
+        </div>
+        <div class="text-xs px-2 py-0.5 bg-red-100 text-red-700 rounded-full font-medium">3 days</div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p><strong>Mar 16 meeting (Ori, Daniel, Mathieu, Barak):</strong> Newer demo versions rejected (accent wrong, too fast, robotic). Original prompt version tested live -- Mathieu confirms "good enough" but not as good as their agent (1.5 years of French tuning). Trillet's backend acknowledged as superior.</p>
+        <p class="mt-2"><strong>Prompt personalization done:</strong> Both prompts now use Daniel's real data -- real listings from equipedj.com, real courtier names (Daniel/Jessica/Mathieu), Equipe DJ branding. Injected into the platform, pending Daniel's review.</p>
+        <p class="mt-2"><strong>Thursday Mar 19:</strong> Investor presentation to an unnamed RE/MAX franchise owner who wants to partner with Prospection Numerique. He already runs AI agents in his company and will compare against Trillet's demo. This is the gating event.</p>
+        <p class="mt-2">Daniel estimates 5-10 agency closings per month. Mathieu pushing a 1-week start. Both demos (agency + personal assistant) needed for Thursday.</p>
+        <p class="mt-2"><strong>Personal assistant "Jarvis" concept:</strong> Daniel wants a realtor-callable AI for contract dates, inspection deadlines, CMA requests while driving. Ori flags as Phase 2+ (needs contract data access). Agreed to start minimum and expand later.</p>
+        <div class="mt-3 pt-3 border-t border-neutral-100">
+          <div class="text-xs font-semibold uppercase tracking-wide text-neutral-500 mb-2">Action items</div>
+          <p class="text-sm text-neutral-700">Ori: Send prompts to Daniel/Mathieu for review. Iterate before Thursday.</p>
+          <p class="text-sm text-neutral-700">Barak: Quebec role question from Daniel still unanswered -- what is Barak's involvement going forward?</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6. SAAS CONFIGURATOR + WHOLESALE -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-neutral-200 bg-white px-4 py-3 shadow-sm hover:bg-neutral-50 transition-colors">
+        <span class="toggle-icon text-neutral-400 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-neutral-950">Product / SaaS Configurator</div>
+          <div class="text-sm text-neutral-600">Wholesale D2C resale model agreed. Nobody else has this capability.</div>
+        </div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p><strong>Huddle tonight (Ori + Laurence + Ming):</strong> Resolved the SaaS configurator gap -- agencies currently cannot sell D2C plans or templates to end customers. The SaaS configurator was hidden by Ming, and Laurence checked the database: zero sales through it, ever.</p>
+        <p class="mt-2"><strong>Decisions:</strong></p>
+        <ul class="list-disc ml-5 mt-1 space-y-1">
+          <li>SaaS configurator is Scale tier ($497) only. All three confirmed.</li>
+          <li>Wholesale pricing model, no rev share. Flat wholesale price around $44 per D2C plan, agency sells at whatever markup.</li>
+          <li>Price floor: agencies cannot sell below $49 (Trillet retail).</li>
+          <li>Two tracks: pre-built Trillet templates = $44 wholesale + 150 min included; custom agents = usage only ($0.12/min).</li>
+        </ul>
+        <p class="mt-2"><strong>Competitive advantage:</strong> Ming and Laurence both confirm nobody else offers this. My AI Front Desk (closest competitor) only allows selling via invoice, not a full self-serve SaaS platform. Ori's reaction: "the income is going to be bigger" if truly unique.</p>
+        <p class="mt-2"><strong>Implementation:</strong> Ming's full redesign is complete (Agency Hub with Workspaces, Plans, Revenue, Settings tabs). Danny is implementing -- about 1 full day in, changes not pushed yet. Strata Blue (Slava) gets beta access as first tester.</p>
+      </div>
+    </div>
+
+    <!-- 7. PER-MINUTE BILLING EXPLOIT -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-neutral-200 bg-white px-4 py-3 shadow-sm hover:bg-neutral-50 transition-colors">
+        <span class="toggle-icon text-neutral-400 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-neutral-950">Risk / Billing Exploit</div>
+          <div class="text-sm text-neutral-600">Agencies can game per-minute rebilling. Three fix proposals, no decision yet.</div>
+        </div>
+        <div class="text-xs px-2 py-0.5 bg-red-100 text-red-700 rounded-full font-medium">Risk</div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p>Isaam flagged an architectural flaw in agency rebilling (#management). An agency sets a high per-minute rate at top-up time (Trillet takes a small platform fee based on expected minutes), then lowers the rate after. The agency's customers use far more minutes than Trillet was compensated for.</p>
+        <p class="mt-2"><strong>Example:</strong> $100 top-up at $1/min = $9 Trillet fee. Agency drops to $0.10/min = 1,000 actual minutes, $90 actual cost, $81 loss to Trillet.</p>
+        <p class="mt-2"><strong>Three proposals:</strong> (1) Lock rate once set (Ming favors this), (2) Per-top-up rate ledger, (3) Switch to minutes-based billing. Decision needed before the tier/wholesale finalization.</p>
+      </div>
+    </div>
+
+    <!-- 8. ELEVENLABS BANNED AARGON -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-neutral-200 bg-white px-4 py-3 shadow-sm hover:bg-neutral-50 transition-colors">
+        <span class="toggle-icon text-neutral-400 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-neutral-950">Risk / ElevenLabs Ban</div>
+          <div class="text-sm text-neutral-600">ElevenLabs banned Aargon's account. Aargon = 58% of all per-minute charges.</div>
+        </div>
+        <div class="text-xs px-2 py-0.5 bg-red-100 text-red-700 rounded-full font-medium">Risk</div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p>Isaam reported that ElevenLabs banned Aargon's account for a policy violation (#management). Aargon is Trillet's single largest customer by usage -- 58% of all workspace per-minute charges.</p>
+        <p class="mt-2">Isaam flags the platform-level risk: if a customer misuses TTS through Trillet's platform, Trillet itself could face action from ElevenLabs. This is a concentration risk + vendor policy compliance issue combined.</p>
+      </div>
+    </div>
+
+    <!-- 9. OPENROUTER OUTAGE -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-neutral-200 bg-white px-4 py-3 shadow-sm hover:bg-neutral-50 transition-colors">
+        <span class="toggle-icon text-neutral-400 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-neutral-950">Operations / OpenRouter</div>
+          <div class="text-sm text-neutral-600">Outage active. No LLM routing middleware -- single-provider reliance pattern.</div>
+        </div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p>OpenRouter timed out repeatedly. Ali switched back to Gemini Vertex, which restored latency but is also a single-provider dependency. Three error classes hit: request timeouts after 2 retries, 500 Internal Server Errors, and tool_call ID string exceeding 40-character max (returns 47).</p>
+        <p class="mt-2">OpenRouter support described as "horrible" by Isaam -- a pending OpenAI issue has been unresolved for 1-2 weeks. Laurence asked Ori about alternatives and shared portkey.ai.</p>
+        <p class="mt-2"><strong>Ori's direction:</strong> Don't replace one single point of failure with another. Need multiple direct provider connections (Vertex already works) behind a self-hosted routing layer (LiteLLM recommended). The FallbackAdapter already in the stack routes both attempts through OpenRouter, defeating its purpose.</p>
+        <p class="mt-2"><strong>Pattern:</strong> AU team has no intelligent routing middleware that tests provider health and fails over automatically. Each outage is handled reactively with a manual switchback.</p>
+        <div class="mt-3 pt-3 border-t border-neutral-100">
+          <div class="text-xs font-semibold uppercase tracking-wide text-neutral-500 mb-2">Action items</div>
+          <p class="text-sm text-neutral-700">Ori: Owes Laurence a message on this (LiteLLM direction vs portkey.ai).</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 10. WHITELABEL URL LEAK -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-neutral-200 bg-white px-4 py-3 shadow-sm hover:bg-neutral-50 transition-colors">
+        <span class="toggle-icon text-neutral-400 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-neutral-950">Risk / Whitelabel URL Leak</div>
+          <div class="text-sm text-neutral-600">100+ hardcoded Trillet URLs expose agency customers to trillet.ai domain.</div>
+        </div>
+        <div class="text-xs px-2 py-0.5 bg-red-100 text-red-700 rounded-full font-medium">Risk</div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p>Ibrahim found 100+ places in the codebase using hardcoded Trillet frontend URLs. Whitelabel/SaaS agency customers are being redirected to trillet.ai instead of their own branded domain. A customer (Mason) already reported it.</p>
+        <p class="mt-2">One fix was pushed (SMB onboarding redirect), but 100+ other locations remain. Ibrahim states: "We are at risk of losing our whitelabel customers." Laurence's response: "no one has complained" but agreed it needs fixing.</p>
+        <p class="mt-2">This is a structural risk to the entire agency tier -- the core revenue model depends on convincing white-label. If Strata Blue's customers (or any whitelabel agency) discover they're actually using a Trillet-branded backend, the value proposition collapses.</p>
+      </div>
+    </div>
+
+    <!-- 11. OPS POSTURE: BILLING LAPSES -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-neutral-200 bg-white px-4 py-3 shadow-sm hover:bg-neutral-50 transition-colors">
+        <span class="toggle-icon text-neutral-400 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-neutral-950">Operations / Billing Posture</div>
+          <div class="text-sm text-neutral-600">Vercel payment failure (expired card) -- second billing lapse in 3 days after Twilio.</div>
+        </div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p>Vercel (hosting provider) sent a payment failure notification because the card on file expired. Laurence fixed it. Pattern: this is the second billing lapse in three days -- Twilio production was suspended Mar 13 for the same class of issue (no auto-recharge, low balance alerts set to just $5).</p>
+        <p class="mt-2"><strong>Twilio backstory (Laurence, Mar 14):</strong> An $8K loss from a bad actor exploiting SMS/calls (tens of thousands of messages). Led to pay-to-login being implemented. Auto-charge remains disabled. Alert threshold raised to $45 (was $5) by Isaam.</p>
+        <p class="mt-2"><strong>Pattern signal:</strong> Production infrastructure going down because nobody is proactively tracking card expiry dates or setting up auto-pay. Reactive rather than preventive ops posture.</p>
+      </div>
+    </div>
+
+    <!-- 12. LIVEKIT UPDATE -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-neutral-200 bg-white px-4 py-3 shadow-sm hover:bg-neutral-50 transition-colors">
+        <span class="toggle-icon text-neutral-400 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-neutral-950">Operations / LiveKit</div>
+          <div class="text-sm text-neutral-600">Upstream reliability fixes available but not applied. Customers hitting known issues.</div>
+        </div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p>A LiveKit agents update was released (Ali flagged, Mar 15) with fixes for transient network issues, memory leaks, and Python 3.14 support. These address classes of problems customers are currently experiencing -- but the update has not been applied.</p>
+        <p class="mt-2">This sits alongside the OpenRouter and billing patterns: available improvements sitting on the shelf while customers experience the exact issues they fix.</p>
+      </div>
+    </div>
+
+    <!-- 13. STRATA BLUE -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-neutral-200 bg-white px-4 py-3 shadow-sm hover:bg-neutral-50 transition-colors">
+        <span class="toggle-icon text-neutral-400 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-neutral-950">Pipeline / Strata Blue</div>
+          <div class="text-sm text-neutral-600">Beta tester for SaaS configurator. Competing against upfirst.ai. Ori joining their Slack.</div>
+        </div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p>Strata Blue (the agency behind the TCC/Verizon deal -- correction from Mar 13: Verizon and TCC are both through Strata Blue, not TCC directly) is becoming the SaaS configurator beta tester. Laurence is enabling it on their account.</p>
+        <p class="mt-2">Slava (Strata Blue) is prepared to spend $200-300/month on marketing to attract D2C customers, already has customers waiting, and Laurence describes him as someone who "just normally goes ham -- I've got an idea, I'm doing it today."</p>
+        <p class="mt-2"><strong>Competitive pressure:</strong> Upfirst.ai flagged by both Sam VanMeter (Strata Blue's technical lead, in #stratablue-trillet) and Isaam (#management). Upfirst offers spam detection on incoming calls and does not charge for calls. Laurence: "Better get a move on to stay ahead of the curve."</p>
+        <p class="mt-2">Ori is being added to the #stratablue-trillet Slack channel for direct visibility. Slack channel full history was ingested today (80+ messages, Feb 5 - Mar 16).</p>
+      </div>
+    </div>
+
+    <!-- 14. COMPETITIVE INTEL -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-neutral-200 bg-white px-4 py-3 shadow-sm hover:bg-neutral-50 transition-colors">
+        <span class="toggle-icon text-neutral-400 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-neutral-950">Competitive Intel</div>
+          <div class="text-sm text-neutral-600">GPT Realtime 1.5 released. Multi-currency gap blocks international agencies.</div>
+        </div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p><strong>GPT Realtime 1.5:</strong> LiveKit now supports Nvidia TTS/STT. Estimated 30-50 cents/min (compared to Retell charging 50c/min). Trillet does not currently offer realtime to users. This is competitive positioning intel for the pricing architecture -- realtime is expensive but competitors are starting to offer it.</p>
+        <p class="mt-2"><strong>Multi-currency gap:</strong> A UK agency owner (Habib) wants to fund client wallets in GBP. Currently USD only. Ibrahim is building a "triage feature" for direct wallet funding, but the currency conversion workaround is still missing. This blocks non-US agency growth -- relevant to Barak's Israel-territory perspective and any international agencies.</p>
+        <p class="mt-2"><strong>SOC2 cost revised:</strong> Now ~$20K USD (auditor revised scope, Ming Mar 16). Previously estimated at ~$15K. Still blocks enterprise deals.</p>
+      </div>
+    </div>
+
+    <!-- 15. TEAM / SUPPORT -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-neutral-200 bg-white px-4 py-3 shadow-sm hover:bg-neutral-50 transition-colors">
+        <span class="toggle-icon text-neutral-400 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-neutral-950">Team / Support</div>
+          <div class="text-sm text-neutral-600">New hire Sharjeel Ali onboarding for QA/support. Bug backlog clearing.</div>
+        </div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p>Ali announced new hire Sharjeel Ali for QA/Customer Support (Mar 15, #general). Onboarding plan: product overview first, then support tickets + email, then Skool community later. Laurence: "He needs to relieve Andrew and Ming completely from support tickets asap."</p>
+        <p class="mt-2">Sharjeel has already completed exploration of all CMS and CRM portal tools (Mar 16). Bug backlog status (Isaam/Andrew): "only minor ones remain + feature requests + UX upgrades." Support tickets described as "much better."</p>
+        <p class="mt-2"><strong>New agency signup:</strong> Joseph McKinney (marvinbusinesssystems@gmail.com), yearly plan (Mar 15). Agency Slack access decision (Mar 15): Not offered in standard tiers. Ori: "not even then -- that's a train wreck waiting to happen."</p>
+        <p class="mt-2"><strong>New lead:</strong> Sarah Chen, VP Marketing at TeleCom Solutions (Austin). Met at networking event Mar 16. Interested in agency tier. Ori-originated. Follow-up to qualify.</p>
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="border-t border-neutral-200 bg-stone-50">
+    <div class="mx-auto max-w-3xl px-4 py-4 text-xs text-neutral-400">
+      Generated from Trillet PKM. Questions? Message Ori.
+    </div>
+  </footer>
+
+  <script>
+    function toggle(btn) {
+      const detail = btn.nextElementSibling;
+      const icon = btn.querySelector('.toggle-icon');
+      detail.classList.toggle('open');
+      icon.classList.toggle('open');
+    }
+
+    // Expand all on double-click header
+    document.querySelector('header').addEventListener('dblclick', () => {
+      document.querySelectorAll('.detail').forEach(d => d.classList.add('open'));
+      document.querySelectorAll('.toggle-icon').forEach(i => i.classList.add('open'));
+    });
+  </script>
+
+</body>
+</html>
