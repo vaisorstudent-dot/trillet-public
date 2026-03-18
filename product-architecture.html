@@ -537,18 +537,18 @@ thead th.col-exploratory { background: #4B5563; opacity: 0.75; }
   <h1>Trillet Agency Product Architecture</h1>
   <div class="meta">
     <span><span class="dot"></span> Decision Brief</span>
-    <span>Updated: 2026-03-12</span>
+    <span>Updated: 2026-03-18</span>
     <span>Owner: Ori Vaisbort</span>
   </div>
   <p class="purpose">Two-layer architecture brief. The top layer is a category read: what market we're in, what buyers are being taught to expect, and where the category is still weak. The bottom layer is the product consequence: how the agency ladder and template object system should be structured given that read. Strategy first -- current product is input, not ceiling. Grounded in competitive research (6 competitors + GHL, cross-validated against GPT-5.4 and Perplexity), template anatomy research (7 competitors across 3 axes), five-object ontology, and commercial model v2.</p>
 
   <div class="exec-summary">
     <div class="exec-card">
-      <h3><span class="indicator" style="background: var(--green);"></span> 7 Locked Decisions</h3>
+      <h3><span class="indicator" style="background: var(--green);"></span> Locked Decisions</h3>
       <ul>
-        <li>Everything open from Entry: full WL, full markup, operational API</li>
-        <li>Three gates only: sub-accounts, SaaS mode, marketplace</li>
-        <li>Agency keeps 100% of markup at all tiers</li>
+        <li>Full agency platform from $149: full WL, full markup, API, templates at every tier</li>
+        <li>Six gates: workspace count (5/10/15), SaaS configurator, custom agents, BYOK, per-min discount, support depth</li>
+        <li>Agency keeps 100% of markup at all tiers. Revenue share: killed.</li>
       </ul>
     </div>
     <div class="exec-card">
@@ -562,10 +562,10 @@ thead th.col-exploratory { background: #4B5563; opacity: 0.75; }
     <div class="exec-card">
       <h3><span class="indicator" style="background: var(--amber);"></span> What Changed (v4 &rarr; v5)</h3>
       <ul>
-        <li>Stress test (Mar 11): <strong>everything open from Entry</strong></li>
-        <li>WL, markup, API: <strong>no tier gating</strong> <span class="tag tag-revised">RESOLVED</span></li>
-        <li>Scale gate: <strong>SaaS mode + marketplace only</strong></li>
-        <li>Open items consolidated to Ming brief (Mar 12)</li>
+        <li>Finalized (Mar 18): <strong>same core platform at every tier</strong></li>
+        <li>WL, markup, API, templates: <strong>open at all tiers</strong> <span class="tag tag-revised">RESOLVED</span></li>
+        <li>Scale gates: SaaS configurator, custom agents, BYOK, $0.10/min, named partner support</li>
+        <li>Revenue share: killed. Agency keeps 100% of markup.</li>
       </ul>
     </div>
   </div>
@@ -706,16 +706,16 @@ thead th.col-exploratory { background: #4B5563; opacity: 0.75; }
       </h3>
     </div>
     <div class="opp-body">
-      <p>Trillet's current SaaS Configurator takes a rev-share (40%/60% or $49-floor) from agency markup at the Scale tier. Every competitor in the set -- every one -- lets agencies keep 100% of their client markup. Platform monetization at the SaaS-mode tier comes from the higher subscription price ($497) plus per-minute usage. This is not a minor pricing mismatch. It is a credibility blocker.</p>
-      <p>You cannot position agency-first while structurally taking the least agency-friendly economics in the competitive set. An agency comparing SaaS-mode economics will see Trillet taking a cut that nobody else takes. Fixing this is not just correcting a policy -- it is removing the contradiction between positioning and product.</p>
+      <p><span class="tag tag-revised">RESOLVED</span> Revenue share is killed. The former SaaS Configurator policy (40%/60% split or $49-floor) is removed. Agency keeps 100% of markup at every tier. Platform revenue at Scale comes from the $497 subscription plus $0.10/min usage.</p>
+      <p>Every competitor in the set lets agencies keep 100% of their client markup. Trillet now matches market norms and eliminates the structural contradiction between "agency-first" positioning and rev-share economics.</p>
 
       <div class="table-wrap">
         <table>
-          <thead><tr><th>Dimension</th><th>Trillet (current)</th><th>Every competitor</th><th>Trillet (proposed)</th></tr></thead>
+          <thead><tr><th>Dimension</th><th>Former (rev-share)</th><th>Every competitor</th><th>Current (resolved)</th></tr></thead>
           <tbody>
-            <tr><td>Agency markup</td><td><span class="partial">Platform takes 60% or $49 floor</span></td><td><span class="yes">Agency keeps 100%</span></td><td><span class="yes">Agency keeps 100%</span></td></tr>
-            <tr><td>Platform revenue at Scale</td><td>Rev-share + subscription + per-minute</td><td>$497 subscription + per-minute</td><td>$497 subscription + per-minute</td></tr>
-            <tr><td>Agency perception</td><td><span class="partial">"They take a cut of my client revenue"</span></td><td>"I keep everything I earn"</td><td><span class="yes">"I keep everything I earn"</span></td></tr>
+            <tr><td>Agency markup</td><td><span class="no">Platform took 60% or $49 floor</span></td><td><span class="yes">Agency keeps 100%</span></td><td><span class="yes">Agency keeps 100%</span></td></tr>
+            <tr><td>Platform revenue at Scale</td><td>Rev-share + subscription + per-minute</td><td>$497 subscription + per-minute</td><td><span class="yes">$497 subscription + $0.10/min</span></td></tr>
+            <tr><td>Agency perception</td><td><span class="no">"They take a cut of my client revenue"</span></td><td>"I keep everything I earn"</td><td><span class="yes">"I keep everything I earn"</span></td></tr>
           </tbody>
         </table>
       </div>
@@ -807,9 +807,9 @@ thead th.col-exploratory { background: #4B5563; opacity: 0.75; }
           <td>RIME STT, OpenAI LLM, direct provider integration. Cuts out the middleware layer (Retell/Vapi) that most competitors sit on. Real cost + quality control advantage.</td>
         </tr>
         <tr>
-          <td>$0.12/min agency rate on full-stack</td>
+          <td>$0.12/min at Starter/Agency; $0.10/min at Scale (volume discount)</td>
           <td><span class="tag tag-fact">FACT</span></td>
-          <td>At parity with wrapper effective rates, but the agency gets quality control, reliability, and no provider dependency stacking for the same price. Wrappers pay $0.06-0.10 to providers plus platform fees, landing at a similar all-in cost but with two failure points instead of one.</td>
+          <td>Floor cost ~$0.046/min (telephony included). $0.12 at Starter and Agency is at parity with wrapper effective rates, but full-stack gives quality control, reliability, and no provider dependency stacking. Scale gets $0.10/min volume discount. ElevenLabs voices add +$0.06/min at all tiers.</td>
         </tr>
         <tr>
           <td>Unlimited concurrency across all tiers</td>
@@ -838,37 +838,39 @@ thead th.col-exploratory { background: #4B5563; opacity: 0.75; }
 <section>
   <h2>Proposed Agency Ladder</h2>
   <p style="font-size:13px; color:var(--text-muted); font-family:'JetBrains Mono', monospace; text-transform:uppercase; letter-spacing:1.5px; margin-bottom:6px;">Given the category read above, this is the product consequence.</p>
-  <p class="brief-framing"><span class="tag tag-revised">REVISED Mar 11</span> Same real Trillet at every tier. Full product, full markup, full white-label, unlimited concurrency. What changes: how many clients you serve, and whether they can self-onboard. Three gates only: sub-accounts, automated self-signup, marketplace distribution.</p>
+  <p class="brief-framing"><span class="tag tag-revised">REVISED Mar 18</span> Full agency platform from $149. Same core platform at every tier: full WL, full markup, full API, templates. What changes: workspace count, SaaS configurator access, custom agents, BYOK, per-minute rate, and support depth.</p>
 
   <div class="table-wrap brief-ladder">
     <table>
       <thead>
         <tr>
           <th></th>
-          <th>Entry (Studio) &middot; $149/mo</th>
-          <th>Core (Agency) &middot; $299/mo</th>
+          <th>Starter &middot; $149/mo</th>
+          <th>Agency &middot; $299/mo <span class="tag tag-live" style="font-size:9px;">HERO</span></th>
           <th>Scale &middot; $497/mo</th>
         </tr>
       </thead>
       <tbody>
         <tr><td>Who it's for</td><td>Proto-agency proving the model with first clients</td><td>Active agency with real clients and proven demand</td><td>Voice AI is core revenue. Building a machine.</td></tr>
-        <tr><td>Sub-accounts</td><td>3 <span class="tag tag-revised">LOCKED</span></td><td>10 <span class="tag tag-revised">LOCKED</span></td><td>Unlimited</td></tr>
+        <tr><td>Workspaces</td><td>5 (hard cap)</td><td>10 included, +$20/ea overage</td><td>15 included, +$20/ea overage</td></tr>
         <tr><td>Concurrent calls</td><td>Unlimited</td><td>Unlimited</td><td>Unlimited</td></tr>
-        <tr><td>White-label</td><td>Full (domain, logo, colors) <span class="tag tag-revised">REVISED</span></td><td>Full</td><td>Full</td></tr>
-        <tr><td>Markup / rebilling</td><td>Full <span class="tag tag-revised">REVISED</span></td><td>Full</td><td>Full</td></tr>
-        <tr><td>Client onboarding</td><td>Manual (receptionist builder)</td><td>Manual / semi-manual</td><td><strong>Automated self-signup (SaaS Creator)</strong> <span class="tag tag-revised">REVISED</span></td></tr>
-        <tr><td>Template objects</td><td>Create + consume <span class="tag tag-revised">REVISED</span></td><td>Create + consume</td><td>Create + consume + <strong>distribute via marketplace</strong></td></tr>
-        <tr><td>API</td><td>Operational (read, manage, webhooks) <span class="tag tag-revised">REVISED</span></td><td>Operational</td><td>Operational + <strong>commercial/automation</strong> (provisioning, billing, plan design)</td></tr>
-        <tr><td>Per-minute</td><td>$0.12</td><td>$0.12</td><td>$0.12</td></tr>
-        <tr><td>Support</td><td>Self-serve, docs, email</td><td>Priority, implementation guidance</td><td>Named contact, architecture partnership</td></tr>
+        <tr><td>White-label</td><td>Full (domain, logo, colors)</td><td>Full</td><td>Full</td></tr>
+        <tr><td>Markup / rebilling</td><td>Full</td><td>Full</td><td>Full</td></tr>
+        <tr><td>Templates &amp; API</td><td>Full (operational)</td><td>Full (operational)</td><td>Full (operational + commercial)</td></tr>
+        <tr><td>SaaS configurator</td><td><span class="no">&mdash;</span></td><td><span class="no">&mdash;</span></td><td><span class="yes">Yes</span> (Scale-only)</td></tr>
+        <tr><td>Custom agents</td><td><span class="no">&mdash;</span></td><td><span class="no">&mdash;</span></td><td><span class="yes">Yes</span> (Scale-only)</td></tr>
+        <tr><td>BYOK</td><td><span class="no">&mdash;</span></td><td><span class="no">&mdash;</span></td><td><span class="yes">Yes</span> (Scale-only)</td></tr>
+        <tr><td>Per-minute</td><td>$0.12</td><td>$0.12</td><td><span class="yes">$0.10</span> (volume discount)</td></tr>
+        <tr><td>Support</td><td>Email + chatbot</td><td>Priority support</td><td>Named partner support</td></tr>
       </tbody>
     </table>
   </div>
 
   <div class="rationale" style="margin-top:12px;">
-    <h4><span class="tag tag-revised">REVISED</span> Stress-tested paradigm (Mar 11, 3-way: Ori + GPT-5.4 + Claude)</h4>
-    <p><strong>Resolved:</strong> No product-level feature gating. No markup gating. No white-label gating. Premium brands include everything and charge for scale. The only gates are operating-mode transitions: sub-account count (quantitative), automated client self-signup (commercial), and marketplace distribution (ecosystem). Full reasoning: <code>rebrand-vc/tier-architecture-stress-test.md</code>.</p>
-    <p><strong>Brand line:</strong> <em>"Same platform that runs bank deployments. Full markup, full white-label, unlimited concurrency &mdash; from day one. What scales with you: how many clients you serve, and whether they can self-onboard."</em></p>
+    <h4><span class="tag tag-revised">FINALIZED Mar 18</span> Tier architecture</h4>
+    <p><strong>Resolved:</strong> No product-level feature gating on WL, markup, API, or templates. Premium brands include everything and charge for scale. Gates are: workspace count (5/10/15 + $20/ea overage), SaaS configurator (Scale), custom agents (Scale), BYOK (Scale), per-minute discount (Scale), support depth.</p>
+    <p><strong>Revenue share killed.</strong> Agency keeps 100% of markup at every tier. Platform monetizes via subscription + per-minute usage only.</p>
+    <p><strong>Brand line:</strong> <em>"Full agency platform from $149. Same core platform at every tier &mdash; full markup, full white-label, unlimited concurrency from day one. What scales with you: workspace count, SaaS configurator access, and support depth."</em></p>
   </div>
 </section>
 
@@ -890,10 +892,10 @@ thead th.col-exploratory { background: #4B5563; opacity: 0.75; }
       </thead>
       <tbody class="decision-row">
         <tr>
-          <td>Core sub-account cap</td>
-          <td><strong>10</strong></td>
-          <td>10 preserves a credible Core while keeping Scale meaningful. Market supports it: Assistable Growth ($450) gives 10, Stammer gives 20 at $197. At $299, 10 is the last capped rung before unlimited. But the real argument is commercial architecture, not market median.</td>
-          <td>Unlimited at $299 removes the strongest upgrade trigger. Every competitor caps lower tiers. 5 is too stingy at $299 (that's $97-tier generosity).</td>
+          <td>Workspace counts</td>
+          <td><strong>Starter: 5 hard cap. Agency: 10 + $20/ea overage. Scale: 15 + $20/ea overage.</strong></td>
+          <td>5 at Starter is a real proto-agency limit. 10 at Agency preserves Scale upgrade pressure. 15 at Scale is generous enough to justify the price without removing upgrade motivation. $20/ea overage monetizes growth without hard walls at Agency and Scale.</td>
+          <td>Unlimited at any self-serve tier removes upgrade motivation. Hard cap at Starter (no overage) because Starter is a testing tier. Overage pricing at Agency and Scale lets growing agencies stay rather than churn.</td>
         </tr>
         <tr>
           <td>Markup at every tier</td>
@@ -920,10 +922,10 @@ thead th.col-exploratory { background: #4B5563; opacity: 0.75; }
           <td>Full API at all tiers lets sophisticated Entry agencies build automation that bypasses the self-signup gate. No API at Entry/Core restricts legitimate operational needs.</td>
         </tr>
         <tr>
-          <td>Scale: SaaS Configurator economics</td>
-          <td><strong>Agency keeps 100% of markup</strong><span class="sub">Platform monetizes via Scale subscription ($497) + per-minute.</span></td>
-          <td>Trillet's current SaaS Configurator takes a rev-share (40%/60% or $49-floor). Every competitor in the set lets agencies keep 100% of their client markup at the SaaS-mode tier. Platform monetization at that tier comes from the higher subscription price + per-minute usage.</td>
-          <td>The rev-share is a Scale-tier policy that's out of step with market norms. Not a billing architecture problem -- Trillet's core billing model (markup-based) is the same as everyone else. But an agency comparing SaaS-mode economics will see Trillet taking a cut that nobody else takes.</td>
+          <td>Revenue share</td>
+          <td><strong>Killed.</strong> Agency keeps 100% of markup at every tier.<span class="sub">Platform monetizes via subscription + per-minute only.</span></td>
+          <td>Former rev-share (40%/60% or $49-floor at Scale) was out of step with every competitor. Platform monetization at Scale is now $497 subscription + $0.10/min usage. Resolves the structural contradiction between agency-first positioning and margin-splitting economics.</td>
+          <td>Keeping rev-share would mean Trillet is the only platform in the competitive set taking a cut of client markup. No agency comparing economics would choose that. Killing it removes the contradiction and aligns with market norms.</td>
         </tr>
         <tr>
           <td>Concurrency strategy</td>
@@ -967,8 +969,8 @@ thead th.col-exploratory { background: #4B5563; opacity: 0.75; }
       </thead>
       <tbody>
         <tr class="col-product"><td>D2C Basic<span class="sub">$49/mo</span></td><td>Packaged product</td><td><span class="tag tag-live">LIVE</span></td><td>Individual business owner</td><td>Self-serve</td><td>Contained tail</td></tr>
-        <tr class="col-product"><td>Agency Entry<span class="sub">$149/mo (Studio)</span></td><td>Packaged product</td><td><span class="tag tag-live">LIVE</span></td><td>Proto-agency testing the model</td><td>Self-serve</td><td>Agency ladder</td></tr>
-        <tr class="col-product"><td>Agency Core<span class="sub">$299/mo</span></td><td>Packaged product</td><td><span class="tag tag-live">LIVE</span></td><td>Active agency, up to 10 clients</td><td>Self-serve / assisted</td><td>Agency ladder</td></tr>
+        <tr class="col-product"><td>Agency Starter<span class="sub">$149/mo</span></td><td>Packaged product</td><td><span class="tag tag-live">LIVE</span></td><td>Proto-agency testing the model</td><td>Self-serve</td><td>Agency ladder</td></tr>
+        <tr class="col-product"><td>Agency<span class="sub">$299/mo</span></td><td>Packaged product</td><td><span class="tag tag-live">LIVE</span></td><td>Active agency, up to 10 workspaces</td><td>Self-serve / assisted</td><td>Agency ladder</td></tr>
         <tr class="col-product"><td>Agency Scale<span class="sub">$497/mo (proposed)</span></td><td>Packaged product</td><td><span class="tag tag-proposed">PROPOSED</span></td><td>Large agency, voice AI as core revenue</td><td>Sales-assisted</td><td>Agency ladder</td></tr>
         <tr class="col-solution"><td>Managed Enterprise<span class="sub">Deal-specific</span></td><td>Solution motion</td><td><span class="tag tag-live">LIVE</span></td><td>Large org with custom requirements</td><td>Consultative</td><td>Enterprise</td></tr>
         <tr class="col-emerging"><td>Network Deployment<span class="sub">Not priced</span></td><td>Exploratory motion</td><td><span class="tag tag-exploratory">EXPLORATORY</span></td><td>Network operator</td><td>Custom strategic</td><td>Enterprise</td></tr>
@@ -994,16 +996,16 @@ thead th.col-exploratory { background: #4B5563; opacity: 0.75; }
   <div class="table-wrap">
     <table>
       <thead>
-        <tr><th>Dimension</th><th>D2C Basic</th><th>Agency Entry</th><th>Agency Core</th><th>Agency Scale</th><th>Managed Enterprise</th></tr>
+        <tr><th>Dimension</th><th>D2C Basic</th><th>Agency Starter</th><th>Agency</th><th>Agency Scale</th><th>Managed Enterprise</th></tr>
       </thead>
       <tbody>
-        <tr><td>ICP</td><td>SMB owner, single location</td><td>Freelancer / small agency testing voice AI resale</td><td>Active agency with proven demand, up to 10 clients</td><td>Scaled agency, voice AI as core revenue, 10+ clients</td><td>Enterprise ops: call centers, healthcare, finance</td></tr>
-        <tr><td>Anti-ICP</td><td>Anyone serving clients</td><td>Anyone with 4+ clients (should be Core)</td><td>Solo user. Enterprise buyer.</td><td>Anyone needing on-prem, compliance, managed service</td><td>Self-serve buyer</td></tr>
-        <tr><td>Primary use case</td><td>AI answers their phone</td><td>Deploy agents for first clients. Full product from day one.</td><td>Active agency scaling to 10 clients</td><td>Productized voice AI offer with automated client self-signup</td><td>AI communication with compliance and integration</td></tr>
+        <tr><td>ICP</td><td>SMB owner, single location</td><td>Freelancer / small agency testing voice AI resale</td><td>Active agency with proven demand, up to 10 workspaces</td><td>Scaled agency, voice AI as core revenue, 15+ workspaces</td><td>Enterprise ops: call centers, healthcare, finance</td></tr>
+        <tr><td>Anti-ICP</td><td>Anyone serving clients</td><td>Anyone needing 6+ workspaces (should be Agency)</td><td>Solo user. Enterprise buyer.</td><td>Anyone needing on-prem, compliance, managed service</td><td>Self-serve buyer</td></tr>
+        <tr><td>Primary use case</td><td>AI answers their phone</td><td>Deploy agents for first clients. Full product from day one.</td><td>Active agency scaling to 10 workspaces</td><td>Productized voice AI offer with automated client self-signup, custom agents, BYOK</td><td>AI communication with compliance and integration</td></tr>
         <tr><td>Subscription</td><td>$49/mo</td><td>$149/mo</td><td>$299/mo</td><td>$497/mo</td><td>Impl fee + retainer</td></tr>
-        <tr><td>Usage rate</td><td>$0.20/min</td><td>$0.12/min</td><td>$0.12/min</td><td>$0.12/min</td><td>$0.09/min (volume)</td></tr>
-        <tr><td>Upgrade trigger</td><td>Wants to deploy for others</td><td>Needs more than 3 sub-accounts</td><td>Needs automated client self-signup, marketplace, unlimited sub-accounts</td><td>Needs custom integrations, compliance, managed service</td><td>Top of self-serve stack</td></tr>
-        <tr><td>Portfolio role</td><td>AEO/SEO entry. Volume tail.</td><td>Acquisition wedge.</td><td>Agency expansion. Revenue engine.</td><td>Highest-value self-serve.</td><td>Revenue floor + credibility.</td></tr>
+        <tr><td>Usage rate</td><td>$0.20/min</td><td>$0.12/min</td><td>$0.12/min</td><td>$0.10/min (volume discount)</td><td>$0.09/min (volume)</td></tr>
+        <tr><td>Upgrade trigger</td><td>Wants to deploy for others</td><td>Needs more than 5 workspaces</td><td>Needs SaaS configurator, custom agents, BYOK, or more than 10 workspaces</td><td>Needs custom integrations, compliance, managed service</td><td>Top of self-serve stack</td></tr>
+        <tr><td>Portfolio role</td><td>AEO/SEO entry. Volume tail.</td><td>Acquisition wedge.</td><td>Agency expansion. Revenue engine. Hero plan.</td><td>Highest-value self-serve.</td><td>Revenue floor + credibility.</td></tr>
         <tr><td>Current data<span class="sub">(CMS, Mar 8)</span></td><td>68 active, $2,117 MRR</td><td>32 active + 12 trial, $3,267 MRR</td><td>23 active + 7 trial, $7,415 MRR</td><td>Does not exist yet</td><td>Separate Stripe. 94.5% of per-min charges.</td></tr>
       </tbody>
     </table>
@@ -1020,9 +1022,9 @@ thead th.col-exploratory { background: #4B5563; opacity: 0.75; }
     <table>
       <thead><tr><th>Offer</th><th>Entry Criteria</th><th>Upgrade Trigger</th><th>Migration</th></tr></thead>
       <tbody>
-        <tr class="col-product"><td>D2C Basic</td><td>Individual business, personal use</td><td>Wants to deploy for others</td><td>Self-serve &rarr; Agency Entry</td></tr>
-        <tr class="col-product"><td>Agency Entry</td><td>Proto-agency, up to 3 clients. Full product.</td><td>Needs more than 3 sub-accounts</td><td>Self-serve upgrade</td></tr>
-        <tr class="col-product"><td>Agency Core</td><td>Active agency scaling to 10 clients</td><td>Needs automated client self-signup, marketplace distribution, unlimited sub-accounts</td><td>Self-serve upgrade</td></tr>
+        <tr class="col-product"><td>D2C Basic</td><td>Individual business, personal use</td><td>Wants to deploy for others</td><td>Self-serve &rarr; Agency Starter</td></tr>
+        <tr class="col-product"><td>Agency Starter</td><td>Proto-agency, up to 5 workspaces. Full product.</td><td>Needs more than 5 workspaces</td><td>Self-serve upgrade</td></tr>
+        <tr class="col-product"><td>Agency</td><td>Active agency, up to 10 workspaces (+ $20/ea overage)</td><td>Needs SaaS configurator, custom agents, BYOK, or volume discount</td><td>Self-serve upgrade</td></tr>
         <tr class="col-product"><td>Agency Scale</td><td>Voice AI as core revenue, building a machine</td><td>Needs on-prem, compliance, managed service</td><td>Sales-assisted upgrade</td></tr>
         <tr class="col-solution"><td>Managed Enterprise</td><td>Sales-qualified. Complex requirements.</td><td>N/A (different regime)</td><td>Consultative sale</td></tr>
       </tbody>
@@ -1033,9 +1035,9 @@ thead th.col-exploratory { background: #4B5563; opacity: 0.75; }
   <div class="rationale">
     <h4><span class="tag tag-constraint">CONSTRAINT</span> Regime boundaries</h4>
     <ol>
-      <li><strong>D2C &rarr; Agency Entry:</strong> The buyer stops using Trillet for themselves and starts serving clients. This is the regime boundary. Entry gets the full product: white-label, markup, API, templates.</li>
-      <li><strong>Entry &rarr; Core:</strong> The buyer outgrows 3 sub-accounts. Same product, more capacity (10 sub-accounts). This is the scale gate.</li>
-      <li><strong>Core &rarr; Scale:</strong> The buyer stops doing delivery and starts building a machine. Automated client self-signup (SaaS Configurator), commercial API, marketplace distribution, unlimited sub-accounts. This is the productization gate.</li>
+      <li><strong>D2C &rarr; Starter:</strong> The buyer stops using Trillet for themselves and starts serving clients. This is the regime boundary. Starter gets the full core product: white-label, markup, API, templates.</li>
+      <li><strong>Starter &rarr; Agency:</strong> The buyer outgrows 5 workspaces. Same product, more capacity (10 workspaces + $20/ea overage). This is the scale gate.</li>
+      <li><strong>Agency &rarr; Scale:</strong> The buyer needs SaaS Configurator (automated client self-signup), custom agents, BYOK, the $0.10/min volume discount, or more than 10 workspaces at scale. This is the productization gate. 15 workspaces included + $20/ea overage.</li>
     </ol>
   </div>
 </section>
@@ -1084,7 +1086,7 @@ thead th.col-exploratory { background: #4B5563; opacity: 0.75; }
         <tr>
           <td>Deployment Pack</td>
           <td>Template + onboarding workflow + integration guides + test scenarios + post-deploy checklist. Everything to go from "I want this" to "working agent taking calls" in one coherent package.</td>
-          <td>Entry agencies consume pre-built packs. Core+ agencies create them.</td>
+          <td>Starter agencies consume pre-built packs. Agency and Scale agencies create them.</td>
           <td><strong>Scalable operations.</strong> Junior staff or even the client can follow the steps. Process, not expertise.</td>
         </tr>
         <tr>
@@ -1134,9 +1136,9 @@ thead th.col-exploratory { background: #4B5563; opacity: 0.75; }
       <thead><tr><th>Tier</th><th>Object access</th><th>What the agency does</th><th>Upgrade trigger</th></tr></thead>
       <tbody>
         <tr><td>Starter (D2C)</td><td>Prompt presets (use only)</td><td>Uses Trillet for their own business. Not an agency.</td><td>"I want to offer this to my clients."</td></tr>
-        <tr><td>Entry ($149)</td><td>Full: presets, blueprints, templates, packs. Consume marketplace assets.</td><td>Full product from day one. Build templates, deploy packs, create IP. Limited to 3 sub-accounts.</td><td>"I need more than 3 clients."</td></tr>
-        <tr><td>Core ($299)</td><td>Same as Entry</td><td>Same capabilities, 10 sub-accounts. Scale the operation.</td><td>"I want clients to self-onboard and sell templates to other agencies."</td></tr>
-        <tr><td>Scale ($497)</td><td>Same + distribute marketplace assets + automated client self-signup</td><td>Clients self-onboard. Templates distributed commercially. Agency becomes a product company.</td><td>Top of self-serve. Enterprise if they need custom/compliance.</td></tr>
+        <tr><td>Starter ($149)</td><td>Full: presets, blueprints, templates, packs. Consume marketplace assets.</td><td>Full product from day one. Build templates, deploy packs, create IP. Limited to 5 workspaces (hard cap).</td><td>"I need more than 5 workspaces."</td></tr>
+        <tr><td>Agency ($299)</td><td>Same as Starter</td><td>Same capabilities, 10 workspaces + $20/ea overage. Scale the operation.</td><td>"I want SaaS configurator, custom agents, BYOK, or volume pricing."</td></tr>
+        <tr><td>Scale ($497)</td><td>Same + distribute marketplace assets + automated client self-signup + custom agents + BYOK</td><td>Clients self-onboard. Templates distributed commercially. Custom agents and BYOK for high-volume control. Agency becomes a product company. 15 workspaces + $20/ea overage.</td><td>Top of self-serve. Enterprise if they need custom/compliance.</td></tr>
       </tbody>
     </table>
   </div>
@@ -1330,13 +1332,13 @@ thead th.col-exploratory { background: #4B5563; opacity: 0.75; }
         <tr>
           <td><strong>Buyer</strong></td>
           <td>Entry and Core agencies</td>
-          <td>Entry ($149) or Core ($299)</td>
+          <td>Starter ($149) or Agency ($299)</td>
           <td>Deploy clients faster. Access verticals they don't have expertise in. Buy instead of build.</td>
         </tr>
       </tbody>
     </table>
   </div>
-  <p>Scale agencies cannot buy marketplace assets (they create them). The buyer base = Entry + Core agencies. This constrains marketplace volume to the non-Scale agency count. At 250 agencies with 200 eligible buyers, the marketplace is a real but bounded exchange.</p>
+  <p>Scale agencies cannot buy marketplace assets (they create them). The buyer base = Starter + Agency agencies. This constrains marketplace volume to the non-Scale agency count. At 250 agencies with 200 eligible buyers, the marketplace is a real but bounded exchange.</p>
 
   <h3>Trust, Packaging, and Versioning</h3>
   <div class="table-wrap">
@@ -1433,9 +1435,9 @@ thead th.col-exploratory { background: #4B5563; opacity: 0.75; }
     <table>
       <thead><tr><th>Capability</th><th>D2C</th><th>Entry</th><th>Core</th><th class="col-proposed">Scale</th><th>Enterprise</th></tr></thead>
       <tbody>
-        <tr><td>Sub-accounts</td><td><span class="no">&mdash;</span></td><td>3</td><td>10 <span class="tag tag-revised">REVISED</span></td><td><span class="yes">Unlimited</span></td><td><span class="yes">Yes</span></td></tr>
+        <tr><td>Workspaces</td><td><span class="no">&mdash;</span></td><td>5 (hard cap)</td><td>10 + $20/ea overage</td><td><span class="yes">15 + $20/ea overage</span></td><td><span class="yes">Yes</span></td></tr>
         <tr><td>Concurrent calls</td><td><span class="yes">Unlimited</span></td><td><span class="yes">Unlimited</span></td><td><span class="yes">Unlimited</span></td><td><span class="yes">Unlimited</span></td><td><span class="yes">Unlimited</span></td></tr>
-        <tr><td>AI voice agents</td><td>1</td><td><span class="yes">Unlimited</span><span class="sub">across 3 sub-accounts</span></td><td><span class="yes">Unlimited</span><span class="sub">across 10 sub-accounts</span></td><td><span class="yes">Unlimited</span></td><td><span class="yes">Unlimited</span></td></tr>
+        <tr><td>AI voice agents</td><td>1</td><td><span class="yes">Unlimited</span><span class="sub">across 5 workspaces</span></td><td><span class="yes">Unlimited</span><span class="sub">across 10 workspaces</span></td><td><span class="yes">Unlimited</span><span class="sub">across 15 workspaces</span></td><td><span class="yes">Unlimited</span></td></tr>
         <tr><td>User roles / permissions</td><td>Owner only</td><td>Owner only</td><td>Owner + limited</td><td>Full team</td><td><span class="custom">Custom</span></td></tr>
         <tr><td>Multi-tenant support</td><td><span class="no">&mdash;</span></td><td>Basic (agent-level)</td><td><span class="yes">Full</span></td><td><span class="yes">Full</span></td><td><span class="yes">Full</span></td></tr>
       </tbody>
@@ -1461,10 +1463,12 @@ thead th.col-exploratory { background: #4B5563; opacity: 0.75; }
       <thead><tr><th>Capability</th><th>D2C</th><th>Entry</th><th>Core</th><th class="col-proposed">Scale</th><th>Enterprise</th></tr></thead>
       <tbody>
         <tr><td>Rebilling to clients</td><td><span class="no">&mdash;</span></td><td><span class="yes">Full markup</span> <span class="tag tag-revised">RESOLVED Mar 11</span></td><td><span class="yes">Full markup</span></td><td><span class="yes">Full SaaS mode</span> (own plans, own pricing)</td><td><span class="custom">Custom</span></td></tr>
-        <tr><td>Per-minute rate</td><td>$0.20</td><td>$0.12</td><td>$0.12</td><td>$0.12</td><td>$0.09 (volume)</td></tr>
+        <tr><td>Per-minute rate</td><td>$0.20</td><td>$0.12</td><td>$0.12</td><td><span class="yes">$0.10</span> (volume discount)</td><td>$0.09 (volume)</td></tr>
         <tr><td>Markup on per-minute</td><td><span class="no">&mdash;</span></td><td><span class="yes">Full</span> <span class="tag tag-revised">RESOLVED</span></td><td><span class="yes">Full</span></td><td><span class="yes">Full</span> (agency sets rates)</td><td>N/A</td></tr>
-        <tr><td>Plan design (client pricing)</td><td><span class="no">&mdash;</span></td><td><span class="no">&mdash;</span></td><td><span class="no">&mdash;</span></td><td><span class="yes">Yes</span> (up to N plans)</td><td>N/A</td></tr>
-        <tr><td>Automated client onboarding</td><td><span class="no">&mdash;</span></td><td><span class="no">&mdash;</span></td><td><span class="no">&mdash;</span></td><td><span class="yes">SaaS Configurator</span></td><td>N/A</td></tr>
+        <tr><td>Plan design (client pricing)</td><td><span class="no">&mdash;</span></td><td><span class="no">&mdash;</span></td><td><span class="no">&mdash;</span></td><td><span class="yes">Yes</span></td><td>N/A</td></tr>
+        <tr><td>Automated client onboarding</td><td><span class="no">&mdash;</span></td><td><span class="no">&mdash;</span></td><td><span class="no">&mdash;</span></td><td><span class="yes">SaaS Configurator (Scale-only)</span></td><td>N/A</td></tr>
+        <tr><td>Custom agents</td><td><span class="no">&mdash;</span></td><td><span class="no">&mdash;</span></td><td><span class="no">&mdash;</span></td><td><span class="yes">Yes</span> (Scale-only)</td><td><span class="yes">Yes</span></td></tr>
+        <tr><td>BYOK (bring your own key)</td><td><span class="no">&mdash;</span></td><td><span class="no">&mdash;</span></td><td><span class="no">&mdash;</span></td><td><span class="yes">Yes</span> (Scale-only)</td><td><span class="yes">Yes</span></td></tr>
       </tbody>
     </table>
   </div>
@@ -1503,13 +1507,14 @@ thead th.col-exploratory { background: #4B5563; opacity: 0.75; }
       <li><strong>Concurrent calls</strong> are currently unlimited across all tiers (confirmed). The open question is whether to market unlimited as a differentiator or introduce per-tier gates as an upgrade lever.</li>
     </ul>
     <div class="rationale" style="border-left-color: var(--green); margin-top: 18px;">
-      <h4><span class="tag tag-live">RESOLVED</span> Decisions locked (Mar 11 stress test)</h4>
+      <h4><span class="tag tag-live">RESOLVED</span> Decisions locked (finalized Mar 18)</h4>
       <ul>
-        <li><strong>Markup policy:</strong> full markup at all agency tiers. No gating. Agencies set their own rates from Entry.</li>
-        <li><strong>White-label:</strong> full at all agency tiers. Custom domain, logo, colors from Entry.</li>
+        <li><strong>Markup policy:</strong> full markup at all agency tiers. No gating. Agencies set their own rates from Starter.</li>
+        <li><strong>White-label:</strong> full at all agency tiers. Custom domain, logo, colors from Starter.</li>
         <li><strong>API:</strong> operational at all agency tiers. Commercial/automation at Scale only.</li>
         <li><strong>Templates:</strong> create + consume at all agency tiers. Marketplace distribution at Scale only.</li>
-        <li><strong>Three gates only:</strong> sub-accounts (3/10/unlimited), automated client self-signup (Scale), marketplace distribution (Scale).</li>
+        <li><strong>Revenue share: killed.</strong> Agency keeps 100% of markup at every tier.</li>
+        <li><strong>Gates:</strong> workspace count (5/10/15 + $20/ea overage), SaaS configurator (Scale), custom agents (Scale), BYOK (Scale), $0.10/min volume discount (Scale), support depth.</li>
       </ul>
     </div>
   </div>
@@ -1519,9 +1524,9 @@ thead th.col-exploratory { background: #4B5563; opacity: 0.75; }
     <table>
       <thead><tr><th>Capability</th><th>D2C</th><th>Entry</th><th>Core</th><th class="col-proposed">Scale</th><th>Enterprise</th></tr></thead>
       <tbody>
-        <tr><td>Support channels</td><td>Email only</td><td>Email, docs</td><td>Email/chat, community</td><td>Priority email/chat</td><td>Dedicated AM</td></tr>
-        <tr><td>Response target</td><td>Best-effort</td><td>Best-effort</td><td>Business hours</td><td>Priority</td><td>SLA-defined</td></tr>
-        <tr><td>Onboarding</td><td><span class="no">None</span></td><td>Self-serve</td><td>Self-serve</td><td>Account review</td><td>Implementation team</td></tr>
+        <tr><td>Support channels</td><td>Email only</td><td>Email + chatbot</td><td>Priority support</td><td>Named partner support</td><td>Dedicated AM</td></tr>
+        <tr><td>Response target</td><td>Best-effort</td><td>Best-effort</td><td>Priority / business hours</td><td>Named contact, fast-track</td><td>SLA-defined</td></tr>
+        <tr><td>Onboarding</td><td><span class="no">None</span></td><td>Self-serve</td><td>Self-serve</td><td>Account review + architecture guidance</td><td>Implementation team</td></tr>
       </tbody>
     </table>
   </div>
@@ -1546,9 +1551,9 @@ thead th.col-exploratory { background: #4B5563; opacity: 0.75; }
       <thead><tr><th>Offer</th><th>Subscription</th><th>Usage</th><th>Services</th><th>How Trillet Gets Paid</th></tr></thead>
       <tbody>
         <tr class="col-product"><td>D2C Basic</td><td>$49/mo</td><td>$0.20/min</td><td><span class="no">&mdash;</span></td><td>Subscription + per-minute.</td></tr>
-        <tr class="col-product"><td>Agency Entry</td><td>$149/mo</td><td>$0.12/min</td><td><span class="no">&mdash;</span></td><td>Subscription + per-minute from all sub-accounts. Agency rebills with full markup.</td></tr>
-        <tr class="col-product"><td>Agency Core</td><td>$299/mo</td><td>$0.12/min</td><td><span class="no">&mdash;</span></td><td>Subscription + per-minute. Agency rebills with full markup.</td></tr>
-        <tr class="col-product"><td>Agency Scale</td><td>$497/mo</td><td>$0.12/min</td><td>Custom-to-template fees (qualified)</td><td>Subscription + per-minute + build fees. Agency keeps 100% of markup.</td></tr>
+        <tr class="col-product"><td>Agency Starter</td><td>$149/mo</td><td>$0.12/min</td><td><span class="no">&mdash;</span></td><td>Subscription + per-minute from all workspaces. Agency rebills with full markup.</td></tr>
+        <tr class="col-product"><td>Agency</td><td>$299/mo + $20/ea workspace overage</td><td>$0.12/min</td><td><span class="no">&mdash;</span></td><td>Subscription + per-minute + overage. Agency rebills with full markup.</td></tr>
+        <tr class="col-product"><td>Agency Scale</td><td>$497/mo + $20/ea workspace overage</td><td>$0.10/min (volume discount)</td><td>Custom-to-template fees (qualified)</td><td>Subscription + per-minute + overage + build fees. Agency keeps 100% of markup.</td></tr>
         <tr class="col-solution"><td>Managed Enterprise</td><td>N/A</td><td>$0.09/min</td><td>Impl fee + retainer</td><td>Three streams: impl + retainer + usage.</td></tr>
       </tbody>
     </table>
@@ -1561,9 +1566,9 @@ thead th.col-exploratory { background: #4B5563; opacity: 0.75; }
     <table>
       <thead><tr><th>Tier</th><th>Cap</th><th>Active Subs</th><th>Trillet Cost/mo</th><th>Agency Client Rev</th><th>Agency Margin</th></tr></thead>
       <tbody>
-        <tr><td>Entry</td><td>3</td><td>2</td><td>$197 ($149 sub + $48 usage)</td><td>$800</td><td>$603 (75%)</td></tr>
-        <tr><td>Core</td><td>10</td><td>7</td><td>$467 ($299 sub + $168 usage)</td><td>$2,800 + per-min markup</td><td>~$2,400+ (85%+)</td></tr>
-        <tr><td>Scale</td><td>Unlimited</td><td>30</td><td>$1,217 ($497 sub + $720 usage)</td><td>$12,000 + full per-min markup</td><td>~$11,000+ (90%+)</td></tr>
+        <tr><td>Starter</td><td>5 (hard cap)</td><td>3</td><td>$221 ($149 sub + $72 usage)</td><td>$1,200</td><td>$979 (81%)</td></tr>
+        <tr><td>Agency</td><td>10 + overage</td><td>7</td><td>$467 ($299 sub + $168 usage)</td><td>$2,800 + per-min markup</td><td>~$2,400+ (85%+)</td></tr>
+        <tr><td>Scale</td><td>15 + overage</td><td>30</td><td>$1,097 ($497 sub + $600 usage at $0.10/min)</td><td>$12,000 + full per-min markup</td><td>~$11,000+ (91%+)</td></tr>
       </tbody>
     </table>
   </div>
@@ -1575,7 +1580,7 @@ thead th.col-exploratory { background: #4B5563; opacity: 0.75; }
       <thead><tr><th>Offer</th><th>Onboarding</th><th>Ongoing Support</th><th>Sales Burden</th><th>Custom Work</th></tr></thead>
       <tbody>
         <tr class="col-product"><td>D2C Basic</td><td>Zero</td><td>Minimal</td><td>Zero</td><td>None</td></tr>
-        <tr class="col-product"><td>Agency Entry</td><td>Zero</td><td>Low</td><td>Zero</td><td>None</td></tr>
+        <tr class="col-product"><td>Agency Starter</td><td>Zero</td><td>Low</td><td>Zero</td><td>None</td></tr>
         <tr class="col-product"><td>Agency Core</td><td>Minimal</td><td>Low-medium</td><td>Minimal</td><td>Low</td></tr>
         <tr class="col-product"><td>Agency Scale</td><td>Low</td><td>Medium</td><td>Light-touch</td><td>Medium (custom-to-template)</td></tr>
         <tr class="col-solution"><td>Managed Enterprise</td><td>High</td><td>High</td><td>High</td><td>High</td></tr>
@@ -1640,8 +1645,8 @@ thead th.col-exploratory { background: #4B5563; opacity: 0.75; }
   <p>Three decisions were revised based on competitive research across Stammer, Assistable, VoiceAIWrapper, Insighto, ChatDash, EchoWin, and GHL. Full research: <code>market-research/competitor-feature-research/round3-consolidated.md</code></p>
 
   <div class="open-item" style="border-left-color: var(--purple);">
-    <div class="q"><span class="tag tag-revised">REVISED</span> Core sub-account cap: 20 &rarr; 10</div>
-    <div class="detail"><strong>Previous logic:</strong> 20 was an estimate based on GHL's unlimited-at-$297 pattern. GPT-5.4 challenged whether 20 was too generous at $299.<br><strong>New evidence:</strong> Assistable Growth ($450) gives 10. Stammer gives 20 at $197. At $299, 10 sits in the middle of the market range and is the last capped rung before unlimited on Assistable's ladder. Leaves clear upgrade headroom for Scale.<br><strong>Impact:</strong> Upgrade trigger fires earlier. Scale's unlimited becomes a stronger draw.</div>
+    <div class="q"><span class="tag tag-revised">REVISED</span> Workspace counts finalized: Starter 5 hard cap, Agency 10 + overage, Scale 15 + overage</div>
+    <div class="detail"><strong>History:</strong> Core cap revised 20 &rarr; 10 (Mar 11) based on market evidence: Assistable Growth ($450) gives 10, Stammer gives 20 at $197. Finalized (Mar 18): Starter 5 hard cap (testing tier, no overage), Agency 10 + $20/ea overage (growth-friendly), Scale 15 + $20/ea overage (generous for machine-builders).<br><strong>Overage logic:</strong> Hard cap only at Starter (forces upgrade). Agency and Scale have overage to retain growing agencies rather than forcing churn.</div>
   </div>
 
   <div class="open-item" style="border-left-color: var(--purple);">
@@ -1659,7 +1664,7 @@ thead th.col-exploratory { background: #4B5563; opacity: 0.75; }
     <h4><span class="tag tag-live">LOCKED</span> Unchanged by competitive research</h4>
     <ol>
       <li><strong>Agency ladder gates are commercial capability, not product features.</strong> Each step unlocks what the agency can DO commercially.</li>
-      <li><strong>Flat per-minute across agency tiers ($0.12).</strong> Subscription increase is the upgrade price, not per-minute.</li>
+      <li><strong>Per-minute by tier: $0.12 at Starter and Agency; $0.10 at Scale (volume discount).</strong> Subscription increase is the primary upgrade price. The per-minute discount at Scale adds an additional incentive for high-volume agencies.</li>
       <li><strong>Buyer-stage alignment, not feature gating.</strong> Tiers match where the buyer IS in their business.</li>
       <li><strong>$497 for Scale.</strong> GHL parity. Commercially rational at the upgrade math.</li>
       <li><strong>D2C is contained, not eliminated.</strong> Exists at $49/mo. Separate routing.</li>
@@ -1667,10 +1672,10 @@ thead th.col-exploratory { background: #4B5563; opacity: 0.75; }
     </ol>
   </div>
 
-  <h3>New Decision: Scale-Tier SaaS Configurator Policy</h3>
-  <div class="open-item" style="border-left-color: var(--amber);">
-    <div class="q"><span class="tag tag-constraint">CONSTRAINT</span> Scale-tier rev-share is out of step with market</div>
-    <div class="detail"><strong>Current state:</strong> SaaS Configurator (Scale tier) offers agencies 40% of subscription revenue (Trillet keeps 60%) or agencies set own price above a $49 base and keep the difference.<br><strong>Market reality:</strong> Every competitor in the set lets agencies keep 100% of their client markup at the SaaS-mode tier. Platform monetizes that tier through the higher subscription price ($497) + per-minute usage. This is not a billing model problem -- Trillet's core billing model (markup-based) is the same as everyone else. The issue is a specific policy within Scale's SaaS Configurator feature.<br><strong>Recommendation:</strong> Agency keeps 100% of markup at Scale. Platform monetizes via $497 subscription + per-minute usage. Aligns with market norms and eliminates the structural contradiction of positioning agency-first while taking a cut nobody else takes.<br><strong>Product note:</strong> Ori confirms product is fully malleable ("we can change anything and everything"). This is a decision, not a constraint.</div>
+  <h3>Decision: Revenue Share Killed. SaaS Configurator Scale-Only.</h3>
+  <div class="open-item" style="border-left-color: var(--green);">
+    <div class="q"><span class="tag tag-revised">RESOLVED Mar 18</span> Revenue share removed. SaaS configurator is Scale-only.</div>
+    <div class="detail"><strong>Former state:</strong> SaaS Configurator offered agencies 40% of subscription revenue (Trillet kept 60%) or a $49-floor model.<br><strong>Resolution:</strong> Revenue share killed. Agency keeps 100% of markup at every tier. Platform monetizes via $497 subscription + $0.10/min usage at Scale.<br><strong>SaaS Configurator:</strong> Scale-only capability. Bypass loophole being fixed. Agency Hub redesign in progress to prevent lower-tier accounts from accessing SaaS configurator functionality.<br><strong>Gates added at Scale:</strong> SaaS configurator, custom agents, BYOK, $0.10/min volume discount, named partner support. These replace rev-share as Scale's commercial differentiation.</div>
   </div>
 </section>
 
@@ -1682,9 +1687,9 @@ thead th.col-exploratory { background: #4B5563; opacity: 0.75; }
 
 <footer class="doc-footer">
   <div>
-    <p>Trillet Agency Product Architecture v5</p>
+    <p>Trillet Agency Product Architecture v6</p>
     <p>Internal Document &mdash; March 2026</p>
-    <p style="margin-top:4px;">Sources: Round 3 competitive research (6 competitors + GHL), GPT-5.4 (3 passes), Perplexity deep research, template anatomy research (7 competitors, 3 axes), template ontology (5 objects), commercial model v2, Laurence product intel, CMS data (Mar 8). Five-object template system integrated Mar 10. Stress-test paradigm shift (everything open, three gates) Mar 11. Full document alignment Mar 12.</p>
+    <p style="margin-top:4px;">Sources: Round 3 competitive research (6 competitors + GHL), GPT-5.4 (3 passes), Perplexity deep research, template anatomy research (7 competitors, 3 axes), template ontology (5 objects), commercial model v2, Laurence product intel, CMS data (Mar 8). Five-object template system integrated Mar 10. Stress-test paradigm shift (everything open, three gates) Mar 11. Full document alignment Mar 12. v6 Mar 18: tier model finalized (5/10/15 workspaces + overage, SaaS configurator/custom agents/BYOK Scale-only, $0.10/min Scale, revenue share killed, D2C $0.20/min, support depth gates).</p>
   </div>
   <img src="https://trillet.ai/trillet-logo.svg" alt="trillet">
 </footer>
