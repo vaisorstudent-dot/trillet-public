@@ -667,8 +667,8 @@ thead th.col-exploratory { background: #4B5563; opacity: 0.75; }
         <table>
           <thead><tr><th>Tier</th><th>What Trillet provides</th><th>What competitors impose</th><th>What it means for the agency</th></tr></thead>
           <tbody>
-            <tr><td>Entry</td><td><span class="yes">No choke points</span></td><td>Stammer: 1 call, $15/slot add-on. Assistable: 10. Insighto: 50.</td><td>No fragile demo-level limits. The agency can test with real client traffic from day one without worrying about call drops.</td></tr>
-            <tr><td>Core</td><td><span class="yes">Safe under real traffic</span></td><td>Stammer: $75-150/mo in concurrency add-ons. Assistable: 15-25 ceiling per workspace.</td><td>Safe to sell into real client traffic. 10 clients, peak hours, simultaneous calls -- the platform doesn't flinch and doesn't charge extra.</td></tr>
+            <tr><td>Starter</td><td><span class="yes">No choke points</span></td><td>Stammer: 1 call, $15/slot add-on. Assistable: 10. Insighto: 50.</td><td>No fragile demo-level limits. The agency can test with real client traffic from day one without worrying about call drops.</td></tr>
+            <tr><td>Agency</td><td><span class="yes">Safe under real traffic</span></td><td>Stammer: $75-150/mo in concurrency add-ons. Assistable: 15-25 ceiling per workspace.</td><td>Safe to sell into real client traffic. 10 clients, peak hours, simultaneous calls -- the platform doesn't flinch and doesn't charge extra.</td></tr>
             <tr><td>Scale</td><td><span class="yes">Governance, not gatekeeping</span></td><td>Stammer: $300+/mo in concurrency. Assistable: hard ceiling at 25. Insighto: caps at 100.</td><td>The scaling question becomes governance (priority handling, observability, traffic control) not "how many more slots do I need to buy." Agency margin <em>improves</em> with growth. On competitors, it <em>degrades</em>.</td></tr>
           </tbody>
         </table>
@@ -743,8 +743,8 @@ thead th.col-exploratory { background: #4B5563; opacity: 0.75; }
         <table>
           <thead><tr><th>Tier</th><th>What the agency has at risk</th><th>Wrapper reality</th><th>Full-stack reality</th></tr></thead>
           <tbody>
-            <tr><td>Entry</td><td>Reputation with first 3 clients. One bad experience kills the agency model before it starts.</td><td>Agency inherits provider outages, latency spikes, and quality variance from Retell/Vapi/Twilio. No recourse.</td><td>Single failure surface. If something breaks, Trillet can fix it. The agency has one throat to choke.</td></tr>
-            <tr><td>Core</td><td>10 real client relationships. An outage hits 10 businesses simultaneously.</td><td>Agency can't tell clients "our provider's provider had an issue." Two layers of abstraction between the agency and the problem.</td><td>Direct accountability. The platform that answers the phone is the platform that owns the infrastructure.</td></tr>
+            <tr><td>Starter</td><td>Reputation with first 3 clients. One bad experience kills the agency model before it starts.</td><td>Agency inherits provider outages, latency spikes, and quality variance from Retell/Vapi/Twilio. No recourse.</td><td>Single failure surface. If something breaks, Trillet can fix it. The agency has one throat to choke.</td></tr>
+            <tr><td>Agency</td><td>10 real client relationships. An outage hits 10 businesses simultaneously.</td><td>Agency can't tell clients "our provider's provider had an issue." Two layers of abstraction between the agency and the problem.</td><td>Direct accountability. The platform that answers the phone is the platform that owns the infrastructure.</td></tr>
             <tr><td>Scale</td><td>Core revenue stream. 30+ clients. An outage at scale is existential.</td><td>Cascading dependency risk compounds with scale. More clients = more exposure to failures the agency cannot diagnose or fix.</td><td>Failure ownership as competitive moat. The larger the agency, the more they need a platform that can't blame someone else.</td></tr>
           </tbody>
         </table>
@@ -773,8 +773,8 @@ thead th.col-exploratory { background: #4B5563; opacity: 0.75; }
         <table>
           <thead><tr><th>Tier</th><th>Trillet deployment</th><th>Competitor reality</th></tr></thead>
           <tbody>
-            <tr><td>Entry</td><td>Deployment pack + receptionist builder = first client agent live in minutes</td><td>Build from scratch on every platform. Hours minimum.</td></tr>
-            <tr><td>Core</td><td>Parameterized templates + 10 sub-accounts = batch deploy a vertical (e.g., 10 dental offices via intake forms in an afternoon)</td><td>Manual setup per client. Linear scaling.</td></tr>
+            <tr><td>Starter</td><td>Deployment pack + receptionist builder = first client agent live in minutes</td><td>Build from scratch on every platform. Hours minimum.</td></tr>
+            <tr><td>Agency</td><td>Parameterized templates + 10 sub-accounts = batch deploy a vertical (e.g., 10 dental offices via intake forms in an afternoon)</td><td>Manual setup per client. Linear scaling.</td></tr>
             <tr><td>Scale</td><td>Automated signup + marketplace assets = agency's clients self-onboard with pre-configured agents</td><td>Nobody else has this. The agency doesn't touch the deployment.</td></tr>
           </tbody>
         </table>
@@ -809,7 +809,7 @@ thead th.col-exploratory { background: #4B5563; opacity: 0.75; }
         <tr>
           <td>$0.12/min at Starter/Agency; $0.10/min at Scale (volume discount)</td>
           <td><span class="tag tag-fact">FACT</span></td>
-          <td>Floor cost ~$0.046/min (telephony included). $0.12 at Starter and Agency is at parity with wrapper effective rates, but full-stack gives quality control, reliability, and no provider dependency stacking. Scale gets $0.10/min volume discount. ElevenLabs voices add +$0.06/min at all tiers.</td>
+          <td>Floor cost ~$0.046/min (telephony included). $0.12 at Starter and Agency is at parity with wrapper effective rates, but full-stack gives quality control, reliability, and no provider dependency stacking. Scale gets $0.10/min volume discount.</td>
         </tr>
         <tr>
           <td>Unlimited concurrency across all tiers</td>
@@ -1433,7 +1433,7 @@ thead th.col-exploratory { background: #4B5563; opacity: 0.75; }
   <h3 id="entitlements-accounts">Accounts &amp; Structure</h3>
   <div class="table-wrap">
     <table>
-      <thead><tr><th>Capability</th><th>D2C</th><th>Entry</th><th>Core</th><th class="col-proposed">Scale</th><th>Enterprise</th></tr></thead>
+      <thead><tr><th>Capability</th><th>D2C</th><th>Starter</th><th>Agency</th><th class="col-proposed">Scale</th><th>Enterprise</th></tr></thead>
       <tbody>
         <tr><td>Workspaces</td><td><span class="no">&mdash;</span></td><td>5 (hard cap)</td><td>10 + $20/ea overage</td><td><span class="yes">15 + $20/ea overage</span></td><td><span class="yes">Yes</span></td></tr>
         <tr><td>Concurrent calls</td><td><span class="yes">Unlimited</span></td><td><span class="yes">Unlimited</span></td><td><span class="yes">Unlimited</span></td><td><span class="yes">Unlimited</span></td><td><span class="yes">Unlimited</span></td></tr>
@@ -1447,7 +1447,7 @@ thead th.col-exploratory { background: #4B5563; opacity: 0.75; }
   <h3 id="entitlements-branding">Branding &amp; White-Label</h3>
   <div class="table-wrap">
     <table>
-      <thead><tr><th>Capability</th><th>D2C</th><th>Entry</th><th>Core</th><th class="col-proposed">Scale</th><th>Enterprise</th></tr></thead>
+      <thead><tr><th>Capability</th><th>D2C</th><th>Starter</th><th>Agency</th><th class="col-proposed">Scale</th><th>Enterprise</th></tr></thead>
       <tbody>
         <tr><td>Agent branding</td><td><span class="no">&mdash;</span></td><td><span class="yes">Yes</span></td><td><span class="yes">Yes</span></td><td><span class="yes">Yes</span></td><td><span class="yes">Yes</span></td></tr>
         <tr><td>Custom domain</td><td><span class="no">&mdash;</span></td><td><span class="yes">Yes</span> <span class="tag tag-revised">REVISED</span></td><td><span class="yes">Yes</span></td><td><span class="yes">Yes</span></td><td><span class="yes">Yes</span></td></tr>
@@ -1460,7 +1460,7 @@ thead th.col-exploratory { background: #4B5563; opacity: 0.75; }
   <h3 id="entitlements-billing">Billing &amp; Monetization</h3>
   <div class="table-wrap">
     <table>
-      <thead><tr><th>Capability</th><th>D2C</th><th>Entry</th><th>Core</th><th class="col-proposed">Scale</th><th>Enterprise</th></tr></thead>
+      <thead><tr><th>Capability</th><th>D2C</th><th>Starter</th><th>Agency</th><th class="col-proposed">Scale</th><th>Enterprise</th></tr></thead>
       <tbody>
         <tr><td>Rebilling to clients</td><td><span class="no">&mdash;</span></td><td><span class="yes">Full markup</span> <span class="tag tag-revised">RESOLVED Mar 11</span></td><td><span class="yes">Full markup</span></td><td><span class="yes">Full SaaS mode</span> (own plans, own pricing)</td><td><span class="custom">Custom</span></td></tr>
         <tr><td>Per-minute rate</td><td>$0.20</td><td>$0.12</td><td>$0.12</td><td><span class="yes">$0.10</span> (volume discount)</td><td>$0.09 (volume)</td></tr>
@@ -1477,7 +1477,7 @@ thead th.col-exploratory { background: #4B5563; opacity: 0.75; }
   <p style="margin-bottom:14px; color:var(--text-secondary); font-size:14px;">Five distinct object types, mapped to tier access. Each tier transition unlocks a qualitatively different object, not just more of the same. <strong>Blue cells represent the strategic target architecture -- engineering scope TBD with Ming/Laurence.</strong></p>
   <div class="table-wrap">
     <table>
-      <thead><tr><th>Object</th><th>D2C</th><th>Entry</th><th>Core</th><th class="col-proposed">Scale</th><th>Enterprise</th></tr></thead>
+      <thead><tr><th>Object</th><th>D2C</th><th>Starter</th><th>Agency</th><th class="col-proposed">Scale</th><th>Enterprise</th></tr></thead>
       <tbody>
         <tr><td>Prompt Presets<span class="sub">Reusable prompt text</span></td><td><span class="yes">Use</span></td><td><span class="yes">Use + create</span></td><td><span class="yes">Use + create</span></td><td><span class="yes">Use + create</span></td><td><span class="yes">Yes</span></td></tr>
         <tr><td>Agent Blueprints<span class="sub">Full agent snapshot, duplicatable</span></td><td><span class="no">&mdash;</span></td><td><span class="yes">Duplicate + edit</span></td><td><span class="yes">Duplicate + edit</span></td><td><span class="yes">Duplicate + edit</span></td><td><span class="yes">Yes</span></td></tr>
@@ -1491,7 +1491,7 @@ thead th.col-exploratory { background: #4B5563; opacity: 0.75; }
   <h3 id="entitlements-api">API Access</h3>
   <div class="table-wrap">
     <table>
-      <thead><tr><th>Capability</th><th>D2C</th><th>Entry</th><th>Core</th><th class="col-proposed">Scale</th><th>Enterprise</th></tr></thead>
+      <thead><tr><th>Capability</th><th>D2C</th><th>Starter</th><th>Agency</th><th class="col-proposed">Scale</th><th>Enterprise</th></tr></thead>
       <tbody>
         <tr><td>API access</td><td><span class="no">&mdash;</span></td><td><span class="yes">Operational API</span> <span class="tag tag-revised">REVISED</span><span class="sub">Read usage, manage agents, webhooks</span></td><td><span class="yes">Operational API</span><span class="sub">Read usage, manage agents, webhooks</span></td><td><span class="yes">Full API</span><span class="sub">+ provisioning, billing, automation</span></td><td><span class="yes">Full API</span></td></tr>
         <tr><td>Rate limits</td><td>&mdash;</td><td>Standard</td><td>Standard</td><td>Higher</td><td>Custom</td></tr>
@@ -1522,7 +1522,7 @@ thead th.col-exploratory { background: #4B5563; opacity: 0.75; }
   <h3 id="entitlements-support">Support &amp; Service</h3>
   <div class="table-wrap">
     <table>
-      <thead><tr><th>Capability</th><th>D2C</th><th>Entry</th><th>Core</th><th class="col-proposed">Scale</th><th>Enterprise</th></tr></thead>
+      <thead><tr><th>Capability</th><th>D2C</th><th>Starter</th><th>Agency</th><th class="col-proposed">Scale</th><th>Enterprise</th></tr></thead>
       <tbody>
         <tr><td>Support channels</td><td>Email only</td><td>Email + chatbot</td><td>Priority support</td><td>Named partner support</td><td>Dedicated AM</td></tr>
         <tr><td>Response target</td><td>Best-effort</td><td>Best-effort</td><td>Priority / business hours</td><td>Named contact, fast-track</td><td>SLA-defined</td></tr>
@@ -1593,7 +1593,7 @@ thead th.col-exploratory { background: #4B5563; opacity: 0.75; }
 
   <div class="table-wrap">
     <table>
-      <thead><tr><th>Scenario</th><th>Entry</th><th>Core</th><th>Scale</th><th>Total Agencies</th><th>Estimated MRR</th><th>ARR</th></tr></thead>
+      <thead><tr><th>Scenario</th><th>Starter</th><th>Agency</th><th>Scale</th><th>Total Agencies</th><th>Estimated MRR</th><th>ARR</th></tr></thead>
       <tbody>
         <tr><td>Current <span class="tag tag-fact">FACT</span></td><td>21</td><td>18</td><td>0</td><td>39</td><td>~$11,700</td><td>~$140K</td></tr>
         <tr><td>6-month</td><td>50</td><td>40</td><td>10</td><td>100</td><td>~$36K</td><td>~$437K</td></tr>
