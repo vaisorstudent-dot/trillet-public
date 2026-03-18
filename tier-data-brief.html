@@ -315,7 +315,56 @@ tbody tr:last-child td:last-child { border-radius: 0 0 8px 0; }
   </div>
 </div>
 
-<!-- Section 3: Competitive positioning -->
+<!-- Section 3: Studio cohort -->
+<div class="section">
+  <div class="section-label">Studio $99 Cohort</div>
+  <h2>Zero upgrades. Higher churn. Not a funnel.</h2>
+
+  <div class="stat-row">
+    <div class="stat-card" style="background: #FEE2E2;">
+      <div class="number" style="color: #DC2626;">0</div>
+      <div class="label" style="color: #991B1B;">Studio -> Agency upgrades</div>
+    </div>
+    <div class="stat-card">
+      <div class="number">28%</div>
+      <div class="label">Studio churn+cancel</div>
+    </div>
+    <div class="stat-card">
+      <div class="number">25%</div>
+      <div class="label">AgencyPlus churn+cancel</div>
+    </div>
+  </div>
+
+  <div class="compare-row">
+    <div class="compare-card">
+      <h3>Studio $99 (39 subs)</h3>
+      <div class="metric"><span>Healthy active</span><span class="val">22 (56%)</span></div>
+      <div class="metric"><span>Canceling</span><span class="val">4</span></div>
+      <div class="metric"><span>Trialing</span><span class="val">6 (2 canceling)</span></div>
+      <div class="metric"><span>Past due</span><span class="val">5</span></div>
+      <div class="metric"><span>Upgrades to Agency</span><span class="val" style="color: #DC2626; font-weight: 700;">0</span></div>
+    </div>
+    <div class="compare-card winner">
+      <h3>AgencyPlus $299 (32 subs)</h3>
+      <div class="metric"><span>Healthy active</span><span class="val">21 (66%)</span></div>
+      <div class="metric"><span>Canceling</span><span class="val">2</span></div>
+      <div class="metric"><span>Trialing</span><span class="val">3 (2 canceling)</span></div>
+      <div class="metric"><span>Past due</span><span class="val">4</span></div>
+      <div class="metric"><span>Revenue share</span><span class="val" style="color: #059669;">70.3% of MRR</span></div>
+    </div>
+  </div>
+
+  <div class="chart-container">
+    <canvas id="cohortChart"></canvas>
+  </div>
+
+  <div class="callout">
+    <div class="callout-label">Key Finding</div>
+    <p>The $99 Studio tier is <strong>not a funnel to $299</strong>. It is a separate population that either stays at $99 or churns. Not a single Studio customer has ever upgraded to AgencyPlus. Studio customers churn at a higher rate (28% vs 25%) while generating less than half the revenue. <strong>At $149, you filter out the weakest cohort without losing any Agency pipeline</strong> -- because Studio never fed Agency in the first place.</p>
+  </div>
+</div>
+
+<!-- Section 4: Competitive positioning -->
 <div class="section">
   <div class="section-label">Competitive Position</div>
   <h2>$149 still undercuts every agency competitor</h2>
@@ -474,6 +523,40 @@ new Chart(revCtx, {
     scales: {
       y: { beginAtZero: true, title: { display: true, text: 'Revenue ($/mo)', font: { family: 'Inter', size: 11 } }, grid: { color: 'rgba(0,0,0,0.05)' } },
       y1: { beginAtZero: true, position: 'right', title: { display: true, text: 'Subscribers', font: { family: 'Inter', size: 11 } }, grid: { display: false } },
+      x: { grid: { display: false }, ticks: { font: { family: 'Inter', size: 11 } } }
+    }
+  }
+});
+
+// Studio vs Agency cohort chart
+const cohCtx = document.getElementById('cohortChart').getContext('2d');
+new Chart(cohCtx, {
+  type: 'bar',
+  data: {
+    labels: ['Jan 26', 'Feb 26', 'Mar 26 (18d)'],
+    datasets: [{
+      label: 'Studio $99 signups',
+      data: [9, 11, 19],
+      backgroundColor: '#BFDBFE',
+      borderRadius: 6,
+      barPercentage: 0.5,
+    }, {
+      label: 'AgencyPlus $299 signups',
+      data: [8, 10, 14],
+      backgroundColor: '#0066FF',
+      borderRadius: 6,
+      barPercentage: 0.5,
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { position: 'top', labels: { font: { family: 'Inter', size: 11 }, usePointStyle: true, pointStyle: 'rectRounded' } },
+      title: { display: true, text: 'Monthly Signups: Studio vs AgencyPlus', font: { family: 'Urbanist', size: 14, weight: '600' }, color: '#171717', padding: { bottom: 16 } }
+    },
+    scales: {
+      y: { beginAtZero: true, title: { display: true, text: 'Signups', font: { family: 'Inter', size: 11 } }, grid: { color: 'rgba(0,0,0,0.05)' } },
       x: { grid: { display: false }, ticks: { font: { family: 'Inter', size: 11 } } }
     }
   }
