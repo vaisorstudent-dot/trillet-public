@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Trillet Pricing — Plans for Every Scale</title>
   <meta name="description"
-    content="From $59/mo for your own AI receptionist to $1,497/mo for enterprise deployment infrastructure. White-label, rebilling, and unlimited sub-accounts on agency plans.">
+    content="From $49/mo for your own AI receptionist to $497/mo for full agency scale. White-label, rebilling, and custom agents on agency plans.">
   <link rel="stylesheet" href="styles.css">
   <style>
     /* Pricing page inline overrides */
@@ -26,11 +26,7 @@
       color: var(--teal-500);
     }
 
-    .pricing-card .plan-label--lite {
-      color: var(--amber-500);
-    }
-
-    .pricing-card .plan-label--pro {
+    .pricing-card .plan-label--scale {
       color: #818CF8;
     }
 
@@ -54,6 +50,65 @@
     .pricing-extras strong {
       color: var(--navy-950);
       font-weight: 700;
+    }
+
+    /* D2C footer strip */
+    .d2c-strip {
+      background: var(--slate-50);
+      border: 1px solid var(--slate-200);
+      border-radius: var(--radius-lg);
+      padding: 28px 32px;
+      max-width: 600px;
+      margin: 40px auto 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .d2c-strip-text {
+      flex: 1;
+    }
+
+    .d2c-strip-label {
+      font-size: 0.6875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: 700;
+      color: var(--blue-500);
+      margin-bottom: 4px;
+    }
+
+    .d2c-strip h4 {
+      margin: 0 0 4px;
+      font-size: 1.0625rem;
+    }
+
+    .d2c-strip p {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      margin: 0;
+    }
+
+    .d2c-strip-price {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--navy-950);
+      white-space: nowrap;
+    }
+
+    .d2c-strip-price span {
+      font-size: 0.875rem;
+      font-weight: 400;
+      color: var(--text-muted);
+    }
+
+    @media (max-width: 600px) {
+      .d2c-strip {
+        flex-direction: column;
+        align-items: flex-start;
+      }
     }
 
     /* Comparison table — collapsed universal section */
@@ -142,8 +197,7 @@
     <div class="container">
       <div class="hero-content">
         <h1>Simple pricing.<br><span class="highlight">Serious margins.</span></h1>
-        <p>One plan for your business. Three plans to build a business around it. All include the same AI — no feature
-          gates on call quality.</p>
+        <p>Three agency plans to build a business around. One standalone plan for your own phones. All include the same AI — no feature gates on call quality.</p>
       </div>
     </div>
   </section>
@@ -151,110 +205,93 @@
   <!-- ===== PRICING CARDS ===== -->
   <section class="section" style="padding-top:0; margin-top:-40px; position:relative; z-index:2;">
     <div class="container">
-      <div class="pricing-grid scroll-animate">
+      <div class="pricing-grid scroll-animate" style="grid-template-columns: repeat(3, 1fr);">
 
-        <!-- D2C -->
+        <!-- Starter Agency -->
         <div class="pricing-card">
-          <div class="plan-label plan-label--d2c">For my business</div>
+          <div class="plan-label plan-label--d2c">For agencies</div>
           <h3>Starter</h3>
-          <div class="pricing-amount">$59<span>/mo</span></div>
-          <div class="pricing-desc">AI answers your phones, qualifies leads, and books appointments.</div>
+          <div class="pricing-amount">$149<span>/mo</span></div>
+          <div class="pricing-desc">White-label AI voice agents for your first clients. You configure, they convert.</div>
           <div class="pricing-divider"></div>
           <ul class="pricing-features">
-            <li>1 AI voice agent</li>
-            <li>Inbound call handling</li>
-            <li>Lead qualification + scoring</li>
-            <li>Calendar booking</li>
-            <li>SMS follow-ups</li>
-            <li>Call transcripts & analytics</li>
-            <li>Spam / honeypot detection</li>
-            <li>32 languages</li>
-          </ul>
-          <a href="#" class="btn btn--primary">Start free trial</a>
-          <div class="plan-subtitle" style="text-align:center; margin-top:12px;">No credit card required</div>
-        </div>
-
-        <!-- Agency -->
-        <div class="pricing-card">
-          <div class="plan-label plan-label--agency">For agencies</div>
-          <h3>Agency</h3>
-          <div class="pricing-amount">$299<span>/mo</span></div>
-          <div class="pricing-desc">White-label the platform. Build agents for clients. Bill them under your brand.
-          </div>
-          <div class="pricing-divider"></div>
-          <ul class="pricing-features">
-            <li>Everything in Starter</li>
-            <li>Unlimited sub-accounts</li>
+            <li>5 workspaces (hard cap)</li>
             <li>Full white-label + custom domain</li>
             <li>Client rebilling (Stripe)</li>
             <li>Agency dashboard</li>
             <li>Manual agent configuration</li>
-            <li>Priority email support</li>
+            <li>Email support</li>
+            <li>Chatbot support</li>
+            <li>$0.12/min AI call time</li>
           </ul>
-          <a href="#" class="btn btn--amber">Launch your agency</a>
-          <div class="plan-subtitle" style="text-align:center; margin-top:12px;">You build each agent. Full control.
-          </div>
+          <a href="#" class="btn btn--primary">Get started</a>
+          <div class="plan-subtitle" style="text-align:center; margin-top:12px;">Upgrade anytime, everything carries over</div>
         </div>
 
-        <!-- Lite SaaS -->
+        <!-- Agency (Most Popular) -->
         <div class="pricing-card pricing-card--featured">
-          <div class="pricing-badge">Recommended</div>
-          <div class="plan-label plan-label--lite">For resellers</div>
-          <h3>Lite SaaS</h3>
+          <div class="pricing-badge">Most Popular</div>
+          <div class="plan-label plan-label--agency">For agencies</div>
+          <h3>Agency</h3>
+          <div class="pricing-amount">$299<span>/mo</span></div>
+          <div class="pricing-desc">White-label the platform. Build agents for clients. Bill them under your brand.</div>
+          <div class="pricing-divider"></div>
+          <ul class="pricing-features">
+            <li>Everything in Starter</li>
+            <li>10 workspaces (+$20/ea overage)</li>
+            <li>Priority email support</li>
+            <li>$0.12/min AI call time</li>
+          </ul>
+          <a href="#" class="btn btn--amber">Launch your agency</a>
+          <div class="plan-subtitle" style="text-align:center; margin-top:12px;">You build each agent. Full control.</div>
+        </div>
+
+        <!-- Scale -->
+        <div class="pricing-card">
+          <div class="plan-label plan-label--scale">For resellers</div>
+          <h3>Scale</h3>
           <div class="pricing-amount">$497<span>/mo</span></div>
-          <div class="pricing-desc">Deploy pre-built template agents. One-click onboarding. Sell without building.</div>
+          <div class="pricing-desc">Custom agents, SaaS configurator, and volume pricing. Built for serious operators.</div>
           <div class="pricing-divider"></div>
           <ul class="pricing-features">
             <li>Everything in Agency</li>
-            <li>Template agent library</li>
-            <li>One-click deployment from URL</li>
-            <li>Client self-onboarding portal</li>
-            <li>Advanced analytics</li>
-            <li>Dedicated onboarding</li>
-            <li>Priority phone support</li>
-            <li>Community access</li>
+            <li>15 workspaces (+$20/ea overage)</li>
+            <li>SaaS configurator</li>
+            <li>Custom agent builds</li>
+            <li>BYOK (bring your own keys)</li>
+            <li>$0.10/min AI call time</li>
+            <li>Named partner support</li>
           </ul>
-          <a href="#" class="btn btn--amber">Start with Lite SaaS</a>
-          <div class="plan-subtitle" style="text-align:center; margin-top:12px;">No agent building required</div>
+          <a href="#" class="btn btn--outline">Talk to sales</a>
+          <div class="plan-subtitle" style="text-align:center; margin-top:12px;">Volume discount included at this tier</div>
         </div>
+      </div>
 
-        <!-- Pro SaaS -->
-        <div class="pricing-card">
-          <div class="plan-label plan-label--pro">For networks</div>
-          <h3>Pro SaaS</h3>
-          <div class="pricing-amount">$1,497<span>/mo</span></div>
-          <div class="pricing-desc">Custom vertical agent. API deployment. Per-endpoint pricing for your network.</div>
-          <div class="pricing-divider"></div>
-          <ul class="pricing-features">
-            <li>Everything in Lite SaaS</li>
-            <li>Custom agent template build</li>
-            <li>Exclusive to your vertical</li>
-            <li>API-driven deployment</li>
-            <li>ERP / platform integration</li>
-            <li>Dedicated account manager</li>
-            <li>Custom SLA</li>
-          </ul>
-          <a href="enterprise.html" class="btn btn--outline">Talk to sales</a>
-          <div class="pricing-extras">
-            <strong>$14K</strong> one-time template build<br>
-            <strong>$49–149</strong>/endpoint/mo (varies by vertical)
-          </div>
+      <!-- D2C footer strip -->
+      <div class="d2c-strip scroll-animate">
+        <div class="d2c-strip-text">
+          <div class="d2c-strip-label">For my own business</div>
+          <h4>D2C Starter</h4>
+          <p>AI answers your phones, qualifies leads, and books appointments. One agent, one business.</p>
+        </div>
+        <div style="display:flex; flex-direction:column; align-items:flex-end; gap:12px; flex-shrink:0;">
+          <div class="d2c-strip-price">$49<span>/mo</span></div>
+          <a href="#" class="btn btn--primary btn--sm">Start free trial</a>
         </div>
       </div>
 
       <!-- ===== UPGRADE PATH ===== -->
-      <div class="upgrade-path scroll-animate">
-        <div class="upgrade-node upgrade-node--d2c">Starter $59</div>
+      <div class="upgrade-path scroll-animate" style="margin-top:40px;">
+        <div class="upgrade-node upgrade-node--d2c">D2C $49</div>
+        <div class="upgrade-arrow">→</div>
+        <div class="upgrade-node upgrade-node--agency">Starter $149</div>
         <div class="upgrade-arrow">→</div>
         <div class="upgrade-node upgrade-node--agency">Agency $299</div>
         <div class="upgrade-arrow">→</div>
-        <div class="upgrade-node upgrade-node--lite">Lite SaaS $497</div>
-        <div class="upgrade-arrow">→</div>
-        <div class="upgrade-node upgrade-node--pro">Pro SaaS $1,497</div>
+        <div class="upgrade-node upgrade-node--lite">Scale $497</div>
       </div>
       <div style="text-align:center; margin-top:16px; font-size:0.875rem; color:var(--text-muted);">
-        Use it for your business → offer to clients → deploy templates → distribute across networks. Upgrade anytime,
-        everything carries over.
+        Use it for your own business → manage your first clients → grow your agency → scale with custom agents and volume pricing. Upgrade anytime, everything carries over.
       </div>
     </div>
   </section>
@@ -268,24 +305,20 @@
       </div>
       <div class="decision-tree scroll-animate">
         <div class="decision-item">
-          <div class="decision-q"><strong>"I need AI for my own phones"</strong>One agent, one business. You set it up,
-            it handles calls.</div>
-          <div class="decision-arrow">→ Starter $59/mo</div>
+          <div class="decision-q"><strong>"I need AI for my own phones"</strong>One agent, one business. You set it up, it handles calls.</div>
+          <div class="decision-arrow">→ D2C Starter $49/mo</div>
         </div>
         <div class="decision-item">
-          <div class="decision-q"><strong>"I want to sell voice AI to my clients"</strong>You build each agent.
-            White-label and rebill under your brand.</div>
+          <div class="decision-q"><strong>"I'm starting an agency with a few clients"</strong>Up to 5 workspaces. White-label and rebill under your brand.</div>
+          <div class="decision-arrow">→ Starter $149/mo</div>
+        </div>
+        <div class="decision-item">
+          <div class="decision-q"><strong>"I want to grow beyond 5 clients"</strong>10 workspaces with overage. Priority support included.</div>
           <div class="decision-arrow">→ Agency $299/mo</div>
         </div>
         <div class="decision-item">
-          <div class="decision-q"><strong>"I want to resell without building"</strong>Pick a template. Enter a URL.
-            Agent is live. Client self-onboards.</div>
-          <div class="decision-arrow">→ Lite SaaS $497/mo</div>
-        </div>
-        <div class="decision-item">
-          <div class="decision-q"><strong>"I run a network of 20+ locations"</strong>Custom template for your vertical.
-            API deploys agents across your network.</div>
-          <div class="decision-arrow">→ Pro SaaS $1,497/mo</div>
+          <div class="decision-q"><strong>"I need custom agents and volume pricing"</strong>15 workspaces, SaaS configurator, BYOK, and $0.10/min.</div>
+          <div class="decision-arrow">→ Scale $497/mo</div>
         </div>
       </div>
     </div>
@@ -305,29 +338,36 @@
           <thead>
             <tr>
               <th style="width:30%;">Capability</th>
-              <th>Starter $59</th>
+              <th>D2C $49</th>
+              <th>Starter $149</th>
               <th>Agency $299</th>
-              <th>Lite SaaS $497</th>
-              <th>Pro SaaS $1,497</th>
+              <th>Scale $497</th>
             </tr>
           </thead>
           <tbody>
             <tr class="table-section-header">
-              <td colspan="5">Scale & accounts</td>
+              <td colspan="5">Scale & workspaces</td>
             </tr>
             <tr>
               <td>AI voice agents</td>
               <td>1</td>
-              <td>Unlimited</td>
-              <td>Unlimited</td>
-              <td>Unlimited</td>
+              <td>Up to 5</td>
+              <td>Up to 10</td>
+              <td>Up to 15</td>
             </tr>
             <tr>
-              <td>Sub-accounts</td>
+              <td>Workspace overage</td>
               <td class="dash">—</td>
-              <td>Unlimited</td>
-              <td>Unlimited</td>
-              <td>Unlimited</td>
+              <td class="dash">—</td>
+              <td>+$20/ea</td>
+              <td>+$20/ea</td>
+            </tr>
+            <tr>
+              <td>Per-minute rate</td>
+              <td>$0.20/min</td>
+              <td>$0.12/min</td>
+              <td>$0.12/min</td>
+              <td>$0.10/min</td>
             </tr>
             <tr class="table-section-header">
               <td colspan="5">Branding & billing</td>
@@ -360,39 +400,25 @@
               <td>Agent configuration</td>
               <td>Self-setup</td>
               <td>Manual per client</td>
-              <td>Template library</td>
-              <td>Custom template + API</td>
+              <td>Manual per client</td>
+              <td>Custom agents + SaaS configurator</td>
             </tr>
             <tr>
-              <td>One-click deployment</td>
-              <td class="dash">—</td>
-              <td class="dash">—</td>
-              <td class="check">✓</td>
-              <td class="check">✓</td>
-            </tr>
-            <tr>
-              <td>Client self-onboarding</td>
-              <td class="dash">—</td>
-              <td class="dash">—</td>
-              <td class="check">✓</td>
-              <td class="check">✓</td>
-            </tr>
-            <tr>
-              <td>Custom vertical template</td>
+              <td>SaaS configurator</td>
               <td class="dash">—</td>
               <td class="dash">—</td>
               <td class="dash">—</td>
               <td class="check">✓</td>
             </tr>
             <tr>
-              <td>API-driven deployment</td>
+              <td>Custom agent builds</td>
               <td class="dash">—</td>
               <td class="dash">—</td>
               <td class="dash">—</td>
               <td class="check">✓</td>
             </tr>
             <tr>
-              <td>ERP / platform integration</td>
+              <td>BYOK (bring your own keys)</td>
               <td class="dash">—</td>
               <td class="dash">—</td>
               <td class="dash">—</td>
@@ -402,45 +428,17 @@
               <td colspan="5">Support</td>
             </tr>
             <tr>
-              <td>Email support</td>
+              <td>Email + chatbot support</td>
+              <td class="check">✓</td>
               <td class="check">✓</td>
               <td>Priority</td>
               <td>Priority</td>
-              <td>Priority</td>
             </tr>
             <tr>
-              <td>Phone support</td>
-              <td class="dash">—</td>
-              <td class="dash">—</td>
-              <td class="check">✓</td>
-              <td class="check">✓</td>
-            </tr>
-            <tr>
-              <td>Dedicated onboarding</td>
-              <td class="dash">—</td>
-              <td class="dash">—</td>
-              <td class="check">✓</td>
-              <td class="check">✓</td>
-            </tr>
-            <tr>
-              <td>Dedicated account manager</td>
+              <td>Named partner support</td>
               <td class="dash">—</td>
               <td class="dash">—</td>
               <td class="dash">—</td>
-              <td class="check">✓</td>
-            </tr>
-            <tr>
-              <td>Custom SLA</td>
-              <td class="dash">—</td>
-              <td class="dash">—</td>
-              <td class="dash">—</td>
-              <td class="check">✓</td>
-            </tr>
-            <tr>
-              <td>Community access</td>
-              <td class="dash">—</td>
-              <td class="dash">—</td>
-              <td class="check">✓</td>
               <td class="check">✓</td>
             </tr>
           </tbody>
@@ -459,18 +457,16 @@
       <div style="max-width:700px; margin:0 auto;" class="scroll-animate">
         <div style="border-bottom:1px solid var(--slate-200); padding:24px 0;">
           <h4 style="margin-bottom:8px;">Can I upgrade between plans?</h4>
-          <p style="font-size:0.9375rem; color:var(--text-muted);">Yes. Move from Starter to Agency to Lite SaaS at any
+          <p style="font-size:0.9375rem; color:var(--text-muted);">Yes. Move from Starter to Agency to Scale at any
             time. Your agents, clients, and configuration carry over. Downgrading works too — no lock-in.</p>
         </div>
         <div style="border-bottom:1px solid var(--slate-200); padding:24px 0;">
           <h4 style="margin-bottom:8px;">What are usage costs on top of the base price?</h4>
-          <p style="font-size:0.9375rem; color:var(--text-muted);">You pay per minute of AI call time. Rates vary by
-            region and language. Most US calls are $0.08–0.12/min. Agency plans can mark up usage and rebill to clients.
-          </p>
+          <p style="font-size:0.9375rem; color:var(--text-muted);">You pay per minute of AI call time. D2C Starter is $0.20/min. Starter and Agency plans are $0.12/min flat. Scale plan is $0.10/min. Agency plans can mark up usage and rebill to clients.</p>
         </div>
         <div style="border-bottom:1px solid var(--slate-200); padding:24px 0;">
           <h4 style="margin-bottom:8px;">Do clients see the Trillet brand?</h4>
-          <p style="font-size:0.9375rem; color:var(--text-muted);">Not on Agency plans and above. Full white-label means
+          <p style="font-size:0.9375rem; color:var(--text-muted);">Not on Starter, Agency, or Scale plans. Full white-label means
             your brand, your domain, your login. Clients interact only with your brand.</p>
         </div>
         <div style="border-bottom:1px solid var(--slate-200); padding:24px 0;">
@@ -480,18 +476,12 @@
             cost.</p>
         </div>
         <div style="border-bottom:1px solid var(--slate-200); padding:24px 0;">
-          <h4 style="margin-bottom:8px;">What's the difference between Agency and Lite SaaS?</h4>
-          <p style="font-size:0.9375rem; color:var(--text-muted);">Deployment model. On Agency, you manually configure
-            each agent per client — full control, more hands-on. On Lite SaaS, you pick a template, enter a client's
-            URL, and the agent deploys in one click. Lite SaaS also adds client self-onboarding, so they can sign up
-            without you touching anything.</p>
+          <h4 style="margin-bottom:8px;">What's the difference between Agency and Scale?</h4>
+          <p style="font-size:0.9375rem; color:var(--text-muted);">Scale adds 5 more workspaces, a volume per-minute discount ($0.10 vs $0.12), the SaaS configurator for faster client setup, custom agent builds, BYOK, and a named partner for dedicated support. If you're managing more than 10 clients or want custom-built agents, Scale is the right move.</p>
         </div>
         <div style="padding:24px 0;">
-          <h4 style="margin-bottom:8px;">What's included in the $14K Pro SaaS template build?</h4>
-          <p style="font-size:0.9375rem; color:var(--text-muted);">We build a custom voice AI agent designed
-            specifically for your vertical — workflows, terminology, compliance, integrations. That agent becomes a
-            deployable template exclusive to your network. Build takes ~2 weeks. You deploy it to unlimited endpoints
-            via API.</p>
+          <h4 style="margin-bottom:8px;">What is BYOK and who needs it?</h4>
+          <p style="font-size:0.9375rem; color:var(--text-muted);">BYOK (bring your own keys) lets Scale plan operators connect their own LLM and telephony API credentials. This gives you direct cost control and model flexibility — useful for high-volume operators or those with existing provider contracts.</p>
         </div>
       </div>
     </div>
@@ -501,10 +491,9 @@
   <section class="cta-section">
     <div class="container">
       <h2>Pick a plan. Start today.</h2>
-      <p>Free trial on Starter. Instant setup on Agency. Or book a call to talk about SaaS and enterprise deployment.
-      </p>
+      <p>Free trial on D2C Starter. Instant setup on agency plans. Or book a call to talk about Scale and custom deployment.</p>
       <div class="btn-group" style="justify-content:center;">
-        <a href="#" class="btn btn--primary btn--lg">Start free trial — $59/mo</a>
+        <a href="#" class="btn btn--primary btn--lg">Start free trial — $149/mo</a>
         <a href="#" class="btn btn--amber btn--lg">Book a demo</a>
       </div>
     </div>
