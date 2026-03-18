@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trillet Briefing -- 2026-03-18</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', system-ui, sans-serif; }
+    .detail { display: none; }
+    .detail.open { display: block; }
+    .toggle-icon { transition: transform 0.2s; }
+    .toggle-icon.open { transform: rotate(90deg); }
+  </style>
+</head>
+<body class="min-h-screen bg-stone-50 text-neutral-950">
+
+  <header class="sticky top-0 z-50 border-b border-neutral-200/80 bg-stone-50/90 backdrop-blur-xl">
+    <div class="mx-auto max-w-3xl px-4 py-3 flex items-center justify-between">
+      <div>
+        <div class="text-sm font-semibold tracking-tight">Trillet Daily Briefing</div>
+        <div class="text-xs text-neutral-500">2026-03-18 -- prepared for Barak</div>
+      </div>
+      <div class="text-xs text-neutral-400">14 items</div>
+    </div>
+  </header>
+
+  <main class="mx-auto max-w-3xl px-4 py-6">
+
+    <!-- 1. TIER ARCHITECTURE: 3-WAY NEEDED -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-neutral-200 bg-white px-4 py-3 shadow-sm hover:bg-neutral-50 transition-colors">
+        <span class="toggle-icon text-neutral-400 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-neutral-950">Tier Architecture -- 3-Way Decision</div>
+          <div class="text-sm text-neutral-600">Ready for Ori/Ming/Barak decision. Must lock before Ming flies Mar 20 (~2.5 days).</div>
+        </div>
+        <div class="text-xs px-2 py-0.5 bg-red-100 text-red-700 rounded-full font-medium">You needed</div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p>The tier architecture has been substantially redesigned over the past two days. Ori ran two GPT-5.4 consultations, competitive research, and CMS data analysis. A WhatsApp group was created for the 3-way decision.</p>
+        <p class="mt-2"><strong>Proposed structure:</strong></p>
+        <table class="mt-2 text-xs w-full border-collapse">
+          <tr class="border-b"><th class="text-left py-1">Feature</th><th class="py-1">Starter $149</th><th class="py-1">Agency $299</th><th class="py-1">Scale $497</th></tr>
+          <tr class="border-b"><td class="py-1">Workspaces</td><td class="py-1 text-center">5 (hard cap)</td><td class="py-1 text-center">10 (+$20 overage)</td><td class="py-1 text-center">15 (+$20 overage)</td></tr>
+          <tr class="border-b"><td class="py-1">Full WL, markup, API, templates</td><td class="py-1 text-center">Yes</td><td class="py-1 text-center">Yes</td><td class="py-1 text-center">Yes</td></tr>
+          <tr class="border-b"><td class="py-1">SaaS configurator</td><td class="py-1 text-center">No</td><td class="py-1 text-center">No</td><td class="py-1 text-center">Yes</td></tr>
+          <tr class="border-b"><td class="py-1">Custom agents / BYOK</td><td class="py-1 text-center">No</td><td class="py-1 text-center">No</td><td class="py-1 text-center">Yes</td></tr>
+          <tr><td class="py-1">Per-minute</td><td class="py-1 text-center">$0.12</td><td class="py-1 text-center">$0.12</td><td class="py-1 text-center">Volume discount</td></tr>
+        </table>
+        <p class="mt-3"><strong>Key changes from prior model:</strong></p>
+        <ul class="list-disc ml-5 mt-1 space-y-1">
+          <li>Bypass loophole will be fixed -- SaaS gate becomes a real capability gate</li>
+          <li>Volume per-minute discount at Scale (breakeven ~10K min/mo) -- no competitor does this</li>
+          <li>Revenue share killed entirely (all three agree)</li>
+          <li>"Everything Included" positioning retired. New: "Full agency platform from $149. Scale when you're ready."</li>
+          <li>Overage pricing at $299/$497 instead of hard caps -- upgrade is a value choice, not forced</li>
+        </ul>
+        <p class="mt-2"><strong>GPT stress test verdict:</strong> "Good move, not a guaranteed breakout." Warns of $149 cannibalizing $299, per-minute as the real battleground, and Scale tier weakening.</p>
+        <p class="mt-2"><strong>Ming's position:</strong> Gut leans 3 tiers "but not very strong." Spoke to agencies who are cautious about spending >$100/mo. Handed remaining agency tasks to Isaam.</p>
+        <div class="mt-3 pt-3 border-t border-neutral-100">
+          <div class="text-xs font-semibold uppercase tracking-wide text-neutral-500 mb-2">Action items</div>
+          <p class="text-sm text-neutral-700"><strong>Barak:</strong> Join 3-way WhatsApp discussion and the tiering decision call. Target: before Mar 20.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. IMLIVE KICKOFF OUTCOME -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-neutral-200 bg-white px-4 py-3 shadow-sm hover:bg-neutral-50 transition-colors">
+        <span class="toggle-icon text-neutral-400 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-neutral-950">ImLive / Muly</div>
+          <div class="text-sm text-neutral-600">Kickoff was yesterday (Mar 17 9am IST). No outcome report yet.</div>
+        </div>
+        <div class="text-xs px-2 py-0.5 bg-blue-100 text-blue-700 rounded-full font-medium">You</div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p>The ImLive kickoff meeting (Barak + Laurence + Kirill + Martin from IML) was scheduled for Mar 17 at 9am IST. Scope: Events + Facebook integration. Barak had shared sample content via Google Drive.</p>
+        <p class="mt-2">We don't have a debrief yet. $4K payment still expected from Muly.</p>
+        <div class="mt-3 pt-3 border-t border-neutral-100">
+          <div class="text-xs font-semibold uppercase tracking-wide text-neutral-500 mb-2">Action items</div>
+          <p class="text-sm text-neutral-700"><strong>Barak:</strong> Debrief Ori on kickoff outcome. What was agreed? What's next?</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. KEY PEOPLE MEETINGS -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-neutral-200 bg-white px-4 py-3 shadow-sm hover:bg-neutral-50 transition-colors">
+        <span class="toggle-icon text-neutral-400 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-neutral-950">Barak / Coalition</div>
+          <div class="text-sm text-neutral-600">Key people meetings with Laurence and Ming happened. Debrief needed.</div>
+        </div>
+        <div class="text-xs px-2 py-0.5 bg-blue-100 text-blue-700 rounded-full font-medium">You</div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p>Barak's individual meetings with AU co-founders were scheduled for Monday AEST: Laurence at 18:00, Ming at 19:00. Both had accepted (Mar 15).</p>
+        <p class="mt-2">These meetings were Ming's requirement -- individual confidence-building before deeper integration. Ori's assessment: Ming may not wait for this process to complete, but we do it anyway because it is good for the company.</p>
+        <div class="mt-3 pt-3 border-t border-neutral-100">
+          <div class="text-xs font-semibold uppercase tracking-wide text-neutral-500 mb-2">Action items</div>
+          <p class="text-sm text-neutral-700"><strong>Barak:</strong> Report to Ori how both meetings went. What was the tone? Any concerns raised?</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. CMS DATA: HARD NUMBERS -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-neutral-200 bg-white px-4 py-3 shadow-sm hover:bg-neutral-50 transition-colors">
+        <span class="toggle-icon text-neutral-400 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-neutral-950">Product Metrics -- Live CMS Pull</div>
+          <div class="text-sm text-neutral-600">$11,981 MRR (+19%). Net Revenue Retention 71.5% -- red flag for investors.</div>
+        </div>
+        <div class="text-xs px-2 py-0.5 bg-amber-100 text-amber-700 rounded-full font-medium">Data</div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p>Ori pulled live CMS data (Mar 17-18). Key numbers:</p>
+        <ul class="list-disc ml-5 mt-1 space-y-1">
+          <li><strong>MRR:</strong> $11,981 USD (up from $10,066 on Mar 8 = +19%)</li>
+          <li><strong>Active subs:</strong> 127 (+20 since Mar 8)</li>
+          <li><strong>NRR:</strong> 71.5% (trailing 3-month: -9.1%). Below 100% means the customer base is shrinking in value. This is a red flag for investor narrative.</li>
+          <li><strong>MRR movement Mar:</strong> +$8,027 new, +$100 expansion, -$2,722 churn</li>
+        </ul>
+        <p class="mt-2"><strong>Revenue by product (CMS Mar 18):</strong></p>
+        <ul class="list-disc ml-5 mt-1 space-y-1">
+          <li>AgencyPlus ($299): $8,252/mo = <strong>70.3% of SMB MRR</strong> from just 23 subs</li>
+          <li>Studio ($99): $3,366/mo from 26 subs</li>
+          <li>D2C ($49/$29): $2,561/mo from 74 subs</li>
+        </ul>
+        <p class="mt-2"><strong>Critical finding:</strong> Zero Studio customers have ever upgraded to AgencyPlus. Not one. The $99 tier is a holding pen, not a funnel. Andrew (community manager) states ~50% are complete newbies who "have never used ChatGPT," the other ~50% have technical know-how but can't sell. Both halves expected to churn within 1-3 months.</p>
+        <p class="mt-2"><strong>D2C price increase worked:</strong> $29->$49 (Mar 3-6). Signup rate <em>increased</em> after the price increase (Feb: 31 at $29; Mar pace: ~39/mo at $49). Retention 87% ($49) vs 83% ($29). Higher price = more signups + more revenue.</p>
+      </div>
+    </div>
+
+    <!-- 5. AARGON CONCENTRATION + ELEVENLABS BAN -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-neutral-200 bg-white px-4 py-3 shadow-sm hover:bg-neutral-50 transition-colors">
+        <span class="toggle-icon text-neutral-400 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-neutral-950">Risk / Customer Concentration</div>
+          <div class="text-sm text-neutral-600">Aargon = 73% of all calls. ElevenLabs banned their account. Critical platform risk.</div>
+        </div>
+        <div class="text-xs px-2 py-0.5 bg-red-100 text-red-700 rounded-full font-medium">Risk</div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p>Live CMS data reveals Aargon concentration is <strong>worse than previously reported:</strong> 73% of all 30-day calls (63,049 of 86,486) and 56% of all charges. Combined with the ElevenLabs ban from Mar 16, this is a critical two-pronged risk:</p>
+        <ul class="list-disc ml-5 mt-1 space-y-1">
+          <li><strong>Revenue concentration:</strong> If Aargon churns or reduces usage, the call volume and revenue numbers collapse.</li>
+          <li><strong>Platform policy risk:</strong> If a customer misuses TTS through Trillet's platform, Trillet itself could face action from ElevenLabs.</li>
+        </ul>
+        <p class="mt-2"><strong>Strata Blue is #2:</strong> 6 workspaces, 8,164 calls, $1,047 charges (30d). Top 2 customers combined = 82% of call volume.</p>
+      </div>
+    </div>
+
+    <!-- 6. QUEBEC: TOMORROW -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-neutral-200 bg-white px-4 py-3 shadow-sm hover:bg-neutral-50 transition-colors">
+        <span class="toggle-icon text-neutral-400 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-neutral-950">Quebec / AURAIA</div>
+          <div class="text-sm text-neutral-600">RE/MAX investor pitch TOMORROW (Thursday Mar 19). Prompts personalized but untested by Daniel.</div>
+        </div>
+        <div class="text-xs px-2 py-0.5 bg-red-100 text-red-700 rounded-full font-medium">1 day</div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p>Thursday Mar 19 is the investor presentation to an unnamed RE/MAX franchise owner who already runs AI agents and will compare against Trillet's demo. Both prompts were personalized with Daniel's real data (listings from equipedj.com, real courtier names, Equipe DJ branding) and injected into the platform Mar 16.</p>
+        <p class="mt-2">Spec doc + email were sent to Daniel/Mathieu (CC Barak) for review. Daniel's feedback has not come back yet.</p>
+        <p class="mt-2"><strong>Competitive intel:</strong> PulsyAI (pulsyai.com) claims "flawless" Quebec French with a named voice "Sara: Confident and Clear, French Quebecois." If Quebec prospects comparison-shop, PulsyAI is the likeliest alternative for French-first voice AI. Their $0.10/min PAYG is competitive with Trillet's $0.12.</p>
+        <p class="mt-2"><strong>Open item:</strong> Alexandra asked "how was the call?" on Mar 16 via WhatsApp -- still unanswered.</p>
+        <div class="mt-3 pt-3 border-t border-neutral-100">
+          <div class="text-xs font-semibold uppercase tracking-wide text-neutral-500 mb-2">Action items</div>
+          <p class="text-sm text-neutral-700"><strong>Barak:</strong> Confirm Daniel/Mathieu have tested the prompts before tomorrow's investor meeting.</p>
+          <p class="text-sm text-neutral-700"><strong>Ori:</strong> Reply to Alexandra. Clarify Barak's Quebec role.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 7. SEQUENCING LOCKED -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-neutral-200 bg-white px-4 py-3 shadow-sm hover:bg-neutral-50 transition-colors">
+        <span class="toggle-icon text-neutral-400 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-neutral-950">Strategic / Sequencing</div>
+          <div class="text-sm text-neutral-600">Pre-blackout sequence locked. Ming flies Mar 20 -- 2.5 effective working days remain.</div>
+        </div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p>Ori and Ming locked the pre-blackout sequence in a huddle (Mar 17):</p>
+        <ol class="list-decimal ml-5 mt-1 space-y-1">
+          <li><strong>Finalize product tiering</strong> -- 3-way Ori/Ming/Barak (before Mar 20)</li>
+          <li><strong>Pass to Laurence</strong> for backend/database implementation</li>
+          <li><strong>Website:</strong> Ming does mood board + concierge experience design (parallel, on planes/trains)</li>
+          <li><strong>Website staggered rollout</strong>, not big launch. Agents take time to dial in.</li>
+          <li><strong>WeChat set up</strong> for China trip communication.</li>
+        </ol>
+        <p class="mt-2"><strong>Website copy:</strong> Ming wants the hero subhead updated. Disagrees with "agency"-level phrasing, prefers earlier version. New aligned version: "Your brand. Your margins. Full platform from $149."</p>
+      </div>
+    </div>
+
+    <!-- 8. COMPETITIVE SWEEP -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-neutral-200 bg-white px-4 py-3 shadow-sm hover:bg-neutral-50 transition-colors">
+        <span class="toggle-icon text-neutral-400 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-neutral-950">Market Research / Competitor Sweep</div>
+          <div class="text-sm text-neutral-600">12 competitors swept with automated skill. Trillet $0.12 is mid-market. Transparency is the weapon.</div>
+        </div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p>A comprehensive competitor pricing sweep was completed (Mar 17-18). 12 competitors crawled, 3 excluded, all using a new validated skill (<code>/trillet-competitor-sweep</code>, 5/5 evals passed). Key findings:</p>
+        <ul class="list-disc ml-5 mt-1 space-y-1">
+          <li><strong>Trillet at $0.12/min is mid-market</strong> on an all-in basis (telephony included, 4.6c floor cost confirmed by Ori)</li>
+          <li><strong>ConvoCore is genuinely cheaper</strong> at ~$0.08/min production-realistic -- real competitive threat on price</li>
+          <li><strong>Most "cheap" competitors are misleading:</strong> Insighto's $0.06 headline uses GPT-3.5-turbo; production-realistic is $0.165. Thinkrr's $0.09 requires $4,500 upfront for 50K min.</li>
+          <li><strong>Synthflow is NOT a competitor</strong> (Ori validated). Pivoted to enterprise. Retain for conquest keyword value only.</li>
+        </ul>
+        <p class="mt-2"><strong>True Cost Calculator concept (Ori, Mar 17):</strong> A live comparison tool on the pricing page showing Trillet's full component breakdown vs competitors' blank cells where they can't answer. "We asked every competitor the same 5 questions about their pricing. Here's who could answer." The transparency gap IS the competitive weapon.</p>
+        <p class="mt-2"><strong>Ming competitive concern:</strong> VoiceAIWrapper at $29 entry could capture agencies before Trillet at $149 (land-grab risk). Analysis: VoiceAIWrapper is a Retell wrapper. $29 wins at low volume, but Retell stacking ($0.13-0.31/min actual) makes them 2-3x more expensive at 10K+ min/mo vs Trillet's flat $0.12.</p>
+      </div>
+    </div>
+
+    <!-- 9. HEROFORGE ACCESS -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-neutral-200 bg-white px-4 py-3 shadow-sm hover:bg-neutral-50 transition-colors">
+        <span class="toggle-icon text-neutral-400 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-neutral-950">HeroForge / NK Ortho</div>
+          <div class="text-sm text-neutral-600">Access partially received. GHL + NexHealth API still pending from Mak.</div>
+        </div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p>Isaam requested full access from Mak on Mar 15. Partially received (Mar 16):</p>
+        <ul class="list-disc ml-5 mt-1 space-y-1">
+          <li>Cloud9 PMS login (Trillet/12345678, password change on first login)</li>
+          <li>Both front desk phone numbers (Tucker 770-939-1280, Suwanee 678-482-9434)</li>
+          <li>Test patient record (TEST/TEST/2602139TU)</li>
+        </ul>
+        <p class="mt-2">Still pending: GHL and NexHealth API access from Mak. Nick (end client) feedback on Demo2 also still pending. Conference deadline: April 30.</p>
+      </div>
+    </div>
+
+    <!-- 10. RELATIENT -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-neutral-200 bg-white px-4 py-3 shadow-sm hover:bg-neutral-50 transition-colors">
+        <span class="toggle-icon text-neutral-400 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-neutral-950">Relatient</div>
+          <div class="text-sm text-neutral-600">12 days stale. Ori describes Chris as nonworkable. Ming to message Chris for entry point.</div>
+        </div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p>Relatient has been stalling for 12+ days. SOWs were received but the state was not updated. Ori describes Chris (the Vafy agent managing this deal) as nonworkable in a Mar 17 huddle: disappears, sent old SOWs but provided no entry point for Ori to engage directly.</p>
+        <p class="mt-2">Ming will message Chris to get Ori an entry point. This deal has potential (~$150K full scope) but needs an active driver.</p>
+      </div>
+    </div>
+
+    <!-- 11. SPEAR REIT -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-neutral-200 bg-white px-4 py-3 shadow-sm hover:bg-neutral-50 transition-colors">
+        <span class="toggle-icon text-neutral-400 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-neutral-950">Pipeline / Spear REIT (New)</div>
+          <div class="text-sm text-neutral-600">JSE-listed REIT in South Africa responded to Andile's outreach. MRI integration is the gate question.</div>
+        </div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p>Simon Riley, Asset Manager at Spear REIT Limited (Cape Town, JSE-listed) responded to Andile's cold email within 24 hours (Mar 5). They are "considering using some additional tech to support and improve workflows." Perceives Trillet as phone-only -- needs reframing around broader AI agent capabilities.</p>
+        <p class="mt-2"><strong>Gate question:</strong> MRI/MDA property system integration. This is make-or-break.</p>
+        <p class="mt-2"><strong>Issue:</strong> 12-day gap. Andile received this Mar 5, only surfaced it Mar 17. Lost momentum. However, Andile states he contacted an internal person at Spear REIT who said "there is value in using AI" -- suggests internal validation beyond Simon's email.</p>
+        <p class="mt-2">Andile also continues banking outreach (HSBC, CitiBank, Wells Fargo, etc.) but has zero responses after 4+ months across 12 messages to 8 people. The credibility claims in his outreach ("working with tier-1 enterprises/banks") remain a reputational risk.</p>
+      </div>
+    </div>
+
+    <!-- 12. STRATA BLUE -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-neutral-200 bg-white px-4 py-3 shadow-sm hover:bg-neutral-50 transition-colors">
+        <span class="toggle-icon text-neutral-400 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-neutral-950">Strata Blue</div>
+          <div class="text-sm text-neutral-600">CMS shows 6 workspaces, $1,047/mo charges. SaaS configurator beta access in progress.</div>
+        </div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p>Live CMS pull reveals Strata Blue's actual footprint: 6 workspaces (Kayak-Pools, Mr Quik, TCC Wireless, Helm, nGroup, Gameday Men's Health), all under mcc@stratablue.com. 8,164 calls, $1,047 charges in 30 days. Second-largest customer by aggregate volume after Aargon.</p>
+        <p class="mt-2">SaaS configurator beta access agreed (Mar 16 huddle). Danny implementing Ming's redesign. Wholesale pricing directionally set at ~$44 per D2C plan, no rev share.</p>
+        <p class="mt-2">Silence timeout fix shipped (DEV-12946). Competitive pressure from upfirst.ai continues -- Laurence states "better get a move on to stay ahead of the curve."</p>
+      </div>
+    </div>
+
+    <!-- 13. CONTRACT -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-neutral-200 bg-white px-4 py-3 shadow-sm hover:bg-neutral-50 transition-colors">
+        <span class="toggle-icon text-neutral-400 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-neutral-950">Contract</div>
+          <div class="text-sm text-neutral-600">Signed Mar 16. 12-month pre-merge clock running. Per-minute floor cost now verified: 4.6c.</div>
+        </div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p>Contract v5 signed Mar 16 (Laurence signed, sent to Ming for co-signing). Signed PDF delivered to Ori 00:43 MDT.</p>
+        <p class="mt-2">Per-minute cost verified by Ori (Mar 17): $0.12 all-in, 4.6c floor cost (Rime TTS, Deepgram Flux STT, GPT-4.1 recommended LLM, telephony included). ElevenLabs voices add +6c (passed through, not shown on pricing page). This 62% gross margin on per-minute is a strong unit economics position.</p>
+      </div>
+    </div>
+
+    <!-- 14. OPERATIONS -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-neutral-200 bg-white px-4 py-3 shadow-sm hover:bg-neutral-50 transition-colors">
+        <span class="toggle-icon text-neutral-400 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-neutral-950">Operations / SOC2</div>
+          <div class="text-sm text-neutral-600">SOC2 cost revised to ~$20K USD (auditor revised scope). Still blocks enterprise deals.</div>
+        </div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p>Ming reports the SOC2 auditor revised the scope upward, now estimating ~$20K USD (was ~$15K). This remains a blocker for enterprise deals -- Strata Blue expansion is blocked on security docs, and larger prospects (Bank of Transylvania, Housing Trust) all require compliance certifications.</p>
+        <p class="mt-2">Laurence remains non-negotiable on wages next month ($10K AUD each). Pricing increase blocked by Stripe endpoint migration.</p>
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="border-t border-neutral-200 bg-stone-50">
+    <div class="mx-auto max-w-3xl px-4 py-4 text-xs text-neutral-400">
+      Generated from Trillet PKM. Questions? Message Ori.
+    </div>
+  </footer>
+
+  <script>
+    function toggle(btn) {
+      const detail = btn.nextElementSibling;
+      const icon = btn.querySelector('.toggle-icon');
+      detail.classList.toggle('open');
+      icon.classList.toggle('open');
+    }
+
+    document.querySelector('header').addEventListener('dblclick', () => {
+      document.querySelectorAll('.detail').forEach(d => d.classList.add('open'));
+      document.querySelectorAll('.toggle-icon').forEach(i => i.classList.add('open'));
+    });
+  </script>
+
+</body>
+</html>
