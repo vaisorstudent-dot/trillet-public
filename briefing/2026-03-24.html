@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trillet Briefing -- March 24, 2026</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', system-ui, sans-serif; }
+    .detail { display: none; }
+    .detail.open { display: block; }
+    .toggle-icon { transition: transform 0.2s; }
+    .toggle-icon.open { transform: rotate(90deg); }
+  </style>
+</head>
+<body class="min-h-screen bg-stone-50 text-neutral-950">
+
+  <header class="sticky top-0 z-50 border-b border-neutral-200/80 bg-stone-50/90 backdrop-blur-xl">
+    <div class="mx-auto max-w-3xl px-4 py-3 flex items-center justify-between">
+      <div>
+        <div class="text-sm font-semibold tracking-tight">Trillet Daily Briefing</div>
+        <div class="text-xs text-neutral-500">March 24, 2026 -- prepared for Barak</div>
+      </div>
+      <div class="text-xs text-neutral-400">11 items</div>
+    </div>
+  </header>
+
+  <main class="mx-auto max-w-3xl px-4 py-6">
+
+    <!-- 1. Property24 Meeting Tomorrow -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-neutral-200 bg-white px-4 py-3 shadow-sm hover:bg-neutral-50 transition-colors">
+        <span class="toggle-icon text-neutral-400 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-neutral-950">Property24 / OLX</div>
+          <div class="text-sm text-neutral-600">Meeting tomorrow 7am MDT. Pricing locked, roles agreed. Ori prepped commercial strategy with Laurence in 42-min huddle.</div>
+        </div>
+        <div class="text-xs px-2 py-0.5 rounded-full bg-red-100 text-red-700 font-medium">HOT</div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p><strong>Meeting: Wed Mar 25, 3pm SAST / 7am MDT.</strong> Ori and Laurence did a 42-minute strategy huddle today to prepare. Roles agreed: Laurence covers technical/CTO, Ori runs commercial/strategic partnerships, Andile on BD (minimized talking -- both Ori and Laurence aligned on this).</p>
+        <p class="mt-2"><strong>Pricing locked:</strong> $29/agent retail price to Property24's agents/agencies, with a 60/40 revenue split (~$17.40/agent to Trillet). Do not change this pricing -- Ismail may have already presented it to the board. A $99 pro plan for API integration is a potential upgrade path.</p>
+        <p class="mt-2"><strong>Scale:</strong> ~50,000 realtors on the Property24 platform. OLX Group (parent: Prosus) has a sister Voice AI company, but it lacks Trillet's one-click deploy capability -- that is Trillet's competitive edge.</p>
+        <p class="mt-2"><strong>Key intel:</strong> Ismail (their Business Growth Manager) is not a decision-maker -- everything goes to the board. This is a strategic deal: win the name, the volume follows.</p>
+        <p class="mt-2"><strong>Operational signal:</strong> Laurence forgot about this meeting entirely. He would have missed it if Ori hadn't brought it up in their DM. Ori initiated the entire prep conversation.</p>
+        <p class="mt-2"><strong>Risk still open:</strong> Andile's Oct 2025 outreach to CEO Nalen Naidoo included a false claim about working with "tier 1 banks in EU." Prosus will verify. This was flagged in coaching but not directly addressed with Andile for this call.</p>
+        <div class="mt-3 pt-3 border-t border-neutral-100">
+          <div class="text-xs font-semibold uppercase tracking-wide text-neutral-500 mb-2">Action items</div>
+          <p class="text-sm">Barak: You are invited to this call. Confirm attendance or let Ori know.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. Muly Returning -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-neutral-200 bg-white px-4 py-3 shadow-sm hover:bg-neutral-50 transition-colors">
+        <span class="toggle-icon text-neutral-400 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-neutral-950">Muly / Coalition</div>
+          <div class="text-sm text-neutral-600">Muly returning in the next few days. Sales/marketing regroup planned. Contract fine from US side.</div>
+        </div>
+        <div class="text-xs px-2 py-0.5 rounded-full bg-amber-100 text-amber-700 font-medium">GATING</div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p>Ori states Muly is "coming back in the next few days" and that "the 3 of us will regroup and get focused on the sales and marketing directions" (Slack DM with Laurence, Mar 24).</p>
+        <p class="mt-2">Contract status: Ori states it's "fine" from the US side, they are waiting for Muly to come back to finalize. Laurence states "no rush on our side" regarding the contract.</p>
+        <p class="mt-2"><strong>Still blocking:</strong> Ram B's (Muly's attorney) 15 comments on the operating partnership agreement from Mar 19. Ram states all comments must be addressed before the meeting can be scheduled. Categories: entity/structure questions, 6 definition gaps, 6 clause clarifications.</p>
+        <div class="mt-3 pt-3 border-t border-neutral-100">
+          <div class="text-xs font-semibold uppercase tracking-wide text-neutral-500 mb-2">Action items</div>
+          <p class="text-sm">Barak + Ori: Address Ram B's 15 comments before Muly returns so the meeting can be scheduled immediately.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. ImLive FBM -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-neutral-200 bg-white px-4 py-3 shadow-sm hover:bg-neutral-50 transition-colors">
+        <span class="toggle-icon text-neutral-400 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-neutral-950">ImLive FBM</div>
+          <div class="text-sm text-neutral-600">Luis asking for Facebook page details. Laurence unclear on request, tagged you.</div>
+        </div>
+        <div class="text-xs px-2 py-0.5 rounded-full bg-blue-100 text-blue-700 font-medium">NEEDS YOU</div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p>Laurence states in #imlive-fbm (Mar 24): "Saw the emails from overnight, I think Luis is asking for the actual facebook pages details? I'm not 100% sure what he wants there, but I don't think it's a direct question at me." He tagged you directly.</p>
+        <p class="mt-2">ImLive is otherwise "ticking along but waiting on a few caveats from the others" (Laurence states in DM with Ori). Laurence also asked Ori to add the ImLive deal to the CRM for tracking.</p>
+        <div class="mt-3 pt-3 border-t border-neutral-100">
+          <div class="text-xs font-semibold uppercase tracking-wide text-neutral-500 mb-2">Action items</div>
+          <p class="text-sm">Barak: Check Luis's email and respond or clarify what he needs. This is directed at you, not Laurence.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. Website Implementation -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-neutral-200 bg-white px-4 py-3 shadow-sm hover:bg-neutral-50 transition-colors">
+        <span class="toggle-icon text-neutral-400 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-neutral-950">Website / Rebrand</div>
+          <div class="text-sm text-neutral-600">All 7 wireframes sent to Laurence. Isaam implementing. Enterprise perception problem confirmed -- current site hurting deals.</div>
+        </div>
+        <div class="text-xs px-2 py-0.5 rounded-full bg-green-100 text-green-700 font-medium">MOVING</div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p>During the Ori-Laurence huddle today, Ori sent all HTML wireframes to Laurence: homepage, agency, pricing, solutions, enterprise, platform, and agent pages. Laurence forwarded them to Isaam to start implementation.</p>
+        <p class="mt-2">Ming was originally supposed to handle this but has not. Ori and Laurence agreed to keep moving without him. They will iterate on copy as the build progresses.</p>
+        <p class="mt-2"><strong>Enterprise perception problem validated:</strong> Ori states a South African prospect (Andile's lead) said "I checked out Trillet and it seems like they work with really small businesses." This echoes Diane/Bernard Group who said the same thing previously. Laurence states there were 21 visitors from Romania in the last 30 days -- they visited pricing and industry pages, but nobody clicked the Bank of Transylvania custom demo link. The current website is actively hurting enterprise deals.</p>
+        <p class="mt-2"><strong>AEO/D2C plan agreed:</strong> Redirect AEO content to point D2C clients to the /agent page and agency clients to the agency page. UTM links on all campaigns for attribution tracking.</p>
+      </div>
+    </div>
+
+    <!-- 5. AU Financial Health -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-neutral-200 bg-white px-4 py-3 shadow-sm hover:bg-neutral-50 transition-colors">
+        <span class="toggle-icon text-neutral-400 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-neutral-950">AU Financial Health</div>
+          <div class="text-sm text-neutral-600">First real profit month: ~$30K USD. Revenue $70-80K/mo. Adding $500-1000/mo new MRR daily.</div>
+        </div>
+        <div class="text-xs px-2 py-0.5 rounded-full bg-green-100 text-green-700 font-medium">POSITIVE</div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p>Laurence states (Mar 24 huddle): AU net profit was ~$30K USD last month -- the first real profit month. Prior months were $7K and $20K. Total revenue is running at ~$70-80K/mo.</p>
+        <p class="mt-2">D2C + agency signups are adding $500-1000/mo in new MRR daily. The company has been "green" (profitable before founder wages) for roughly 3 months. They are ~$15-20K/mo away from covering personal wages (Laurence, Andrew, Chris).</p>
+        <p class="mt-2"><strong>Banking:</strong> Revolut business account is active ($900/yr annual fee) with lower international transaction fees ($60 vs $300). Pakistan team cannot use Revolut (not available there).</p>
+      </div>
+    </div>
+
+    <!-- 6. Pipeline -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-neutral-200 bg-white px-4 py-3 shadow-sm hover:bg-neutral-50 transition-colors">
+        <span class="toggle-icon text-neutral-400 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-neutral-950">Pipeline</div>
+          <div class="text-sm text-neutral-600">Lead flow dried up. Ori absorbed in redesign/strategy. Ad campaign and Muly regroup planned.</div>
+        </div>
+        <div class="text-xs px-2 py-0.5 rounded-full bg-amber-100 text-amber-700 font-medium">WATCH</div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p>Ori states to Laurence: "I've been totally absorbed with the redesign and strategy and whatever incoming leads was very short lived -- it literally died for a while now." (Slack DM, Mar 24)</p>
+        <p class="mt-2">Ori states the ad campaign is still planned, and that he thinks it will be "much better to involve bigger clients when the new site is up." Laurence states the ad campaign "will help 100% ... it's a slow burn until it's not. That's how it went for us."</p>
+        <p class="mt-2">The plan is for Muly to return in the next few days and for the three of them (Ori, Barak, Muly) to regroup on sales and marketing directions.</p>
+        <p class="mt-2"><strong>Quebec:</strong> Ori states "Quebec are running the demos" -- the partnership demo track continues.</p>
+      </div>
+    </div>
+
+    <!-- 7. Ming Blackout -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-neutral-200 bg-white px-4 py-3 shadow-sm hover:bg-neutral-50 transition-colors">
+        <span class="toggle-icon text-neutral-400 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-neutral-950">Ming Status</div>
+          <div class="text-sm text-neutral-600">In China, basically unreachable. Only one message received (a KFC photo). ~1-1.5 weeks remaining.</div>
+        </div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p>Ming has been in China with his girlfriend since ~Mar 20. Laurence states (Mar 24 huddle) only one message has been received from him -- a photo from KFC. Laurence told Ming to "disappear for 2 weeks." Estimated ~2.5 weeks total, ~1-1.5 weeks remaining.</p>
+        <p class="mt-2">This is why the website implementation is moving without him. Ori and Laurence agreed not to wait and to iterate when Ming returns.</p>
+      </div>
+    </div>
+
+    <!-- 8. Ori-Laurence DM Transcript -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-neutral-200 bg-white px-4 py-3 shadow-sm hover:bg-neutral-50 transition-colors">
+        <span class="toggle-icon text-neutral-400 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-neutral-950">Ori-Laurence DM (Full Transcript)</div>
+          <div class="text-sm text-neutral-600">79 messages covering Property24, pipeline, website, contract, ImLive, and Quebec. Ori requested this be shared with you.</div>
+        </div>
+        <div class="text-xs px-2 py-0.5 rounded-full bg-blue-100 text-blue-700 font-medium">FROM ORI</div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p>Ori specifically asked to include today's DM conversation with Laurence for you. Key threads covered:</p>
+        <ul class="mt-2 list-disc ml-5 space-y-1">
+          <li><strong>Property24:</strong> Ori initiated the meeting reminder. Laurence confirmed attendance ("I have the initial rapport"). Ori prepping commercial angle -- wants to "come in strong" on pricing since Laurence says minimal commercial discussion happened previously.</li>
+          <li><strong>Contract:</strong> Laurence asks "have you guys read the contract? all happy and will sign and return?" Ori says yes, it's fine, waiting for Muly.</li>
+          <li><strong>Pipeline:</strong> Laurence asks about other deals. Ori says pipeline dried up, absorbed in redesign. Muly returning soon for regroup.</li>
+          <li><strong>Website:</strong> Laurence wants the HTML wireframe to give to Danny for dev. Ming was supposed to handle it but didn't. Both agree to keep moving. AEO redirect + UTM plan discussed.</li>
+          <li><strong>ImLive:</strong> "Ticking along, waiting on caveats." Laurence asks Ori to add to CRM.</li>
+          <li><strong>Huddle planned then cancelled:</strong> Ori offered to huddle. Laurence accepted, then had to cancel due to a Revolut meeting he forgot about. They may reconnect later.</li>
+        </ul>
+        <p class="mt-2"><em>Full transcript is in the PKM at barak/artifacts/2026-03-24-slack-dm-ori-laurence.md.</em></p>
+      </div>
+    </div>
+
+    <!-- 9. Relatient -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-neutral-200 bg-white px-4 py-3 shadow-sm hover:bg-neutral-50 transition-colors">
+        <span class="toggle-icon text-neutral-400 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-neutral-950">Relatient</div>
+          <div class="text-sm text-neutral-600">POC now built. Chris consumed by the project -- 2 resources dedicated, nonstop changes.</div>
+        </div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p>Laurence states (Mar 24 huddle): Chris is consumed by Relatient with nonstop changes, 2 resources fully dedicated to it. The POC for the agent is now built, but no commercial conversation has happened yet.</p>
+        <p class="mt-2">The window is narrowing: Bland's contract with Relatient lapses ~April 2026. That is the switch window. Without a commercial conversation before then, the opportunity may pass.</p>
+      </div>
+    </div>
+
+    <!-- 10. Team: Abidi -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-neutral-200 bg-white px-4 py-3 shadow-sm hover:bg-neutral-50 transition-colors">
+        <span class="toggle-icon text-neutral-400 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-neutral-950">Team</div>
+          <div class="text-sm text-neutral-600">Abidi cancelled. Both Ori and Laurence agree: move on. "He's not dependable."</div>
+        </div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p>Ori states "he's not dependable." Promised resume by Mar 15, never delivered. Both Ori and Laurence aligned on dropping him. No further action needed.</p>
+      </div>
+    </div>
+
+    <!-- 11. Operations: Team Pulse -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-neutral-200 bg-white px-4 py-3 shadow-sm hover:bg-neutral-50 transition-colors">
+        <span class="toggle-icon text-neutral-400 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-neutral-950">Operations / Team Pulse</div>
+          <div class="text-sm text-neutral-600">Kayak Pools pushing for production. LiteLLM supply chain compromise warning.</div>
+        </div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p><strong>Kayak Pools (Ryan) -- HIGH:</strong> Customer pushing to go live ASAP. Blocking issues: appointment scheduling fails (customer file not created), voice recording gaps mid-call, pronunciation bugs ("Inground" sounds like "Ingrounded", letters R and A mispronounced). Ryan requesting multi-phase rollout (6pm-8am initially), separate on/off toggle, and infinite loop prevention for call routing. Isaam states he will handle directly.</p>
+        <p class="mt-2"><strong>LiteLLM compromised -- MEDIUM:</strong> Laurence posted a warning in #general linking to a LinkedIn post about a LiteLLM supply chain compromise. "Anyone above using LiteLLM, do not update." Needs confirmation whether Trillet uses LiteLLM in any part of the stack.</p>
+        <p class="mt-2"><strong>Other:</strong> Feature confusion between "pronunciation guide" and "agent dictionary" in #dev-trillet -- Laurence and Andrew have different understanding. Low severity but could cause customer miscommunication.</p>
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="border-t border-neutral-200 bg-stone-50">
+    <div class="mx-auto max-w-3xl px-4 py-4 text-xs text-neutral-400">
+      Generated from Trillet PKM. Questions? Message Ori.
+    </div>
+  </footer>
+
+  <script>
+    function toggle(btn) {
+      const detail = btn.nextElementSibling;
+      const icon = btn.querySelector('.toggle-icon');
+      detail.classList.toggle('open');
+      icon.classList.toggle('open');
+    }
+
+    // Expand all on double-click header
+    document.querySelector('header').addEventListener('dblclick', () => {
+      document.querySelectorAll('.detail').forEach(d => d.classList.add('open'));
+      document.querySelectorAll('.toggle-icon').forEach(i => i.classList.add('open'));
+    });
+  </script>
+
+</body>
+</html>
