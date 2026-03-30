@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trillet Briefing -- 2026-03-29</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', system-ui, sans-serif; }
+    .detail { display: none; }
+    .detail.open { display: block; }
+    .toggle-icon { transition: transform 0.2s; }
+    .toggle-icon.open { transform: rotate(90deg); }
+  </style>
+</head>
+<body class="min-h-screen bg-stone-50 text-neutral-950">
+
+  <header class="sticky top-0 z-50 border-b border-neutral-200/80 bg-stone-50/90 backdrop-blur-xl">
+    <div class="mx-auto max-w-3xl px-4 py-3 flex items-center justify-between">
+      <div>
+        <div class="text-sm font-semibold tracking-tight">Trillet Daily Briefing</div>
+        <div class="text-xs text-neutral-500">2026-03-29 (Saturday) -- prepared for Barak</div>
+      </div>
+      <div class="text-xs text-neutral-400">8 items</div>
+    </div>
+  </header>
+
+  <main class="mx-auto max-w-3xl px-4 py-6">
+
+    <!-- 1. Russell Carraway -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-neutral-200 bg-white px-4 py-3 shadow-sm hover:bg-neutral-50 transition-colors">
+        <span class="toggle-icon text-neutral-400 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-neutral-950">Russell Carraway / Timber Shredders</div>
+          <div class="text-sm text-neutral-600">Agent LIVE and customer-validated. Russell tested independently -- "very good so far!!"</div>
+        </div>
+        <div class="text-xs text-neutral-400">3 actions</div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p>The full Timber Shredders agent is live on <strong>+1 (434) 442-6144</strong>. Ori built it via the Trillet API under the agency account -- agent, flow, knowledge base, and phone number all wired and verified.</p>
+        <p class="mt-2">Russell tested the agent on his own (Sunday evening his time) and responded immediately via email. Russell states: <em>"That is very good so far!!"</em> and <em>"It sounded great, thats 1st part, to qualify and schedule."</em> One minor UX note: Russell states sometimes the agent "started to talk over me if I didn't speak up fast enough. But it stopped very fast."</p>
+        <p class="mt-2"><strong>What's working (confirmed via test calls):</strong> Voice qualification with budget/timeline gates, post-call SMS to both owner and customer (A2P pool), post-call email analysis, outbound calling, silence detection, and call transfer to Ori's phone. Six test calls completed, total cost $0.98 USD.</p>
+        <p class="mt-2"><strong>Calendar integration:</strong> Russell shared his Google Calendar with oriv@trillet.ai, but GCal sharing doesn't work with Trillet's integration model. Ori sent Russell Cal.com setup instructions -- sign up, set availability, share API key + Event Type ID. Awaiting Russell's response.</p>
+        <p class="mt-2"><strong>Channel opportunity:</strong> Russell states he's in Austin Gray's Bear Claw group (990 members, ~150 actively scaling their businesses). Land clearing, landscapers, plumbers, trades. The group had a meeting about AI call handling, and a podcast is scheduled to discuss the topic. Russell volunteered to pitch Trillet -- not asking for commission, just "a reasonable price." If even 10% of the 150 scaling members convert at $49 USD/mo base, that's 15 accounts at $735 USD MRR before custom work.</p>
+        <p class="mt-2"><strong>Pricing (Ori's draft, not yet presented):</strong> $999 USD one-time setup + $199 USD/mo + usage pass-through ($0.12/min calls, $0.008/SMS). First month = $1,198 USD. Russell states $49 USD is acceptable but "$1,500 bill I might as well go to the bigger company."</p>
+        <p class="mt-2"><strong>Secondary value:</strong> This build served as the comprehensive Trillet API/UI test case. Every field, endpoint, and UI element was mapped -- producing a ~190-field settings reference and 9+ newly discovered API endpoints. This benefits all future agent builds.</p>
+        <div class="mt-3 pt-3 border-t border-neutral-100">
+          <div class="text-xs font-semibold uppercase tracking-wide text-neutral-500 mb-2">Action items</div>
+          <ul class="list-disc ml-4 text-sm text-neutral-700 space-y-1">
+            <li><strong>Russell</strong> owes Cal.com API key + Event Type ID</li>
+            <li><strong>Ori</strong> to finalize agency pricing and draft proposal email</li>
+            <li><strong>Barak</strong> -- you mentioned verifying the API gap analysis with Isaam before sharing with Laurence/Ming. Worth doing this week.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. API Documentation Gap Analysis -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-neutral-200 bg-white px-4 py-3 shadow-sm hover:bg-neutral-50 transition-colors">
+        <span class="toggle-icon text-neutral-400 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-neutral-950">Platform / API Documentation</div>
+          <div class="text-sm text-neutral-600">Only ~28% of documented API paths are correct. Gap analysis doc sent to you.</div>
+        </div>
+        <div class="text-xs text-neutral-400">1 action</div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p>During the Russell agent build, Ori mapped every API endpoint and UI field systematically. The result: <strong>docs.trillet.ai is significantly inaccurate.</strong> A developer following the docs will hit 404s on knowledge base, phone numbers, call history, recordings, active calls, and folders endpoints.</p>
+        <p class="mt-2">3 of 9 documentation pages have actual content. 4 return 404. 1 is "coming soon." The changelog is empty.</p>
+        <p class="mt-2">The biggest gap isn't wrong paths -- it's the <strong>36-field settings object that's completely undocumented.</strong> This is where native calendar booking (Cal.com + Google Calendar + GHL), post-call SMS/email automation, AI-driven transfer to human, office hours, speech tuning, HIPAA mode, voicemail detection, and compliance monitoring live. These are real competitive differentiators that no agency or developer can discover without reverse engineering.</p>
+        <p class="mt-2">You responded (WhatsApp): <em>"If these conclusions are correct, it's a serious flaw... we sent the documentation to Jenya for review when we first started evaluating Trillet, and others surely do the same. It must be accurate."</em></p>
+        <p class="mt-2">Ori states the analysis was AI-generated (first run) and "at least 80% correct." The full doc was sent to you via WhatsApp (trillet-api-gap-analysis-for-barak.docx).</p>
+        <div class="mt-3 pt-3 border-t border-neutral-100">
+          <div class="text-xs font-semibold uppercase tracking-wide text-neutral-500 mb-2">Action items</div>
+          <ul class="list-disc ml-4 text-sm text-neutral-700 space-y-1">
+            <li><strong>Barak</strong> to verify findings with Isaam before including in the review document for Laurence and Ming</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. Andile SA Pipeline -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-neutral-200 bg-white px-4 py-3 shadow-sm hover:bg-neutral-50 transition-colors">
+        <span class="toggle-icon text-neutral-400 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-neutral-950">Andile / SA Property Pipeline</div>
+          <div class="text-sm text-neutral-600">Three quality emails in one day. Follow-through pattern partially reversed after coaching.</div>
+        </div>
+        <div class="text-xs text-neutral-400">0 actions</div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p>Andile sent three substantive outbound emails on Saturday evening (SAST):</p>
+        <ol class="list-decimal ml-4 mt-2 space-y-1">
+          <li><strong>Broll / Surine Griffin (COO):</strong> Substantive alignment view covering property management call volume automation + BrollTech integration angle (Broll has 2,000+ daily PropTech users across Africa). This was the 22-day-gap lead -- finally answered.</li>
+          <li><strong>SPEAR / Simon Riley:</strong> Follow-up requesting a meeting date. Original outreach was Mar 19.</li>
+          <li><strong>SPEAR / Cliff (new contact):</strong> Cold email to a colleague at SPEAR with structured outreach covering platform overview, MRI/MDA integration, pricing approach, and SA market references.</li>
+        </ol>
+        <p class="mt-2">This is a notable recovery. The follow-through failure pattern (warm leads decaying from inaction) was the primary coaching target. Three quality emails in one day after weeks of delay suggests the coaching is landing. The 22-day Broll gap still happened, but the behavior is moving in the right direction.</p>
+        <p class="mt-2"><strong>Availability note:</strong> Andile states he observes Old Testament Sabbath -- unavailable Friday sunset through Saturday 9pm SAST. Available Sundays and Saturday evenings after 9pm.</p>
+      </div>
+    </div>
+
+    <!-- 4. CMS Metrics -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-neutral-200 bg-white px-4 py-3 shadow-sm hover:bg-neutral-50 transition-colors">
+        <span class="toggle-icon text-neutral-400 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-neutral-950">CMS / Revenue Metrics</div>
+          <div class="text-sm text-neutral-600">MRR $12,983 (-$299). Discount increase, not churn. Past-due 6 -> 7.</div>
+        </div>
+        <div class="text-xs text-neutral-400">1 action</div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p>Net MRR dropped from $13,282 to <strong>$12,983 USD</strong> (-$299). Gross MRR is flat at $16,013 -- the entire drop is from a $299 increase in discounts. This is exactly one AgencyPlus subscription's worth.</p>
+        <p class="mt-2">Subscriptions: 177 total (153 active, 17 trialing, 7 past-due). One Studio trial converted to active. Past-due increased from 6 to 7 -- one more subscription is now payment-delinquent.</p>
+        <p class="mt-2"><strong>Likely cause:</strong> Laurence was setting up a 12-month free agency coupon in #management (Saturday) for a client "going after 6 large councils." Isaam walked him through the coupon vs invitation code vs voucher flow. The $299 discount may be this coupon being applied.</p>
+        <p class="mt-2"><strong>Pattern note:</strong> This is the second time in recent weeks that a significant discount was applied without advance visibility to US partners. The refund policy overhaul (Mar 28, "spent thousands on refunds this month") and now a full AgencyPlus comp suggest AU-side revenue decisions are being made without a coordination checkpoint.</p>
+        <div class="mt-3 pt-3 border-t border-neutral-100">
+          <div class="text-xs font-semibold uppercase tracking-wide text-neutral-500 mb-2">Action items</div>
+          <ul class="list-disc ml-4 text-sm text-neutral-700 space-y-1">
+            <li><strong>Investigate:</strong> Confirm whether the $299 discount is Laurence's 6-council client coupon. If so, who is the client?</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. Competitor Intel -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-neutral-200 bg-white px-4 py-3 shadow-sm hover:bg-neutral-50 transition-colors">
+        <span class="toggle-icon text-neutral-400 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-neutral-950">Competitor: sophiie.ai</div>
+          <div class="text-sm text-neutral-600">Australian AI receptionist. $1M invested, $2.5M USD revenue. Small business focus.</div>
+        </div>
+        <div class="text-xs text-neutral-400">0 actions</div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p>Laurence shared sophiie.ai in a Slack DM. Laurence states: in the last 12 months they got $1M AUD in investment and used it to build a sales team and marketing. Already at <strong>$2.5M USD revenue</strong> from small business in Australia only -- not US.</p>
+        <p class="mt-2">Laurence states they are "not exactly like us but good" and "we know them well." Australian-based, services vertical focus.</p>
+        <p class="mt-2">Ori asked Laurence: "If we think about creating that workflow ourselves -- what are we looking at? What do we have already, how much effort for what we don't?" Laurence was busy with a new customer and said he'd answer later.</p>
+        <p class="mt-2"><strong>Context:</strong> $2.5M USD revenue from one country (AU) in small business alone is a meaningful proof point for the D2C/SMB market. Trillet's current MRR is ~$13K. Worth understanding what their product does differently and whether the services workflow is something Trillet could replicate.</p>
+      </div>
+    </div>
+
+    <!-- 6. Laurence Referring to Competitor -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-neutral-200 bg-white px-4 py-3 shadow-sm hover:bg-neutral-50 transition-colors">
+        <span class="toggle-icon text-neutral-400 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-neutral-950">Laurence / Operational Signal</div>
+          <div class="text-sm text-neutral-600">Ori shared Russell's spec with Laurence. Laurence's response: referred to a competitor.</div>
+        </div>
+        <div class="text-xs text-neutral-400">0 actions</div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p>Ori shared Russell Carraway's detailed call script (the Timber Shredders spec) with Laurence for context on the build. Laurence's reply: he referred Ori to sophiie.ai -- a competitor.</p>
+        <p class="mt-2">Ori's reaction (WhatsApp to you): <em>"You know what his reply was? He referred me to another company. wtf"</em></p>
+        <p class="mt-2">Then Ori noted that Laurence himself states sophiie.ai is doing "10 times better than them at least" but concludes: <em>"not as good as us but good enough pretty much."</em></p>
+        <p class="mt-2"><strong>Read:</strong> There are two ways to interpret this. Charitably: Laurence was sharing competitive intel he thought was relevant. Less charitably: when presented with a concrete build opportunity, his instinct was to point to someone else rather than engage with the scope. Either way, Ori built the agent himself that same evening and Russell loved it.</p>
+      </div>
+    </div>
+
+    <!-- 7. YouTube / Personal Brand -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-neutral-200 bg-white px-4 py-3 shadow-sm hover:bg-neutral-50 transition-colors">
+        <span class="toggle-icon text-neutral-400 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-neutral-950">YouTube / Editor Search</div>
+          <div class="text-sm text-neutral-600">Ori posted editor recruitment. Duplicate paragraph in the email -- you flagged it.</div>
+        </div>
+        <div class="text-xs text-neutral-400">0 actions</div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p>Ori posted video editor recruitment in "well-researched locations" and expects replies quickly. Strategy: find top candidates from initial respondents.</p>
+        <p class="mt-2">You noted the editor recruitment email had a paragraph that repeats itself twice. Ori's response: "They'll figure it out." Worth a quick fix if the post is still editable.</p>
+      </div>
+    </div>
+
+    <!-- 8. System / Ops -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-neutral-200 bg-white px-4 py-3 shadow-sm hover:bg-neutral-50 transition-colors">
+        <span class="toggle-icon text-neutral-400 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-neutral-950">System / CRM / Calendar</div>
+          <div class="text-sm text-neutral-600">CRM zero deltas. Calendar clear all week. Luca was disconnected today.</div>
+        </div>
+        <div class="text-xs text-neutral-400">0 actions</div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p><strong>CRM:</strong> Full sync, zero changes. Token healthy through April 3. 333 tasks, same counts across all projects.</p>
+        <p class="mt-2"><strong>Calendar:</strong> Clear through the entire week. Easter Sunday April 5 is the only item.</p>
+        <p class="mt-2"><strong>Luca:</strong> You reported the daemon was disconnected today ("Luca wasn't working, was disconnected"). The daemon is the AI concierge that mediates your PKM access. Ori is aware.</p>
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="border-t border-neutral-200 bg-stone-50">
+    <div class="mx-auto max-w-3xl px-4 py-4 text-xs text-neutral-400">
+      Generated from Trillet PKM. Questions? Message Ori.
+    </div>
+  </footer>
+
+  <script>
+    function toggle(btn) {
+      const detail = btn.nextElementSibling;
+      const icon = btn.querySelector('.toggle-icon');
+      detail.classList.toggle('open');
+      icon.classList.toggle('open');
+    }
+
+    // Expand all on double-click header
+    document.querySelector('header').addEventListener('dblclick', () => {
+      document.querySelectorAll('.detail').forEach(d => d.classList.add('open'));
+      document.querySelectorAll('.toggle-icon').forEach(i => i.classList.add('open'));
+    });
+  </script>
+
+</body>
+</html>
