@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trillet API Developer Onboarding Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Urbanist:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blue: #0066FF;
+    --white: #FFFFFF;
+    --text: #171717;
+    --dark-gray: #374151;
+    --muted: #9CA3AF;
+    --light-blue: #EFF6FF;
+    --border: #E5E7EB;
+    --green: #059669;
+    --amber: #D97706;
+    --red: #DC2626;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 14px;
+    color: var(--text);
+    background: var(--white);
+    line-height: 1.65;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 56px 48px;
+  }
+  .doc-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding-bottom: 28px;
+    border-bottom: 3px solid var(--blue);
+    margin-bottom: 40px;
+  }
+  .logo-wordmark {
+    font-family: 'Urbanist', system-ui, sans-serif;
+    font-weight: 700;
+    font-size: 22px;
+    color: var(--blue);
+  }
+  .doc-meta { text-align: right; font-size: 11px; color: var(--muted); line-height: 1.6; }
+  .title-block { margin-bottom: 36px; }
+  h1 {
+    font-family: 'Urbanist', system-ui, sans-serif;
+    font-weight: 700;
+    font-size: 30px;
+    color: var(--text);
+    letter-spacing: -0.5px;
+    margin-bottom: 6px;
+  }
+  .doc-subtitle { font-size: 15px; color: var(--dark-gray); font-weight: 500; margin-bottom: 20px; }
+  .doc-intro { font-size: 13.5px; color: var(--dark-gray); line-height: 1.7; max-width: 780px; }
+  h2 {
+    font-family: 'Urbanist', system-ui, sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    color: var(--blue);
+    margin-top: 48px;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+  h3 {
+    font-family: 'Urbanist', system-ui, sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--dark-gray);
+    margin-top: 24px;
+    margin-bottom: 10px;
+  }
+  p { font-size: 13.5px; color: var(--dark-gray); line-height: 1.7; margin-bottom: 12px; }
+  ul, ol { padding-left: 20px; margin-bottom: 14px; }
+  li { font-size: 13.5px; color: var(--dark-gray); line-height: 1.7; margin-bottom: 4px; }
+  code {
+    font-family: 'Courier New', monospace;
+    font-size: 11.5px;
+    background: #F3F4F6;
+    padding: 1px 5px;
+    border-radius: 3px;
+    color: var(--text);
+  }
+  pre {
+    background: #1F2937;
+    color: #F9FAFB;
+    border-radius: 6px;
+    padding: 16px 18px;
+    font-size: 12px;
+    font-family: 'Courier New', monospace;
+    line-height: 1.7;
+    overflow-x: auto;
+    margin: 12px 0 16px;
+  }
+  pre .comment { color: #6EE7B7; }
+  pre .string { color: #FCD34D; }
+  .step-block {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    margin-bottom: 32px;
+    overflow: hidden;
+  }
+  .step-header {
+    background: var(--blue);
+    color: var(--white);
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .step-number {
+    font-family: 'Urbanist', system-ui, sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    background: rgba(255,255,255,0.2);
+    padding: 2px 10px;
+    border-radius: 9999px;
+  }
+  .step-title {
+    font-family: 'Urbanist', system-ui, sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+  }
+  .step-body { padding: 20px 22px; }
+  .step-goal {
+    background: var(--light-blue);
+    border-radius: 6px;
+    padding: 10px 14px;
+    font-size: 13px;
+    color: var(--dark-gray);
+    margin-bottom: 16px;
+  }
+  .step-goal strong { color: var(--blue); }
+  .verify-block {
+    background: #F0FDF4;
+    border: 1px solid #BBF7D0;
+    border-radius: 6px;
+    padding: 12px 16px;
+    margin-top: 14px;
+  }
+  .verify-title {
+    font-family: 'Urbanist', system-ui, sans-serif;
+    font-weight: 600;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--green);
+    margin-bottom: 6px;
+  }
+  .verify-body { font-size: 13px; color: var(--dark-gray); line-height: 1.6; }
+  .warning-block {
+    background: #FFFBEB;
+    border: 1px solid #FDE68A;
+    border-radius: 6px;
+    padding: 12px 16px;
+    margin: 12px 0;
+  }
+  .warning-title {
+    font-family: 'Urbanist', system-ui, sans-serif;
+    font-weight: 600;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--amber);
+    margin-bottom: 6px;
+  }
+  .warning-body { font-size: 13px; color: var(--dark-gray); line-height: 1.6; }
+  .error-block {
+    background: #FEF2F2;
+    border: 1px solid #FECACA;
+    border-radius: 6px;
+    padding: 12px 16px;
+    margin: 12px 0;
+  }
+  .error-title {
+    font-family: 'Urbanist', system-ui, sans-serif;
+    font-weight: 600;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--red);
+    margin-bottom: 6px;
+  }
+  .error-body { font-size: 13px; color: var(--dark-gray); line-height: 1.6; }
+  .note {
+    background: var(--light-blue);
+    border-left: 3px solid var(--blue);
+    padding: 12px 16px;
+    border-radius: 0 6px 6px 0;
+    font-size: 13px;
+    color: var(--dark-gray);
+    margin: 12px 0;
+    line-height: 1.6;
+  }
+  .note strong { color: var(--text); }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12.5px;
+    margin: 12px 0;
+  }
+  thead tr { background: var(--blue); color: var(--white); }
+  thead th {
+    font-family: 'Urbanist', system-ui, sans-serif;
+    font-weight: 600;
+    font-size: 11.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 10px 12px;
+    text-align: left;
+  }
+  tbody tr:nth-child(even) { background: var(--light-blue); }
+  tbody tr:nth-child(odd) { background: var(--white); }
+  tbody td { padding: 9px 12px; border-bottom: 1px solid var(--border); vertical-align: top; line-height: 1.5; }
+  .toc { background: var(--light-blue); border-radius: 8px; padding: 20px 24px; margin-bottom: 36px; }
+  .toc-title { font-family: 'Urbanist', system-ui, sans-serif; font-weight: 700; font-size: 13px; color: var(--blue); margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .toc ol { margin-bottom: 0; }
+  .toc li { font-size: 13px; color: var(--dark-gray); margin-bottom: 3px; }
+  .toc a { color: var(--blue); text-decoration: none; }
+  .toc a:hover { text-decoration: underline; }
+  .prereq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 16px 0; }
+  .prereq-item { background: var(--light-blue); border-radius: 6px; padding: 12px 14px; }
+  .prereq-label { font-weight: 600; font-size: 12px; color: var(--blue); margin-bottom: 4px; }
+  .prereq-value { font-size: 12.5px; color: var(--dark-gray); }
+  .doc-footer {
+    margin-top: 56px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11px;
+    color: var(--muted);
+  }
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<div class="doc-header">
+  <div class="logo-wordmark">trillet</div>
+  <div class="doc-meta">
+    Developer Onboarding Guide<br>
+    Updated: 31 March 2026<br>
+    Validated against live production API
+  </div>
+</div>
+
+<!-- Title -->
+<div class="title-block">
+  <h1>Deploy Your First Voice Agent</h1>
+  <div class="doc-subtitle">A six-step guide for agency partners and integration developers</div>
+  <p class="doc-intro">
+    This guide walks through building and deploying a production-ready inbound voice agent via the Trillet API.
+    Each step is gated: complete the verification before moving to the next step. A failed verification means
+    the next step will not work. By the end, you'll have a live phone number routing inbound calls to an AI
+    agent with post-call SMS and analytics.
+  </p>
+</div>
+
+<!-- TOC -->
+<div class="toc">
+  <div class="toc-title">Steps in this guide</div>
+  <ol>
+    <li><a href="#prereqs">Prerequisites and authentication</a></li>
+    <li><a href="#step1">Step 1: Create the voice agent</a></li>
+    <li><a href="#step2">Step 2: Create the call flow</a></li>
+    <li><a href="#step3">Step 3: Configure knowledge base</a></li>
+    <li><a href="#step4">Step 4: Provision a phone number</a></li>
+    <li><a href="#step5">Step 5: Wire the phone to the agent</a></li>
+    <li><a href="#step6">Step 6: Test and verify end-to-end</a></li>
+    <li><a href="#troubleshooting">Common issues</a></li>
+  </ol>
+</div>
+
+<!-- Prerequisites -->
+<div id="prereqs">
+<h2>Prerequisites and Authentication</h2>
+
+<p>Before starting, you need four things:</p>
+
+<div class="prereq-grid">
+  <div class="prereq-item">
+    <div class="prereq-label">API Key</div>
+    <div class="prereq-value">Generate at app.trillet.ai > Settings > Developer > API Keys</div>
+  </div>
+  <div class="prereq-item">
+    <div class="prereq-label">Workspace ID</div>
+    <div class="prereq-value">Found in the workspace URL or in your JWT access_token payload</div>
+  </div>
+  <div class="prereq-item">
+    <div class="prereq-label">An existing call flow to duplicate</div>
+    <div class="prereq-value">Flow creation via POST is broken. You need at least one flow in your workspace to duplicate</div>
+  </div>
+  <div class="prereq-item">
+    <div class="prereq-label">curl or a REST client</div>
+    <div class="prereq-value">Examples use curl. Any HTTP client works</div>
+  </div>
+</div>
+
+<p>Set your credentials as environment variables to avoid repeating them in every call:</p>
+
+<pre>export TRILLET_API_KEY="your-api-key-here"
+export TRILLET_WORKSPACE_ID="your-workspace-id-here"
+export TRILLET_BASE="https://api.trillet.ai"</pre>
+
+<p>Every request needs two headers:</p>
+
+<pre>-H "x-api-key: $TRILLET_API_KEY"
+-H "x-workspace-id: $TRILLET_WORKSPACE_ID"</pre>
+
+<div class="note">
+  <strong>Python note:</strong> All inline Python examples use <code>sys.stdout.reconfigure(encoding='utf-8')</code>.
+  This is required on Windows to avoid encoding errors with non-ASCII characters in API responses. Include it
+  in every Python snippet.
+</div>
+</div>
+
+<!-- Step 1 -->
+<div id="step1">
+<div class="step-block">
+  <div class="step-header">
+    <div class="step-number">Step 1 of 6</div>
+    <div class="step-title">Create the voice agent</div>
+  </div>
+  <div class="step-body">
+    <div class="step-goal"><strong>Goal:</strong> A configured voice agent with your chosen LLM, TTS voice, and STT provider. Save the returned <code>_id</code> as <code>AGENT_ID</code>.</div>
+
+    <p>The agent defines the AI brain and voice. The call flow (Step 2) defines the script and behavior. You need both.</p>
+
+    <pre>RESULT=$(curl -s -X POST "$TRILLET_BASE/v1/api/agents" \
+  -H "x-api-key: $TRILLET_API_KEY" \
+  -H "x-workspace-id: $TRILLET_WORKSPACE_ID" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Inbound Receptionist",
+    "llmModel": "gpt-4.1",
+    "ttsModel": {
+      "provider": "rime",
+      "voiceId": "mistv2_Brook",
+      "language": "en"
+    },
+    "sttProvider": {
+      "id": "deepgram-nova-3"
+    },
+    "settings": {
+      "speed": 1.0,
+      "volume": 1.0,
+      "temperature": 0.7
+    },
+    "smartCallback": true,
+    "maxAttemptsForSmartCallback": 3,
+    "gapBetweenEachAttemptForSmartCallback": [
+      {"days": 0, "hours": 1},
+      {"days": 0, "hours": 4},
+      {"days": 1, "hours": 0}
+    ]
+  }')
+
+AGENT_ID=$(echo "$RESULT" | python -c "
+import json, sys
+sys.stdout.reconfigure(encoding='utf-8')
+print(json.load(sys.stdin)['_id'])
+")
+echo "Agent ID: $AGENT_ID"</pre>
+
+    <h3>LLM options</h3>
+    <table>
+      <thead><tr><th>Model ID</th><th>Tier</th><th>Best for</th></tr></thead>
+      <tbody>
+        <tr><td><code>gpt-4.1</code></td><td>Standard</td><td>General purpose, best balance of quality and cost</td></tr>
+        <tr><td><code>gpt-4.1-mini</code></td><td>Standard</td><td>High volume, cost-sensitive deployments</td></tr>
+        <tr><td><code>gemini-2.5-flash</code></td><td>Standard</td><td>Fast responses, competitive with GPT-4.1</td></tr>
+        <tr><td><code>gpt-5</code></td><td>Premium</td><td>Complex reasoning, nuanced conversations</td></tr>
+        <tr><td><code>audiopipeline:openai-realtime</code></td><td>Beta</td><td>Speech-to-speech, lowest latency</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Voice options (TTS)</h3>
+    <table>
+      <thead><tr><th>Provider</th><th>voiceId examples</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td><code>rime</code></td><td>mistv2_Brook, mistv2_Wildflower, mistv2_Violet, mistv2_juliette</td><td>Default. Natural-sounding, low latency</td></tr>
+        <tr><td><code>openai</code></td><td>alloy, echo, fable, onyx, nova, shimmer</td><td>Familiar voices from OpenAI TTS</td></tr>
+        <tr><td><code>elevenlabs</code></td><td>Any ElevenLabs voice ID</td><td>Highest quality. Use GET /v1/api/agents/voices for catalog</td></tr>
+      </tbody>
+    </table>
+
+    <div class="verify-block">
+      <div class="verify-title">Verify before continuing</div>
+      <div class="verify-body">
+        <pre>curl -s "$TRILLET_BASE/v1/api/agents/$AGENT_ID" \
+  -H "x-api-key: $TRILLET_API_KEY" \
+  -H "x-workspace-id: $TRILLET_WORKSPACE_ID" | python -c "
+import json, sys
+sys.stdout.reconfigure(encoding='utf-8')
+d = json.load(sys.stdin)
+assert d['name'] == 'Inbound Receptionist', f'Name mismatch: {d[\"name\"]}'
+assert d['llmModel'] == 'gpt-4.1', f'LLM mismatch: {d[\"llmModel\"]}'
+print(f'PASS: Agent {d[\"_id\"]} created correctly')
+"</pre>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Step 2 -->
+<div id="step2">
+<div class="step-block">
+  <div class="step-header">
+    <div class="step-number">Step 2 of 6</div>
+    <div class="step-title">Create the call flow</div>
+  </div>
+  <div class="step-body">
+    <div class="step-goal"><strong>Goal:</strong> A configured call flow attached to your agent, with a prompt, welcome message, and call settings. Save the returned <code>_id</code> as <code>FLOW_ID</code>.</div>
+
+    <div class="warning-block">
+      <div class="warning-title">Known Bug: Direct flow creation is broken</div>
+      <div class="warning-body">
+        <code>POST /v1/api/call-flows</code> returns 500 on all payloads as of March 2026.
+        The workaround is to duplicate an existing flow, then configure it via PUT.
+        You need the ID of any existing flow in your workspace. Find one with
+        <code>GET /v1/api/call-flows</code> and use its <code>_id</code> as <code>SOURCE_FLOW_ID</code>.
+      </div>
+    </div>
+
+    <p><strong>Step 2a: Duplicate an existing flow</strong></p>
+    <pre>SOURCE_FLOW_ID="paste-any-existing-flow-id-here"
+
+DUP_RESULT=$(curl -s -X POST "$TRILLET_BASE/v1/api/call-flows/$SOURCE_FLOW_ID/duplicate" \
+  -H "x-api-key: $TRILLET_API_KEY" \
+  -H "x-workspace-id: $TRILLET_WORKSPACE_ID" \
+  -H "Content-Type: application/json" \
+  -d '{}')
+
+FLOW_ID=$(echo "$DUP_RESULT" | python -c "
+import json, sys
+sys.stdout.reconfigure(encoding='utf-8')
+print(json.load(sys.stdin)['_id'])
+")
+echo "Flow ID: $FLOW_ID"</pre>
+
+    <p><strong>Step 2b: Configure the duplicated flow</strong></p>
+    <p>
+      Write your prompt to a file to avoid shell escaping issues with quotes and special characters.
+      PUT uses replace semantics: the entire object below replaces the duplicated flow's config.
+    </p>
+
+    <pre>cat > /tmp/flow_payload.json << 'PAYLOAD'
+{
+  "name": "Inbound Receptionist",
+  "direction": "bidirectional",
+  "promptType": "simple",
+  "prompt": "You are a professional receptionist for Acme Corp. Your job is to answer questions about our services, take messages, and transfer callers who need to speak with someone urgently.\n\nServices we offer:\n- General consulting\n- Technical support\n- Account management\n\nIf someone needs urgent assistance, transfer them to the owner. Otherwise, take their name and number and let them know someone will call back within one business day.",
+  "welcomeMessage": "ai_custom",
+  "customWelcomeMessage": "Thank you for calling Acme Corp. How can I help you today?",
+  "agent": "REPLACE_WITH_AGENT_ID",
+  "settings": {
+    "transfers": [
+      {
+        "friendly_name": "Owner",
+        "method": "cold",
+        "destination": "+1XXXXXXXXXX",
+        "destinationType": "SIP",
+        "condition": "Caller requires urgent assistance or requests a human",
+        "isSummary": false,
+        "summary_format": "",
+        "custom_headers": []
+      }
+    ],
+    "callSetting": {
+      "maxCallDuration": 600,
+      "endCallOnSilence": 15,
+      "enableComplianceMonitoring": true,
+      "voicemailDetection": {"enabled": true, "action": "hangup"}
+    },
+    "speechSetting": {
+      "responsiveness": 7,
+      "interruptionSensitivity": 5
+    },
+    "OfficeHoursSettings": {
+      "enabled": false
+    },
+    "smsPostCallSettings": {
+      "businessOwnerSMS": true,
+      "customerSMS": false,
+      "useInternalA2P": true,
+      "selectedPhoneNumberId": "",
+      "businessOwnerPhoneNumber": "+1XXXXXXXXXX"
+    },
+    "postCallAnalysisEmailSettings": {
+      "enabled": true,
+      "emails": ["owner@acmecorp.com"]
+    },
+    "tools": [
+      {"name": "end_call", "description": "End the call when the conversation is complete", "enabled": true},
+      {"name": "get_time_for_timezone", "description": "Get the current time", "enabled": true, "locations": ["America/New_York"]}
+    ],
+    "knowledgeBases": []
+  }
+}
+PAYLOAD
+
+<span class="comment"># Replace the placeholder with your actual agent ID</span>
+sed -i "s/REPLACE_WITH_AGENT_ID/$AGENT_ID/" /tmp/flow_payload.json
+
+curl -s -X PUT "$TRILLET_BASE/v1/api/call-flows/$FLOW_ID" \
+  -H "x-api-key: $TRILLET_API_KEY" \
+  -H "x-workspace-id: $TRILLET_WORKSPACE_ID" \
+  -H "Content-Type: application/json" \
+  -d @/tmp/flow_payload.json</pre>
+
+    <div class="note">
+      <strong>Transfer schema:</strong> Use <code>friendly_name</code> and <code>destination</code>, not
+      <code>label</code> and <code>phoneNumber</code>. The older field names are accepted by PUT but not
+      read by the <code>transfer_call</code> function. The agent will report "Team not found" at transfer time.
+    </div>
+
+    <div class="verify-block">
+      <div class="verify-title">Verify before continuing</div>
+      <div class="verify-body">
+        <pre>curl -s "$TRILLET_BASE/v1/api/call-flows/$FLOW_ID" \
+  -H "x-api-key: $TRILLET_API_KEY" \
+  -H "x-workspace-id: $TRILLET_WORKSPACE_ID" | python -c "
+import json, sys
+sys.stdout.reconfigure(encoding='utf-8')
+d = json.load(sys.stdin)
+assert d['name'] == 'Inbound Receptionist', f'Name: {d[\"name\"]}'
+assert d['agent'] == '$AGENT_ID' or d.get('agent',{}).get('_id') == '$AGENT_ID', 'Agent not set'
+assert len(d['prompt']) > 50, 'Prompt too short or missing'
+sms = d.get('settings',{}).get('smsPostCallSettings',{})
+assert sms.get('useInternalA2P'), 'useInternalA2P not set -- SMS will silently fail'
+print(f'PASS: Flow {d[\"_id\"]} configured correctly')
+"</pre>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Step 3 -->
+<div id="step3">
+<div class="step-block">
+  <div class="step-header">
+    <div class="step-number">Step 3 of 6</div>
+    <div class="step-title">Configure a knowledge base (optional but recommended)</div>
+  </div>
+  <div class="step-body">
+    <div class="step-goal"><strong>Goal:</strong> A knowledge base with business-specific content attached to the call flow. Skip this step if you don't need KB-backed responses.</div>
+
+    <p><strong>Step 3a: Create the KB</strong></p>
+    <pre>KB_RESULT=$(curl -s -X POST "$TRILLET_BASE/v1/api/knowledgebase" \
+  -H "x-api-key: $TRILLET_API_KEY" \
+  -H "x-workspace-id: $TRILLET_WORKSPACE_ID" \
+  -H "Content-Type: application/json" \
+  -d '{"name": "Acme Corp Info", "description": "Business information for the receptionist"}')
+
+KB_ID=$(echo "$KB_RESULT" | python -c "
+import json, sys
+sys.stdout.reconfigure(encoding='utf-8')
+print(json.load(sys.stdin)['_id'])
+")
+echo "KB ID: $KB_ID"</pre>
+
+    <p><strong>Step 3b: Add content</strong></p>
+    <pre>curl -s -X POST "$TRILLET_BASE/v1/api/knowledgebase/$KB_ID/text" \
+  -H "x-api-key: $TRILLET_API_KEY" \
+  -H "x-workspace-id: $TRILLET_WORKSPACE_ID" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "text": "Acme Corp provides consulting services for small and medium businesses. We are open Monday through Friday, 9am to 6pm Eastern. Our main office is at 123 Main Street. For billing questions, callers should ask for the accounts team. For technical issues, our support line is available during business hours. Common questions: we do not offer weekend appointments; our typical project turnaround is 2-3 weeks; we accept payment by invoice, credit card, or ACH transfer."
+  }'</pre>
+
+    <p><strong>Step 3c: Attach KB to the flow</strong></p>
+    <p>GET the full flow first, add the KB ID, then PUT the complete object:</p>
+    <pre>FLOW_DATA=$(curl -s "$TRILLET_BASE/v1/api/call-flows/$FLOW_ID" \
+  -H "x-api-key: $TRILLET_API_KEY" \
+  -H "x-workspace-id: $TRILLET_WORKSPACE_ID")
+
+<span class="comment"># Add KB ID to knowledgeBases array and PUT the updated flow</span>
+echo "$FLOW_DATA" | python -c "
+import json, sys
+sys.stdout.reconfigure(encoding='utf-8')
+d = json.load(sys.stdin)
+d.setdefault('settings', {}).setdefault('knowledgeBases', [])
+if '$KB_ID' not in d['settings']['knowledgeBases']:
+    d['settings']['knowledgeBases'].append('$KB_ID')
+print(json.dumps(d))
+" | curl -s -X PUT "$TRILLET_BASE/v1/api/call-flows/$FLOW_ID" \
+  -H "x-api-key: $TRILLET_API_KEY" \
+  -H "x-workspace-id: $TRILLET_WORKSPACE_ID" \
+  -H "Content-Type: application/json" \
+  -d @-</pre>
+
+    <div class="note">
+      <strong>File upload:</strong> The KB file upload endpoint (<code>POST /knowledgebase/{id}/files</code>) works via browser but the correct curl multipart field name is unconfirmed. Text upload via <code>/text</code> is the reliable programmatic path.
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Step 4 -->
+<div id="step4">
+<div class="step-block">
+  <div class="step-header">
+    <div class="step-number">Step 4 of 6</div>
+    <div class="step-title">Provision a phone number</div>
+  </div>
+  <div class="step-body">
+    <div class="step-goal"><strong>Goal:</strong> A Trillet-managed phone number in your workspace. Save the returned <code>_id</code> as <code>PHONE_ID</code>.</div>
+
+    <p><strong>Step 4a: Check your quota</strong></p>
+    <pre>curl -s "$TRILLET_BASE/v1/api/twilio/free-number-status" \
+  -H "x-api-key: $TRILLET_API_KEY" \
+  -H "x-workspace-id: $TRILLET_WORKSPACE_ID"
+<span class="comment"># Returns: {"limit": 5, "used": 3, "remaining": 2, "hasFree": true}</span></pre>
+
+    <p><strong>Step 4b: Search for available numbers</strong></p>
+    <pre>curl -s "$TRILLET_BASE/v1/api/twilio/available-numbers?country=US&type=local&areaCode=212" \
+  -H "x-api-key: $TRILLET_API_KEY" \
+  -H "x-workspace-id: $TRILLET_WORKSPACE_ID"
+<span class="comment"># Returns array: [{phoneNumber, friendlyName, region, capabilities: {voice, SMS, MMS}}]</span></pre>
+
+    <p><strong>Step 4c: Purchase a number</strong></p>
+    <pre>PHONE_RESULT=$(curl -s -X POST "$TRILLET_BASE/v1/api/twilio/purchase-number" \
+  -H "x-api-key: $TRILLET_API_KEY" \
+  -H "x-workspace-id: $TRILLET_WORKSPACE_ID" \
+  -H "Content-Type: application/json" \
+  -d "{
+    \"country\": \"US\",
+    \"phoneNumber\": \"+12125550100\",
+    \"type\": \"local\",
+    \"workspaceId\": \"$TRILLET_WORKSPACE_ID\"
+  }")
+
+PHONE_ID=$(echo "$PHONE_RESULT" | python -c "
+import json, sys
+sys.stdout.reconfigure(encoding='utf-8')
+print(json.load(sys.stdin)['_id'])
+")
+echo "Phone ID: $PHONE_ID"</pre>
+
+    <div class="verify-block">
+      <div class="verify-title">Verify before continuing</div>
+      <div class="verify-body">
+        <pre>curl -s "$TRILLET_BASE/v1/api/twilio/user-phone-numbers" \
+  -H "x-api-key: $TRILLET_API_KEY" \
+  -H "x-workspace-id: $TRILLET_WORKSPACE_ID" | python -c "
+import json, sys
+sys.stdout.reconfigure(encoding='utf-8')
+numbers = json.load(sys.stdin)
+ids = [n['_id'] for n in numbers]
+assert '$PHONE_ID' in ids, f'Phone ID not found in workspace. IDs: {ids}'
+print('PASS: Phone number confirmed in workspace')
+"</pre>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Step 5 -->
+<div id="step5">
+<div class="step-block">
+  <div class="step-header">
+    <div class="step-number">Step 5 of 6</div>
+    <div class="step-title">Wire the phone to the agent</div>
+  </div>
+  <div class="step-body">
+    <div class="step-goal"><strong>Goal:</strong> Inbound calls to the phone number route to your agent's call flow. This is the critical step. Without it, inbound calls get a disconnected tone.</div>
+
+    <p>
+      Binding sets the phone number's <code>pathwayId</code> to your agent's flow and <code>flowType</code>
+      to "call". Two calls are needed: bind the phone to the agent, then set the agent's <code>pathway</code>
+      to the flow.
+    </p>
+
+    <p><strong>Step 5a: Bind the phone number to the agent</strong></p>
+    <pre>curl -s -X POST "$TRILLET_BASE/v1/api/agents/$AGENT_ID/bind/$PHONE_ID" \
+  -H "x-api-key: $TRILLET_API_KEY" \
+  -H "x-workspace-id: $TRILLET_WORKSPACE_ID" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "recordCalls": false,
+    "recordingPublic": false,
+    "officeHours": {"enabled": false},
+    "metadataTags": {},
+    "label": "",
+    "transferCallerIdMode": "from-transferee"
+  }'</pre>
+
+    <p><strong>Step 5b: Set the agent's pathway to the flow</strong></p>
+    <pre><span class="comment"># GET the full agent first to avoid wiping other fields</span>
+AGENT_DATA=$(curl -s "$TRILLET_BASE/v1/api/agents/$AGENT_ID" \
+  -H "x-api-key: $TRILLET_API_KEY" \
+  -H "x-workspace-id: $TRILLET_WORKSPACE_ID")
+
+<span class="comment"># Merge pathway into the full agent object and PUT it back</span>
+echo "$AGENT_DATA" | python -c "
+import json, sys
+sys.stdout.reconfigure(encoding='utf-8')
+d = json.load(sys.stdin)
+d['pathway'] = '$FLOW_ID'
+print(json.dumps(d))
+" | curl -s -X PUT "$TRILLET_BASE/v1/api/agents/$AGENT_ID" \
+  -H "x-api-key: $TRILLET_API_KEY" \
+  -H "x-workspace-id: $TRILLET_WORKSPACE_ID" \
+  -H "Content-Type: application/json" \
+  -d @-</pre>
+
+    <div class="verify-block">
+      <div class="verify-title">Verify before continuing</div>
+      <div class="verify-body">
+        <pre>curl -s "$TRILLET_BASE/v1/api/twilio/user-phone-numbers" \
+  -H "x-api-key: $TRILLET_API_KEY" \
+  -H "x-workspace-id: $TRILLET_WORKSPACE_ID" | python -c "
+import json, sys
+sys.stdout.reconfigure(encoding='utf-8')
+numbers = json.load(sys.stdin)
+phone = next((n for n in numbers if n['_id'] == '$PHONE_ID'), None)
+assert phone, 'Phone not found'
+assert phone.get('pathwayId') == '$FLOW_ID', f'pathwayId is {phone.get(\"pathwayId\")}, expected $FLOW_ID'
+assert phone.get('flowType') == 'call', f'flowType is {phone.get(\"flowType\")}'
+print(f'PASS: Phone {phone[\"phoneNumber\"]} is routed to flow $FLOW_ID')
+"</pre>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Step 6 -->
+<div id="step6">
+<div class="step-block">
+  <div class="step-header">
+    <div class="step-number">Step 6 of 6</div>
+    <div class="step-title">Test and verify end-to-end</div>
+  </div>
+  <div class="step-body">
+    <div class="step-goal"><strong>Goal:</strong> A live call handled by the agent, verified in call history with transcript and post-call analytics.</div>
+
+    <p><strong>Step 6a: Make a test call</strong></p>
+    <p>
+      Dial the phone number you purchased from any phone. You should hear the welcome message within 2-3
+      seconds. Have a short conversation with the agent, then hang up.
+    </p>
+    <p>Alternatively, initiate an outbound test call via API:</p>
+    <pre>curl -s -X POST "$TRILLET_BASE/v1/api/call" \
+  -H "x-api-key: $TRILLET_API_KEY" \
+  -H "x-workspace-id: $TRILLET_WORKSPACE_ID" \
+  -H "Content-Type: application/json" \
+  -d "{
+    \"to\": \"+1YOUR_PHONE_NUMBER\",
+    \"call_agent_id\": \"$AGENT_ID\",
+    \"dynamic_variables\": {\"caller_name\": \"Test Caller\"}
+  }"</pre>
+
+    <div class="warning-block">
+      <div class="warning-title">Office hours</div>
+      <div class="warning-body">
+        If office hours were enabled in the flow configuration, outbound calls placed outside the window sit
+        in pending status indefinitely. Check <code>OfficeHoursSettings.enabled</code> in your flow config,
+        or call during the configured hours.
+      </div>
+    </div>
+
+    <p><strong>Step 6b: Verify call history</strong></p>
+    <pre><span class="comment"># Wait 30-60 seconds after the call ends for post-call processing</span>
+curl -s "$TRILLET_BASE/v2/api/call-history?limit=5" \
+  -H "x-api-key: $TRILLET_API_KEY" \
+  -H "x-workspace-id: $TRILLET_WORKSPACE_ID" | python -c "
+import json, sys
+sys.stdout.reconfigure(encoding='utf-8')
+d = json.load(sys.stdin)
+calls = d.get('data', [])
+if not calls:
+    print('No calls found. Wait another 30 seconds.')
+    sys.exit(1)
+latest = calls[0]
+print(f'Call ID: {latest[\"_id\"]}')
+print(f'Status: {latest[\"status\"]}')
+print(f'Duration: {latest.get(\"duration\", \"N/A\")}s')
+print(f'Transcript lines: {len(latest.get(\"transcript\", []))}')
+print(f'Summary: {latest.get(\"summary\", \"(not yet generated)\")[:100]}')
+"</pre>
+
+    <p><strong>Step 6c: Get full call detail with analytics</strong></p>
+    <pre>CALL_ID="paste-call-id-from-above"
+curl -s "$TRILLET_BASE/v2/api/call-history/$CALL_ID" \
+  -H "x-api-key: $TRILLET_API_KEY" \
+  -H "x-workspace-id: $TRILLET_WORKSPACE_ID" | python -c "
+import json, sys
+sys.stdout.reconfigure(encoding='utf-8')
+d = json.load(sys.stdin)
+analyzed = d.get('analyzedData', {})
+print('=== Call Analytics ===')
+print(f'Sentiment: {analyzed.get(\"call_sentiment\")}')
+print(f'Disposition: {analyzed.get(\"call_disposition\")}')
+compliance = analyzed.get('compliance', {})
+print(f'Compliance: {compliance.get(\"compliance_result\")}')
+print(f'Cost: \${d.get(\"cost\", 0):.4f}')
+print(f'Transcript lines: {len(d.get(\"transcript\", []))}')
+print()
+print('=== Full Transcript ===')
+for t in d.get('transcript', [])[:5]:
+    print(f'[{t[\"role\"]}] {t[\"content\"][:80]}')
+"</pre>
+
+    <div class="verify-block">
+      <div class="verify-title">Your deployment is complete when all of these pass</div>
+      <div class="verify-body">
+        <ul style="list-style: none; padding: 0; margin: 0;">
+          <li style="padding: 3px 0;">Call appears in <code>GET /v2/api/call-history</code></li>
+          <li style="padding: 3px 0;">Transcript array is non-empty</li>
+          <li style="padding: 3px 0;"><code>analyzedData</code> exists with sentiment and disposition</li>
+          <li style="padding: 3px 0;">Post-call SMS delivered (if enabled)</li>
+          <li style="padding: 3px 0;">Post-call analysis email received (if configured)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Troubleshooting -->
+<div id="troubleshooting">
+<h2>Common Issues</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Symptom</th>
+      <th>Cause</th>
+      <th>Fix</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Inbound call gets disconnected tone</td>
+      <td>Phone number not bound to agent (pathwayId not set)</td>
+      <td>Run Step 5 again. Verify pathwayId on the phone number</td>
+    </tr>
+    <tr>
+      <td>Outbound call stays in "pending" forever</td>
+      <td>Office hours are enabled, call placed outside the window</td>
+      <td>Disable OfficeHoursSettings or call within the configured hours</td>
+    </tr>
+    <tr>
+      <td>Flow config changes don't appear after PUT</td>
+      <td>PUT on a non-owned flow silently succeeds but writes nothing</td>
+      <td>Verify the flow was created/duplicated by your API key user. Check via GET after every PUT</td>
+    </tr>
+    <tr>
+      <td>Config fields reset to defaults after PUT</td>
+      <td>PUT uses replace semantics. Partial objects wipe omitted fields</td>
+      <td>GET the full object first, merge your changes, PUT the complete object</td>
+    </tr>
+    <tr>
+      <td>POST /v1/api/call-flows returns 500</td>
+      <td>Known platform bug. Direct flow creation is broken</td>
+      <td>Use the duplicate+configure workaround in Step 2</td>
+    </tr>
+    <tr>
+      <td>Transfer at runtime says "Team not found"</td>
+      <td>Using old transfer field names (label/phoneNumber instead of friendly_name/destination)</td>
+      <td>Update transfer entries to use UI format: friendly_name, destination, method, destinationType</td>
+    </tr>
+    <tr>
+      <td>SMS not delivered after call</td>
+      <td>Missing useInternalA2P: true or businessOwnerPhoneNumber field</td>
+      <td>Confirm all three required SMS fields are set: businessOwnerSMS, useInternalA2P, businessOwnerPhoneNumber</td>
+    </tr>
+    <tr>
+      <td>No transcript in call history</td>
+      <td>Post-call processing takes 30-60 seconds after call ends</td>
+      <td>Wait and re-GET. Transcript is filled asynchronously</td>
+    </tr>
+    <tr>
+      <td>"No active pathway configured" on web call start</td>
+      <td>Agent's pathway field is not set</td>
+      <td>PUT the agent with pathway: FLOW_ID (Step 5b)</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>Reference: All IDs from This Guide</h2>
+<pre><span class="comment"># Save these after completing each step</span>
+AGENT_ID="..."        <span class="comment"># from Step 1</span>
+FLOW_ID="..."         <span class="comment"># from Step 2</span>
+KB_ID="..."           <span class="comment"># from Step 3 (optional)</span>
+PHONE_ID="..."        <span class="comment"># from Step 4</span>
+PHONE_NUMBER="..."    <span class="comment"># E.164 format, e.g. +12125550100</span></pre>
+</div>
+
+<!-- Footer -->
+<div class="doc-footer">
+  <div>
+    <span style="font-weight:600;color:var(--text);">trillet</span>
+    &nbsp;&nbsp;|&nbsp;&nbsp;
+    Developer Onboarding Guide
+    &nbsp;&nbsp;|&nbsp;&nbsp;
+    Validated 31 March 2026
+  </div>
+  <div>
+    Agency partner reference. All code tested against live production API.
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trillet API Bug Report</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Urbanist:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blue: #0066FF;
+    --white: #FFFFFF;
+    --text: #171717;
+    --dark-gray: #374151;
+    --muted: #9CA3AF;
+    --light-blue: #EFF6FF;
+    --border: #E5E7EB;
+    --green: #059669;
+    --amber: #D97706;
+    --red: #DC2626;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 14px;
+    color: var(--text);
+    background: var(--white);
+    line-height: 1.65;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 56px 48px;
+  }
+  .doc-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding-bottom: 28px;
+    border-bottom: 3px solid var(--blue);
+    margin-bottom: 40px;
+  }
+  .logo-wordmark {
+    font-family: 'Urbanist', system-ui, sans-serif;
+    font-weight: 700;
+    font-size: 22px;
+    color: var(--blue);
+    letter-spacing: -0.5px;
+  }
+  .doc-meta {
+    text-align: right;
+    font-size: 11px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+  .title-block { margin-bottom: 36px; }
+  h1 {
+    font-family: 'Urbanist', system-ui, sans-serif;
+    font-weight: 700;
+    font-size: 30px;
+    color: var(--text);
+    letter-spacing: -0.5px;
+    margin-bottom: 6px;
+  }
+  .doc-subtitle {
+    font-size: 15px;
+    color: var(--dark-gray);
+    font-weight: 500;
+    margin-bottom: 20px;
+  }
+  .doc-intro {
+    font-size: 13.5px;
+    color: var(--dark-gray);
+    line-height: 1.7;
+    max-width: 780px;
+  }
+  h2 {
+    font-family: 'Urbanist', system-ui, sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    color: var(--blue);
+    margin-top: 44px;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+  h3 {
+    font-family: 'Urbanist', system-ui, sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--dark-gray);
+    margin-top: 24px;
+    margin-bottom: 10px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12.5px;
+    margin-bottom: 8px;
+  }
+  thead tr { background: var(--blue); color: var(--white); }
+  thead th {
+    font-family: 'Urbanist', system-ui, sans-serif;
+    font-weight: 600;
+    font-size: 11.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 10px 12px;
+    text-align: left;
+  }
+  tbody tr:nth-child(even) { background: var(--light-blue); }
+  tbody tr:nth-child(odd) { background: var(--white); }
+  tbody td {
+    padding: 9px 12px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+    line-height: 1.5;
+  }
+  .badge {
+    display: inline-block;
+    padding: 2px 9px;
+    border-radius: 9999px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.2px;
+    white-space: nowrap;
+  }
+  .badge-green { background: #D1FAE5; color: var(--green); }
+  .badge-amber { background: #FEF3C7; color: var(--amber); }
+  .badge-red { background: #FEE2E2; color: var(--red); }
+  .bug-card {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    margin-bottom: 24px;
+    overflow: hidden;
+  }
+  .bug-header {
+    background: var(--light-blue);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .bug-id {
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+    font-weight: 700;
+    background: var(--blue);
+    color: var(--white);
+    padding: 3px 8px;
+    border-radius: 4px;
+  }
+  .bug-title {
+    font-family: 'Urbanist', system-ui, sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--text);
+    flex: 1;
+  }
+  .bug-body { padding: 18px 20px; }
+  .bug-field {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 6px 16px;
+    margin-bottom: 10px;
+    font-size: 13px;
+  }
+  .bug-field-label {
+    font-weight: 600;
+    color: var(--dark-gray);
+    padding-top: 1px;
+  }
+  .bug-field-value { color: var(--text); line-height: 1.55; }
+  code {
+    font-family: 'Courier New', monospace;
+    font-size: 11.5px;
+    background: #F3F4F6;
+    padding: 1px 5px;
+    border-radius: 3px;
+    color: var(--text);
+  }
+  pre {
+    background: #1F2937;
+    color: #F9FAFB;
+    border-radius: 6px;
+    padding: 14px 16px;
+    font-size: 11.5px;
+    font-family: 'Courier New', monospace;
+    line-height: 1.6;
+    overflow-x: auto;
+    margin: 10px 0;
+  }
+  .note {
+    background: var(--light-blue);
+    border-left: 3px solid var(--blue);
+    padding: 12px 16px;
+    border-radius: 0 6px 6px 0;
+    font-size: 13px;
+    color: var(--dark-gray);
+    margin: 16px 0;
+    line-height: 1.6;
+  }
+  .note strong { color: var(--text); }
+  .doc-footer {
+    margin-top: 56px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11px;
+    color: var(--muted);
+  }
+  .severity-high { color: var(--red); font-weight: 600; }
+  .severity-medium { color: var(--amber); font-weight: 600; }
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<div class="doc-header">
+  <div class="logo-wordmark">trillet</div>
+  <div class="doc-meta">
+    API Bug Report<br>
+    Updated: 31 March 2026<br>
+    8 confirmed bugs<br>
+    Status: Final
+  </div>
+</div>
+
+<!-- Title -->
+<div class="title-block">
+  <h1>Confirmed API Bug Report</h1>
+  <div class="doc-subtitle">Live Production Issues for Developer Team Review</div>
+  <p class="doc-intro">
+    This report documents eight confirmed bugs in the Trillet REST API, each with a reproducible test case,
+    the exact server response, and a working workaround where one exists. All bugs were discovered during
+    seven rounds of live testing between 29 and 31 March 2026. Testing used API key auth, JWT Bearer auth,
+    Playwright network capture during browser sessions, and real-time calls. The environment was the live
+    production API at <code>api.trillet.ai</code>.
+  </p>
+</div>
+
+<!-- Summary table -->
+<h2>Summary</h2>
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Affected Endpoint</th>
+      <th>Summary</th>
+      <th>Severity</th>
+      <th>Workaround</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>BUG-01</strong></td>
+      <td><code>POST /v1/api/call-flows</code></td>
+      <td>500 on all payloads. Flow creation non-functional</td>
+      <td><span class="badge badge-red">High</span></td>
+      <td>Duplicate + configure via PUT</td>
+    </tr>
+    <tr>
+      <td><strong>BUG-02</strong></td>
+      <td><code>PUT /v1/api/call-flows/{id}</code></td>
+      <td>Silent write failure on non-owned flows. Returns 200, writes nothing</td>
+      <td><span class="badge badge-red">High</span></td>
+      <td>Only PUT flows you own</td>
+    </tr>
+    <tr>
+      <td><strong>BUG-03</strong></td>
+      <td>All PUT endpoints</td>
+      <td>Replace semantics: partial PUT wipes omitted fields silently</td>
+      <td><span class="badge badge-amber">Medium</span></td>
+      <td>Always GET-merge-PUT full object</td>
+    </tr>
+    <tr>
+      <td><strong>BUG-04</strong></td>
+      <td><code>GET /v1/api/voices/search</code></td>
+      <td>Route registered, service method missing. Returns 500</td>
+      <td><span class="badge badge-amber">Medium</span></td>
+      <td>Use /v1/api/agents/voices for catalog</td>
+    </tr>
+    <tr>
+      <td><strong>BUG-05</strong></td>
+      <td><code>DELETE /v1/api/workspaces/{id}</code></td>
+      <td>500: "Cast to string failed for deletedBy"</td>
+      <td><span class="badge badge-amber">Medium</span></td>
+      <td>Delete via UI</td>
+    </tr>
+    <tr>
+      <td><strong>BUG-06</strong></td>
+      <td><code>POST /v1/api/conversations/message/generate</code></td>
+      <td>Returns success but SMS never delivered. Variables not interpolated</td>
+      <td><span class="badge badge-red">High</span></td>
+      <td>Use post-call smsPostCallSettings instead</td>
+    </tr>
+    <tr>
+      <td><strong>BUG-07</strong></td>
+      <td><code>PUT /v1/api/call-flows/{id}</code> (webhooks)</td>
+      <td>settings.webhooks silently drops on all PUTs. Values never persist</td>
+      <td><span class="badge badge-amber">Medium</span></td>
+      <td>Configure webhooks via flow editor UI</td>
+    </tr>
+    <tr>
+      <td><strong>BUG-08</strong></td>
+      <td><code>POST /v2/api/active-calls/{roomName}/remove-agent</code></td>
+      <td>500 on web calls: LiveKit encoding error. Body validates correctly</td>
+      <td><span class="badge badge-amber">Medium</span></td>
+      <td>Tested on web calls only. May work on telephony</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- Detailed bug cards -->
+<h2>Detailed Bug Reports</h2>
+
+<!-- BUG-01 -->
+<div class="bug-card">
+  <div class="bug-header">
+    <div class="bug-id">BUG-01</div>
+    <div class="bug-title">Call flow creation via POST always returns 500</div>
+    <span class="badge badge-red">High</span>
+  </div>
+  <div class="bug-body">
+    <div class="bug-field">
+      <div class="bug-field-label">Endpoint</div>
+      <div class="bug-field-value"><code>POST /v1/api/call-flows</code></div>
+    </div>
+    <div class="bug-field">
+      <div class="bug-field-label">Expected</div>
+      <div class="bug-field-value">New call flow object with 201 or 200 status</div>
+    </div>
+    <div class="bug-field">
+      <div class="bug-field-label">Actual</div>
+      <div class="bug-field-value">500 on every payload variant tested: minimal (name+direction only), with agentId, with full config, bidirectional and outbound</div>
+    </div>
+    <div class="bug-field">
+      <div class="bug-field-label">Reproduction</div>
+      <div class="bug-field-value">
+        <pre>curl -X POST "https://api.trillet.ai/v1/api/call-flows" \
+  -H "x-api-key: YOUR_KEY" \
+  -H "x-workspace-id: YOUR_WORKSPACE" \
+  -H "Content-Type: application/json" \
+  -d '{"name": "Test Flow", "direction": "bidirectional"}'
+# Returns: 500</pre>
+      </div>
+    </div>
+    <div class="bug-field">
+      <div class="bug-field-label">Impact</div>
+      <div class="bug-field-value">Full flow provisioning automation is blocked. Can not create new flows programmatically</div>
+    </div>
+    <div class="bug-field">
+      <div class="bug-field-label">Workaround</div>
+      <div class="bug-field-value">
+        Duplicate an existing flow: <code>POST /v1/api/call-flows/{sourceId}/duplicate</code> with body <code>{}</code>.
+        This returns a new flow owned by the API key user. Configure it via PUT.
+      </div>
+    </div>
+    <div class="bug-field">
+      <div class="bug-field-label">First confirmed</div>
+      <div class="bug-field-value">29 March 2026</div>
+    </div>
+  </div>
+</div>
+
+<!-- BUG-02 -->
+<div class="bug-card">
+  <div class="bug-header">
+    <div class="bug-id">BUG-02</div>
+    <div class="bug-title">PUT on non-owned call flows: silent write failure, false 200</div>
+    <span class="badge badge-red">High</span>
+  </div>
+  <div class="bug-body">
+    <div class="bug-field">
+      <div class="bug-field-label">Endpoint</div>
+      <div class="bug-field-value"><code>PUT /v1/api/call-flows/{id}</code> (when flow is owned by a different workspace user)</div>
+    </div>
+    <div class="bug-field">
+      <div class="bug-field-label">Expected</div>
+      <div class="bug-field-value">403 Forbidden or 400 with "not authorized to modify this flow"</div>
+    </div>
+    <div class="bug-field">
+      <div class="bug-field-label">Actual</div>
+      <div class="bug-field-value">200 with the submitted payload echoed back. Subsequent GET returns original values unchanged. No error at any point</div>
+    </div>
+    <div class="bug-field">
+      <div class="bug-field-label">Reproduction</div>
+      <div class="bug-field-value">
+        1. Obtain a call flow ID owned by any user other than the API key's user.<br>
+        2. PUT a config change to that flow ID.<br>
+        3. GET the same flow ID.<br>
+        4. Observe that the GET response reflects original values, not the submitted update.
+      </div>
+    </div>
+    <div class="bug-field">
+      <div class="bug-field-label">Impact</div>
+      <div class="bug-field-value">Silent data integrity failure. Automations that modify shared flows report success, but changes are never applied. Extremely difficult to debug without explicit verification after every write</div>
+    </div>
+    <div class="bug-field">
+      <div class="bug-field-label">Workaround</div>
+      <div class="bug-field-value">Only PUT flows created or duplicated by the same API key user. Verify every write with a GET</div>
+    </div>
+    <div class="bug-field">
+      <div class="bug-field-label">First confirmed</div>
+      <div class="bug-field-value">29 March 2026</div>
+    </div>
+  </div>
+</div>
+
+<!-- BUG-03 -->
+<div class="bug-card">
+  <div class="bug-header">
+    <div class="bug-id">BUG-03</div>
+    <div class="bug-title">Replace semantics on all PUT endpoints: partial objects wipe fields silently</div>
+    <span class="badge badge-amber">Medium</span>
+  </div>
+  <div class="bug-body">
+    <div class="bug-field">
+      <div class="bug-field-label">Affected endpoints</div>
+      <div class="bug-field-value">All PUT endpoints: <code>/v1/api/agents/{id}</code>, <code>/v1/api/call-flows/{id}</code>, <code>/v1/api/knowledgebase/{id}</code>, and all other mutable resources</div>
+    </div>
+    <div class="bug-field">
+      <div class="bug-field-label">Expected</div>
+      <div class="bug-field-value">Merge semantics: only the fields sent in the body are updated; all other fields are unchanged</div>
+    </div>
+    <div class="bug-field">
+      <div class="bug-field-label">Actual</div>
+      <div class="bug-field-value">Replace semantics: the entire object is replaced with the submitted payload. Omitted fields revert to defaults or empty values. The API returns 200 with the submitted values, making the write appear successful</div>
+    </div>
+    <div class="bug-field">
+      <div class="bug-field-label">Example</div>
+      <div class="bug-field-value">
+        An agent has a configured TTS voice, STT provider, and smart callback settings.
+        Send PUT with only <code>{"name": "Updated Name"}</code> and all other fields revert to defaults.
+        The agent's voice, STT, and callback config are gone.
+      </div>
+    </div>
+    <div class="bug-field">
+      <div class="bug-field-label">Note</div>
+      <div class="bug-field-value">This behavior may be intentional (some APIs use replace semantics by design). If intentional, the documentation should state it explicitly. The Trillet docs currently imply standard update behavior with no mention of full-object replacement</div>
+    </div>
+    <div class="bug-field">
+      <div class="bug-field-label">Workaround</div>
+      <div class="bug-field-value">
+        GET the full resource first. Merge changes into the complete object. PUT the entire merged object.
+        Confirm that only the intended fields changed with a follow-up GET.
+      </div>
+    </div>
+    <div class="bug-field">
+      <div class="bug-field-label">First confirmed</div>
+      <div class="bug-field-value">29 March 2026</div>
+    </div>
+  </div>
+</div>
+
+<!-- BUG-04 -->
+<div class="bug-card">
+  <div class="bug-header">
+    <div class="bug-id">BUG-04</div>
+    <div class="bug-title">Voice search route registered but service method not implemented</div>
+    <span class="badge badge-amber">Medium</span>
+  </div>
+  <div class="bug-body">
+    <div class="bug-field">
+      <div class="bug-field-label">Endpoint</div>
+      <div class="bug-field-value"><code>GET /v1/api/voices/search</code></div>
+    </div>
+    <div class="bug-field">
+      <div class="bug-field-label">Expected</div>
+      <div class="bug-field-value">Search results from the voice catalog</div>
+    </div>
+    <div class="bug-field">
+      <div class="bug-field-label">Actual</div>
+      <div class="bug-field-value"><code>500: "voiceService.searchVoices is not a function"</code></div>
+    </div>
+    <div class="bug-field">
+      <div class="bug-field-label">Reproduction</div>
+      <div class="bug-field-value">
+        <pre>curl "https://api.trillet.ai/v1/api/voices/search?query=female" \
+  -H "x-api-key: YOUR_KEY" \
+  -H "x-workspace-id: YOUR_WORKSPACE"
+# Returns: 500 {"message": "voiceService.searchVoices is not a function"}</pre>
+      </div>
+    </div>
+    <div class="bug-field">
+      <div class="bug-field-label">Additional note</div>
+      <div class="bug-field-value">Also tested with JWT auth. Same result. The route is registered in the router but the underlying service class does not implement the <code>searchVoices</code> method</div>
+    </div>
+    <div class="bug-field">
+      <div class="bug-field-label">Workaround</div>
+      <div class="bug-field-value">Use <code>GET /v1/api/agents/voices</code> for the full voice catalog (returns OpenAI, ElevenLabs, Hume voices grouped by provider)</div>
+    </div>
+    <div class="bug-field">
+      <div class="bug-field-label">First confirmed</div>
+      <div class="bug-field-value">31 March 2026</div>
+    </div>
+  </div>
+</div>
+
+<!-- BUG-05 -->
+<div class="bug-card">
+  <div class="bug-header">
+    <div class="bug-id">BUG-05</div>
+    <div class="bug-title">Workspace delete fails with type cast error</div>
+    <span class="badge badge-amber">Medium</span>
+  </div>
+  <div class="bug-body">
+    <div class="bug-field">
+      <div class="bug-field-label">Endpoint</div>
+      <div class="bug-field-value"><code>DELETE /v1/api/workspaces/{id}</code></div>
+    </div>
+    <div class="bug-field">
+      <div class="bug-field-label">Expected</div>
+      <div class="bug-field-value">Workspace deleted (204 or 200)</div>
+    </div>
+    <div class="bug-field">
+      <div class="bug-field-label">Actual</div>
+      <div class="bug-field-value"><code>500: "Cast to string failed for value ... at path 'deletedBy'"</code></div>
+    </div>
+    <div class="bug-field">
+      <div class="bug-field-label">Cause</div>
+      <div class="bug-field-value">The <code>deletedBy</code> field in the workspace schema expects a string user ID. The API key auth context provides a different user object format than the handler expects, causing a Mongoose cast error</div>
+    </div>
+    <div class="bug-field">
+      <div class="bug-field-label">Workaround</div>
+      <div class="bug-field-value">Delete workspaces via the Trillet web UI</div>
+    </div>
+    <div class="bug-field">
+      <div class="bug-field-label">First confirmed</div>
+      <div class="bug-field-value">29 March 2026</div>
+    </div>
+  </div>
+</div>
+
+<!-- BUG-06 -->
+<div class="bug-card">
+  <div class="bug-header">
+    <div class="bug-id">BUG-06</div>
+    <div class="bug-title">On-demand SMS generation: returns success but does not deliver</div>
+    <span class="badge badge-red">High</span>
+  </div>
+  <div class="bug-body">
+    <div class="bug-field">
+      <div class="bug-field-label">Endpoint</div>
+      <div class="bug-field-value"><code>POST /v1/api/conversations/message/generate</code></div>
+    </div>
+    <div class="bug-field">
+      <div class="bug-field-label">Expected</div>
+      <div class="bug-field-value">AI-generated SMS delivered to the target number. Dynamic variables interpolated into the message template</div>
+    </div>
+    <div class="bug-field">
+      <div class="bug-field-label">Actual</div>
+      <div class="bug-field-value">
+        API returns <code>{"status": "success", "conversation_id": "...", "message_id": "..."}</code>.
+        No SMS is received by the target number. Dynamic variables passed in the <code>dynamic</code>
+        object are not interpolated into the <code>initiationMessage</code> template.
+      </div>
+    </div>
+    <div class="bug-field">
+      <div class="bug-field-label">Reproduction</div>
+      <div class="bug-field-value">
+        <pre>curl -X POST "https://api.trillet.ai/v1/api/conversations/message/generate" \
+  -H "x-api-key: YOUR_KEY" \
+  -H "x-workspace-id: YOUR_WORKSPACE" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "flowId": "YOUR_MESSAGE_FLOW_ID",
+    "to": "+1XXXXXXXXXX",
+    "metadata": {"autopilot": true},
+    "dynamic": {"customer_name": "Test"}
+  }'
+# Returns: {"status": "success"} -- but no SMS delivered</pre>
+      </div>
+    </div>
+    <div class="bug-field">
+      <div class="bug-field-label">Additional note</div>
+      <div class="bug-field-value">Post-call SMS via <code>smsPostCallSettings</code> on call flows works correctly and does deliver. This bug affects only the on-demand SMS generation path</div>
+    </div>
+    <div class="bug-field">
+      <div class="bug-field-label">Workaround</div>
+      <div class="bug-field-value">Use <code>smsPostCallSettings</code> on the call flow for automated post-call SMS. Requires <code>useInternalA2P: true</code> and <code>businessOwnerPhoneNumber</code> fields</div>
+    </div>
+    <div class="bug-field">
+      <div class="bug-field-label">First confirmed</div>
+      <div class="bug-field-value">30 March 2026</div>
+    </div>
+  </div>
+</div>
+
+<!-- BUG-07 -->
+<div class="bug-card">
+  <div class="bug-header">
+    <div class="bug-id">BUG-07</div>
+    <div class="bug-title">Webhook settings silently drop on call flow PUT</div>
+    <span class="badge badge-amber">Medium</span>
+  </div>
+  <div class="bug-body">
+    <div class="bug-field">
+      <div class="bug-field-label">Endpoint</div>
+      <div class="bug-field-value"><code>PUT /v1/api/call-flows/{id}</code> with <code>settings.webhooks</code></div>
+    </div>
+    <div class="bug-field">
+      <div class="bug-field-label">Expected</div>
+      <div class="bug-field-value">Webhook URLs persist and are returned on subsequent GET</div>
+    </div>
+    <div class="bug-field">
+      <div class="bug-field-label">Actual</div>
+      <div class="bug-field-value">PUT returns 200 with webhook values in the response body. GET the same flow and <code>settings.webhooks</code> is empty. Values never persisted despite the 200</div>
+    </div>
+    <div class="bug-field">
+      <div class="bug-field-label">Reproduction</div>
+      <div class="bug-field-value">
+        <pre>curl -X PUT "https://api.trillet.ai/v1/api/call-flows/FLOW_ID" \
+  -H "x-api-key: YOUR_KEY" -H "x-workspace-id: YOUR_WORKSPACE" \
+  -H "Content-Type: application/json" \
+  -d '{"settings": {"webhooks": {"inbound": "https://example.com/hook"}}}'
+# Returns 200 with webhooks in body
+
+curl "https://api.trillet.ai/v1/api/call-flows/FLOW_ID" \
+  -H "x-api-key: YOUR_KEY" -H "x-workspace-id: YOUR_WORKSPACE"
+# settings.webhooks is {} -- values never saved</pre>
+      </div>
+    </div>
+    <div class="bug-field">
+      <div class="bug-field-label">Workaround</div>
+      <div class="bug-field-value">Configure webhooks via the flow editor in the Trillet web UI (Data > System Webhooks tab)</div>
+    </div>
+    <div class="bug-field">
+      <div class="bug-field-label">First confirmed</div>
+      <div class="bug-field-value">29 March 2026</div>
+    </div>
+  </div>
+</div>
+
+<!-- BUG-08 -->
+<div class="bug-card">
+  <div class="bug-header">
+    <div class="bug-id">BUG-08</div>
+    <div class="bug-title">Remove-agent (human takeover) fails on web calls with LiveKit encoding error</div>
+    <span class="badge badge-amber">Medium</span>
+  </div>
+  <div class="bug-body">
+    <div class="bug-field">
+      <div class="bug-field-label">Endpoint</div>
+      <div class="bug-field-value"><code>POST /v2/api/active-calls/{roomName}/remove-agent</code></div>
+    </div>
+    <div class="bug-field">
+      <div class="bug-field-label">Required body</div>
+      <div class="bug-field-value"><code>{"participantIdentity": "&lt;agent identity from participants array&gt;"}</code></div>
+    </div>
+    <div class="bug-field">
+      <div class="bug-field-label">Expected</div>
+      <div class="bug-field-value">Agent is removed from the call, allowing a human operator to take over</div>
+    </div>
+    <div class="bug-field">
+      <div class="bug-field-label">Actual</div>
+      <div class="bug-field-value"><code>500: "cannot encode field livekit.SendDataRequest.kind"</code> when called during a web call session</div>
+    </div>
+    <div class="bug-field">
+      <div class="bug-field-label">Scope</div>
+      <div class="bug-field-value">Confirmed only on web calls (WebRTC via LiveKit). The endpoint is not yet tested on standard telephony calls (inbound/outbound PSTN). The error suggests a web-call-specific data encoding issue in the LiveKit integration</div>
+    </div>
+    <div class="bug-field">
+      <div class="bug-field-label">Body note</div>
+      <div class="bug-field-value">Without the <code>participantIdentity</code> field, the server returns 400 "Participant identity is required." The field is validated correctly. The error occurs after validation during the LiveKit call</div>
+    </div>
+    <div class="bug-field">
+      <div class="bug-field-label">Workaround</div>
+      <div class="bug-field-value">None confirmed for web calls. For telephony: needs testing. End the web call via <code>POST /v1/api/calls/web/disconnect</code> if human takeover is required</div>
+    </div>
+    <div class="bug-field">
+      <div class="bug-field-label">First confirmed</div>
+      <div class="bug-field-value">31 March 2026</div>
+    </div>
+  </div>
+</div>
+
+<!-- Testing methodology -->
+<h2>Testing Methodology</h2>
+<p style="font-size:13px;color:var(--dark-gray);line-height:1.7;margin-bottom:12px;">
+  All bugs in this report were discovered and confirmed through direct API testing against the live production
+  environment. No staging or sandbox environment was available. Testing covered:
+</p>
+<ul style="font-size:13px;color:var(--dark-gray);line-height:1.8;padding-left:20px;">
+  <li>Direct REST calls via curl and Python, with both API key and JWT Bearer authentication</li>
+  <li>Playwright browser network capture during live UI sessions, used to discover undocumented endpoints and compare UI vs API behavior</li>
+  <li>Active voice call testing, including a live web call with real-time transcript and insight polling</li>
+  <li>Seven distinct validation passes between 29 and 31 March 2026</li>
+</ul>
+
+<div class="note" style="margin-top:20px;">
+  <strong>JWT parity confirmed:</strong> JWT Bearer tokens and API keys hit identical routes on the Trillet
+  API. All bugs confirmed via API key were re-tested with JWT and produced the same results. There is no
+  separate JWT-only API surface that resolves any of these issues.
+</div>
+
+<!-- Footer -->
+<div class="doc-footer">
+  <div>
+    <span style="font-weight:600;color:var(--text);">trillet</span>
+    &nbsp;&nbsp;|&nbsp;&nbsp;
+    API Bug Report
+    &nbsp;&nbsp;|&nbsp;&nbsp;
+    31 March 2026
+  </div>
+  <div>
+    8 confirmed bugs. Prepared for Trillet Australia and development team review.
+  </div>
+</div>
+
+</body>
+</html>

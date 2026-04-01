@@ -1,0 +1,1073 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trillet API Capability Matrix</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Urbanist:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blue: #0066FF;
+    --white: #FFFFFF;
+    --text: #171717;
+    --dark-gray: #374151;
+    --muted: #9CA3AF;
+    --light-blue: #EFF6FF;
+    --border: #E5E7EB;
+    --green: #059669;
+    --amber: #D97706;
+    --red: #DC2626;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 14px;
+    color: var(--text);
+    background: var(--white);
+    line-height: 1.65;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 56px 48px;
+  }
+  /* Header */
+  .doc-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding-bottom: 28px;
+    border-bottom: 3px solid var(--blue);
+    margin-bottom: 40px;
+  }
+  .logo-wordmark {
+    font-family: 'Urbanist', system-ui, sans-serif;
+    font-weight: 700;
+    font-size: 22px;
+    color: var(--blue);
+    letter-spacing: -0.5px;
+  }
+  .doc-meta {
+    text-align: right;
+    font-size: 11px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+  /* Title block */
+  .title-block { margin-bottom: 36px; }
+  h1 {
+    font-family: 'Urbanist', system-ui, sans-serif;
+    font-weight: 700;
+    font-size: 30px;
+    color: var(--text);
+    letter-spacing: -0.5px;
+    margin-bottom: 6px;
+  }
+  .doc-subtitle {
+    font-size: 15px;
+    color: var(--dark-gray);
+    font-weight: 500;
+    margin-bottom: 20px;
+  }
+  .doc-intro {
+    font-size: 13.5px;
+    color: var(--dark-gray);
+    line-height: 1.7;
+    max-width: 780px;
+  }
+  /* Section headings */
+  h2 {
+    font-family: 'Urbanist', system-ui, sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    color: var(--blue);
+    margin-top: 44px;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+  h3 {
+    font-family: 'Urbanist', system-ui, sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--dark-gray);
+    margin-top: 24px;
+    margin-bottom: 10px;
+  }
+  /* Tables */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12.5px;
+    margin-bottom: 8px;
+  }
+  thead tr {
+    background: var(--blue);
+    color: var(--white);
+  }
+  thead th {
+    font-family: 'Urbanist', system-ui, sans-serif;
+    font-weight: 600;
+    font-size: 11.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 10px 12px;
+    text-align: left;
+    white-space: nowrap;
+  }
+  tbody tr:nth-child(even) { background: var(--light-blue); }
+  tbody tr:nth-child(odd) { background: var(--white); }
+  tbody td {
+    padding: 9px 12px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+    line-height: 1.5;
+  }
+  td:first-child { font-weight: 500; }
+  /* Status badges */
+  .badge {
+    display: inline-block;
+    padding: 2px 9px;
+    border-radius: 9999px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.2px;
+    white-space: nowrap;
+  }
+  .badge-green { background: #D1FAE5; color: var(--green); }
+  .badge-amber { background: #FEF3C7; color: var(--amber); }
+  .badge-red { background: #FEE2E2; color: var(--red); }
+  .badge-blue { background: var(--light-blue); color: var(--blue); }
+  /* Notes */
+  .note {
+    background: var(--light-blue);
+    border-left: 3px solid var(--blue);
+    padding: 12px 16px;
+    border-radius: 0 6px 6px 0;
+    font-size: 13px;
+    color: var(--dark-gray);
+    margin: 16px 0;
+    line-height: 1.6;
+  }
+  .note strong { color: var(--text); }
+  /* Behavioral notes */
+  .behavior-item {
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+  }
+  .behavior-item:last-child { border-bottom: none; }
+  .behavior-title {
+    font-family: 'Urbanist', system-ui, sans-serif;
+    font-weight: 600;
+    font-size: 13.5px;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+  .behavior-body {
+    font-size: 13px;
+    color: var(--dark-gray);
+    line-height: 1.7;
+  }
+  /* Auth table */
+  .auth-row td:first-child { width: 160px; }
+  code {
+    font-family: 'Courier New', monospace;
+    font-size: 11.5px;
+    background: #F3F4F6;
+    padding: 1px 5px;
+    border-radius: 3px;
+    color: var(--text);
+  }
+  /* Footer */
+  .doc-footer {
+    margin-top: 56px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11px;
+    color: var(--muted);
+  }
+  .method-tag {
+    font-family: 'Courier New', monospace;
+    font-size: 10.5px;
+    font-weight: 700;
+    padding: 1px 5px;
+    border-radius: 3px;
+    margin-right: 3px;
+  }
+  .get { background: #D1FAE5; color: #065F46; }
+  .post { background: #DBEAFE; color: #1D4ED8; }
+  .put { background: #FEF3C7; color: #92400E; }
+  .delete { background: #FEE2E2; color: #991B1B; }
+  .patch { background: #F3E8FF; color: #6B21A8; }
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<div class="doc-header">
+  <div class="logo-wordmark">trillet</div>
+  <div class="doc-meta">
+    API Capability Matrix<br>
+    Updated: 31 March 2026<br>
+    Validation passes: 7 (29-31 March 2026)<br>
+    Status: Final
+  </div>
+</div>
+
+<!-- Title -->
+<div class="title-block">
+  <h1>API Capability Matrix</h1>
+  <div class="doc-subtitle">Programmatic Access Reference for Enterprise Integration Teams</div>
+  <p class="doc-intro">
+    Trillet has a REST API for managing voice agents, call flows, phone numbers, and calls.
+    This document maps every major platform feature to one of three categories: accessible via API,
+    UI-only, or currently broken at the server level. All findings come from seven rounds of live
+    testing against <code>api.trillet.ai</code> between 29 and 31 March 2026, using API key auth,
+    JWT Bearer auth, Playwright network capture during browser sessions, and active voice call tests.
+    Two API versions run in production. Most resources use <code>/v1/api/</code>. Call history,
+    active calls, and recordings use <code>/v2/api/</code>.
+  </p>
+</div>
+
+<div class="note">
+  <strong>Note on official documentation:</strong> The docs at docs.trillet.ai use incorrect paths
+  for a significant number of endpoints. Where the documented path differs from the working path,
+  the correct path is shown in this document. The discrepancies are detailed in the full API reference.
+</div>
+
+<!-- Section 1: API-Accessible -->
+<h2>API-Accessible Features</h2>
+<p style="font-size:13px;color:var(--dark-gray);margin-bottom:14px;">
+  All endpoints below accept <code>x-api-key</code> and <code>x-workspace-id</code> headers.
+  Base URL: <code>https://api.trillet.ai</code>
+</p>
+
+<h3>Core Voice Agent Management</h3>
+<table>
+  <thead>
+    <tr>
+      <th>Feature</th>
+      <th>Methods</th>
+      <th>Endpoint</th>
+      <th>Status</th>
+      <th>Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Create agent</td>
+      <td><span class="method-tag post">POST</span></td>
+      <td><code>/v1/api/agents</code></td>
+      <td><span class="badge badge-green">Confirmed</span></td>
+      <td>Returns full object. Supports all TTS/STT/LLM config on creation</td>
+    </tr>
+    <tr>
+      <td>List agents</td>
+      <td><span class="method-tag get">GET</span></td>
+      <td><code>/v1/api/agents</code></td>
+      <td><span class="badge badge-green">Confirmed</span></td>
+      <td>Returns all agents in workspace</td>
+    </tr>
+    <tr>
+      <td>Get agent detail</td>
+      <td><span class="method-tag get">GET</span></td>
+      <td><code>/v1/api/agents/{id}</code></td>
+      <td><span class="badge badge-green">Confirmed</span></td>
+      <td>Full config including phoneNumberIds, pathway, ttsDictionary</td>
+    </tr>
+    <tr>
+      <td>Update agent</td>
+      <td><span class="method-tag put">PUT</span></td>
+      <td><code>/v1/api/agents/{id}</code></td>
+      <td><span class="badge badge-green">Confirmed</span></td>
+      <td>Replace semantics. Partial objects drop omitted fields</td>
+    </tr>
+    <tr>
+      <td>Delete agent</td>
+      <td><span class="method-tag delete">DELETE</span></td>
+      <td><code>/v1/api/agents/{id}</code></td>
+      <td><span class="badge badge-green">Confirmed</span></td>
+      <td>Returns full object on delete (200, not 204)</td>
+    </tr>
+    <tr>
+      <td>Bind phone to agent</td>
+      <td><span class="method-tag post">POST</span></td>
+      <td><code>/v1/api/agents/{id}/bind/{phoneId}</code></td>
+      <td><span class="badge badge-green">Confirmed</span></td>
+      <td>Sets pathwayId on phone number. Required for inbound call routing</td>
+    </tr>
+    <tr>
+      <td>Voice catalog</td>
+      <td><span class="method-tag get">GET</span></td>
+      <td><code>/v1/api/agents/voices</code></td>
+      <td><span class="badge badge-green">Confirmed</span></td>
+      <td>Returns OpenAI (6), ElevenLabs (127), Hume (102). Rime/Cartesia set by voiceId string directly</td>
+    </tr>
+    <tr>
+      <td>LLM model catalog</td>
+      <td><span class="method-tag get">GET</span></td>
+      <td><code>/v1/api/llm-models/call-flow-models</code></td>
+      <td><span class="badge badge-green">Confirmed</span></td>
+      <td>18 models including GPT-5 family, Gemini 2.5/3, Llama 4, speech-to-speech pipelines</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Call Flow Management</h3>
+<table>
+  <thead>
+    <tr>
+      <th>Feature</th>
+      <th>Methods</th>
+      <th>Endpoint</th>
+      <th>Status</th>
+      <th>Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Create call flow</td>
+      <td><span class="method-tag post">POST</span></td>
+      <td><code>/v1/api/call-flows/{id}/duplicate</code></td>
+      <td><span class="badge badge-amber">Workaround</span></td>
+      <td>Direct POST to /call-flows returns 500. Workaround: duplicate an existing flow, then configure via PUT</td>
+    </tr>
+    <tr>
+      <td>List call flows</td>
+      <td><span class="method-tag get">GET</span></td>
+      <td><code>/v1/api/call-flows</code></td>
+      <td><span class="badge badge-green">Confirmed</span></td>
+      <td>Returns full configs including prompts, nodes, edges, all settings</td>
+    </tr>
+    <tr>
+      <td>Get call flow</td>
+      <td><span class="method-tag get">GET</span></td>
+      <td><code>/v1/api/call-flows/{id}</code></td>
+      <td><span class="badge badge-green">Confirmed</span></td>
+      <td>Full detail including promptVersions array</td>
+    </tr>
+    <tr>
+      <td>Update call flow</td>
+      <td><span class="method-tag put">PUT</span></td>
+      <td><code>/v1/api/call-flows/{id}</code></td>
+      <td><span class="badge badge-amber">Conditional</span></td>
+      <td>Only persists on flows you own. Non-owned flows return 200 but write nothing. 36 settings fields available</td>
+    </tr>
+    <tr>
+      <td>Delete call flow</td>
+      <td><span class="method-tag delete">DELETE</span></td>
+      <td><code>/v1/api/call-flows/{id}</code></td>
+      <td><span class="badge badge-green">Confirmed</span></td>
+      <td>Returns 204</td>
+    </tr>
+    <tr>
+      <td>Publish draft to live</td>
+      <td><span class="method-tag post">POST</span></td>
+      <td><code>/v1/api/call-flows/{id}/drafts/{draftId}/publish</code></td>
+      <td><span class="badge badge-green">Confirmed</span></td>
+      <td>Equivalent to "Push Live" in UI. API PUTs bypass drafts and go live directly</td>
+    </tr>
+    <tr>
+      <td>List flow drafts</td>
+      <td><span class="method-tag get">GET</span></td>
+      <td><code>/v1/api/call-flows/{id}/drafts</code></td>
+      <td><span class="badge badge-green">Confirmed</span></td>
+      <td>Draft version history</td>
+    </tr>
+    <tr>
+      <td>Flow folders (CRUD)</td>
+      <td><span class="method-tag get">GET</span> <span class="method-tag post">POST</span> <span class="method-tag patch">PATCH</span> <span class="method-tag delete">DELETE</span></td>
+      <td><code>/v1/api/flow-folders</code></td>
+      <td><span class="badge badge-green">Confirmed</span></td>
+      <td>Docs say /folders. Correct path is /flow-folders</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Knowledge Base</h3>
+<table>
+  <thead>
+    <tr>
+      <th>Feature</th>
+      <th>Methods</th>
+      <th>Endpoint</th>
+      <th>Status</th>
+      <th>Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Create KB</td>
+      <td><span class="method-tag post">POST</span></td>
+      <td><code>/v1/api/knowledgebase</code></td>
+      <td><span class="badge badge-green">Confirmed</span></td>
+      <td>Docs say /knowledge-base (hyphen). Correct path has no hyphen</td>
+    </tr>
+    <tr>
+      <td>List KBs</td>
+      <td><span class="method-tag get">GET</span></td>
+      <td><code>/v1/api/knowledgebase/paginated</code></td>
+      <td><span class="badge badge-green">Confirmed</span></td>
+      <td>Paginated. Docs say /knowledge-base/list</td>
+    </tr>
+    <tr>
+      <td>Add text content</td>
+      <td><span class="method-tag post">POST</span></td>
+      <td><code>/v1/api/knowledgebase/{id}/text</code></td>
+      <td><span class="badge badge-green">Confirmed</span></td>
+      <td>Body: <code>{"text": "..."}</code>. Fully working</td>
+    </tr>
+    <tr>
+      <td>Upload file to KB</td>
+      <td><span class="method-tag post">POST</span></td>
+      <td><code>/v1/api/knowledgebase/{id}/files</code></td>
+      <td><span class="badge badge-amber">Partial</span></td>
+      <td>Works via browser. Curl multipart field name unresolved. Text upload is the confirmed workaround</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Phone Numbers (Twilio)</h3>
+<table>
+  <thead>
+    <tr>
+      <th>Feature</th>
+      <th>Methods</th>
+      <th>Endpoint</th>
+      <th>Status</th>
+      <th>Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>List workspace numbers</td>
+      <td><span class="method-tag get">GET</span></td>
+      <td><code>/v1/api/twilio/user-phone-numbers</code></td>
+      <td><span class="badge badge-green">Confirmed</span></td>
+      <td>Docs say /phone-numbers/list. Correct path uses /twilio/ prefix</td>
+    </tr>
+    <tr>
+      <td>Check quota</td>
+      <td><span class="method-tag get">GET</span></td>
+      <td><code>/v1/api/twilio/free-number-status</code></td>
+      <td><span class="badge badge-green">Confirmed</span></td>
+      <td>Returns {limit, used, remaining, hasFree}. Undocumented</td>
+    </tr>
+    <tr>
+      <td>Search available numbers</td>
+      <td><span class="method-tag get">GET</span></td>
+      <td><code>/v1/api/twilio/available-numbers</code></td>
+      <td><span class="badge badge-green">Confirmed</span></td>
+      <td>Query: country, type, areaCode. Returns numbers with voice/SMS/MMS capabilities. Undocumented</td>
+    </tr>
+    <tr>
+      <td>Purchase number</td>
+      <td><span class="method-tag post">POST</span></td>
+      <td><code>/v1/api/twilio/purchase-number</code></td>
+      <td><span class="badge badge-green">Confirmed</span></td>
+      <td>Body: {country, phoneNumber, type, workspaceId}. Undocumented</td>
+    </tr>
+    <tr>
+      <td>Register external number (BYON)</td>
+      <td><span class="method-tag post">POST</span></td>
+      <td><code>/v1/api/twilio/register-external-number</code></td>
+      <td><span class="badge badge-amber">Partial</span></td>
+      <td>Endpoint confirmed. Full credential object structure undocumented beyond appendPlus field</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Calls: Outbound, Web, and Batch</h3>
+<table>
+  <thead>
+    <tr>
+      <th>Feature</th>
+      <th>Methods</th>
+      <th>Endpoint</th>
+      <th>Status</th>
+      <th>Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Initiate outbound call</td>
+      <td><span class="method-tag post">POST</span></td>
+      <td><code>/v1/api/call</code></td>
+      <td><span class="badge badge-green">Confirmed</span></td>
+      <td>Body: {to, call_agent_id, callback_url, dynamic_variables, metadata}. Agent must have phone and pathway set</td>
+    </tr>
+    <tr>
+      <td>Start web call (browser)</td>
+      <td><span class="method-tag post">POST</span></td>
+      <td><code>/v1/api/calls/web/connect</code></td>
+      <td><span class="badge badge-green">Confirmed</span></td>
+      <td>Body: {agentId}. Returns LiveKit JWT token for WebRTC session</td>
+    </tr>
+    <tr>
+      <td>End web call</td>
+      <td><span class="method-tag post">POST</span></td>
+      <td><code>/v1/api/calls/web/disconnect</code></td>
+      <td><span class="badge badge-green">Confirmed</span></td>
+      <td>Body: {callId, roomName}</td>
+    </tr>
+    <tr>
+      <td>Upload batch call CSV</td>
+      <td><span class="method-tag post">POST</span></td>
+      <td><code>/v1/api/batch-calls</code></td>
+      <td><span class="badge badge-green">Confirmed</span></td>
+      <td>Multipart form: file (CSV, max 20MB), agentId, scheduledAt. Required CSV column: phone_number</td>
+    </tr>
+    <tr>
+      <td>Query batch call results</td>
+      <td><span class="method-tag get">GET</span></td>
+      <td><code>/v2/api/call-history?batchId={id}</code></td>
+      <td><span class="badge badge-green">Confirmed</span></td>
+      <td>No standalone batch list endpoint. Filter call history by batchId field instead</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Call History and Analytics</h3>
+<table>
+  <thead>
+    <tr>
+      <th>Feature</th>
+      <th>Methods</th>
+      <th>Endpoint</th>
+      <th>Status</th>
+      <th>Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>List call history</td>
+      <td><span class="method-tag get">GET</span></td>
+      <td><code>/v2/api/call-history</code></td>
+      <td><span class="badge badge-green">Confirmed</span></td>
+      <td>v2 only. Docs say v1. Filters: agentId, status, dateRange, batchId</td>
+    </tr>
+    <tr>
+      <td>Get call detail</td>
+      <td><span class="method-tag get">GET</span></td>
+      <td><code>/v2/api/call-history/{id}</code></td>
+      <td><span class="badge badge-green">Confirmed</span></td>
+      <td>Full transcript, AI summary, sentiment, compliance analysis, function calls, cost</td>
+    </tr>
+    <tr>
+      <td>Call metrics</td>
+      <td><span class="method-tag get">GET</span></td>
+      <td><code>/v2/api/call-history/metrics</code></td>
+      <td><span class="badge badge-green">Confirmed</span></td>
+      <td>Returns {totalCalls, avgDuration, completionRate}</td>
+    </tr>
+    <tr>
+      <td>Filter options</td>
+      <td><span class="method-tag get">GET</span></td>
+      <td><code>/v2/api/call-history/filter-options</code></td>
+      <td><span class="badge badge-green">Confirmed</span></td>
+      <td>Agent list and status options for UI filters. Undocumented</td>
+    </tr>
+    <tr>
+      <td>Phonebook (frequent callers)</td>
+      <td><span class="method-tag get">GET</span></td>
+      <td><code>/v2/api/call-history/phonebook</code></td>
+      <td><span class="badge badge-green">Confirmed</span></td>
+      <td>Most-called numbers from call history. Undocumented</td>
+    </tr>
+    <tr>
+      <td>Call dispositions</td>
+      <td><span class="method-tag get">GET</span></td>
+      <td><code>/v1/api/call-dispositions</code></td>
+      <td><span class="badge badge-green">Confirmed</span></td>
+      <td>Paginated. Filters: agentId, batchId</td>
+    </tr>
+    <tr>
+      <td>Export call history (CSV)</td>
+      <td>N/A</td>
+      <td>N/A</td>
+      <td><span class="badge badge-red">UI Only</span></td>
+      <td>No API export endpoint. Use paginated GET /v2/api/call-history for programmatic access</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Active Calls (Live Monitoring)</h3>
+<table>
+  <thead>
+    <tr>
+      <th>Feature</th>
+      <th>Methods</th>
+      <th>Endpoint</th>
+      <th>Status</th>
+      <th>Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>List active calls</td>
+      <td><span class="method-tag get">GET</span></td>
+      <td><code>/v2/api/active-calls</code></td>
+      <td><span class="badge badge-green">Confirmed</span></td>
+      <td>Returns {data, count, timestamp}. Includes roomName, sentiment, lastMessage, participants</td>
+    </tr>
+    <tr>
+      <td>Get active call detail</td>
+      <td><span class="method-tag get">GET</span></td>
+      <td><code>/v2/api/active-calls/{roomName}</code></td>
+      <td><span class="badge badge-green">Confirmed</span></td>
+      <td>Real-time transcript, participants array, full call object</td>
+    </tr>
+    <tr>
+      <td>Live call insights</td>
+      <td><span class="method-tag get">GET</span></td>
+      <td><code>/v2/api/active-calls/{roomName}/insights</code></td>
+      <td><span class="badge badge-green">Confirmed</span></td>
+      <td>Returns {sentiment, summary, suggestions}. Live AI analysis</td>
+    </tr>
+    <tr>
+      <td>Human takeover (remove agent)</td>
+      <td><span class="method-tag post">POST</span></td>
+      <td><code>/v2/api/active-calls/{roomName}/remove-agent</code></td>
+      <td><span class="badge badge-amber">Partial</span></td>
+      <td>Body: {participantIdentity}. Server bug on web calls (LiveKit encoding error). Expected working on telephony calls</td>
+    </tr>
+    <tr>
+      <td>Get recording</td>
+      <td><span class="method-tag get">GET</span></td>
+      <td><code>/v2/api/recordings/{callHistoryId}</code></td>
+      <td><span class="badge badge-green">Confirmed</span></td>
+      <td>Streams audio. Recording must be enabled at bind time (recordCalls field). Docs say v1</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Messaging and SMS</h3>
+<table>
+  <thead>
+    <tr>
+      <th>Feature</th>
+      <th>Methods</th>
+      <th>Endpoint</th>
+      <th>Status</th>
+      <th>Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Omni flow agents (CRUD)</td>
+      <td><span class="method-tag get">GET</span> <span class="method-tag post">POST</span> <span class="method-tag put">PUT</span> <span class="method-tag delete">DELETE</span></td>
+      <td><code>/v1/api/omni-flow-agents</code></td>
+      <td><span class="badge badge-green">Confirmed</span></td>
+      <td>Docs say /omniflow-agents (no hyphen). Correct path uses hyphen</td>
+    </tr>
+    <tr>
+      <td>Bind phone to messaging agent</td>
+      <td><span class="method-tag post">POST</span></td>
+      <td><code>/v1/api/omni-flow-agents/{id}/bind/{phoneId}</code></td>
+      <td><span class="badge badge-green">Confirmed</span></td>
+      <td>Sets messagePathwayId. Required for SMS delivery to work</td>
+    </tr>
+    <tr>
+      <td>Post-call SMS (A2P pool)</td>
+      <td>Via flow settings</td>
+      <td><code>PUT /v1/api/call-flows/{id}</code></td>
+      <td><span class="badge badge-green">Confirmed</span></td>
+      <td>smsPostCallSettings: {businessOwnerSMS, customerSMS, useInternalA2P: true, businessOwnerPhoneNumber}. useInternalA2P required</td>
+    </tr>
+    <tr>
+      <td>On-demand AI SMS generation</td>
+      <td><span class="method-tag post">POST</span></td>
+      <td><code>/v1/api/conversations/message/generate</code></td>
+      <td><span class="badge badge-red">Broken</span></td>
+      <td>Returns success but does not deliver. Dynamic variables not interpolated. Use post-call SMS instead</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Workspace and Team</h3>
+<table>
+  <thead>
+    <tr>
+      <th>Feature</th>
+      <th>Methods</th>
+      <th>Endpoint</th>
+      <th>Status</th>
+      <th>Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Get workspace</td>
+      <td><span class="method-tag get">GET</span></td>
+      <td><code>/v1/api/workspaces/{id}</code></td>
+      <td><span class="badge badge-green">Confirmed</span></td>
+      <td>Full workspace: team, billing, features, branding, batch config</td>
+    </tr>
+    <tr>
+      <td>Create WL workspace</td>
+      <td><span class="method-tag post">POST</span></td>
+      <td><code>/v1/api/workspaces</code></td>
+      <td><span class="badge badge-green">Confirmed</span></td>
+      <td>White-label workspace creation. Body: {name, initials}</td>
+    </tr>
+    <tr>
+      <td>Update workspace</td>
+      <td><span class="method-tag put">PUT</span></td>
+      <td><code>/v1/api/workspaces/{id}</code></td>
+      <td><span class="badge badge-green">Confirmed</span></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>Delete workspace</td>
+      <td><span class="method-tag delete">DELETE</span></td>
+      <td><code>/v1/api/workspaces/{id}</code></td>
+      <td><span class="badge badge-red">Broken</span></td>
+      <td>Server bug: "Cast to string failed for deletedBy". Use UI</td>
+    </tr>
+    <tr>
+      <td>List all workspaces</td>
+      <td><span class="method-tag get">GET</span></td>
+      <td><code>/v1/api/workspaces</code></td>
+      <td><span class="badge badge-red">UI Only</span></td>
+      <td>Requires session JWT. Returns 500 with API key auth</td>
+    </tr>
+    <tr>
+      <td>Invite team member</td>
+      <td><span class="method-tag post">POST</span></td>
+      <td><code>/v1/api/workspaces/{id}/invite</code></td>
+      <td><span class="badge badge-green">Confirmed</span></td>
+      <td>Body: {email, role}. Sends actual invitation email. Undocumented</td>
+    </tr>
+    <tr>
+      <td>Crews (CRUD)</td>
+      <td><span class="method-tag get">GET</span> <span class="method-tag post">POST</span> <span class="method-tag put">PUT</span> <span class="method-tag delete">DELETE</span></td>
+      <td><code>/v1/api/crews</code></td>
+      <td><span class="badge badge-green">Confirmed</span></td>
+      <td>Multi-agent routing groups. leadPathwayId sets the crew's entry flow</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- Section 2: UI-Only -->
+<h2>UI-Only Features</h2>
+<p style="font-size:13px;color:var(--dark-gray);margin-bottom:14px;">
+  These features are accessible only through the web interface at app.trillet.ai. All listed paths were
+  tested with both API key and JWT Bearer authentication. 404 with JWT confirms the route is not registered
+  on the server, not an auth gap.
+</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Feature</th>
+      <th>Status</th>
+      <th>Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Call history CSV export</td>
+      <td><span class="badge badge-red">UI Only</span></td>
+      <td>No export endpoint. GET /v2/api/call-history with pagination provides programmatic access to call records</td>
+    </tr>
+    <tr>
+      <td>API key management</td>
+      <td><span class="badge badge-red">UI Only</span></td>
+      <td>All tested paths 404. Create and rotate API keys via Settings > Developer in the UI</td>
+    </tr>
+    <tr>
+      <td>Role and permission management</td>
+      <td><span class="badge badge-red">UI Only</span></td>
+      <td>RBAC configuration is UI-only. Team invite via API (see above) accepts a role param at creation</td>
+    </tr>
+    <tr>
+      <td>Voice cloning</td>
+      <td><span class="badge badge-red">UI Only</span></td>
+      <td>Route is registered on the server but the clone service method is not implemented. Server returns 500 on any clone request</td>
+    </tr>
+    <tr>
+      <td>Meta Lead Ads integration</td>
+      <td><span class="badge badge-red">UI Only</span></td>
+      <td>OAuth flow is UI-only. All auth/status/configure paths return 404</td>
+    </tr>
+    <tr>
+      <td>Meta WhatsApp Business integration</td>
+      <td><span class="badge badge-red">UI Only</span></td>
+      <td>All tested paths return 404. OAuth setup requires the UI</td>
+    </tr>
+    <tr>
+      <td>Webhook management (standalone)</td>
+      <td><span class="badge badge-red">UI Only</span></td>
+      <td>No standalone webhook endpoint. Webhooks are configured inline on call flows via the settings.webhooks field</td>
+    </tr>
+    <tr>
+      <td>Message flow autopilot toggle</td>
+      <td><span class="badge badge-red">UI Only</span></td>
+      <td>PUT /message-flows/{id}/autopilot returns 404. Not implemented in the API</td>
+    </tr>
+    <tr>
+      <td>In-call APIs (custom function calling)</td>
+      <td><span class="badge badge-red">UI Only</span></td>
+      <td>Configured via the flow editor toolbar. No equivalent API field discovered</td>
+    </tr>
+    <tr>
+      <td>Anti-bot detection</td>
+      <td><span class="badge badge-red">UI Only</span></td>
+      <td>Security > Compliance & Detection. No API field found</td>
+    </tr>
+    <tr>
+      <td>Data retention policy</td>
+      <td><span class="badge badge-red">UI Only</span></td>
+      <td>Auto-delete configuration is UI-only</td>
+    </tr>
+    <tr>
+      <td>Persistent Recall (Beta)</td>
+      <td><span class="badge badge-red">UI Only</span></td>
+      <td>LLM response caching toggle. No API field discovered</td>
+    </tr>
+    <tr>
+      <td>Calendar integrations (initial OAuth)</td>
+      <td><span class="badge badge-red">UI Only</span></td>
+      <td>Google Calendar, Cal.com, and GoHighLevel OAuth flows require the UI. Post-auth config (access tokens, calendar IDs) can be written via API PUT on the flow settings object</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- Section 3: Platform Bugs -->
+<h2>Platform-Level Bugs</h2>
+<p style="font-size:13px;color:var(--dark-gray);margin-bottom:14px;">
+  Confirmed bugs as of 31 March 2026. Each has a working reproduction path and a documented workaround where one exists.
+  A separate bug report document provides full reproduction steps for filing with the Trillet development team.
+</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Affected Endpoint</th>
+      <th>Symptom</th>
+      <th>Severity</th>
+      <th>Workaround</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>BUG-01</td>
+      <td><code>POST /v1/api/call-flows</code></td>
+      <td>Returns 500 on all payloads. Flow creation is non-functional</td>
+      <td><span class="badge badge-red">High</span></td>
+      <td>Duplicate an existing flow via POST /call-flows/{id}/duplicate, then configure via PUT</td>
+    </tr>
+    <tr>
+      <td>BUG-02</td>
+      <td><code>PUT /v1/api/call-flows/{id}</code> (non-owned)</td>
+      <td>Returns 200 with submitted values but writes nothing. Silent failure with no error</td>
+      <td><span class="badge badge-red">High</span></td>
+      <td>Only PUT flows created or duplicated by the same API key user</td>
+    </tr>
+    <tr>
+      <td>BUG-03</td>
+      <td>All PUT endpoints</td>
+      <td>Replace semantics. Partial objects wipe omitted fields. API returns 200 regardless</td>
+      <td><span class="badge badge-amber">Medium</span></td>
+      <td>GET the full object first, merge changes, then PUT the complete object</td>
+    </tr>
+    <tr>
+      <td>BUG-04</td>
+      <td><code>GET /v1/api/voices/search</code></td>
+      <td>Route registered but returns 500: "voiceService.searchVoices is not a function"</td>
+      <td><span class="badge badge-amber">Medium</span></td>
+      <td>Use GET /v1/api/agents/voices for voice catalog</td>
+    </tr>
+    <tr>
+      <td>BUG-05</td>
+      <td><code>DELETE /v1/api/workspaces/{id}</code></td>
+      <td>Returns 500: "Cast to string failed for deletedBy"</td>
+      <td><span class="badge badge-amber">Medium</span></td>
+      <td>Delete workspaces via the UI</td>
+    </tr>
+    <tr>
+      <td>BUG-06</td>
+      <td><code>POST /v1/api/conversations/message/generate</code></td>
+      <td>Returns success response but SMS is not delivered. Dynamic variables not interpolated</td>
+      <td><span class="badge badge-red">High</span></td>
+      <td>Use post-call SMS via smsPostCallSettings on the call flow instead</td>
+    </tr>
+    <tr>
+      <td>BUG-07</td>
+      <td><code>PUT /v1/api/call-flows/{id}</code> settings.webhooks</td>
+      <td>Returns 200 with webhook values, but subsequent GET shows empty webhooks. Values do not persist</td>
+      <td><span class="badge badge-amber">Medium</span></td>
+      <td>Configure webhooks via the flow editor UI</td>
+    </tr>
+    <tr>
+      <td>BUG-08</td>
+      <td><code>POST /v2/api/active-calls/{roomName}/remove-agent</code></td>
+      <td>Body validates correctly but returns 500: "cannot encode field livekit.SendDataRequest.kind" on web calls</td>
+      <td><span class="badge badge-amber">Medium</span></td>
+      <td>Expected to work on telephony calls. Web call limitation only</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- Section 4: Behavioral Notes -->
+<h2>Key Behavioral Notes</h2>
+
+<div class="behavior-item">
+  <div class="behavior-title">PUT replaces, it does not merge</div>
+  <div class="behavior-body">
+    Send a partial object to any PUT endpoint and all omitted fields revert to defaults or empty values.
+    The API returns 200 with your submitted values, so the write looks successful. A GET afterward shows
+    the omitted fields are gone. Always GET the full resource first, merge your changes in, then PUT the
+    complete object back. This applies to agents, call flows, knowledge bases, and everything else.
+  </div>
+</div>
+
+<div class="behavior-item">
+  <div class="behavior-title">Call flow ownership</div>
+  <div class="behavior-body">
+    PUT only persists on flows you created or duplicated with your API key. PUT a flow owned by another
+    workspace user and you get 200 back, but nothing changes. No error is returned. The API claims success.
+    When building automations that modify call flows, always ensure the flow was created or duplicated by
+    the same API key user performing the update.
+  </div>
+</div>
+
+<div class="behavior-item">
+  <div class="behavior-title">Draft and publish</div>
+  <div class="behavior-body">
+    The web UI saves call flow changes to a draft first. Going live requires clicking "Push Live," which
+    triggers <code>POST /call-flows/{id}/drafts/{draftId}/publish</code>. API PUTs skip the draft system
+    entirely and write directly to the live configuration. If a team uses both the UI and the API to manage
+    the same flows, be aware that UI drafts and API writes operate as separate paths to the live config.
+  </div>
+</div>
+
+<div class="behavior-item">
+  <div class="behavior-title">Office hours and outbound calls</div>
+  <div class="behavior-body">
+    If office hours are enabled on a call flow, outbound calls placed outside the configured window are
+    queued rather than placed immediately. They sit in pending status until the next open slot. The
+    <code>scheduledTime</code> field on the call record shows when it will be placed. To call on demand
+    without scheduling constraints, either disable office hours or confirm calls are being placed within
+    the configured window.
+  </div>
+</div>
+
+<div class="behavior-item">
+  <div class="behavior-title">SMS: three required fields</div>
+  <div class="behavior-body">
+    Post-call SMS via the A2P pool requires three specific fields in <code>smsPostCallSettings</code>:
+    <code>businessOwnerSMS: true</code>, <code>useInternalA2P: true</code>, and
+    <code>businessOwnerPhoneNumber</code> (the exact field name the SMS pipeline reads; <code>businessOwnerPhone</code>
+    is accepted by PUT but not read by the SMS service). Missing any one of these causes silent failure
+    with no error returned.
+  </div>
+</div>
+
+<div class="behavior-item">
+  <div class="behavior-title">Transfer configuration schema</div>
+  <div class="behavior-body">
+    The <code>transfers</code> array in flow settings accepts two field formats, but the
+    <code>transfer_call</code> function only reads the UI format. Using the older API format (label, phoneNumber)
+    causes the agent to report "Team not found" at transfer time despite the transfer appearing correctly in
+    settings. Always use: <code>friendly_name</code>, <code>destination</code> (E.164),
+    <code>method</code> ("cold"/"warm"), <code>destinationType</code> ("SIP").
+  </div>
+</div>
+
+<!-- Section 5: Auth Reference -->
+<h2>Authentication Reference</h2>
+
+<table class="auth-row">
+  <thead>
+    <tr>
+      <th>Header</th>
+      <th>Value</th>
+      <th>Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>x-api-key</code></td>
+      <td>Your API key</td>
+      <td>Generated at app.trillet.ai > Settings > Developer > API Keys</td>
+    </tr>
+    <tr>
+      <td><code>x-workspace-id</code></td>
+      <td>Your workspace ID</td>
+      <td>Required on every request. Found in the workspace URL or JWT access_token payload</td>
+    </tr>
+    <tr>
+      <td><code>Content-Type</code></td>
+      <td><code>application/json</code></td>
+      <td>Required on POST and PUT requests</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="note" style="margin-top:16px;">
+  <strong>JWT vs API key:</strong> JWT Bearer tokens and API keys hit identical routes. There is no separate
+  JWT-only API surface. Any endpoint returning 404 with an API key will return 404 with a JWT. Features that
+  appear UI-only are implemented in Next.js server-side routes, not in the public REST API.
+</div>
+
+<!-- Web SDK note -->
+<h2>Web SDK</h2>
+<p style="font-size:13px;color:var(--dark-gray);margin-bottom:10px;">
+  Trillet publishes an official JavaScript SDK for embedding voice agents in web applications.
+</p>
+<table>
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>npm package</td>
+      <td><code>@trillet-ai/web-sdk</code></td>
+    </tr>
+    <tr>
+      <td>CDN</td>
+      <td><code>https://cdn.jsdelivr.net/npm/@trillet-ai/web-sdk/+esm</code></td>
+    </tr>
+    <tr>
+      <td>Key class</td>
+      <td><code>TrilletAgent({ workspaceId, agentId, variables, mode: 'voice' })</code></td>
+    </tr>
+    <tr>
+      <td>Methods</td>
+      <td><code>startPublicCall()</code>, <code>endCall()</code>, <code>toggleMicrophone(bool)</code>, <code>getTranscripts()</code></td>
+    </tr>
+    <tr>
+      <td>Prerequisites</td>
+      <td>Domain whitelisted in Settings > Domains. Public access enabled on the call flow</td>
+    </tr>
+    <tr>
+      <td>Transport</td>
+      <td>LiveKit WebRTC</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- Footer -->
+<div class="doc-footer">
+  <div>
+    <span style="font-weight:600;color:var(--text);">trillet</span>
+    &nbsp;&nbsp;|&nbsp;&nbsp;
+    API Capability Matrix
+    &nbsp;&nbsp;|&nbsp;&nbsp;
+    Testing completed 31 March 2026
+  </div>
+  <div>
+    Prepared for Trillet Australia reference. Internal use.
+  </div>
+</div>
+
+</body>
+</html>

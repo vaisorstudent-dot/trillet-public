@@ -1,0 +1,1621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trillet API Reference</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Urbanist:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blue: #0066FF;
+    --white: #FFFFFF;
+    --text: #171717;
+    --dark-gray: #374151;
+    --muted: #9CA3AF;
+    --light-blue: #EFF6FF;
+    --border: #E5E7EB;
+    --green: #059669;
+    --amber: #D97706;
+    --red: #DC2626;
+    --sidebar-width: 240px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  /* Layout */
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 14px;
+    color: var(--text);
+    background: var(--white);
+    line-height: 1.65;
+    display: flex;
+    min-height: 100vh;
+  }
+
+  /* Sidebar */
+  .sidebar {
+    width: var(--sidebar-width);
+    min-height: 100vh;
+    background: #F9FAFB;
+    border-right: 1px solid var(--border);
+    position: fixed;
+    top: 0;
+    left: 0;
+    overflow-y: auto;
+    padding: 24px 0 40px;
+  }
+  .sidebar-logo {
+    font-family: 'Urbanist', system-ui, sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    color: var(--blue);
+    padding: 0 20px 20px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 16px;
+    display: block;
+  }
+  .sidebar-section {
+    padding: 6px 20px 2px;
+    font-family: 'Urbanist', system-ui, sans-serif;
+    font-weight: 700;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--muted);
+    margin-top: 12px;
+  }
+  .sidebar a {
+    display: block;
+    padding: 5px 20px;
+    font-size: 13px;
+    color: var(--dark-gray);
+    text-decoration: none;
+    border-left: 2px solid transparent;
+    transition: all 0.1s;
+  }
+  .sidebar a:hover { color: var(--blue); background: var(--light-blue); border-left-color: var(--blue); }
+
+  /* Main content */
+  .main {
+    margin-left: var(--sidebar-width);
+    flex: 1;
+    padding: 48px 56px;
+    max-width: 900px;
+  }
+
+  /* Page header */
+  .page-header {
+    padding-bottom: 28px;
+    border-bottom: 3px solid var(--blue);
+    margin-bottom: 40px;
+  }
+  h1 {
+    font-family: 'Urbanist', system-ui, sans-serif;
+    font-weight: 700;
+    font-size: 32px;
+    color: var(--text);
+    letter-spacing: -0.5px;
+    margin-bottom: 8px;
+  }
+  .page-tagline { font-size: 15px; color: var(--dark-gray); margin-bottom: 16px; }
+
+  /* Resource sections */
+  .resource-section {
+    margin-bottom: 64px;
+    padding-bottom: 48px;
+    border-bottom: 1px solid var(--border);
+  }
+  .resource-section:last-child { border-bottom: none; }
+  h2 {
+    font-family: 'Urbanist', system-ui, sans-serif;
+    font-weight: 700;
+    font-size: 22px;
+    color: var(--text);
+    margin-bottom: 6px;
+    margin-top: 0;
+    padding-top: 0;
+  }
+  .resource-desc { font-size: 13.5px; color: var(--dark-gray); line-height: 1.7; margin-bottom: 20px; }
+  h3 {
+    font-family: 'Urbanist', system-ui, sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--blue);
+    margin-top: 28px;
+    margin-bottom: 12px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--border);
+  }
+  h4 {
+    font-family: 'Urbanist', system-ui, sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    color: var(--dark-gray);
+    margin-top: 18px;
+    margin-bottom: 8px;
+  }
+  p { font-size: 13.5px; color: var(--dark-gray); line-height: 1.7; margin-bottom: 10px; }
+
+  /* Endpoint blocks */
+  .endpoint {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    margin-bottom: 20px;
+    overflow: hidden;
+  }
+  .endpoint-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    background: #F9FAFB;
+    border-bottom: 1px solid var(--border);
+  }
+  .method {
+    font-family: 'Courier New', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 4px;
+    min-width: 52px;
+    text-align: center;
+  }
+  .GET { background: #D1FAE5; color: #065F46; }
+  .POST { background: #DBEAFE; color: #1D4ED8; }
+  .PUT { background: #FEF3C7; color: #92400E; }
+  .DELETE { background: #FEE2E2; color: #991B1B; }
+  .PATCH { background: #F3E8FF; color: #6B21A8; }
+  .endpoint-path {
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+    color: var(--text);
+    font-weight: 500;
+  }
+  .endpoint-summary { font-size: 12.5px; color: var(--muted); margin-left: auto; }
+  .endpoint-body { padding: 16px 18px; }
+  .endpoint-body p { font-size: 13px; margin-bottom: 10px; }
+
+  /* Parameter tables */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12.5px;
+    margin: 10px 0;
+  }
+  thead tr { background: var(--blue); color: var(--white); }
+  thead th {
+    font-family: 'Urbanist', system-ui, sans-serif;
+    font-weight: 600;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 8px 10px;
+    text-align: left;
+  }
+  tbody tr:nth-child(even) { background: var(--light-blue); }
+  tbody tr:nth-child(odd) { background: var(--white); }
+  tbody td { padding: 7px 10px; border-bottom: 1px solid var(--border); vertical-align: top; line-height: 1.5; }
+  .param-name { font-family: 'Courier New', monospace; font-size: 12px; color: var(--text); }
+  .param-type { font-size: 11px; color: var(--blue); font-family: 'Courier New', monospace; }
+  .param-required { color: var(--red); font-size: 10px; font-weight: 700; }
+  .param-optional { color: var(--muted); font-size: 10px; }
+
+  /* Code blocks */
+  code {
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+    background: #F3F4F6;
+    padding: 1px 5px;
+    border-radius: 3px;
+    color: var(--text);
+  }
+  pre {
+    background: #111827;
+    color: #F3F4F6;
+    border-radius: 6px;
+    padding: 16px 18px;
+    font-size: 12px;
+    font-family: 'Courier New', monospace;
+    line-height: 1.7;
+    overflow-x: auto;
+    margin: 10px 0;
+  }
+  pre .comment { color: #6EE7B7; }
+  pre .key { color: #93C5FD; }
+  pre .val { color: #FCD34D; }
+
+  /* Badges */
+  .badge {
+    display: inline-block;
+    padding: 1px 8px;
+    border-radius: 9999px;
+    font-size: 10.5px;
+    font-weight: 600;
+  }
+  .badge-green { background: #D1FAE5; color: var(--green); }
+  .badge-amber { background: #FEF3C7; color: var(--amber); }
+  .badge-red { background: #FEE2E2; color: var(--red); }
+
+  /* Callout boxes */
+  .note { background: var(--light-blue); border-left: 3px solid var(--blue); padding: 10px 14px; border-radius: 0 6px 6px 0; font-size: 13px; color: var(--dark-gray); margin: 10px 0; line-height: 1.6; }
+  .warning { background: #FFFBEB; border-left: 3px solid var(--amber); padding: 10px 14px; border-radius: 0 6px 6px 0; font-size: 13px; color: var(--dark-gray); margin: 10px 0; line-height: 1.6; }
+  .error-note { background: #FEF2F2; border-left: 3px solid var(--red); padding: 10px 14px; border-radius: 0 6px 6px 0; font-size: 13px; color: var(--dark-gray); margin: 10px 0; line-height: 1.6; }
+  .note strong, .warning strong, .error-note strong { color: var(--text); }
+
+  /* Response schema block */
+  .schema-block { background: #F9FAFB; border: 1px solid var(--border); border-radius: 6px; padding: 14px 16px; margin: 10px 0; }
+  .schema-block h4 { margin-top: 0; color: var(--dark-gray); font-size: 12px; }
+
+  /* Auth section */
+  .auth-block { background: var(--light-blue); border-radius: 8px; padding: 16px 20px; margin: 16px 0; }
+
+  /* Doc footer */
+  .doc-footer { margin-top: 56px; padding-top: 20px; border-top: 1px solid var(--border); font-size: 11px; color: var(--muted); display: flex; justify-content: space-between; }
+
+  @media (max-width: 768px) {
+    .sidebar { display: none; }
+    .main { margin-left: 0; padding: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Sidebar navigation -->
+<nav class="sidebar">
+  <div class="sidebar-logo">trillet</div>
+  <div class="sidebar-section">Getting Started</div>
+  <a href="#introduction">Introduction</a>
+  <a href="#authentication">Authentication</a>
+  <a href="#versioning">API Versions</a>
+  <a href="#errors">Errors</a>
+  <a href="#behavioral-notes">Behavioral Notes</a>
+
+  <div class="sidebar-section">Resources</div>
+  <a href="#agents">Agents</a>
+  <a href="#call-flows">Call Flows</a>
+  <a href="#knowledge-base">Knowledge Base</a>
+  <a href="#phone-numbers">Phone Numbers</a>
+
+  <div class="sidebar-section">Calls</div>
+  <a href="#outbound-calls">Outbound Calls</a>
+  <a href="#web-calls">Web Calls</a>
+  <a href="#batch-calls">Batch Calls</a>
+  <a href="#call-history">Call History</a>
+  <a href="#active-calls">Active Calls</a>
+  <a href="#recordings">Recordings</a>
+
+  <div class="sidebar-section">Messaging</div>
+  <a href="#omni-agents">Omni Flow Agents</a>
+  <a href="#sms">SMS Configuration</a>
+
+  <div class="sidebar-section">Workspace</div>
+  <a href="#workspace">Workspace</a>
+  <a href="#teams">Team & Invitations</a>
+  <a href="#crews">Crews</a>
+  <a href="#flow-folders">Flow Folders</a>
+
+  <div class="sidebar-section">Reference</div>
+  <a href="#models">LLM Models</a>
+  <a href="#voices">Voices</a>
+  <a href="#flow-settings">Flow Settings Reference</a>
+  <a href="#web-sdk">Web SDK</a>
+</nav>
+
+<!-- Main content -->
+<div class="main">
+
+<div class="page-header">
+  <h1>Trillet API Reference</h1>
+  <div class="page-tagline">Complete reference for the Trillet voice AI platform API. Validated against live production, 31 March 2026.</div>
+  <div style="display:flex;gap:16px;margin-top:12px;">
+    <div style="font-size:12px;color:var(--muted);">Base URL: <code>https://api.trillet.ai</code></div>
+    <div style="font-size:12px;color:var(--muted);">Versions: v1 (most resources), v2 (calls, user)</div>
+  </div>
+</div>
+
+<!-- ========== INTRODUCTION ========== -->
+<div class="resource-section" id="introduction">
+<h2>Introduction</h2>
+<p>
+  The Trillet API lets you build and manage voice AI agents programmatically: create agents, configure
+  call flows, provision phone numbers, initiate calls, and retrieve transcripts and analytics. The API
+  is a REST API. All requests and responses use JSON.
+</p>
+<p>
+  Two versions run in parallel. <strong>Most resources use <code>/v1/api/</code>.</strong> Call history,
+  active calls, recordings, and user profile use <code>/v2/api/</code>. Where the version matters, it
+  is noted on each endpoint.
+</p>
+<div class="note">
+  <strong>Documentation accuracy:</strong> The official docs at docs.trillet.ai contain significant path
+  errors. Several documented endpoints use incorrect paths, wrong API versions, or describe features that
+  do not exist via the REST API. This reference reflects the live production API only.
+</div>
+</div>
+
+<!-- ========== AUTHENTICATION ========== -->
+<div class="resource-section" id="authentication">
+<h2>Authentication</h2>
+<p>Every request needs two headers. There are no optional auth methods.</p>
+
+<div class="auth-block">
+  <table>
+    <thead><tr><th>Header</th><th>Value</th><th>Description</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><code>x-api-key</code></td>
+        <td>Your API key</td>
+        <td>Generated at app.trillet.ai > Settings > Developer > API Keys. Required on every request</td>
+      </tr>
+      <tr>
+        <td><code>x-workspace-id</code></td>
+        <td>Your workspace ID</td>
+        <td>The MongoDB ObjectId of your workspace. Found in your JWT access_token cookie payload. Required on every request</td>
+      </tr>
+      <tr>
+        <td><code>Content-Type</code></td>
+        <td><code>application/json</code></td>
+        <td>Required on all POST and PUT requests</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<pre><span class="comment"># Every curl command needs these headers</span>
+curl -H "x-api-key: YOUR_API_KEY" \
+     -H "x-workspace-id: YOUR_WORKSPACE_ID" \
+     -H "Content-Type: application/json" \
+     "https://api.trillet.ai/v1/api/agents"</pre>
+
+<p>
+  <strong>JWT parity:</strong> JWT Bearer tokens and API keys hit identical routes. There is no separate
+  JWT-only API surface. Any endpoint returning 404 with an API key returns 404 with a JWT.
+</p>
+</div>
+
+<!-- ========== VERSIONING ========== -->
+<div class="resource-section" id="versioning">
+<h2>API Versions</h2>
+<table>
+  <thead><tr><th>Version</th><th>Used for</th></tr></thead>
+  <tbody>
+    <tr><td><code>/v1/api/</code></td><td>Agents, call flows, knowledge base, phone numbers, workspace, crews, flow folders, messaging, outbound calls, batch calls</td></tr>
+    <tr><td><code>/v2/api/</code></td><td>Call history, active calls, recordings, user profile</td></tr>
+  </tbody>
+</table>
+<div class="warning">
+  <strong>Common mistake:</strong> The official docs often show v1 paths for call history and recordings.
+  These endpoints are v2 only. Using v1 returns 404.
+</div>
+</div>
+
+<!-- ========== ERRORS ========== -->
+<div class="resource-section" id="errors">
+<h2>Errors</h2>
+<table>
+  <thead><tr><th>Status</th><th>Meaning</th><th>Common causes</th></tr></thead>
+  <tbody>
+    <tr><td><code>400</code></td><td>Bad request</td><td>Missing required field, invalid enum value, malformed JSON</td></tr>
+    <tr><td><code>401</code></td><td>Unauthorized</td><td>Missing or invalid x-api-key</td></tr>
+    <tr><td><code>403</code></td><td>Forbidden</td><td>Valid key but insufficient permissions for this workspace</td></tr>
+    <tr><td><code>404</code></td><td>Not found</td><td>Route not registered, or resource ID does not exist</td></tr>
+    <tr><td><code>409</code></td><td>Conflict</td><td>Duplicate resource (e.g., phone number already in workspace)</td></tr>
+    <tr><td><code>500</code></td><td>Server error</td><td>Platform bug, invalid ID format, missing service method. See Bug Report for known 500s</td></tr>
+  </tbody>
+</table>
+<p>All error responses include a <code>message</code> field in the response body describing the issue.</p>
+<div class="error-note">
+  <strong>Silent failures:</strong> Several known bugs cause the API to return 200 when the operation did
+  not actually succeed. Always verify writes with a follow-up GET. See Behavioral Notes.
+</div>
+</div>
+
+<!-- ========== BEHAVIORAL NOTES ========== -->
+<div class="resource-section" id="behavioral-notes">
+<h2>Behavioral Notes</h2>
+
+<h3>PUT replaces, it does not merge</h3>
+<p>
+  All PUT endpoints use replace semantics. Sending a partial object causes omitted fields to revert to
+  defaults or empty values. The API returns 200 with your submitted values, making it look like a
+  successful partial update. A GET afterward shows the omitted fields are gone.
+</p>
+<p><strong>Always follow this pattern for updates:</strong></p>
+<pre><span class="comment"># 1. GET the full current state</span>
+CURRENT=$(curl -s "https://api.trillet.ai/v1/api/agents/$ID" -H "x-api-key: ...")
+
+<span class="comment"># 2. Merge your change into the full object</span>
+UPDATED=$(echo "$CURRENT" | python -c "
+import json, sys
+d = json.load(sys.stdin)
+d['name'] = 'New Name'  # only change what you intend to change
+print(json.dumps(d))
+")
+
+<span class="comment"># 3. PUT the complete merged object</span>
+curl -X PUT "https://api.trillet.ai/v1/api/agents/$ID" \
+  -H "x-api-key: ..." -H "Content-Type: application/json" \
+  -d "$UPDATED"</pre>
+
+<h3>Call flow ownership</h3>
+<p>
+  Call flow PUT requests only persist on flows that were created or duplicated by the same API key user.
+  PUT a flow owned by a different workspace user and you get 200, but nothing changes. No error is returned.
+  Always verify writes with a GET.
+</p>
+
+<h3>Draft and publish</h3>
+<p>
+  The Trillet UI saves call flow changes as drafts. Publishing requires POST to
+  <code>/call-flows/{id}/drafts/{draftId}/publish</code>. API PUTs bypass drafts and go directly to
+  the live configuration. If a team uses both the UI and the API, be aware that UI drafts and API
+  writes are separate paths to the same live config.
+</p>
+
+<h3>Verification protocol</h3>
+<p>
+  For any operation that creates or modifies a resource, always verify the result with a follow-up GET
+  before proceeding to the next step. Compare the fields you sent against what came back. Do not trust
+  a 200 response alone.
+</p>
+</div>
+
+<!-- ========== AGENTS ========== -->
+<div class="resource-section" id="agents">
+<h2>Agents</h2>
+<p class="resource-desc">
+  Agents define the AI voice model for calls: which LLM, which TTS voice, which STT provider, and
+  behavioral settings like speed, temperature, and smart callback. Each agent is associated with one
+  call flow (via the <code>pathway</code> field) and one or more phone numbers.
+</p>
+
+<h3>Endpoints</h3>
+
+<div class="endpoint">
+  <div class="endpoint-header">
+    <div class="method POST">POST</div>
+    <div class="endpoint-path">/v1/api/agents</div>
+    <div class="endpoint-summary">Create agent</div>
+  </div>
+  <div class="endpoint-body">
+    <h4>Request body</h4>
+    <table>
+      <thead><tr><th>Field</th><th>Type</th><th>Required</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td class="param-name">name</td><td class="param-type">string</td><td class="param-required">Required</td><td>Display name for the agent</td></tr>
+        <tr><td class="param-name">llmModel</td><td class="param-type">string</td><td class="param-required">Required</td><td>LLM model ID. See Models reference for full list</td></tr>
+        <tr><td class="param-name">ttsModel</td><td class="param-type">object</td><td class="param-optional">Optional</td><td>{provider, voiceId, language}. See Voices reference</td></tr>
+        <tr><td class="param-name">sttProvider</td><td class="param-type">object</td><td class="param-optional">Optional</td><td>{id: "deepgram-nova-3" | "deepgram-flux" | "whisper"}</td></tr>
+        <tr><td class="param-name">settings</td><td class="param-type">object</td><td class="param-optional">Optional</td><td>{speed: float, volume: float, temperature: float}</td></tr>
+        <tr><td class="param-name">smartCallback</td><td class="param-type">boolean</td><td class="param-optional">Optional</td><td>Enable smart callback retry logic for missed calls</td></tr>
+        <tr><td class="param-name">maxAttemptsForSmartCallback</td><td class="param-type">integer</td><td class="param-optional">Optional</td><td>Max retry attempts (default 3)</td></tr>
+        <tr><td class="param-name">gapBetweenEachAttemptForSmartCallback</td><td class="param-type">array</td><td class="param-optional">Optional</td><td>Array of {days, hours} intervals between retries</td></tr>
+        <tr><td class="param-name">pathway</td><td class="param-type">string</td><td class="param-optional">Optional</td><td>Call flow ID to associate with this agent</td></tr>
+        <tr><td class="param-name">ttsDictionary</td><td class="param-type">object</td><td class="param-optional">Optional</td><td>Pronunciation dictionary config</td></tr>
+        <tr><td class="param-name">fallbackSettings</td><td class="param-type">object</td><td class="param-optional">Optional</td><td>Fallback speed/volume/temperature if primary fails</td></tr>
+      </tbody>
+    </table>
+    <h4>Example request</h4>
+    <pre>curl -X POST "https://api.trillet.ai/v1/api/agents" \
+  -H "x-api-key: YOUR_KEY" \
+  -H "x-workspace-id: YOUR_WORKSPACE" \
+  -H "Content-Type: application/json" \
+  -d '{
+    <span class="key">"name"</span>: <span class="val">"Sales Assistant"</span>,
+    <span class="key">"llmModel"</span>: <span class="val">"gpt-4.1"</span>,
+    <span class="key">"ttsModel"</span>: {
+      <span class="key">"provider"</span>: <span class="val">"rime"</span>,
+      <span class="key">"voiceId"</span>: <span class="val">"mistv2_Brook"</span>,
+      <span class="key">"language"</span>: <span class="val">"en"</span>
+    },
+    <span class="key">"sttProvider"</span>: {<span class="key">"id"</span>: <span class="val">"deepgram-nova-3"</span>},
+    <span class="key">"settings"</span>: {<span class="key">"speed"</span>: 1.0, <span class="key">"volume"</span>: 1.0, <span class="key">"temperature"</span>: 0.7},
+    <span class="key">"smartCallback"</span>: true
+  }'</pre>
+    <h4>Response</h4>
+    <p>200 with full agent object including <code>_id</code>, <code>status</code> ("ready"), <code>createdAt</code>.</p>
+  </div>
+</div>
+
+<div class="endpoint">
+  <div class="endpoint-header">
+    <div class="method GET">GET</div>
+    <div class="endpoint-path">/v1/api/agents</div>
+    <div class="endpoint-summary">List agents</div>
+  </div>
+  <div class="endpoint-body">
+    <p>Returns all agents in the workspace. No pagination. Each agent includes full config, phoneNumberIds array, and pathway.</p>
+  </div>
+</div>
+
+<div class="endpoint">
+  <div class="endpoint-header">
+    <div class="method GET">GET</div>
+    <div class="endpoint-path">/v1/api/agents/{id}</div>
+    <div class="endpoint-summary">Get agent</div>
+  </div>
+  <div class="endpoint-body">
+    <p>Returns the full agent object for the given ID, including all voice config, settings, phoneNumberIds, pathway, and activeSessions.</p>
+  </div>
+</div>
+
+<div class="endpoint">
+  <div class="endpoint-header">
+    <div class="method PUT">PUT</div>
+    <div class="endpoint-path">/v1/api/agents/{id}</div>
+    <div class="endpoint-summary">Update agent</div>
+  </div>
+  <div class="endpoint-body">
+    <p>Updates the agent. <strong>Replace semantics:</strong> GET the full agent first, merge your changes, then PUT the complete object. Partial objects wipe omitted fields.</p>
+    <p>Same body structure as POST. All fields optional on update.</p>
+  </div>
+</div>
+
+<div class="endpoint">
+  <div class="endpoint-header">
+    <div class="method DELETE">DELETE</div>
+    <div class="endpoint-path">/v1/api/agents/{id}</div>
+    <div class="endpoint-summary">Delete agent</div>
+  </div>
+  <div class="endpoint-body">
+    <p>Deletes the agent. Returns 200 with the full deleted agent object (not 204).</p>
+  </div>
+</div>
+
+<div class="endpoint">
+  <div class="endpoint-header">
+    <div class="method POST">POST</div>
+    <div class="endpoint-path">/v1/api/agents/{agentId}/bind/{phoneNumberId}</div>
+    <div class="endpoint-summary">Bind phone to agent</div>
+  </div>
+  <div class="endpoint-body">
+    <p>
+      Sets the phone number's <code>pathwayId</code> to the agent's associated flow and <code>flowType</code>
+      to "call". This is what makes inbound calls route to the agent. Without this step, inbound calls
+      to the number get a disconnected tone.
+    </p>
+    <h4>Request body</h4>
+    <pre>{
+  <span class="key">"recordCalls"</span>: false,
+  <span class="key">"recordingPublic"</span>: false,
+  <span class="key">"officeHours"</span>: {<span class="key">"enabled"</span>: false},
+  <span class="key">"metadataTags"</span>: {},
+  <span class="key">"label"</span>: <span class="val">""</span>,
+  <span class="key">"transferCallerIdMode"</span>: <span class="val">"from-transferee"</span>
+}</pre>
+    <div class="note"><strong>Note:</strong> Set <code>recordCalls: true</code> here to enable call recording. Recording cannot be toggled mid-call via API.</div>
+  </div>
+</div>
+
+<div class="endpoint">
+  <div class="endpoint-header">
+    <div class="method GET">GET</div>
+    <div class="endpoint-path">/v1/api/agents/voices</div>
+    <div class="endpoint-summary">List available voices</div>
+  </div>
+  <div class="endpoint-body">
+    <p>Returns available TTS voices grouped by provider.</p>
+    <h4>Response structure</h4>
+    <pre>{
+  <span class="key">"openai"</span>: [<span class="comment">/* 6 voices */</span>],
+  <span class="key">"elevenlabs"</span>: [<span class="comment">/* 127 voices */</span>],
+  <span class="key">"hume"</span>: [<span class="comment">/* 102 voices */</span>]
+}</pre>
+    <div class="note"><strong>Note:</strong> Rime and Cartesia voices are not returned by this endpoint. Set them directly via voiceId string in the agent's ttsModel config.</div>
+  </div>
+</div>
+</div>
+
+<!-- ========== CALL FLOWS ========== -->
+<div class="resource-section" id="call-flows">
+<h2>Call Flows</h2>
+<p class="resource-desc">
+  Call flows define the agent's behavior during a call: the system prompt, welcome message, call settings
+  (max duration, silence handling, office hours), transfers, post-call actions, and integrations. Each
+  flow has 36 configurable settings fields, most of which are undocumented in the official docs.
+</p>
+
+<div class="warning">
+  <strong>Known bug: Flow creation via POST is broken.</strong> <code>POST /v1/api/call-flows</code>
+  returns 500 on all payloads. The workaround is to duplicate an existing flow via
+  <code>POST /v1/api/call-flows/{id}/duplicate</code>, then configure it with PUT.
+</div>
+
+<h3>Endpoints</h3>
+
+<div class="endpoint">
+  <div class="endpoint-header">
+    <div class="method POST">POST</div>
+    <div class="endpoint-path">/v1/api/call-flows/{id}/duplicate</div>
+    <div class="endpoint-summary">Duplicate flow (primary creation method)</div>
+  </div>
+  <div class="endpoint-body">
+    <p>Creates a copy of the specified flow owned by the API key's user. Use this instead of the broken POST /call-flows endpoint.</p>
+    <h4>Request body</h4>
+    <pre>{}</pre>
+    <p>Returns the new flow with a new <code>_id</code>. The name will be "&lt;original&gt; (Copy)". Configure the new flow using PUT.</p>
+  </div>
+</div>
+
+<div class="endpoint">
+  <div class="endpoint-header">
+    <div class="method GET">GET</div>
+    <div class="endpoint-path">/v1/api/call-flows</div>
+    <div class="endpoint-summary">List call flows</div>
+  </div>
+  <div class="endpoint-body">
+    <p>Returns all call flows in the workspace. Includes full config: prompt, nodes, edges, all settings, promptVersions array.</p>
+  </div>
+</div>
+
+<div class="endpoint">
+  <div class="endpoint-header">
+    <div class="method GET">GET</div>
+    <div class="endpoint-path">/v1/api/call-flows/{id}</div>
+    <div class="endpoint-summary">Get call flow</div>
+  </div>
+  <div class="endpoint-body">
+    <p>Full flow detail including promptVersions history. Use <code>currentPromptId</code> to identify the active prompt version.</p>
+  </div>
+</div>
+
+<div class="endpoint">
+  <div class="endpoint-header">
+    <div class="method PUT">PUT</div>
+    <div class="endpoint-path">/v1/api/call-flows/{id}</div>
+    <div class="endpoint-summary">Update call flow</div>
+  </div>
+  <div class="endpoint-body">
+    <p>
+      Updates the call flow configuration. <strong>Replace semantics.</strong> GET the full flow first,
+      merge your changes, PUT the complete object.
+    </p>
+    <div class="warning">
+      <strong>Ownership required:</strong> PUT only persists on flows you own (created or duplicated
+      with your API key). PUT a non-owned flow gets 200, but nothing is written. No error is returned.
+    </div>
+    <h4>Top-level fields</h4>
+    <table>
+      <thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td class="param-name">name</td><td class="param-type">string</td><td>Flow display name</td></tr>
+        <tr><td class="param-name">direction</td><td class="param-type">string</td><td>"outbound" or "bidirectional"</td></tr>
+        <tr><td class="param-name">promptType</td><td class="param-type">string</td><td>"simple" for flat prompt, "advanced" for node-based</td></tr>
+        <tr><td class="param-name">prompt</td><td class="param-type">string</td><td>The system prompt. Creates a new promptVersion on each change</td></tr>
+        <tr><td class="param-name">welcomeMessage</td><td class="param-type">string</td><td>"user_initiated", "ai_dynamic", or "ai_custom"</td></tr>
+        <tr><td class="param-name">customWelcomeMessage</td><td class="param-type">string</td><td>Used when welcomeMessage is "ai_custom" for bidirectional flows</td></tr>
+        <tr><td class="param-name">agent</td><td class="param-type">string</td><td>Agent ID to associate with this flow</td></tr>
+        <tr><td class="param-name">settings</td><td class="param-type">object</td><td>36-field settings object. See Flow Settings Reference</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="endpoint">
+  <div class="endpoint-header">
+    <div class="method DELETE">DELETE</div>
+    <div class="endpoint-path">/v1/api/call-flows/{id}</div>
+    <div class="endpoint-summary">Delete call flow</div>
+  </div>
+  <div class="endpoint-body"><p>Returns 204 No Content.</p></div>
+</div>
+
+<div class="endpoint">
+  <div class="endpoint-header">
+    <div class="method POST">POST</div>
+    <div class="endpoint-path">/v1/api/call-flows/{id}/drafts/{draftId}/publish</div>
+    <div class="endpoint-summary">Publish draft to live</div>
+  </div>
+  <div class="endpoint-body">
+    <p>
+      Equivalent to the "Push Live" button in the UI. The UI saves changes as drafts first. Call this
+      endpoint to push a draft to the live configuration. List drafts via
+      <code>GET /v1/api/call-flows/{id}/drafts</code> to get the <code>draftId</code>.
+    </p>
+    <p>API PUTs bypass the draft system entirely and write directly to live.</p>
+  </div>
+</div>
+</div>
+
+<!-- ========== KNOWLEDGE BASE ========== -->
+<div class="resource-section" id="knowledge-base">
+<h2>Knowledge Base</h2>
+<p class="resource-desc">
+  Knowledge bases are text corpora attached to call flows. The agent uses them to answer questions with
+  accurate, business-specific information. Attach a KB to a flow by including its ID in
+  <code>settings.knowledgeBases</code> during a flow PUT.
+</p>
+<div class="warning">
+  <strong>Path correction:</strong> The official docs use <code>/knowledge-base/</code> (with hyphen).
+  The correct path is <code>/knowledgebase/</code> (no hyphen).
+</div>
+
+<h3>Endpoints</h3>
+
+<div class="endpoint">
+  <div class="endpoint-header">
+    <div class="method POST">POST</div>
+    <div class="endpoint-path">/v1/api/knowledgebase</div>
+    <div class="endpoint-summary">Create knowledge base</div>
+  </div>
+  <div class="endpoint-body">
+    <table>
+      <thead><tr><th>Field</th><th>Type</th><th>Required</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td class="param-name">name</td><td class="param-type">string</td><td class="param-required">Required</td><td>KB display name</td></tr>
+        <tr><td class="param-name">description</td><td class="param-type">string</td><td class="param-optional">Optional</td><td>Description of the KB content</td></tr>
+      </tbody>
+    </table>
+    <p>Returns the new KB object with <code>_id</code>. Add content in a separate step.</p>
+  </div>
+</div>
+
+<div class="endpoint">
+  <div class="endpoint-header">
+    <div class="method GET">GET</div>
+    <div class="endpoint-path">/v1/api/knowledgebase/paginated</div>
+    <div class="endpoint-summary">List knowledge bases</div>
+  </div>
+  <div class="endpoint-body">
+    <p>Query params: <code>page</code> (default 1), <code>limit</code> (default 20). Also works without the <code>/paginated</code> suffix: <code>GET /v1/api/knowledgebase</code>.</p>
+  </div>
+</div>
+
+<div class="endpoint">
+  <div class="endpoint-header">
+    <div class="method POST">POST</div>
+    <div class="endpoint-path">/v1/api/knowledgebase/{id}/text</div>
+    <div class="endpoint-summary">Add text content</div>
+  </div>
+  <div class="endpoint-body">
+    <p>The recommended way to add content to a KB.</p>
+    <pre>{<span class="key">"text"</span>: <span class="val">"Your business information, FAQs, product details..."</span>}</pre>
+  </div>
+</div>
+
+<div class="endpoint">
+  <div class="endpoint-header">
+    <div class="method POST">POST</div>
+    <div class="endpoint-path">/v1/api/knowledgebase/{id}/files</div>
+    <div class="endpoint-summary">Upload file <span class="badge badge-amber">Partial</span></div>
+  </div>
+  <div class="endpoint-body">
+    <p>
+      Accepts file uploads via multipart form. Works via browser. Curl field name is unconfirmed ("file",
+      "document", and several others all return "No file uploaded"). Text upload via <code>/text</code>
+      is the confirmed workaround for programmatic access.
+    </p>
+  </div>
+</div>
+
+<div class="endpoint">
+  <div class="endpoint-header">
+    <div class="method DELETE">DELETE</div>
+    <div class="endpoint-path">/v1/api/knowledgebase/{id}</div>
+    <div class="endpoint-summary">Delete knowledge base</div>
+  </div>
+  <div class="endpoint-body"><p>Returns 204.</p></div>
+</div>
+</div>
+
+<!-- ========== PHONE NUMBERS ========== -->
+<div class="resource-section" id="phone-numbers">
+<h2>Phone Numbers</h2>
+<p class="resource-desc">
+  Trillet manages phone numbers via Twilio. All telephony endpoints use the <code>/twilio/</code> prefix.
+  The documented paths (e.g., <code>/phone-numbers/list</code>) do not work.
+</p>
+
+<div class="endpoint">
+  <div class="endpoint-header">
+    <div class="method GET">GET</div>
+    <div class="endpoint-path">/v1/api/twilio/user-phone-numbers</div>
+    <div class="endpoint-summary">List workspace numbers</div>
+  </div>
+  <div class="endpoint-body">
+    <p>Returns all phone numbers in the workspace. Each number includes: <code>_id</code>, <code>phoneNumber</code> (E.164), <code>pathwayId</code>, <code>flowType</code>, <code>messagePathwayId</code>, capabilities.</p>
+  </div>
+</div>
+
+<div class="endpoint">
+  <div class="endpoint-header">
+    <div class="method GET">GET</div>
+    <div class="endpoint-path">/v1/api/twilio/free-number-status</div>
+    <div class="endpoint-summary">Check quota</div>
+  </div>
+  <div class="endpoint-body">
+    <p>Returns <code>{limit, used, remaining, hasFree}</code>. AgencyPlus workspaces have 5 free numbers.</p>
+  </div>
+</div>
+
+<div class="endpoint">
+  <div class="endpoint-header">
+    <div class="method GET">GET</div>
+    <div class="endpoint-path">/v1/api/twilio/available-numbers</div>
+    <div class="endpoint-summary">Search available numbers</div>
+  </div>
+  <div class="endpoint-body">
+    <h4>Query parameters</h4>
+    <table>
+      <thead><tr><th>Param</th><th>Required</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td class="param-name">country</td><td class="param-required">Required</td><td>ISO 2-letter code (e.g., "US")</td></tr>
+        <tr><td class="param-name">type</td><td class="param-required">Required</td><td>"local", "toll-free", or "mobile"</td></tr>
+        <tr><td class="param-name">areaCode</td><td class="param-optional">Optional</td><td>3-digit area code for US numbers</td></tr>
+      </tbody>
+    </table>
+    <p>Returns array of <code>{phoneNumber, friendlyName, region, capabilities: {voice, SMS, MMS}}</code>.</p>
+  </div>
+</div>
+
+<div class="endpoint">
+  <div class="endpoint-header">
+    <div class="method POST">POST</div>
+    <div class="endpoint-path">/v1/api/twilio/purchase-number</div>
+    <div class="endpoint-summary">Purchase number</div>
+  </div>
+  <div class="endpoint-body">
+    <table>
+      <thead><tr><th>Field</th><th>Required</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td class="param-name">country</td><td class="param-required">Required</td><td>ISO 2-letter country code</td></tr>
+        <tr><td class="param-name">phoneNumber</td><td class="param-required">Required</td><td>E.164 number from search results</td></tr>
+        <tr><td class="param-name">type</td><td class="param-required">Required</td><td>"local", "toll-free", or "mobile"</td></tr>
+        <tr><td class="param-name">workspaceId</td><td class="param-required">Required</td><td>Your workspace ID</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+</div>
+
+<!-- ========== OUTBOUND CALLS ========== -->
+<div class="resource-section" id="outbound-calls">
+<h2>Outbound Calls</h2>
+<p class="resource-desc">Initiate AI-driven outbound calls to any phone number.</p>
+
+<div class="endpoint">
+  <div class="endpoint-header">
+    <div class="method POST">POST</div>
+    <div class="endpoint-path">/v1/api/call</div>
+    <div class="endpoint-summary">Initiate outbound call</div>
+  </div>
+  <div class="endpoint-body">
+    <table>
+      <thead><tr><th>Field</th><th>Type</th><th>Required</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td class="param-name">to</td><td class="param-type">string</td><td class="param-required">Required</td><td>Destination phone number (E.164)</td></tr>
+        <tr><td class="param-name">call_agent_id</td><td class="param-type">string</td><td class="param-required">Required</td><td>Agent ID to handle the call</td></tr>
+        <tr><td class="param-name">callback_url</td><td class="param-type">string</td><td class="param-optional">Optional</td><td>Webhook URL for call status updates</td></tr>
+        <tr><td class="param-name">dynamic_variables</td><td class="param-type">object</td><td class="param-optional">Optional</td><td>Key-value pairs injected into prompt as {{variable_name}}</td></tr>
+        <tr><td class="param-name">metadata</td><td class="param-type">object</td><td class="param-optional">Optional</td><td>Passed through to webhooks. Not included in agent context</td></tr>
+      </tbody>
+    </table>
+    <h4>Prerequisites</h4>
+    <ol style="font-size:13px;color:var(--dark-gray);padding-left:18px;margin-top:8px;line-height:1.8;">
+      <li>Agent must have at least one phone number assigned via the bind endpoint</li>
+      <li>Agent's <code>pathway</code> field must point to an active call flow</li>
+      <li>If office hours are enabled: call must be placed within the configured window, or calls queue until the next open slot</li>
+    </ol>
+    <div class="note">
+      <strong>Office hours:</strong> Calls placed outside the configured hours sit in pending status with
+      <code>scheduledTime</code> set to the next available window. Disable office hours in the call flow
+      settings to call on demand at any time.
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ========== WEB CALLS ========== -->
+<div class="resource-section" id="web-calls">
+<h2>Web Calls</h2>
+<p class="resource-desc">
+  Start and end browser-based voice calls using WebRTC via LiveKit. Used for web widgets, demos, and
+  embedded voice experiences. Requires the agent's call flow to have public access enabled.
+</p>
+
+<div class="endpoint">
+  <div class="endpoint-header">
+    <div class="method POST">POST</div>
+    <div class="endpoint-path">/v1/api/calls/web/connect</div>
+    <div class="endpoint-summary">Start web call</div>
+  </div>
+  <div class="endpoint-body">
+    <table>
+      <thead><tr><th>Field</th><th>Type</th><th>Required</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td class="param-name">agentId</td><td class="param-type">string</td><td class="param-required">Required</td><td>Agent ID. Must have an active pathway configured</td></tr>
+      </tbody>
+    </table>
+    <h4>Response</h4>
+    <pre>{
+  <span class="key">"status"</span>: <span class="val">"success"</span>,
+  <span class="key">"callId"</span>: <span class="val">"..."</span>,
+  <span class="key">"roomName"</span>: <span class="val">"..."</span>,
+  <span class="key">"token"</span>: <span class="val">"..."</span>,       <span class="comment">// LiveKit JWT for WebRTC connection</span>
+  <span class="key">"agent"</span>: {<span class="key">"id"</span>: <span class="val">"..."</span>, <span class="key">"name"</span>: <span class="val">"..."</span>, <span class="key">"model"</span>: <span class="val">"..."</span>, <span class="key">"voice"</span>: <span class="val">"..."</span>}
+}</pre>
+    <p>Use the <code>roomName</code> to poll active call endpoints during the call. Use the <code>token</code> with the LiveKit JS SDK or Trillet Web SDK to connect WebRTC audio.</p>
+  </div>
+</div>
+
+<div class="endpoint">
+  <div class="endpoint-header">
+    <div class="method POST">POST</div>
+    <div class="endpoint-path">/v1/api/calls/web/disconnect</div>
+    <div class="endpoint-summary">End web call</div>
+  </div>
+  <div class="endpoint-body">
+    <pre>{<span class="key">"callId"</span>: <span class="val">"..."</span>, <span class="key">"roomName"</span>: <span class="val">"..."</span>}</pre>
+    <p>Returns <code>{"status": "success", "message": "Session ended successfully"}</code>.</p>
+  </div>
+</div>
+</div>
+
+<!-- ========== BATCH CALLS ========== -->
+<div class="resource-section" id="batch-calls">
+<h2>Batch Calls</h2>
+<p class="resource-desc">Upload a CSV of phone numbers to run a campaign of outbound calls.</p>
+
+<div class="endpoint">
+  <div class="endpoint-header">
+    <div class="method POST">POST</div>
+    <div class="endpoint-path">/v1/api/batch-calls</div>
+    <div class="endpoint-summary">Upload batch call CSV</div>
+  </div>
+  <div class="endpoint-body">
+    <p>Multipart form upload. Fields:</p>
+    <table>
+      <thead><tr><th>Field</th><th>Type</th><th>Required</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td class="param-name">file</td><td class="param-type">file</td><td class="param-required">Required</td><td>CSV file, max 20MB. Required column: phone_number. Optional: first_name, last_name, email, custom fields</td></tr>
+        <tr><td class="param-name">agentId</td><td class="param-type">string</td><td class="param-required">Required</td><td>Agent to handle the calls</td></tr>
+        <tr><td class="param-name">scheduledAt</td><td class="param-type">string</td><td class="param-optional">Optional</td><td>ISO 8601 datetime for when to start the batch</td></tr>
+        <tr><td class="param-name">smartCallbackConfig</td><td class="param-type">object</td><td class="param-optional">Optional</td><td>Override smart callback settings for this batch</td></tr>
+      </tbody>
+    </table>
+    <div class="note">
+      <strong>Querying batch results:</strong> There is no standalone batch history endpoint. Filter call
+      history by batchId: <code>GET /v2/api/call-history?batchId={id}</code>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ========== CALL HISTORY ========== -->
+<div class="resource-section" id="call-history">
+<h2>Call History &amp; Analytics</h2>
+<p class="resource-desc">
+  Access completed call records with full transcripts, AI-generated summaries, sentiment analysis,
+  and compliance monitoring. All call history endpoints use v2.
+</p>
+<div class="warning">
+  <strong>Version:</strong> Docs show v1 paths for call history. Correct version is v2.
+  <code>/v1/api/call-history</code> returns 404.
+</div>
+
+<div class="endpoint">
+  <div class="endpoint-header">
+    <div class="method GET">GET</div>
+    <div class="endpoint-path">/v2/api/call-history</div>
+    <div class="endpoint-summary">List calls</div>
+  </div>
+  <div class="endpoint-body">
+    <h4>Query parameters</h4>
+    <table>
+      <thead><tr><th>Param</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td class="param-name">page</td><td>Page number (default 1)</td></tr>
+        <tr><td class="param-name">limit</td><td>Records per page (default 20)</td></tr>
+        <tr><td class="param-name">agentId</td><td>Filter by agent ID</td></tr>
+        <tr><td class="param-name">status</td><td>Filter by status: completed, pending, failed</td></tr>
+        <tr><td class="param-name">dateRange</td><td>JSON object: {"startDate": "ISO8601", "endDate": "ISO8601"}</td></tr>
+        <tr><td class="param-name">batchId</td><td>Filter to calls from a specific batch upload</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="endpoint">
+  <div class="endpoint-header">
+    <div class="method GET">GET</div>
+    <div class="endpoint-path">/v2/api/call-history/{id}</div>
+    <div class="endpoint-summary">Get call detail</div>
+  </div>
+  <div class="endpoint-body">
+    <p>Full call record. Key fields:</p>
+    <table>
+      <thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td class="param-name">transcript</td><td class="param-type">array</td><td>Array of {node_tags, timestamp, role, content, metrics}. Role: "ai" or "human"</td></tr>
+        <tr><td class="param-name">summary</td><td class="param-type">string</td><td>AI-generated summary of the call</td></tr>
+        <tr><td class="param-name">analyzedData</td><td class="param-type">object</td><td>Post-call analysis: voicemail_left, call_disposition, call_sentiment, compliance: {compliance_result, violated_clauses, violation_reason}</td></tr>
+        <tr><td class="param-name">functionCalls</td><td class="param-type">array</td><td>Functions executed by the agent during the call (transfers, tool calls)</td></tr>
+        <tr><td class="param-name">duration</td><td class="param-type">number</td><td>Call duration in seconds</td></tr>
+        <tr><td class="param-name">cost</td><td class="param-type">number</td><td>Call cost in USD</td></tr>
+        <tr><td class="param-name">dynamic_variables</td><td class="param-type">object</td><td>Variables that were passed to the call</td></tr>
+        <tr><td class="param-name">postCallStatus</td><td class="param-type">object</td><td>SMS delivery status, DB ops, transcription details</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="endpoint">
+  <div class="endpoint-header">
+    <div class="method GET">GET</div>
+    <div class="endpoint-path">/v2/api/call-history/metrics</div>
+    <div class="endpoint-summary">Call metrics summary</div>
+  </div>
+  <div class="endpoint-body">
+    <p>Returns <code>{totalCalls, avgDuration, completionRate}</code> across the workspace.</p>
+  </div>
+</div>
+
+<div class="endpoint">
+  <div class="endpoint-header">
+    <div class="method GET">GET</div>
+    <div class="endpoint-path">/v2/api/call-history/phonebook</div>
+    <div class="endpoint-summary">Frequent callers</div>
+  </div>
+  <div class="endpoint-body">
+    <p>Returns an array of most frequently called phone numbers: <code>[{toPhoneNumber}]</code>. Undocumented.</p>
+  </div>
+</div>
+</div>
+
+<!-- ========== ACTIVE CALLS ========== -->
+<div class="resource-section" id="active-calls">
+<h2>Active Calls</h2>
+<p class="resource-desc">Monitor and interact with calls in progress. All endpoints use v2.</p>
+
+<div class="endpoint">
+  <div class="endpoint-header">
+    <div class="method GET">GET</div>
+    <div class="endpoint-path">/v2/api/active-calls</div>
+    <div class="endpoint-summary">List active calls</div>
+  </div>
+  <div class="endpoint-body">
+    <p>Returns <code>{data: [...], count: N, timestamp}</code>. Each call includes: <code>id, roomName, customerPhone, aiAgentName, duration, status, sentiment, lastMessage, transferRequested, type, mode, participants</code>.</p>
+  </div>
+</div>
+
+<div class="endpoint">
+  <div class="endpoint-header">
+    <div class="method GET">GET</div>
+    <div class="endpoint-path">/v2/api/active-calls/{roomName}</div>
+    <div class="endpoint-summary">Get active call detail</div>
+  </div>
+  <div class="endpoint-body">
+    <p>Full live call object including real-time <code>transcript[]</code> array, <code>participants[]</code> with identities, <code>sentiment</code>, and <code>summary</code>.</p>
+  </div>
+</div>
+
+<div class="endpoint">
+  <div class="endpoint-header">
+    <div class="method GET">GET</div>
+    <div class="endpoint-path">/v2/api/active-calls/{roomName}/insights</div>
+    <div class="endpoint-summary">Live call insights</div>
+  </div>
+  <div class="endpoint-body">
+    <p>Returns live AI analysis: <code>{sentiment, summary, suggestions: []}</code>. Updates as the call progresses.</p>
+  </div>
+</div>
+
+<div class="endpoint">
+  <div class="endpoint-header">
+    <div class="method POST">POST</div>
+    <div class="endpoint-path">/v2/api/active-calls/{roomName}/remove-agent</div>
+    <div class="endpoint-summary">Human takeover <span class="badge badge-amber">Partial</span></div>
+  </div>
+  <div class="endpoint-body">
+    <p>Removes the AI agent from the call, allowing a human to take over. The <code>participantIdentity</code> is the agent's identity string from the <code>participants</code> array in the active call object.</p>
+    <pre>{<span class="key">"participantIdentity"</span>: <span class="val">"&lt;agent identity from participants array&gt;"</span>}</pre>
+    <div class="error-note">
+      <strong>Known bug:</strong> Returns 500 ("cannot encode field livekit.SendDataRequest.kind") on web
+      calls. Expected to work on telephony calls. Tested on web calls only.
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ========== RECORDINGS ========== -->
+<div class="resource-section" id="recordings">
+<h2>Recordings</h2>
+<p class="resource-desc">
+  Access call recordings. Recording must be enabled at bind time (<code>recordCalls: true</code> in the
+  bind request body). Recordings cannot be enabled mid-call via API.
+</p>
+
+<div class="endpoint">
+  <div class="endpoint-header">
+    <div class="method GET">GET</div>
+    <div class="endpoint-path">/v2/api/recordings/{callHistoryId}</div>
+    <div class="endpoint-summary">Get recording</div>
+  </div>
+  <div class="endpoint-body">
+    <p>Streams the call recording (mp3/mp4). Requires <code>x-workspace-id</code> header. Returns 500 "No recording available" if the call was not recorded.</p>
+    <div class="note">
+      <strong>Path correction:</strong> Docs say v1. Correct version is v2.
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ========== OMNI AGENTS ========== -->
+<div class="resource-section" id="omni-agents">
+<h2>Omni Flow Agents (Messaging)</h2>
+<p class="resource-desc">
+  Omni flow agents handle SMS and messaging conversations. They work like voice agents but for text
+  channels. Bind a phone number to an omni agent to enable inbound SMS handling.
+</p>
+<div class="warning">
+  <strong>Path correction:</strong> Docs say <code>/omniflow-agents</code> (no hyphen). Correct path
+  is <code>/omni-flow-agents</code> (with hyphen).
+</div>
+
+<div class="endpoint">
+  <div class="endpoint-header">
+    <div class="method POST">POST</div>
+    <div class="endpoint-path">/v1/api/omni-flow-agents</div>
+    <div class="endpoint-summary">Create messaging agent</div>
+  </div>
+  <div class="endpoint-body">
+    <table>
+      <thead><tr><th>Field</th><th>Type</th><th>Required</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td class="param-name">name</td><td class="param-type">string</td><td class="param-required">Required</td><td>Agent name</td></tr>
+        <tr><td class="param-name">llmModel</td><td class="param-type">string</td><td class="param-optional">Optional</td><td>LLM model ID</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="endpoint">
+  <div class="endpoint-header">
+    <div class="method GET">GET</div>
+    <div class="endpoint-path">/v1/api/omni-flow-agents</div>
+    <div class="endpoint-summary">List messaging agents</div>
+  </div>
+  <div class="endpoint-body"><p>Returns all omni flow agents in the workspace.</p></div>
+</div>
+
+<div class="endpoint">
+  <div class="endpoint-header">
+    <div class="method POST">POST</div>
+    <div class="endpoint-path">/v1/api/omni-flow-agents/{id}/bind/{phoneNumberId}</div>
+    <div class="endpoint-summary">Bind phone to messaging agent</div>
+  </div>
+  <div class="endpoint-body">
+    <p>Sets the phone number's <code>messagePathwayId</code>. Required for inbound SMS delivery to route to the agent. Body: <code>{}</code>.</p>
+  </div>
+</div>
+</div>
+
+<!-- ========== SMS ========== -->
+<div class="resource-section" id="sms">
+<h2>SMS Configuration</h2>
+<p class="resource-desc">
+  Post-call SMS is configured in the call flow's <code>settings.smsPostCallSettings</code> object.
+  Three fields are all required for SMS delivery to work.
+</p>
+
+<div class="endpoint">
+  <div class="endpoint-header">
+    <div class="method PUT">PUT</div>
+    <div class="endpoint-path">/v1/api/call-flows/{id}</div>
+    <div class="endpoint-summary">Configure post-call SMS (via flow settings)</div>
+  </div>
+  <div class="endpoint-body">
+    <p>Include this object in the flow's <code>settings</code> on a full-object PUT:</p>
+    <pre>{
+  <span class="key">"smsPostCallSettings"</span>: {
+    <span class="key">"businessOwnerSMS"</span>: true,           <span class="comment">// send SMS to business owner after each call</span>
+    <span class="key">"customerSMS"</span>: false,               <span class="comment">// send SMS to caller after call</span>
+    <span class="key">"useInternalA2P"</span>: true,             <span class="comment">// REQUIRED: enable the A2P number pool</span>
+    <span class="key">"selectedPhoneNumberId"</span>: <span class="val">""</span>,        <span class="comment">// empty = auto-select by region</span>
+    <span class="key">"businessOwnerPhoneNumber"</span>: <span class="val">"+1XXXXXXXXXX"</span>  <span class="comment">// REQUIRED: exact field name</span>
+  }
+}</pre>
+    <div class="error-note">
+      <strong>Silent failure:</strong> Missing <code>useInternalA2P: true</code> or using the wrong
+      field name (<code>businessOwnerPhone</code> instead of <code>businessOwnerPhoneNumber</code>)
+      causes SMS to silently not send. No error is returned.
+    </div>
+    <p>A2P SMS costs USD $0.008/SMS surcharge in addition to call costs.</p>
+  </div>
+</div>
+</div>
+
+<!-- ========== WORKSPACE ========== -->
+<div class="resource-section" id="workspace">
+<h2>Workspace</h2>
+
+<div class="endpoint">
+  <div class="endpoint-header">
+    <div class="method GET">GET</div>
+    <div class="endpoint-path">/v1/api/workspaces/{id}</div>
+    <div class="endpoint-summary">Get workspace</div>
+  </div>
+  <div class="endpoint-body">
+    <p>Full workspace detail: team members, billing, features (AgencyPlus, white label), branding config, batch call config, Stripe Connect status.</p>
+  </div>
+</div>
+
+<div class="endpoint">
+  <div class="endpoint-header">
+    <div class="method POST">POST</div>
+    <div class="endpoint-path">/v1/api/workspaces</div>
+    <div class="endpoint-summary">Create white-label workspace</div>
+  </div>
+  <div class="endpoint-body">
+    <table>
+      <thead><tr><th>Field</th><th>Type</th><th>Required</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td class="param-name">name</td><td class="param-type">string</td><td class="param-required">Required</td><td>Workspace display name</td></tr>
+        <tr><td class="param-name">initials</td><td class="param-type">string</td><td class="param-required">Required</td><td>Short initials for workspace avatar (2-3 chars)</td></tr>
+      </tbody>
+    </table>
+    <p>Returns new workspace on the <code>build_plan</code> tier. Requires AgencyPlus entitlement (100 free WL workspaces included).</p>
+  </div>
+</div>
+
+<div class="endpoint">
+  <div class="endpoint-header">
+    <div class="method PUT">PUT</div>
+    <div class="endpoint-path">/v1/api/workspaces/{id}</div>
+    <div class="endpoint-summary">Update workspace</div>
+  </div>
+  <div class="endpoint-body"><p>Replace semantics. Returns 200 with updated workspace.</p></div>
+</div>
+
+<div class="endpoint">
+  <div class="endpoint-header">
+    <div class="method DELETE">DELETE</div>
+    <div class="endpoint-path">/v1/api/workspaces/{id}</div>
+    <div class="endpoint-summary">Delete workspace <span class="badge badge-red">Broken</span></div>
+  </div>
+  <div class="endpoint-body">
+    <div class="error-note"><strong>Known bug:</strong> Returns 500 "Cast to string failed for deletedBy". Use the UI to delete workspaces.</div>
+  </div>
+</div>
+</div>
+
+<!-- ========== TEAMS ========== -->
+<div class="resource-section" id="teams">
+<h2>Team &amp; Invitations</h2>
+
+<div class="endpoint">
+  <div class="endpoint-header">
+    <div class="method POST">POST</div>
+    <div class="endpoint-path">/v1/api/workspaces/{id}/invite</div>
+    <div class="endpoint-summary">Invite team member</div>
+  </div>
+  <div class="endpoint-body">
+    <table>
+      <thead><tr><th>Field</th><th>Type</th><th>Required</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td class="param-name">email</td><td class="param-type">string</td><td class="param-required">Required</td><td>Email address to invite</td></tr>
+        <tr><td class="param-name">role</td><td class="param-type">string</td><td class="param-required">Required</td><td>Role to assign (e.g., "member", "admin")</td></tr>
+      </tbody>
+    </table>
+    <p>Sends an actual invitation email. Undocumented endpoint.</p>
+  </div>
+</div>
+</div>
+
+<!-- ========== CREWS ========== -->
+<div class="resource-section" id="crews">
+<h2>Crews</h2>
+<p class="resource-desc">Crews group multiple agents under a shared call flow entry point for multi-agent routing.</p>
+
+<div class="endpoint">
+  <div class="endpoint-header">
+    <div class="method POST">POST</div>
+    <div class="endpoint-path">/v1/api/crews</div>
+    <div class="endpoint-summary">Create crew</div>
+  </div>
+  <div class="endpoint-body">
+    <table>
+      <thead><tr><th>Field</th><th>Type</th><th>Required</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td class="param-name">name</td><td class="param-type">string</td><td class="param-required">Required</td><td>Crew name</td></tr>
+        <tr><td class="param-name">description</td><td class="param-type">string</td><td class="param-optional">Optional</td><td>Description</td></tr>
+        <tr><td class="param-name">leadPathwayId</td><td class="param-type">string</td><td class="param-optional">Optional</td><td>Call flow ID for the crew entry point</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="endpoint">
+  <div class="endpoint-header">
+    <div class="method GET">GET</div>
+    <div class="endpoint-path">/v1/api/crews</div>
+    <div class="endpoint-summary">List crews</div>
+  </div>
+  <div class="endpoint-body"><p>Returns all crews. Detail (<code>GET /v1/api/crews/{id}</code>) includes members array and populated leadPathwayId.</p></div>
+</div>
+</div>
+
+<!-- ========== FLOW FOLDERS ========== -->
+<div class="resource-section" id="flow-folders">
+<h2>Flow Folders</h2>
+<p class="resource-desc">Organize call flows into folders.</p>
+<div class="warning"><strong>Path correction:</strong> Docs say <code>/folders</code>. Correct path is <code>/flow-folders</code>.</div>
+
+<div class="endpoint">
+  <div class="endpoint-header">
+    <div class="method POST">POST</div>
+    <div class="endpoint-path">/v1/api/flow-folders</div>
+    <div class="endpoint-summary">Create folder</div>
+  </div>
+  <div class="endpoint-body">
+    <table>
+      <thead><tr><th>Field</th><th>Type</th><th>Required</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td class="param-name">name</td><td class="param-type">string</td><td class="param-required">Required</td><td>Folder name</td></tr>
+        <tr><td class="param-name">flowType</td><td class="param-type">string</td><td class="param-required">Required</td><td>"call" for call flows</td></tr>
+        <tr><td class="param-name">color</td><td class="param-type">string</td><td class="param-optional">Optional</td><td>Hex color</td></tr>
+        <tr><td class="param-name">icon</td><td class="param-type">string</td><td class="param-optional">Optional</td><td>Icon identifier</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="endpoint">
+  <div class="endpoint-header">
+    <div class="method POST">POST</div>
+    <div class="endpoint-path">/v1/api/flow-folders/{id}/flows</div>
+    <div class="endpoint-summary">Add flow to folder</div>
+  </div>
+  <div class="endpoint-body">
+    <pre>{<span class="key">"flowId"</span>: <span class="val">"..."</span>}</pre>
+    <p>The flow's <code>promptType</code> must match the folder's <code>flowType</code>.</p>
+  </div>
+</div>
+</div>
+
+<!-- ========== MODELS ========== -->
+<div class="resource-section" id="models">
+<h2>LLM Models Reference</h2>
+<p class="resource-desc">Full list from <code>GET /v1/api/llm-models/call-flow-models</code>. As of 31 March 2026.</p>
+
+<table>
+  <thead><tr><th>Model ID</th><th>Provider</th><th>Type</th><th>Notes</th></tr></thead>
+  <tbody>
+    <tr><td><code>gpt-4.1</code></td><td>OpenAI</td><td>Standard</td><td>Recommended general-purpose model</td></tr>
+    <tr><td><code>gpt-4.1-mini</code></td><td>OpenAI</td><td>Standard</td><td>Cost-efficient</td></tr>
+    <tr><td><code>gpt-4o</code></td><td>OpenAI</td><td>Standard</td><td></td></tr>
+    <tr><td><code>gpt-4o-mini</code></td><td>OpenAI</td><td>Standard</td><td></td></tr>
+    <tr><td><code>gpt-5</code></td><td>OpenAI</td><td>Premium</td><td></td></tr>
+    <tr><td><code>gpt-5-mini</code></td><td>OpenAI</td><td>Premium</td><td></td></tr>
+    <tr><td><code>gpt-5.3-chat-latest</code></td><td>OpenAI</td><td>Premium</td><td></td></tr>
+    <tr><td><code>gpt-4o-enterprise</code></td><td>OpenAI</td><td>Enterprise</td><td>+$0.01/min surcharge</td></tr>
+    <tr><td><code>gpt-4.1-enterprise</code></td><td>OpenAI</td><td>Enterprise</td><td></td></tr>
+    <tr><td><code>claude-3-5-sonnet-latest</code></td><td>Anthropic</td><td>Standard</td><td></td></tr>
+    <tr><td><code>gemini-2.5-flash</code></td><td>Google</td><td>Standard</td><td></td></tr>
+    <tr><td><code>gemini-3-flash-preview</code></td><td>Google</td><td>Standard</td><td></td></tr>
+    <tr><td><code>gemini-3.1-flash-lite-preview</code></td><td>Google</td><td>Standard</td><td></td></tr>
+    <tr><td><code>groq:llama-3.1-8b-instant</code></td><td>Groq</td><td>Open-source</td><td>Very fast, lower quality</td></tr>
+    <tr><td><code>groq:llama-3.3-70b-versatile</code></td><td>Groq</td><td>Open-source</td><td></td></tr>
+    <tr><td><code>groq:openai/gpt-oss-120b</code></td><td>Groq</td><td>Open-source</td><td></td></tr>
+    <tr><td><code>vertex:meta/llama-4-maverick-17b-128e-instruct-maas</code></td><td>Vertex</td><td>Open-source</td><td></td></tr>
+    <tr><td><code>audiopipeline:openai-realtime</code></td><td>OpenAI</td><td>Speech-to-speech (Beta)</td><td>Lowest latency. No text transcript</td></tr>
+    <tr><td><code>audiopipeline:gemini-live-2.5-flash-native-audio</code></td><td>Google</td><td>Speech-to-speech (Beta)</td><td></td></tr>
+    <tr><td><code>audiopipeline:xai-realtime</code></td><td>xAI</td><td>Speech-to-speech (Beta)</td><td>Grok voice</td></tr>
+    <tr><td><code>glm-5</code></td><td>Zhipu</td><td>Standard</td><td></td></tr>
+  </tbody>
+</table>
+</div>
+
+<!-- ========== VOICES ========== -->
+<div class="resource-section" id="voices">
+<h2>Voices Reference</h2>
+<p class="resource-desc">TTS provider options and voice selection. Voice catalog endpoint: <code>GET /v1/api/agents/voices</code>.</p>
+
+<table>
+  <thead><tr><th>Provider</th><th>API Value</th><th>Voice Selection</th><th>Notes</th></tr></thead>
+  <tbody>
+    <tr><td>Rime</td><td><code>rime</code></td><td>Set voiceId directly: mistv2_Brook, mistv2_Wildflower, mistv2_Violet, mistv2_juliette</td><td>Default. Not in catalog endpoint. Set by voiceId string</td></tr>
+    <tr><td>Cartesia</td><td><code>cartesia</code></td><td>Set voiceId directly</td><td>Not in catalog endpoint. Set by voiceId string</td></tr>
+    <tr><td>OpenAI</td><td><code>openai</code></td><td>alloy, echo, fable, onyx, nova, shimmer</td><td>Returned by catalog endpoint</td></tr>
+    <tr><td>ElevenLabs</td><td><code>elevenlabs</code> or <code>11labs_byo</code></td><td>Any ElevenLabs voice ID (127 in catalog)</td><td>Requires ElevenLabs API key for BYO</td></tr>
+    <tr><td>Hume</td><td><code>hume</code></td><td>102 voices in catalog</td><td></td></tr>
+    <tr><td>Google</td><td><code>google</code></td><td>Set voiceId directly</td><td></td></tr>
+    <tr><td>Grok (xAI)</td><td><code>grok</code></td><td>eve, ara</td><td></td></tr>
+  </tbody>
+</table>
+
+<p>STT provider options: <code>deepgram-nova-3</code> (default, recommended), <code>deepgram-flux</code>, <code>whisper</code> (via Groq).</p>
+</div>
+
+<!-- ========== FLOW SETTINGS ========== -->
+<div class="resource-section" id="flow-settings">
+<h2>Flow Settings Reference</h2>
+<p class="resource-desc">
+  The <code>settings</code> object on call flows has 36 configurable fields. All are set via the
+  <code>settings</code> key in a full-object PUT. Most are undocumented in the official docs.
+</p>
+
+<h3>Speech and voice</h3>
+<table>
+  <thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead>
+  <tbody>
+    <tr><td class="param-name">speechSetting.responsiveness</td><td class="param-type">0-10</td><td>How quickly the AI responds after the caller stops speaking</td></tr>
+    <tr><td class="param-name">speechSetting.interruptionSensitivity</td><td class="param-type">0-10</td><td>How easily the caller can interrupt the AI</td></tr>
+    <tr><td class="param-name">speechSetting.pronunciation</td><td class="param-type">string[]</td><td>Words the TTS should pronounce correctly</td></tr>
+    <tr><td class="param-name">speechSetting.vadModel</td><td class="param-type">string</td><td>Voice activity detection model ("multilingualModel")</td></tr>
+    <tr><td class="param-name">speechSetting.enablePreemptiveGeneration</td><td class="param-type">boolean</td><td>Pre-generate AI responses while caller is speaking</td></tr>
+    <tr><td class="param-name">backgroundNoise.ambient_sound</td><td class="param-type">string</td><td>Background ambient audio</td></tr>
+    <tr><td class="param-name">backgroundNoise.thinking_sound</td><td class="param-type">string</td><td>Sound played while AI is processing</td></tr>
+  </tbody>
+</table>
+
+<h3>Call behavior</h3>
+<table>
+  <thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead>
+  <tbody>
+    <tr><td class="param-name">callSetting.maxCallDuration</td><td class="param-type">integer</td><td>Max call length in seconds (default 1800 = 30 min)</td></tr>
+    <tr><td class="param-name">callSetting.endCallOnSilence</td><td class="param-type">integer</td><td>Seconds of silence before ending the call</td></tr>
+    <tr><td class="param-name">callSetting.voicemailDetection</td><td class="param-type">object</td><td>{enabled, action: "hangup" or "leaveMessage", leaveMessage}</td></tr>
+    <tr><td class="param-name">callSetting.ivrHandling</td><td class="param-type">object</td><td>{enabled} -- navigate IVR menus on outbound calls</td></tr>
+    <tr><td class="param-name">callSetting.dtmfSettings</td><td class="param-type">object</td><td>{enabled, nextButtonPressDelay, dtmfInterruptible}</td></tr>
+    <tr><td class="param-name">callSetting.redactTranscription</td><td class="param-type">boolean</td><td>Redact sensitive data (PII) from transcripts</td></tr>
+    <tr><td class="param-name">callSetting.enableComplianceMonitoring</td><td class="param-type">boolean</td><td>Monitor calls for compliance violations</td></tr>
+    <tr><td class="param-name">callSetting.postCallAnalysisModel</td><td class="param-type">string</td><td>LLM for post-call analysis (default: "gemini-2.5-flash")</td></tr>
+    <tr><td class="param-name">callSetting.disableMetadata</td><td class="param-type">boolean</td><td>Disable metadata in call records</td></tr>
+  </tbody>
+</table>
+
+<h3>Transfers</h3>
+<table>
+  <thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead>
+  <tbody>
+    <tr><td class="param-name">transfers</td><td class="param-type">array</td><td>Array of transfer configurations. Must use UI format (see below)</td></tr>
+    <tr><td class="param-name">redirectToHuman</td><td class="param-type">object</td><td>{enabled, phoneNumber} -- always redirect to human (not AI-triggered)</td></tr>
+  </tbody>
+</table>
+<div class="error-note">
+  <strong>Transfer field names matter.</strong> The <code>transfer_call</code> function only reads the
+  UI format. Using the old API format (<code>label</code>, <code>phoneNumber</code>) causes the agent to
+  return "Team not found" at transfer time. Always use: <code>friendly_name</code>, <code>destination</code>
+  (E.164), <code>method</code> ("cold"/"warm"), <code>destinationType</code> ("SIP").
+</div>
+
+<h3>Office hours</h3>
+<pre>{
+  <span class="key">"OfficeHoursSettings"</span>: {
+    <span class="key">"enabled"</span>: true,
+    <span class="key">"timezone"</span>: <span class="val">"America/New_York"</span>,
+    <span class="key">"blockedDates"</span>: [],
+    <span class="key">"perDay"</span>: {
+      <span class="key">"Monday"</span>: {<span class="key">"enabled"</span>: true, <span class="key">"start"</span>: <span class="val">"09:00"</span>, <span class="key">"end"</span>: <span class="val">"17:00"</span>},
+      <span class="key">"Tuesday"</span>: {<span class="key">"enabled"</span>: true, <span class="key">"start"</span>: <span class="val">"09:00"</span>, <span class="key">"end"</span>: <span class="val">"17:00"</span>},
+      <span class="comment">// ... etc for each day</span>
+    }
+  }
+}</pre>
+
+<h3>Post-call actions</h3>
+<table>
+  <thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead>
+  <tbody>
+    <tr><td class="param-name">smsPostCallSettings</td><td class="param-type">object</td><td>{businessOwnerSMS, customerSMS, useInternalA2P, selectedPhoneNumberId, businessOwnerPhoneNumber}. All three required for delivery</td></tr>
+    <tr><td class="param-name">postCallAnalysisEmailSettings</td><td class="param-type">object</td><td>{enabled, emails: []} -- auto-email analysis report after calls</td></tr>
+    <tr><td class="param-name">webhooks</td><td class="param-type">object</td><td>{inbound: url, agent: url, status: {enabled, url, headers, params}}. Note: webhook settings currently drop on PUT (known bug)</td></tr>
+  </tbody>
+</table>
+
+<h3>Integrations</h3>
+<table>
+  <thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead>
+  <tbody>
+    <tr><td class="param-name">knowledgeBases</td><td class="param-type">string[]</td><td>Array of KB IDs to attach to this flow</td></tr>
+    <tr><td class="param-name">calendarIntegration</td><td class="param-type">object</td><td>Cal.com integration config</td></tr>
+    <tr><td class="param-name">googleCalendarIntegration</td><td class="param-type">object</td><td>Google Calendar config (post-OAuth, set tokens via API)</td></tr>
+    <tr><td class="param-name">ghlIntegration</td><td class="param-type">object</td><td>GoHighLevel config with booking feature flag</td></tr>
+    <tr><td class="param-name">mcpServers</td><td class="param-type">object</td><td>{enabled, servers[]} -- MCP server integration</td></tr>
+  </tbody>
+</table>
+
+<h3>Memory and access</h3>
+<table>
+  <thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead>
+  <tbody>
+    <tr><td class="param-name">utilizePriorCallsContext</td><td class="param-type">boolean</td><td>Use context from prior calls with the same caller</td></tr>
+    <tr><td class="param-name">identifierBasedWebDemoMemory</td><td class="param-type">boolean</td><td>Remember returning web demo users</td></tr>
+    <tr><td class="param-name">publicDemoLinks</td><td class="param-type">array</td><td>[{name, hash, enabled, expiresAt, perIpLimit, totalLimit}] -- shareable demo links</td></tr>
+    <tr><td class="param-name">security</td><td class="param-type">object</td><td>{hipaaCompliance, publicAccess} -- public access required for web calls</td></tr>
+  </tbody>
+</table>
+
+<h3>Built-in tools</h3>
+<table>
+  <thead><tr><th>Tool name</th><th>Description</th><th>Config fields</th></tr></thead>
+  <tbody>
+    <tr><td><code>check_availability</code></td><td>Check calendar availability</td><td>calendarId, eventDuration, eventType</td></tr>
+    <tr><td><code>book_appointment</code></td><td>Book calendar appointment</td><td>calendarId, eventDuration, eventType</td></tr>
+    <tr><td><code>end_call</code></td><td>End the call</td><td>No config required</td></tr>
+    <tr><td><code>get_time_for_timezone</code></td><td>Get current time</td><td>locations: ["America/New_York"] (IANA timezone IDs)</td></tr>
+  </tbody>
+</table>
+</div>
+
+<!-- ========== WEB SDK ========== -->
+<div class="resource-section" id="web-sdk">
+<h2>Web SDK</h2>
+<p class="resource-desc">
+  The Trillet Web SDK lets you embed a voice agent in any web page. It handles the LiveKit WebRTC
+  connection, audio, and transcript retrieval.
+</p>
+
+<table>
+  <thead><tr><th>Property</th><th>Value</th></tr></thead>
+  <tbody>
+    <tr><td>npm package</td><td><code>@trillet-ai/web-sdk</code></td></tr>
+    <tr><td>CDN</td><td><code>https://cdn.jsdelivr.net/npm/@trillet-ai/web-sdk/+esm</code></td></tr>
+  </tbody>
+</table>
+
+<h3>Quickstart</h3>
+<pre>import { TrilletAgent } from '@trillet-ai/web-sdk';
+
+const agent = new TrilletAgent({
+  workspaceId: 'YOUR_WORKSPACE_ID',
+  agentId: 'YOUR_AGENT_ID',
+  variables: { customer_name: 'Jane' },
+  mode: 'voice'
+});
+
+await agent.startPublicCall();
+
+<span class="comment">// Poll transcript during call</span>
+const transcript = agent.getCurrentTranscript();
+
+<span class="comment">// End call</span>
+await agent.endCall();</pre>
+
+<h3>Methods</h3>
+<table>
+  <thead><tr><th>Method</th><th>Description</th></tr></thead>
+  <tbody>
+    <tr><td><code>startPublicCall()</code></td><td>Start call using public flow access (no API key needed client-side)</td></tr>
+    <tr><td><code>startCall()</code></td><td>Start call using API key authentication</td></tr>
+    <tr><td><code>endCall()</code></td><td>End the current call</td></tr>
+    <tr><td><code>toggleMicrophone(bool)</code></td><td>Mute or unmute the caller's microphone</td></tr>
+    <tr><td><code>getTranscripts()</code></td><td>Full transcript history for the current call</td></tr>
+    <tr><td><code>getCurrentTranscript()</code></td><td>Most recent transcript line</td></tr>
+  </tbody>
+</table>
+
+<h3>Events</h3>
+<table>
+  <thead><tr><th>Event</th><th>Fires when</th></tr></thead>
+  <tbody>
+    <tr><td><code>connected</code></td><td>WebRTC connection established</td></tr>
+    <tr><td><code>disconnected</code></td><td>Call ended or connection dropped</td></tr>
+    <tr><td><code>error</code></td><td>Connection or agent error</td></tr>
+    <tr><td><code>assistantStartedSpeaking</code></td><td>AI begins an utterance</td></tr>
+  </tbody>
+</table>
+
+<h3>Prerequisites</h3>
+<ul>
+  <li>Domain whitelisted in Settings > Domains</li>
+  <li>Public access enabled on the call flow (<code>security.publicAccess: true</code>)</li>
+  <li>Agent has an active <code>pathway</code> configured</li>
+</ul>
+</div>
+
+<!-- Footer -->
+<div class="doc-footer">
+  <div>
+    <span style="font-weight:600;color:var(--text);">trillet</span> API Reference
+    &nbsp;|&nbsp; Validated 31 March 2026 (7 passes)
+    &nbsp;|&nbsp; <code>https://api.trillet.ai</code>
+  </div>
+  <div>All endpoints tested against live production.</div>
+</div>
+
+</div><!-- end main -->
+</body>
+</html>

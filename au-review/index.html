@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trillet AU — API Operational Review</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Urbanist:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blue: #0066FF;
+    --blue-dark: #0052cc;
+    --white: #FFFFFF;
+    --text: #171717;
+    --dark-gray: #374151;
+    --muted: #9CA3AF;
+    --light-blue: #EFF6FF;
+    --border: #E5E7EB;
+    --green: #059669;
+    --amber: #D97706;
+    --red: #DC2626;
+    --bg: #F8FAFF;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 14px;
+    color: var(--text);
+    background: var(--bg);
+    line-height: 1.65;
+    min-height: 100vh;
+  }
+
+  /* ── Top bar ── */
+  .topbar {
+    background: var(--blue);
+    color: var(--white);
+    padding: 0 48px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .topbar-logo {
+    font-family: 'Urbanist', sans-serif;
+    font-weight: 800;
+    font-size: 19px;
+    letter-spacing: -0.5px;
+    color: var(--white);
+  }
+  .topbar-meta {
+    font-size: 12px;
+    opacity: 0.8;
+    letter-spacing: 0.2px;
+  }
+
+  /* ── Page header ── */
+  .page-header {
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    padding: 40px 48px 36px;
+  }
+  .page-header-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .page-eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--blue);
+    margin-bottom: 10px;
+  }
+  h1 {
+    font-family: 'Urbanist', sans-serif;
+    font-weight: 800;
+    font-size: 34px;
+    color: var(--text);
+    letter-spacing: -0.8px;
+    margin-bottom: 10px;
+    line-height: 1.2;
+  }
+  .page-subtitle {
+    font-size: 15px;
+    color: var(--dark-gray);
+    max-width: 680px;
+    line-height: 1.6;
+  }
+
+  /* ── Stats band ── */
+  .stats-band {
+    max-width: 1100px;
+    margin: 32px auto 0;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 16px;
+    padding: 0 48px;
+  }
+  .stat-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 18px 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  .stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+  }
+  .stat-card.blue::before { background: var(--blue); }
+  .stat-card.red::before { background: var(--red); }
+  .stat-card.amber::before { background: var(--amber); }
+  .stat-card.green::before { background: var(--green); }
+  .stat-card.gray::before { background: var(--muted); }
+  .stat-number {
+    font-family: 'Urbanist', sans-serif;
+    font-weight: 800;
+    font-size: 36px;
+    letter-spacing: -1px;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .stat-card.blue .stat-number { color: var(--blue); }
+  .stat-card.red .stat-number { color: var(--red); }
+  .stat-card.amber .stat-number { color: var(--amber); }
+  .stat-card.green .stat-number { color: var(--green); }
+  .stat-card.gray .stat-number { color: var(--muted); }
+  .stat-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--dark-gray);
+    line-height: 1.4;
+  }
+  .stat-sub {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 3px;
+  }
+
+  /* ── Main content ── */
+  .main {
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 0 48px;
+  }
+
+  /* ── Section header ── */
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .section-title {
+    font-family: 'Urbanist', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    color: var(--text);
+  }
+  .section-count {
+    font-size: 12px;
+    color: var(--muted);
+    font-weight: 500;
+  }
+
+  /* ── Document grid ── */
+  .doc-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-bottom: 48px;
+  }
+  .doc-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    transition: border-color 0.15s, box-shadow 0.15s;
+    position: relative;
+    overflow: hidden;
+  }
+  .doc-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--blue);
+    opacity: 0;
+    transition: opacity 0.15s;
+  }
+  .doc-card:hover {
+    border-color: #BFDBFE;
+    box-shadow: 0 4px 16px rgba(0,102,255,0.08);
+  }
+  .doc-card:hover::before {
+    opacity: 1;
+  }
+  .doc-card.span-2 {
+    grid-column: span 2;
+    flex-direction: row;
+    align-items: flex-start;
+  }
+  .doc-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+  .doc-icon.blue-bg { background: var(--light-blue); }
+  .doc-icon.green-bg { background: #D1FAE5; }
+  .doc-icon.amber-bg { background: #FEF3C7; }
+  .doc-icon.red-bg { background: #FEE2E2; }
+  .doc-icon.purple-bg { background: #EDE9FE; }
+  .doc-body { flex: 1; }
+  .doc-title {
+    font-family: 'Urbanist', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+  .doc-desc {
+    font-size: 12.5px;
+    color: var(--dark-gray);
+    line-height: 1.55;
+    margin-bottom: 14px;
+  }
+  .doc-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .doc-tag {
+    font-size: 11px;
+    font-weight: 500;
+    padding: 2px 8px;
+    border-radius: 99px;
+    border: 1px solid var(--border);
+    color: var(--dark-gray);
+    background: var(--bg);
+  }
+  .doc-tag.blue { background: var(--light-blue); color: var(--blue); border-color: #BFDBFE; }
+  .doc-tag.red { background: #FEE2E2; color: var(--red); border-color: #FECACA; }
+  .doc-tag.amber { background: #FEF3C7; color: var(--amber); border-color: #FDE68A; }
+  .doc-tag.green { background: #D1FAE5; color: var(--green); border-color: #A7F3D0; }
+  .doc-arrow {
+    font-size: 18px;
+    color: var(--border);
+    align-self: center;
+    transition: color 0.15s;
+    margin-left: auto;
+    flex-shrink: 0;
+  }
+  .doc-card:hover .doc-arrow { color: var(--blue); }
+
+  /* ── Context block ── */
+  .context-block {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px 32px;
+    margin-bottom: 40px;
+  }
+  .context-block h2 {
+    font-family: 'Urbanist', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--text);
+    margin-bottom: 14px;
+  }
+  .context-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px 40px;
+  }
+  .context-item { }
+  .context-item-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 5px;
+  }
+  .context-item-value {
+    font-size: 13.5px;
+    color: var(--dark-gray);
+    line-height: 1.6;
+  }
+  .context-item-value strong { color: var(--text); }
+
+  /* ── Finding strip ── */
+  .finding-strip {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 48px;
+  }
+  .finding-row {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 20px;
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+  }
+  .finding-num {
+    font-family: 'Urbanist', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--blue);
+    width: 24px;
+    flex-shrink: 0;
+    padding-top: 1px;
+  }
+  .finding-text {
+    font-size: 13.5px;
+    color: var(--dark-gray);
+    line-height: 1.6;
+  }
+  .finding-text strong { color: var(--text); }
+
+  /* ── Footer ── */
+  .page-footer {
+    border-top: 1px solid var(--border);
+    padding: 20px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11px;
+    color: var(--muted);
+    background: var(--white);
+  }
+  .footer-logo {
+    font-family: 'Urbanist', sans-serif;
+    font-weight: 700;
+    color: var(--blue);
+    font-size: 13px;
+  }
+
+  @media (max-width: 860px) {
+    .stats-band { grid-template-columns: repeat(3, 1fr); padding: 0 24px; }
+    .doc-grid { grid-template-columns: 1fr; }
+    .doc-card.span-2 { grid-column: span 1; flex-direction: column; }
+    .main { padding: 0 24px; }
+    .context-grid { grid-template-columns: 1fr; }
+    .page-header { padding: 32px 24px; }
+    .topbar { padding: 0 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Top bar -->
+<div class="topbar">
+  <div class="topbar-logo">trillet</div>
+  <div class="topbar-meta">AU Operational Review &nbsp;|&nbsp; 31 March 2026 &nbsp;|&nbsp; Confidential</div>
+</div>
+
+<!-- Page header -->
+<div class="page-header">
+  <div class="page-header-inner">
+    <div class="page-eyebrow">Trillet Australia</div>
+    <h1>API Operational Review</h1>
+    <p class="page-subtitle">
+      Seven rounds of direct API testing against <code style="font-size:13px;background:#F3F4F6;padding:1px 6px;border-radius:3px;">api.trillet.ai</code> between 29–31 March 2026.
+      Covers every endpoint category, documentation accuracy, confirmed bugs, and end-to-end deployment patterns.
+    </p>
+  </div>
+</div>
+
+<!-- Stats band -->
+<div class="stats-band">
+  <div class="stat-card blue">
+    <div class="stat-number">46</div>
+    <div class="stat-label">Endpoints Validated</div>
+    <div class="stat-sub">Live production, Mar 29–31</div>
+  </div>
+  <div class="stat-card red">
+    <div class="stat-number">41%</div>
+    <div class="stat-label">Docs Accuracy</div>
+    <div class="stat-sub">19 of 46 items correct</div>
+  </div>
+  <div class="stat-card amber">
+    <div class="stat-number">8</div>
+    <div class="stat-label">Confirmed Bugs</div>
+    <div class="stat-sub">3 High · 5 Medium severity</div>
+  </div>
+  <div class="stat-card red">
+    <div class="stat-number">9</div>
+    <div class="stat-label">Undocumented Endpoints</div>
+    <div class="stat-sub">3 critical for inbound routing</div>
+  </div>
+  <div class="stat-card green">
+    <div class="stat-number">6</div>
+    <div class="stat-label">Gated Build Steps</div>
+    <div class="stat-sub">Verified E2E deployment path</div>
+  </div>
+</div>
+
+<!-- Main -->
+<div class="main">
+
+  <!-- Document grid -->
+  <div class="section-header" style="margin-top:40px;">
+    <div class="section-title">Review Documents</div>
+    <div class="section-count">5 documents</div>
+  </div>
+
+  <div class="doc-grid">
+
+    <!-- API Reference (spans 2 cols) -->
+    <a class="doc-card span-2" href="api-reference.html" target="_blank">
+      <div class="doc-icon blue-bg">📘</div>
+      <div class="doc-body">
+        <div class="doc-title">API Reference</div>
+        <div class="doc-desc">
+          Complete endpoint catalog covering agents, call flows, knowledge bases, phone numbers, batch calls,
+          web calls, conversations, webhooks, and workspace management. Includes authentication, two-version
+          architecture (v1/v2), and the full settings schema with all ~190 undocumented fields.
+        </div>
+        <div class="doc-tags">
+          <span class="doc-tag blue">Full catalog</span>
+          <span class="doc-tag">~50 endpoints</span>
+          <span class="doc-tag">Auth guide</span>
+          <span class="doc-tag">Settings schema</span>
+          <span class="doc-tag">v1 + v2 API</span>
+        </div>
+      </div>
+      <div class="doc-arrow">›</div>
+    </a>
+
+    <!-- Developer Onboarding -->
+    <a class="doc-card" href="api-developer-onboarding.html" target="_blank">
+      <div class="doc-icon green-bg">🚀</div>
+      <div class="doc-body">
+        <div class="doc-title">Developer Onboarding</div>
+        <div class="doc-desc">
+          Gated 6-step E2E deployment workflow. Agent creation through live inbound call.
+          Includes verified curl patterns, inline Python verification, and the duplicate-then-PUT
+          flow creation method.
+        </div>
+        <div class="doc-tags">
+          <span class="doc-tag green">Verified patterns</span>
+          <span class="doc-tag">6-step workflow</span>
+          <span class="doc-tag">Copy-paste ready</span>
+        </div>
+      </div>
+      <div class="doc-arrow">›</div>
+    </a>
+
+    <!-- Capability Matrix -->
+    <a class="doc-card" href="api-capability-matrix.html" target="_blank">
+      <div class="doc-icon purple-bg">📊</div>
+      <div class="doc-body">
+        <div class="doc-title">Capability Matrix</div>
+        <div class="doc-desc">
+          Every resource by CRUD operation: confirmed working, broken (with workaround),
+          UI-only, or not accessible via API key. Quick-reference for what is and isn't
+          programmable today.
+        </div>
+        <div class="doc-tags">
+          <span class="doc-tag">Works / Broken / UI-only</span>
+          <span class="doc-tag amber">8 blocked paths</span>
+        </div>
+      </div>
+      <div class="doc-arrow">›</div>
+    </a>
+
+    <!-- Documentation Issues -->
+    <a class="doc-card" href="api-documentation-issues.html" target="_blank">
+      <div class="doc-icon amber-bg">⚠️</div>
+      <div class="doc-body">
+        <div class="doc-title">Documentation Issues</div>
+        <div class="doc-desc">
+          41% accuracy across 46 validated items. 5 wrong paths, 6 wrong versions,
+          9 undocumented endpoints, 7 undocumented behavioral patterns including the
+          replace-semantics PUT issue.
+        </div>
+        <div class="doc-tags">
+          <span class="doc-tag red">41% accuracy</span>
+          <span class="doc-tag amber">9 undocumented</span>
+          <span class="doc-tag">Commercial ramifications</span>
+        </div>
+      </div>
+      <div class="doc-arrow">›</div>
+    </a>
+
+    <!-- Bug Report -->
+    <a class="doc-card" href="api-bug-report.html" target="_blank">
+      <div class="doc-icon red-bg">🐛</div>
+      <div class="doc-body">
+        <div class="doc-title">Bug Report</div>
+        <div class="doc-desc">
+          8 confirmed bugs with reproduction steps, server response excerpts,
+          and workarounds. BUG-01 (flow creation 500), BUG-06 (silent SMS failure),
+          and BUG-02 (silent PUT no-op on non-owned flows) are High severity.
+        </div>
+        <div class="doc-tags">
+          <span class="doc-tag red">3 High</span>
+          <span class="doc-tag amber">5 Medium</span>
+          <span class="doc-tag">Workarounds included</span>
+        </div>
+      </div>
+      <div class="doc-arrow">›</div>
+    </a>
+
+  </div>
+
+  <!-- Key findings -->
+  <div class="section-header">
+    <div class="section-title">Key Findings for AU Review</div>
+  </div>
+  <div class="finding-strip">
+    <div class="finding-row">
+      <div class="finding-num">1</div>
+      <div class="finding-text">
+        <strong>Agency activation requires undocumented endpoints.</strong> Two calls critical to
+        deploying an inbound agent — <code style="font-size:11.5px;background:#F3F4F6;padding:1px 5px;border-radius:3px;">POST /agents/{id}/bind/{phoneId}</code> and
+        phone number purchase — are absent from the official docs entirely.
+        A developer starting from docs.trillet.ai will fail before routing a single call.
+      </div>
+    </div>
+    <div class="finding-row">
+      <div class="finding-num">2</div>
+      <div class="finding-text">
+        <strong>All PUT endpoints use replace semantics, not merge.</strong>
+        Sending a partial update wipes omitted fields silently with a 200 response.
+        This is the root cause of the "settings resetting" failure mode.
+        Fix: GET the full object first, merge, then PUT the complete object back.
+      </div>
+    </div>
+    <div class="finding-row">
+      <div class="finding-num">3</div>
+      <div class="finding-text">
+        <strong>Call flow creation via POST is broken (500 on all payloads).</strong>
+        Workaround is confirmed: duplicate an existing flow, then configure via PUT.
+        The UI uses this same approach internally.
+      </div>
+    </div>
+    <div class="finding-row">
+      <div class="finding-num">4</div>
+      <div class="finding-text">
+        <strong>Post-call SMS works; on-demand SMS does not.</strong>
+        <code style="font-size:11.5px;background:#F3F4F6;padding:1px 5px;border-radius:3px;">smsPostCallSettings</code> with <code style="font-size:11.5px;background:#F3F4F6;padding:1px 5px;border-radius:3px;">useInternalA2P: true</code> delivers reliably.
+        <code style="font-size:11.5px;background:#F3F4F6;padding:1px 5px;border-radius:3px;">conversations/message/generate</code> returns success but never delivers.
+      </div>
+    </div>
+    <div class="finding-row">
+      <div class="finding-num">5</div>
+      <div class="finding-text">
+        <strong>A full inbound deployment is achievable today via API.</strong>
+        The 6-step gated workflow (agent → KB → flow → phone → bind → test) is documented,
+        verified, and copy-paste ready in the Developer Onboarding document.
+        The workarounds for all blocking bugs are included.
+      </div>
+    </div>
+  </div>
+
+  <!-- Context block -->
+  <div class="context-block">
+    <h2>Testing Context</h2>
+    <div class="context-grid">
+      <div class="context-item">
+        <div class="context-item-label">Environment</div>
+        <div class="context-item-value"><strong>Live production</strong> — api.trillet.ai. No sandbox available.</div>
+      </div>
+      <div class="context-item">
+        <div class="context-item-label">Auth methods</div>
+        <div class="context-item-value">API key (primary) + JWT Bearer. Confirmed parity — both hit identical routes.</div>
+      </div>
+      <div class="context-item">
+        <div class="context-item-label">Validation passes</div>
+        <div class="context-item-value">7 passes, 29–31 March 2026. Final docs crawl via <code style="font-size:11.5px;background:#F3F4F6;padding:1px 5px;border-radius:3px;">docs.trillet.ai/llms.txt</code> on Mar 31.</div>
+      </div>
+      <div class="context-item">
+        <div class="context-item-label">Discovery method</div>
+        <div class="context-item-value">Playwright network capture during live app.trillet.ai sessions (primary source for undocumented endpoints).</div>
+      </div>
+      <div class="context-item">
+        <div class="context-item-label">Workspace</div>
+        <div class="context-item-value">Trillet US — enterprise_1 tier, AgencyPlus enabled, 100 WL workspaces.</div>
+      </div>
+      <div class="context-item">
+        <div class="context-item-label">Docs fix estimate</div>
+        <div class="context-item-value">2–3 days for a technical writer with live API access to correct all 27 issues (9 undocumented + 11 path/version errors + 7 behavioral notes).</div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /main -->
+
+<!-- Footer -->
+<div class="page-footer">
+  <div><span class="footer-logo">trillet</span> &nbsp;|&nbsp; AU Operational Review</div>
+  <div>31 March 2026 &nbsp;|&nbsp; Prepared by Ori Vaisbort &nbsp;|&nbsp; Confidential</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trillet API Documentation Issues Report</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Urbanist:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blue: #0066FF;
+    --white: #FFFFFF;
+    --text: #171717;
+    --dark-gray: #374151;
+    --muted: #9CA3AF;
+    --light-blue: #EFF6FF;
+    --border: #E5E7EB;
+    --green: #059669;
+    --amber: #D97706;
+    --red: #DC2626;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 14px;
+    color: var(--text);
+    background: var(--white);
+    line-height: 1.65;
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 56px 48px;
+  }
+  .doc-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding-bottom: 28px;
+    border-bottom: 3px solid var(--blue);
+    margin-bottom: 40px;
+  }
+  .logo-wordmark {
+    font-family: 'Urbanist', system-ui, sans-serif;
+    font-weight: 700;
+    font-size: 22px;
+    color: var(--blue);
+    letter-spacing: -0.5px;
+  }
+  .doc-meta {
+    text-align: right;
+    font-size: 11px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+  .title-block { margin-bottom: 36px; }
+  h1.doc-title {
+    font-family: 'Urbanist', system-ui, sans-serif;
+    font-weight: 700;
+    font-size: 30px;
+    color: var(--text);
+    letter-spacing: -0.5px;
+    margin-bottom: 6px;
+  }
+  .doc-subtitle {
+    font-size: 15px;
+    color: var(--dark-gray);
+    font-weight: 500;
+    margin-bottom: 20px;
+  }
+  .doc-intro {
+    font-size: 13.5px;
+    color: var(--dark-gray);
+    line-height: 1.7;
+    max-width: 820px;
+    margin-bottom: 12px;
+  }
+  h2 {
+    font-family: 'Urbanist', system-ui, sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    color: var(--blue);
+    margin-top: 44px;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+  h3 {
+    font-family: 'Urbanist', system-ui, sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--dark-gray);
+    margin-top: 28px;
+    margin-bottom: 10px;
+  }
+  p {
+    font-size: 13.5px;
+    color: var(--dark-gray);
+    line-height: 1.7;
+    margin-bottom: 12px;
+    max-width: 820px;
+  }
+  ul {
+    margin: 8px 0 12px 20px;
+    max-width: 820px;
+  }
+  li {
+    font-size: 13.5px;
+    color: var(--dark-gray);
+    line-height: 1.65;
+    margin-bottom: 6px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12.5px;
+    margin-bottom: 8px;
+  }
+  thead tr { background: var(--blue); color: var(--white); }
+  thead th {
+    font-family: 'Urbanist', system-ui, sans-serif;
+    font-weight: 600;
+    font-size: 11.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 10px 12px;
+    text-align: left;
+  }
+  tbody tr:nth-child(even) { background: var(--light-blue); }
+  tbody tr:nth-child(odd) { background: var(--white); }
+  tbody td {
+    padding: 9px 12px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+    line-height: 1.5;
+  }
+  .badge {
+    display: inline-block;
+    padding: 2px 9px;
+    border-radius: 9999px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.2px;
+    white-space: nowrap;
+  }
+  .badge-green { background: #D1FAE5; color: var(--green); }
+  .badge-amber { background: #FEF3C7; color: var(--amber); }
+  .badge-red { background: #FEE2E2; color: var(--red); }
+  .badge-blue { background: var(--light-blue); color: var(--blue); }
+  code {
+    font-family: 'Courier New', monospace;
+    font-size: 11.5px;
+    background: #F3F4F6;
+    padding: 1px 5px;
+    border-radius: 3px;
+    color: var(--text);
+  }
+  .note {
+    background: var(--light-blue);
+    border-left: 3px solid var(--blue);
+    padding: 12px 16px;
+    border-radius: 0 6px 6px 0;
+    font-size: 13px;
+    color: var(--dark-gray);
+    margin: 16px 0;
+    line-height: 1.6;
+    max-width: 820px;
+  }
+  .warning {
+    background: #FFFBEB;
+    border-left: 3px solid var(--amber);
+    padding: 12px 16px;
+    border-radius: 0 6px 6px 0;
+    font-size: 13px;
+    color: var(--dark-gray);
+    margin: 16px 0;
+    line-height: 1.6;
+    max-width: 820px;
+  }
+  .doc-footer {
+    margin-top: 56px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11px;
+    color: var(--muted);
+  }
+
+  /* ── Accuracy scorecard ── */
+  .accuracy-scorecard {
+    background: var(--light-blue);
+    border: 1px solid #BFDBFE;
+    border-radius: 10px;
+    padding: 28px 32px;
+    margin: 32px 0;
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 24px;
+    align-items: center;
+  }
+  .accuracy-dial {
+    text-align: center;
+  }
+  .accuracy-number {
+    font-family: 'Urbanist', system-ui, sans-serif;
+    font-size: 72px;
+    font-weight: 700;
+    color: var(--red);
+    line-height: 1;
+    letter-spacing: -2px;
+  }
+  .accuracy-label {
+    font-family: 'Urbanist', system-ui, sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--dark-gray);
+    margin-top: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .accuracy-detail {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+  .accuracy-breakdown {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .accuracy-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .accuracy-bar-wrap {
+    flex: 1;
+    height: 8px;
+    background: #E5E7EB;
+    border-radius: 9999px;
+    overflow: hidden;
+  }
+  .accuracy-bar {
+    height: 100%;
+    border-radius: 9999px;
+  }
+  .accuracy-row-label {
+    font-size: 12px;
+    color: var(--dark-gray);
+    width: 200px;
+    flex-shrink: 0;
+  }
+  .accuracy-row-pct {
+    font-size: 12px;
+    font-weight: 600;
+    width: 36px;
+    text-align: right;
+    flex-shrink: 0;
+  }
+
+  /* ── Synopsis block ── */
+  .synopsis-block {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 32px 0;
+  }
+  .synopsis-header {
+    background: var(--text);
+    color: var(--white);
+    padding: 14px 20px;
+    font-family: 'Urbanist', system-ui, sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.2px;
+  }
+  .synopsis-body {
+    padding: 20px 24px;
+  }
+  .synopsis-state {
+    font-size: 13.5px;
+    color: var(--text);
+    line-height: 1.7;
+    margin-bottom: 16px;
+    max-width: 820px;
+  }
+  .ramification-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    max-width: 820px;
+  }
+  .ramification-item {
+    display: flex;
+    gap: 14px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+    align-items: flex-start;
+  }
+  .ramification-item:last-child { border-bottom: none; }
+  .ramification-number {
+    font-family: 'Urbanist', system-ui, sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    color: var(--blue);
+    width: 28px;
+    flex-shrink: 0;
+    padding-top: 1px;
+  }
+  .ramification-text { font-size: 13.5px; color: var(--dark-gray); line-height: 1.65; }
+  .ramification-text strong { color: var(--text); }
+  .fix-note {
+    background: #F0FDF4;
+    border-left: 3px solid var(--green);
+    padding: 12px 16px;
+    border-radius: 0 6px 6px 0;
+    font-size: 13px;
+    color: var(--dark-gray);
+    margin-top: 16px;
+    line-height: 1.6;
+    max-width: 820px;
+  }
+  .fix-note strong { color: var(--green); }
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<div class="doc-header">
+  <div class="logo-wordmark">trillet</div>
+  <div class="doc-meta">
+    API Documentation Issues Report<br>
+    31 March 2026 &nbsp;|&nbsp; 7 validation passes<br>
+    api.trillet.ai &nbsp;|&nbsp; docs.trillet.ai
+  </div>
+</div>
+
+<!-- Title -->
+<div class="title-block">
+  <h1 class="doc-title">Documentation Issues Report</h1>
+  <div class="doc-subtitle">All known discrepancies between docs.trillet.ai and live production behavior</div>
+</div>
+
+<p class="doc-intro">This report documents every known problem with the official Trillet documentation at docs.trillet.ai, based on seven rounds of direct API testing between 29 and 31 March 2026. Issues fall into four categories: wrong API paths, wrong API versions, undocumented endpoints, and behavioral gaps. Eight confirmed platform bugs are covered separately in the API Bug Report.</p>
+
+<!-- ── Accuracy Scorecard ── -->
+<div class="accuracy-scorecard">
+  <div class="accuracy-dial">
+    <div class="accuracy-number">41%</div>
+    <div class="accuracy-label">Documentation Accuracy</div>
+    <div class="accuracy-detail">19 of 46 validated items<br>correctly documented</div>
+  </div>
+  <div class="accuracy-breakdown">
+    <div style="font-family:'Urbanist',sans-serif;font-weight:700;font-size:13px;color:var(--text);margin-bottom:4px;">Breakdown by category</div>
+    <div class="accuracy-row">
+      <div class="accuracy-row-label">Correctly documented endpoints</div>
+      <div class="accuracy-bar-wrap"><div class="accuracy-bar" style="width:49%;background:var(--green);"></div></div>
+      <div class="accuracy-row-pct" style="color:var(--green);">49%</div>
+    </div>
+    <div class="accuracy-row">
+      <div class="accuracy-row-label">Wrong path in docs</div>
+      <div class="accuracy-bar-wrap"><div class="accuracy-bar" style="width:13%;background:var(--amber);"></div></div>
+      <div class="accuracy-row-pct" style="color:var(--amber);">13%</div>
+    </div>
+    <div class="accuracy-row">
+      <div class="accuracy-row-label">Wrong version in docs</div>
+      <div class="accuracy-bar-wrap"><div class="accuracy-bar" style="width:15%;background:var(--amber);"></div></div>
+      <div class="accuracy-row-pct" style="color:var(--amber);">15%</div>
+    </div>
+    <div class="accuracy-row">
+      <div class="accuracy-row-label">Not in docs at all</div>
+      <div class="accuracy-bar-wrap"><div class="accuracy-bar" style="width:23%;background:var(--red);"></div></div>
+      <div class="accuracy-row-pct" style="color:var(--red);">23%</div>
+    </div>
+    <div class="accuracy-row">
+      <div class="accuracy-row-label">Behavioral gaps (0 of 7 documented)</div>
+      <div class="accuracy-bar-wrap"><div class="accuracy-bar" style="width:100%;background:#FEE2E2;"></div></div>
+      <div class="accuracy-row-pct" style="color:var(--red);">0%</div>
+    </div>
+    <div style="font-size:11px;color:var(--muted);margin-top:4px;">Methodology: 39 endpoint operations + 7 behavioral patterns validated against live production. Correctly documented = accurate path, version, and behavior present in docs.</div>
+  </div>
+</div>
+
+<!-- ── Synopsis and Ramifications ── -->
+<div class="synopsis-block">
+  <div class="synopsis-header">Synopsis &amp; Commercial Ramifications</div>
+  <div class="synopsis-body">
+    <p class="synopsis-state">The official Trillet documentation is not functional as a standalone integration resource. Less than half the API surface is correctly documented. Nine endpoints required for basic operations are absent from the docs entirely. None of the seven behavioral patterns that cause silent failures are documented anywhere. A developer following only docs.trillet.ai cannot complete a single end-to-end task: inbound call routing, phone number provisioning, and call history retrieval all require undocumented or incorrectly documented endpoints.</p>
+
+    <ul class="ramification-list">
+      <li class="ramification-item">
+        <div class="ramification-number">1</div>
+        <div class="ramification-text"><strong>Agency activation is blocked.</strong> The two endpoints critical to deploying an inbound agent (bind phone to agent, purchase phone number) are completely absent from the docs. An agency developer starting from scratch will fail before writing a single line of production code. This directly impairs the agency channel that Barak and Ori are building.</div>
+      </li>
+      <li class="ramification-item">
+        <div class="ramification-number">2</div>
+        <div class="ramification-text"><strong>Silent data loss goes undetected and unattributed.</strong> The undocumented replace semantics on PUT and the flow ownership model mean developers configure agents that appear to work, then lose configuration silently. Without knowing to run a GET after every PUT, this failure mode is nearly impossible to debug. Support tickets will describe it as "settings resetting" or "configuration not saving" with no path to resolution.</div>
+      </li>
+      <li class="ramification-item">
+        <div class="ramification-number">3</div>
+        <div class="ramification-text"><strong>Support ticket volume is inflated by documentation-preventable failures.</strong> Wrong paths produce 404s. Wrong version prefixes produce 404s. These look like platform bugs to the developer. Each one generates a support contact. The current support load almost certainly contains a significant proportion of documentation-originating tickets, particularly around call history (wrong version) and phone number management (wrong path).</div>
+      </li>
+      <li class="ramification-item">
+        <div class="ramification-number">4</div>
+        <div class="ramification-text"><strong>Enterprise evaluation fails before it starts.</strong> Enterprise procurement teams evaluating the API will typically spend 1-2 hours testing against the documentation before engaging sales. At 41% documentation accuracy, they will hit 404s and silent failures within minutes. The experience reads as an unstable or immature API, which is a hard perception to reverse even when the underlying platform works correctly.</div>
+      </li>
+      <li class="ramification-item">
+        <div class="ramification-number">5</div>
+        <div class="ramification-text"><strong>The office hours queuing trap creates invisible outbound call failures.</strong> Developers building outbound campaigns will place calls that enter pending status with no explanation. Calls appear to be accepted (200 response) but never connect. Without knowing about the office hours queuing behavior, developers will spend hours ruling out agent configuration, phone number issues, and network problems before discovering the real cause.</div>
+      </li>
+    </ul>
+
+    <div class="fix-note">
+      <strong>What it takes to fix it:</strong> The 9 undocumented endpoints and 7 behavioral notes can be documented in a single targeted update. The 5 wrong paths and 6 wrong versions are find-and-replace corrections. Total documentation effort is estimated at 2-3 days for a technical writer with live API access. Priority order: (1) bind endpoint + phone provisioning endpoints (unblock agency activation), (2) correct v1/v2 version mismatches, (3) behavioral notes section covering PUT semantics, flow ownership, and SMS requirements.
+    </div>
+  </div>
+</div>
+
+<!-- ── Category 1 ── -->
+<h2>Category 1: Wrong API Paths</h2>
+<p>These endpoints exist and work, but the official documentation shows an incorrect URL. Following the docs produces a 404 on every call.</p>
+<table>
+  <thead>
+    <tr>
+      <th style="width:18%">Resource</th>
+      <th style="width:30%">Docs Say</th>
+      <th style="width:30%">Actually Works</th>
+      <th style="width:12%">Status</th>
+      <th style="width:10%">Confirmed</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Knowledge Base</td>
+      <td><code>/v1/api/knowledge-base/*</code></td>
+      <td><code>/v1/api/knowledgebase/*</code></td>
+      <td><span class="badge badge-red">Wrong Path</span></td>
+      <td>Mar 29</td>
+    </tr>
+    <tr>
+      <td>Phone Numbers (list)</td>
+      <td><code>/v1/api/phone-numbers/*</code></td>
+      <td><code>/v1/api/twilio/user-phone-numbers</code></td>
+      <td><span class="badge badge-red">Wrong Path</span></td>
+      <td>Mar 29</td>
+    </tr>
+    <tr>
+      <td>Flow Folders</td>
+      <td><code>/v1/api/folders</code></td>
+      <td><code>/v1/api/flow-folders</code></td>
+      <td><span class="badge badge-red">Wrong Path</span></td>
+      <td>Mar 30</td>
+    </tr>
+    <tr>
+      <td>Omni Flow Agents</td>
+      <td><code>/v1/api/omniflow-agents</code></td>
+      <td><code>/v1/api/omni-flow-agents</code></td>
+      <td><span class="badge badge-red">Wrong Path</span></td>
+      <td>Mar 30</td>
+    </tr>
+    <tr>
+      <td>Voice Search</td>
+      <td><code>/v1/api/voices/search</code></td>
+      <td>Server bug (BUG-04). Use <code>/v1/api/agents/voices</code></td>
+      <td><span class="badge badge-amber">Wrong Path + Bug</span></td>
+      <td>Mar 31</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- ── Category 2 ── -->
+<h2>Category 2: Wrong API Version</h2>
+<p>These endpoints exist and work, but the docs show the wrong API version prefix. Calling them with <code>/v1/api/</code> returns 404. The correct version is v2.</p>
+<table>
+  <thead>
+    <tr>
+      <th style="width:22%">Resource</th>
+      <th style="width:34%">Docs Say</th>
+      <th style="width:34%">Correct Path</th>
+      <th style="width:10%">Confirmed</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Call history — list</td>
+      <td><code>/v1/api/calls/call-history</code></td>
+      <td><code>/v2/api/call-history</code></td>
+      <td>Mar 29</td>
+    </tr>
+    <tr>
+      <td>Call history — detail</td>
+      <td><code>/v1/api/calls/call-history/{id}</code></td>
+      <td><code>/v2/api/call-history/{id}</code></td>
+      <td>Mar 29</td>
+    </tr>
+    <tr>
+      <td>Call metrics</td>
+      <td><code>/v1/api/calls/metrics</code></td>
+      <td><code>/v2/api/call-history/metrics</code></td>
+      <td>Mar 30</td>
+    </tr>
+    <tr>
+      <td>Active calls — list</td>
+      <td><code>/v1/api/active-calls</code></td>
+      <td><code>/v2/api/active-calls</code></td>
+      <td>Mar 29</td>
+    </tr>
+    <tr>
+      <td>Active calls — detail</td>
+      <td><code>/v1/api/active-calls/{id}</code></td>
+      <td><code>/v2/api/active-calls/{roomName}</code></td>
+      <td>Mar 29</td>
+    </tr>
+    <tr>
+      <td>Recordings</td>
+      <td><code>/v1/api/recordings/{id}</code></td>
+      <td><code>/v2/api/recordings/{callHistoryId}</code></td>
+      <td>Mar 30</td>
+    </tr>
+  </tbody>
+</table>
+<div class="note">Both API versions are in active production. The v2 endpoints are not a replacement or migration path — they are a parallel version that handles specific resource types. The documentation makes no mention of v2 at all.</div>
+
+<!-- ── Category 3 ── -->
+<h2>Category 3: Undocumented Endpoints</h2>
+<p>These endpoints are not mentioned anywhere in the official documentation. Several are critical for core operations. All were discovered by capturing network traffic from the Trillet web UI via Playwright during live browser sessions.</p>
+<table>
+  <thead>
+    <tr>
+      <th style="width:40%">Endpoint</th>
+      <th style="width:42%">What It Does</th>
+      <th style="width:10%">Criticality</th>
+      <th style="width:8%">Discovered</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>POST /v1/api/agents/{id}/bind/{phoneId}</code></td>
+      <td>Sets pathwayId and flowType on the phone number. Required for inbound call routing. Without this, all inbound calls disconnect.</td>
+      <td><span class="badge badge-red">Critical</span></td>
+      <td>Mar 29</td>
+    </tr>
+    <tr>
+      <td><code>POST /v1/api/omni-flow-agents/{id}/bind/{phoneId}</code></td>
+      <td>Sets messagePathwayId on the phone number. Required for SMS message routing.</td>
+      <td><span class="badge badge-red">Critical</span></td>
+      <td>Mar 30</td>
+    </tr>
+    <tr>
+      <td><code>POST /v1/api/call-flows/{id}/duplicate</code></td>
+      <td>Duplicates a call flow. The only working method to create flows programmatically — direct POST is broken (BUG-01).</td>
+      <td><span class="badge badge-red">Critical</span></td>
+      <td>Mar 29</td>
+    </tr>
+    <tr>
+      <td><code>GET /v1/api/twilio/free-number-status</code></td>
+      <td>Returns phone number quota: {limit, used, remaining, hasFree}. Required to check before purchasing.</td>
+      <td><span class="badge badge-amber">High</span></td>
+      <td>Mar 29</td>
+    </tr>
+    <tr>
+      <td><code>GET /v1/api/twilio/available-numbers</code></td>
+      <td>Searches for available numbers by country, type, and area code.</td>
+      <td><span class="badge badge-amber">High</span></td>
+      <td>Mar 29</td>
+    </tr>
+    <tr>
+      <td><code>POST /v1/api/twilio/purchase-number</code></td>
+      <td>Purchases a phone number from the available pool.</td>
+      <td><span class="badge badge-amber">High</span></td>
+      <td>Mar 29</td>
+    </tr>
+    <tr>
+      <td><code>POST /v1/api/workspaces/{id}/invite</code></td>
+      <td>Invites a team member by email with a specified role.</td>
+      <td><span class="badge badge-amber">Medium</span></td>
+      <td>Mar 30</td>
+    </tr>
+    <tr>
+      <td><code>GET /v2/api/active-calls/{room}/insights</code></td>
+      <td>Returns live sentiment, summary, and coaching suggestions during an active call.</td>
+      <td><span class="badge badge-amber">Medium</span></td>
+      <td>Mar 31</td>
+    </tr>
+    <tr>
+      <td><code>POST /v1/api/call-flows/{id}/drafts/{draftId}/publish</code></td>
+      <td>Publishes a draft to live. Equivalent to the "Push Live" button in the UI.</td>
+      <td><span class="badge badge-amber">Medium</span></td>
+      <td>Mar 30</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- ── Category 4 ── -->
+<h2>Category 4: Behavioral Gaps</h2>
+<p>These behaviors are not mentioned or explained anywhere in the official documentation. The API performs them consistently. Without knowing about them, developers encounter silent failures and data loss with no diagnostic path.</p>
+
+<h3>1. PUT uses replace semantics, not merge semantics</h3>
+<p>Every PUT endpoint replaces the entire stored object with the submitted payload. Omitted fields revert to defaults or become empty. The API returns 200 with your submitted values, so the write looks successful. A GET afterward reveals the omitted fields are gone. This affects agents, call flows, knowledge bases, workspaces, and every other mutable resource. Not documented anywhere.</p>
+<p><strong>Fix:</strong> GET the full resource first, merge changes into the full object, PUT the complete merged object back.</p>
+
+<h3>2. Call flow ownership model for PUT</h3>
+<p>PUT on a call flow only persists if the flow was created or duplicated by the same API key user. Sending a PUT to a flow owned by a different workspace user returns 200 with the submitted values echoed back, but a subsequent GET shows the original values unchanged. No error is returned at any point. Not documented anywhere.</p>
+
+<h3>3. Draft and publish model</h3>
+<p>Changes made through the web UI auto-save to a draft rather than going live immediately. Going live requires clicking "Push Live" (API: <code>POST /call-flows/{id}/drafts/{draftId}/publish</code>). API PUTs bypass the draft system entirely and write directly to live. The two write paths target different states and are not interchangeable. Not explained in the documentation.</p>
+
+<h3>4. Office hours queue outbound calls rather than blocking them</h3>
+<p>When office hours are configured and an outbound call is placed outside those hours, the call enters pending status with a scheduledTime set to the next open window. The API accepts the call (200 response) but does not connect it. No error is returned. Developers expecting on-demand calling will see calls stuck in pending with no explanation. Not documented anywhere.</p>
+
+<h3>5. SMS requires three specific fields</h3>
+<p>Post-call SMS requires all three of: <code>businessOwnerSMS: true</code>, <code>useInternalA2P: true</code>, and <code>businessOwnerPhoneNumber</code> (exact field name matters — <code>businessOwnerPhone</code> is accepted by PUT but may not be read by the SMS pipeline). Missing any one results in silent failure: the setting appears saved, no error is returned, no SMS is delivered. None of these requirements are documented.</p>
+
+<h3>6. GET responses may return stale data immediately after PUT</h3>
+<p>A GET request immediately following a successful PUT may return the previous values rather than the updated ones due to caching. For call flows, the most reliable freshness indicator is the <code>promptVersions</code> array: a new entry appears when a PUT successfully persisted. For other resources, a 1-2 second wait before re-GET resolves the issue.</p>
+
+<h3>7. Transfer schema: old field names accepted but not used at runtime</h3>
+<p>The transfer object in call flow settings accepts two sets of field names: the old names (<code>label</code>, <code>phoneNumber</code>) and the current names (<code>friendly_name</code>, <code>destination</code>). Old names are accepted by PUT and echo back on GET — they appear saved. At runtime, the transfer_call function only reads the current names. Transfers configured with old field names will fail with "Team not found" on every attempt. Not documented anywhere.</p>
+
+<!-- ── Summary ── -->
+<h2>Summary by Impact</h2>
+<table>
+  <thead>
+    <tr>
+      <th style="width:25%">Issue Type</th>
+      <th style="width:8%">Count</th>
+      <th style="width:67%">Developer Impact</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Wrong API paths</td>
+      <td>5</td>
+      <td>404 on every call. Developer assumes the endpoint does not exist or the feature is not available via API.</td>
+    </tr>
+    <tr>
+      <td>Wrong API version</td>
+      <td>6</td>
+      <td>404 on every call. Version mismatch is hard to diagnose without knowing about the two-version architecture, which is also undocumented.</td>
+    </tr>
+    <tr>
+      <td>Undocumented endpoints</td>
+      <td>9</td>
+      <td>Critical operations (inbound routing, number purchase, flow creation) are impossible to discover without reverse-engineering the UI. Inbound call routing specifically cannot be achieved without the undocumented bind endpoint.</td>
+    </tr>
+    <tr>
+      <td>Behavioral gaps</td>
+      <td>7</td>
+      <td>Silent failures, corrupted writes, stuck calls, and undelivered SMS. Each one requires significant debugging time without documentation guidance. Several (replace semantics, flow ownership) result in data loss with no error signal.</td>
+    </tr>
+    <tr>
+      <td>Platform bugs (separate report)</td>
+      <td>8</td>
+      <td>Server-side failures affecting core operations including flow creation and on-demand SMS generation.</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- ── Methodology ── -->
+<h2>Testing Methodology</h2>
+<p>All findings reflect the live production API at api.trillet.ai as of 31 March 2026. Testing methods:</p>
+<ul>
+  <li>Direct REST calls via curl and Python with API key and JWT Bearer authentication</li>
+  <li>Playwright browser network capture during live app.trillet.ai sessions (primary source for undocumented endpoint discovery)</li>
+  <li>Active voice call testing with real-time transcript and insight polling</li>
+  <li>Seven validation passes between 29 and 31 March 2026</li>
+</ul>
+<div class="note">JWT parity confirmed: JWT Bearer tokens and API keys hit identical routes. All discrepancies apply equally to both authentication methods. Any path that returns 404 via API key also returns 404 via JWT.</div>
+
+<!-- Footer -->
+<div class="doc-footer">
+  <div><span style="font-family:'Urbanist',sans-serif;font-weight:700;color:var(--text);">trillet</span> &nbsp;|&nbsp; Documentation Issues Report</div>
+  <div>31 March 2026 &nbsp;|&nbsp; 41% documentation accuracy &nbsp;|&nbsp; For Trillet Australia and development team review</div>
+</div>
+
+</body>
+</html>
