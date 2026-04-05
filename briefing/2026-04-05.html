@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trillet Briefing -- 2026-04-05</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', system-ui, sans-serif; }
+    .detail { display: none; }
+    .detail.open { display: block; }
+    .toggle-icon { transition: transform 0.2s; }
+    .toggle-icon.open { transform: rotate(90deg); }
+    .tag-critical { background: #fef2f2; color: #991b1b; border: 1px solid #fecaca; }
+    .tag-upgrade { background: #f0fdf4; color: #166534; border: 1px solid #bbf7d0; }
+    .tag-ops { background: #fffbeb; color: #92400e; border: 1px solid #fde68a; }
+    .tag-pipeline { background: #eff6ff; color: #1e40af; border: 1px solid #bfdbfe; }
+    .tag-pattern { background: #faf5ff; color: #6b21a8; border: 1px solid #e9d5ff; }
+  </style>
+</head>
+<body class="min-h-screen bg-stone-50 text-neutral-950">
+
+  <header class="sticky top-0 z-50 border-b border-neutral-200/80 bg-stone-50/90 backdrop-blur-xl">
+    <div class="mx-auto max-w-3xl px-4 py-3 flex items-center justify-between">
+      <div>
+        <div class="text-sm font-semibold tracking-tight">Trillet Daily Briefing</div>
+        <div class="text-xs text-neutral-500">2026-04-05 -- prepared for Barak</div>
+      </div>
+      <div class="text-xs text-neutral-400">15 items</div>
+    </div>
+  </header>
+
+  <main class="mx-auto max-w-3xl px-4 py-6">
+
+    <!-- 1. AARGON SLA BREACH -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-red-200 bg-red-50 px-4 py-3 shadow-sm hover:bg-red-100 transition-colors">
+        <span class="toggle-icon text-red-400 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="flex items-center gap-2">
+            <div class="text-sm font-semibold text-red-900">Operations / Aargon</div>
+            <span class="text-[10px] font-medium px-1.5 py-0.5 rounded tag-critical">CRITICAL</span>
+          </div>
+          <div class="text-sm text-red-700">$3K SLA fine risk -- dev accidentally deleted 24 phone numbers for enterprise client</div>
+        </div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-red-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p><strong>What happened:</strong> During Autocall's migration from legacy to Agency Plus, a duplicate Stripe customer profile was created. A dev cancelled the duplicate subscription to consolidate -- but this triggered an automated phone number deletion cascade. The deletion hit Aargon's workspace (24 numbers wiped in ~20 seconds on Mar 31).</p>
+        <p class="mt-2"><strong>Root cause:</strong> Legacy workspace resolution code uses <code>userId + isMasterWorkspace = true</code>. Santiago owns two master workspaces ("Santiago's Workspace" + "Autocall"). The DB returned Autocall first, so the deletion cascaded to the wrong workspace -- the production one.</p>
+        <p class="mt-2"><strong>Recovery:</strong> Isaam states 15 of 24 numbers recovered from DB records. Trunks recreated for 13 (2 numbers no longer in use). 9 numbers have no trace in call history archives -- unrecoverable.</p>
+        <p class="mt-2"><strong>SLA impact:</strong> Laurence states (#dev-trillet): "This was a mistake, this has caused Aargon SLAs to be missed. This will now involve a 3k SLA fine." He then told the dev: "Don't worry, these things happen to the best of us."</p>
+        <p class="mt-2"><strong>Band-aid shipped:</strong> Soft-delete for phone numbers (PRs #1395/#1396). Phone numbers now soft-deleted instead of hard-deleted. Also fixed a related inbound call bug -- soft-deleted records were being returned by pymongo queries (no Mongoose filter), causing calls to drop.</p>
+        <p class="mt-2"><span class="font-semibold text-red-800">Systemic bug unassigned:</span> The multi-master-workspace query resolution bug has no owner and no fix scheduled. Any future operation that resolves workspace via <code>userId + isMasterWorkspace</code> can hit the same issue for any user who owns multiple master workspaces.</p>
+        <div class="mt-3 pt-3 border-t border-neutral-100">
+          <div class="text-xs font-semibold uppercase tracking-wide text-neutral-500 mb-2">Action items</div>
+          <ul class="list-disc ml-4 text-sm">
+            <li><strong>Engineering:</strong> Multi-master-workspace bug needs owner + fix. Structural, not cosmetic.</li>
+            <li><strong>Laurence/Isaam:</strong> Confirm whether the $3K SLA fine was formally applied or credited.</li>
+            <li><strong>Process:</strong> Laurence called for enterprise client changes to require approval. No enforcement mechanism yet.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. FNB UPGRADE -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-green-200 bg-green-50 px-4 py-3 shadow-sm hover:bg-green-100 transition-colors">
+        <span class="toggle-icon text-green-500 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="flex items-center gap-2">
+            <div class="text-sm font-semibold text-green-900">Pipeline / Andile</div>
+            <span class="text-[10px] font-medium px-1.5 py-0.5 rounded tag-upgrade">UPGRADE</span>
+          </div>
+          <div class="text-sm text-green-700">FNB (top-5 African bank) -- senior leaders committing to set up a meeting</div>
+        </div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-green-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p>Andile states (group DM, Apr 1): "We're due to have a meeting with FNB. Senior leaders have said they'll set up a time for us to meet." No date confirmed yet. First National Bank SA is a division of FirstRand (founded 1838), top-5 bank in Africa.</p>
+        <p class="mt-2">This is the first institutional-grade lead Andile has produced. Previously all his deals were real estate/property management. FNB is a different category -- enterprise banking with potentially massive call volumes.</p>
+        <p class="mt-2">Laurence congratulated Andile. Ori states "coaching Andile will pay off." Ori has been coaching Andile "a couple times a week" on outbound methodology and communication discipline.</p>
+        <p class="mt-2"><strong>Andile pipeline overall:</strong> Also has broker introductions coming next week for Property24 data gathering (Ismail's shortlist). Broll/Surine expected back from OOO ~Apr 3. SPEAR REIT follow-ups sent.</p>
+        <div class="mt-3 pt-3 border-t border-neutral-100">
+          <div class="text-xs font-semibold uppercase tracking-wide text-neutral-500 mb-2">Action items</div>
+          <ul class="list-disc ml-4 text-sm">
+            <li><strong>Andile:</strong> Awaiting FNB to set meeting date.</li>
+            <li><strong>Ori/Barak:</strong> Decide level of involvement in the FNB meeting when it materializes.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. RUSSELL CARRAWAY -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-neutral-200 bg-white px-4 py-3 shadow-sm hover:bg-neutral-50 transition-colors">
+        <span class="toggle-icon text-neutral-400 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="flex items-center gap-2">
+            <div class="text-sm font-semibold text-neutral-950">Russell Carraway</div>
+            <span class="text-[10px] font-medium px-1.5 py-0.5 rounded tag-pipeline">PIPELINE</span>
+          </div>
+          <div class="text-sm text-neutral-600">Meta Messenger/WhatsApp/Lead Ads all confirmed live -- 37/42 capabilities, pricing proposal next</div>
+        </div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p><strong>Russell called Ori (Apr 4)</strong> asking if Trillet can handle Meta Messenger as an inbound channel. This triggered a deep API exploration (70+ endpoints tested).</p>
+        <p class="mt-2"><strong>Findings (Apr 4-5):</strong></p>
+        <ul class="list-disc ml-4 mt-1">
+          <li><strong>Meta Lead Ads:</strong> LIVE. OAuth install endpoint confirmed. Russell can run Lead Form ads and Trillet auto-calls leads within seconds.</li>
+          <li><strong>Meta WhatsApp:</strong> LIVE. OAuth authorize endpoint confirmed.</li>
+          <li><strong>Meta Messenger:</strong> Confirmed as a productized channel (Apr 5 UI trace). Setup via Settings > Meta Message Flows > Connect Meta Business (OAuth). Create Message Flow with Facebook Messenger channel.</li>
+          <li><strong>All four Meta CTAs</strong> (Call Now, Lead Form, Messenger, WhatsApp) now have confirmed Trillet support.</li>
+        </ul>
+        <p class="mt-2"><strong>Blocker:</strong> Meta Business OAuth connection required. Russell or Ori must authorize via Facebook first.</p>
+        <p class="mt-2"><strong>Deal stage:</strong> 37/42 capabilities (88%). Ori pivoted from free testing to paid proposal (Apr 2). Russell replied "didn't think it was ready" -- sees test agent as incomplete but willing to invest. Pricing proposal is next: $999 setup + $199/mo + usage.</p>
+        <p class="mt-2"><strong>Channel opportunity:</strong> Russell is a Bear Claw member (Austin Gray's group, 990 members, ~150 scaling trades operators). Volunteers to pitch Trillet organically. Assessed: 15 accounts at ~$735 MRR if 10% convert.</p>
+        <div class="mt-3 pt-3 border-t border-neutral-100">
+          <div class="text-xs font-semibold uppercase tracking-wide text-neutral-500 mb-2">Action items</div>
+          <ul class="list-disc ml-4 text-sm">
+            <li><strong>Ori:</strong> Draft and send pricing proposal to Russell.</li>
+            <li><strong>Ori/Russell:</strong> Connect Meta Business OAuth to enable Messenger + Lead Ads.</li>
+            <li><strong>Ori:</strong> Switch transfer number from Ori's to Russell's personal number.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. MRR / CMS UPDATE -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-neutral-200 bg-white px-4 py-3 shadow-sm hover:bg-neutral-50 transition-colors">
+        <span class="toggle-icon text-neutral-400 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-neutral-950">MRR / Revenue</div>
+          <div class="text-sm text-neutral-600">$14,359 USD (Apr 5) -- down $29 from $14,388; $14,775 peak on Apr 3</div>
+        </div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p><strong>Apr 3 peak:</strong> $14,775 USD MRR. 192 subs (+6). AgencyPlus 40 (+2), Studio 39 (+1), Basic 74 (+1). Growth driven by trial-to-paid conversions, not net-new signups.</p>
+        <p class="mt-2"><strong>Apr 5 CMS sync:</strong> $14,359 (-$29 from $14,388). One Basic Plan churned. Two trial conversions (AgencyPlus +1, Studio +1). Dunning stable at 9 records / $1,281 at risk. Brandon Francis nearing Stripe auto-cancel.</p>
+        <p class="mt-2"><strong>Refund policy change:</strong> Laurence states he "spent thousands on refunds this month." Updated T&Cs policies 18+19 (no-refund after 7-day trial). CMS corroborates: dunning improved 8->6 past-due, $683 recovered last 30 days. Discount creep at 17.1% of gross MRR -- worth watching.</p>
+      </div>
+    </div>
+
+    <!-- 5. KAYAK POOLS GO-LIVE -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-neutral-200 bg-white px-4 py-3 shadow-sm hover:bg-neutral-50 transition-colors">
+        <span class="toggle-icon text-neutral-400 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="flex items-center gap-2">
+            <div class="text-sm font-semibold text-neutral-950">Operations / Kayak Pools</div>
+            <span class="text-[10px] font-medium px-1.5 py-0.5 rounded tag-ops">BLOCKED</span>
+          </div>
+          <div class="text-sm text-neutral-600">Go-live targeting Thu/Fri blocked by two bugs -- Isaam: "cannot go to next week"</div>
+        </div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p>Kayak Pools go-live was targeting this Thursday/Friday. Two blocking bugs from #prompt-trillet:</p>
+        <ul class="list-disc ml-4 mt-1">
+          <li>AZ zip code 85254 rejected (missing from valid states list)</li>
+          <li>Appointment booking fails silently</li>
+        </ul>
+        <p class="mt-2">Isaam states "cannot go to next week" -- urgency is high. This is a Strata Blue enterprise account.</p>
+      </div>
+    </div>
+
+    <!-- 6. AGENCY BILLING EXPLOIT -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-neutral-200 bg-white px-4 py-3 shadow-sm hover:bg-neutral-50 transition-colors">
+        <span class="toggle-icon text-neutral-400 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="flex items-center gap-2">
+            <div class="text-sm font-semibold text-neutral-950">Operations / Billing</div>
+            <span class="text-[10px] font-medium px-1.5 py-0.5 rounded tag-pattern">PATTERN</span>
+          </div>
+          <div class="text-sm text-neutral-600">Agency billing exploit patched -- agencies could inflate wallets or disable custom billing</div>
+        </div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p>Edge case discovered and patched in #dev-trillet: agencies could inflate wallets or disable custom billing for subsidized minutes. Fix deployed.</p>
+        <p class="mt-2"><strong>Pattern note:</strong> This is the third billing/payment system issue in recent weeks (Twilio auto-recharge disabled in March, Autocall Stripe duplication Mar 31, now this). The billing infrastructure is producing incidents at a rate that suggests structural fragility, not isolated bugs.</p>
+      </div>
+    </div>
+
+    <!-- 7. PROPERTY24 -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-neutral-200 bg-white px-4 py-3 shadow-sm hover:bg-neutral-50 transition-colors">
+        <span class="toggle-icon text-neutral-400 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-neutral-950">Pipeline / Property24</div>
+          <div class="text-sm text-neutral-600">Agency ID in progress, PoC expected -- shortlist ~Apr 6-8 post-Easter</div>
+        </div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p>Ismail confirmed (Apr 1 email) the agency ID is in progress. Laurence confirms to Ori (Mar 31): "Property 24 looks good, like it will be a PoC."</p>
+        <p class="mt-2">Shortlist of 5-10 partner agencies expected ~Apr 6-8 post-Easter. Andile's broker introductions next week feed data into Ismail's selection process.</p>
+      </div>
+    </div>
+
+    <!-- 8. CRM TOKEN EXPIRED -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-neutral-200 bg-white px-4 py-3 shadow-sm hover:bg-neutral-50 transition-colors">
+        <span class="toggle-icon text-neutral-400 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="flex items-center gap-2">
+            <div class="text-sm font-semibold text-neutral-950">Operations / CRM</div>
+            <span class="text-[10px] font-medium px-1.5 py-0.5 rounded tag-ops">DEGRADED</span>
+          </div>
+          <div class="text-sm text-neutral-600">CRM token expired Apr 3 -- all 17 endpoints returning 401, data 3+ days stale</div>
+        </div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p>CRM OAuth token expired 2026-04-03 11:50 UTC. Refresh token also dead. All 17 endpoints returning 401. Needs interactive Google SSO re-auth.</p>
+        <p class="mt-2">Last successful sync: Mar 31 (358 tasks). Key signals from that last sync: Isaam task count jumped 1->7 (bottleneck). FLEXA project at 0% progress for 16 days (critical). NexaDental assigned as new project. P1 bug "Numbers swapped for calls" in review.</p>
+        <p class="mt-2"><strong>Visibility gap:</strong> Without CRM data, we can't track task assignments, project progress, or bug resolution status. This is the operational dashboard going dark.</p>
+      </div>
+    </div>
+
+    <!-- 9. ORG ASSESSMENT -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-neutral-200 bg-white px-4 py-3 shadow-sm hover:bg-neutral-50 transition-colors">
+        <span class="toggle-icon text-neutral-400 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-neutral-950">Barak / Org Assessment</div>
+          <div class="text-sm text-neutral-600">Interim doc still unsent as of Apr 3 -- design blocked since Mar 25</div>
+        </div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p>The org assessment interim document remains unsent as of Apr 3. Document design has been blocked since Mar 25 (the form factor was rejected).</p>
+        <p class="mt-2">Barak has sent zero text messages since Mar 31 -- calls only. Ori notes Laurence is already acting on assessment feedback ("made changes especially to the CRM"), website target live by ~Apr 11. Ori's commentary: "charging forward in reverse" -- surface-level fixes without structural change.</p>
+        <div class="mt-3 pt-3 border-t border-neutral-100">
+          <div class="text-xs font-semibold uppercase tracking-wide text-neutral-500 mb-2">Action items</div>
+          <ul class="list-disc ml-4 text-sm">
+            <li><strong>Barak/Ori:</strong> Decide on document form factor and send the interim assessment.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 10. LAURENCE SIGNALS -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-neutral-200 bg-white px-4 py-3 shadow-sm hover:bg-neutral-50 transition-colors">
+        <span class="toggle-icon text-neutral-400 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-neutral-950">Laurence / AU Signals</div>
+          <div class="text-sm text-neutral-600">Acting on feedback but surface-level; website target Apr 11; IMLive FB app workaround</div>
+        </div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p><strong>Assessment response:</strong> Laurence states he has "made changes especially to the CRM." Website target: live by ~Apr 11.</p>
+        <p class="mt-2"><strong>IMLive FBM:</strong> Laurence got alternate FB app access (his surname "Latin" was blocking FB verification). Waiting on Luis (IML) to confirm FB page connections. Barak is following up with Luis directly.</p>
+        <p class="mt-2"><strong>NexaDental:</strong> Mak (heroforge.ai) requesting Nick (nexadental.ai) create NexHealth employee account with Cloud9 credentialing. Healthcare vertical integration work.</p>
+      </div>
+    </div>
+
+    <!-- 11. ANDREW -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-neutral-200 bg-white px-4 py-3 shadow-sm hover:bg-neutral-50 transition-colors">
+        <span class="toggle-icon text-neutral-400 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-neutral-950">Team / Andrew</div>
+          <div class="text-sm text-neutral-600">Asking about ad campaign timing -- "thought we were planning to launch a tester soon"</div>
+        </div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p>Andrew states (Slack, Mar 30-31): "thought we were planning to launch a tester soon" and "trying to manage my workload + timeline." He's asking for clarity on the Meta ads tester campaign.</p>
+        <p class="mt-2">Also asked Ori for a Trustpilot review. Meta ads Phase 2 has $1,500/mo budget secured (Muly verbal $5-10K). Blocked on landing page build + pixel integration.</p>
+        <div class="mt-3 pt-3 border-t border-neutral-100">
+          <div class="text-xs font-semibold uppercase tracking-wide text-neutral-500 mb-2">Action items</div>
+          <ul class="list-disc ml-4 text-sm">
+            <li><strong>Ori:</strong> Decide Andrew's scope (full brief vs directed) and respond on timeline.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 12. IMLIVE FBM -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-neutral-200 bg-white px-4 py-3 shadow-sm hover:bg-neutral-50 transition-colors">
+        <span class="toggle-icon text-neutral-400 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-neutral-950">ImLive / FBM</div>
+          <div class="text-sm text-neutral-600">FB app access workaround found -- waiting on Luis for page connections</div>
+        </div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p>Laurence got alternate FB app access after his surname "Latin" blocked FB verification. Waiting on Luis (IML) to confirm FB page connections for the six hosts.</p>
+        <p class="mt-2">Barak is following up with Luis directly. INV-0071 ($4,500 first installment) paid Mar 17. Second installment ($4,500) due at go-live.</p>
+      </div>
+    </div>
+
+    <!-- 13. TIER ARCHITECTURE -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-neutral-200 bg-white px-4 py-3 shadow-sm hover:bg-neutral-50 transition-colors">
+        <span class="toggle-icon text-neutral-400 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-neutral-950">Strategy / Tier Architecture</div>
+          <div class="text-sm text-neutral-600">3-tier pricing locked ($149/$299/$497) -- 5 blocking questions remain for 3-way call</div>
+        </div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p>Tiers locked: Starter $149/mo, Agency $299/mo, Scale $497/mo. GPT-5.4 review: "approve and ship." Five blocking questions remain: API scope, custom build fee ($12-35K range), enterprise pricing bands, annual pricing, bypass fix.</p>
+        <p class="mt-2">These need the 3-way Ori/Ming/Barak call. Ming still in China (blackout since ~Mar 20, estimated 1-1.5 weeks remaining as of late March).</p>
+        <div class="mt-3 pt-3 border-t border-neutral-100">
+          <div class="text-xs font-semibold uppercase tracking-wide text-neutral-500 mb-2">Action items</div>
+          <ul class="list-disc ml-4 text-sm">
+            <li><strong>Ori/Barak/Ming:</strong> Schedule 3-way call to resolve 5 blocking questions before website goes live.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 14. COMPETITOR PRICING SWEEP -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-neutral-200 bg-white px-4 py-3 shadow-sm hover:bg-neutral-50 transition-colors">
+        <span class="toggle-icon text-neutral-400 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-neutral-950">Market Research</div>
+          <div class="text-sm text-neutral-600">26-competitor pricing sweep solid; non-pricing research shallow; Trillet stack verification needed</div>
+        </div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p>Competitor pricing sweep covers 26 competitors with solid depth. Non-pricing research (features, architecture, integrations) remains shallow.</p>
+        <p class="mt-2">Key gap: Trillet's own stack needs verification with Laurence/Ming before comparisons can be used in sales materials. Without this, any "Trillet does X that competitors don't" claim is unvalidated.</p>
+      </div>
+    </div>
+
+    <!-- 15. SYSTEM / INGESTION -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-neutral-200 bg-white px-4 py-3 shadow-sm hover:bg-neutral-50 transition-colors">
+        <span class="toggle-icon text-neutral-400 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-neutral-950">System / PKM</div>
+          <div class="text-sm text-neutral-600">Deep ingestion sweep completed (all except Gmail); V3 shadow pilot seeded across 47 threads</div>
+        </div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p>Today's session included a deep ingestion sweep across Slack, WhatsApp, and CMS (Gmail excluded). Multiple state files updated across all domains. V3 event-sourced shadow pilot seeded across 47 threads with auto-discover compiler.</p>
+        <p class="mt-2">Meta Messenger/WhatsApp/Lead Ads API exploration and validation completed for Russell Carraway deal (findings above).</p>
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="border-t border-neutral-200 bg-stone-50">
+    <div class="mx-auto max-w-3xl px-4 py-4 text-xs text-neutral-400">
+      Generated from Trillet PKM. Questions? Message Ori.
+    </div>
+  </footer>
+
+  <script>
+    function toggle(btn) {
+      const detail = btn.nextElementSibling;
+      const icon = btn.querySelector('.toggle-icon');
+      detail.classList.toggle('open');
+      icon.classList.toggle('open');
+    }
+
+    // Expand all on double-click header
+    document.querySelector('header').addEventListener('dblclick', () => {
+      document.querySelectorAll('.detail').forEach(d => d.classList.add('open'));
+      document.querySelectorAll('.toggle-icon').forEach(i => i.classList.add('open'));
+    });
+  </script>
+
+</body>
+</html>
