@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trillet Briefing -- 2026-04-07</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', system-ui, sans-serif; }
+    .detail { display: none; }
+    .detail.open { display: block; }
+    .toggle-icon { transition: transform 0.2s; }
+    .toggle-icon.open { transform: rotate(90deg); }
+  </style>
+</head>
+<body class="min-h-screen bg-stone-50 text-neutral-950">
+
+  <header class="sticky top-0 z-50 border-b border-neutral-200/80 bg-stone-50/90 backdrop-blur-xl">
+    <div class="mx-auto max-w-3xl px-4 py-3 flex items-center justify-between">
+      <div>
+        <div class="text-sm font-semibold tracking-tight">Trillet Daily Briefing</div>
+        <div class="text-xs text-neutral-500">2026-04-07 (Monday) -- prepared for Barak</div>
+      </div>
+      <div class="text-xs text-neutral-400">11 items</div>
+    </div>
+  </header>
+
+  <main class="mx-auto max-w-3xl px-4 py-6">
+
+    <!-- 1. Org Assessment Follow-Up -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-neutral-200 bg-white px-4 py-3 shadow-sm hover:bg-neutral-50 transition-colors">
+        <span class="toggle-icon text-neutral-400 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-neutral-950">Org Assessment</div>
+          <div class="text-sm text-neutral-600">Founders meeting confirmed THIS WEEK. Laurence wants to fix core foundation.</div>
+        </div>
+        <div class="text-xs text-neutral-400">2 actions</div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p>In the Founders group DM (Apr 6), you proposed coordinating a meeting to discuss next steps on the org assessment. Laurence responded positively: "I think we can do this, this week. As I would like to move on fixing a lot of the core foundation so it runs smoothly without constantly being involved in day 2 day operations so we can focus on moving forward or finding ways to actually ensure we stay ahead of the curve."</p>
+        <p class="mt-2">This is a strong signal -- Laurence is framing the assessment findings as an operational improvement opportunity, not a threat. He's also signaling fatigue with day-to-day firefighting, which aligns with the assessment's SPOF findings.</p>
+        <p class="mt-2"><strong>Ming is back</strong> (returned Apr 6 from China trip). He hasn't read the assessment yet -- catching up on ~400 emails. Ori asked Ming about it in Slack DM but Ming states he hasn't spoken to Laurence about changes yet. This means the meeting will likely be the first time all four founders discuss the assessment together.</p>
+        <div class="mt-3 pt-3 border-t border-neutral-100">
+          <div class="text-xs font-semibold uppercase tracking-wide text-neutral-500 mb-2">Action items</div>
+          <p class="text-sm"><strong>Barak:</strong> Message Laurence back to confirm the meeting (Ori flagged this on WhatsApp -- "Message back Laurence").</p>
+          <p class="text-sm"><strong>All founders:</strong> Schedule the 4-person meeting this week while Laurence momentum is high.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. Barak/Laurence Comms -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-neutral-200 bg-white px-4 py-3 shadow-sm hover:bg-neutral-50 transition-colors">
+        <span class="toggle-icon text-neutral-400 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-neutral-950">FB Messenger Project</div>
+          <div class="text-sm text-neutral-600">Barak asked about FB Messenger project -- Laurence not responding on it.</div>
+        </div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p>Barak messaged (WhatsApp, Apr 7) about the Facebook Messenger project and why Laurence isn't responding. Ori told Barak "I don't think he'll message on that thread btw" and urged Barak to message Laurence directly.</p>
+        <p class="mt-2">Related context: In #imlive-fbm (Apr 6), Laurence was testing livemsg.io using an old business account to bypass blockers. He shared admin credentials with the channel and confirmed "its working." This suggests the FB Messenger integration work is progressing from Laurence's side, but communication back to Barak may have dropped.</p>
+      </div>
+    </div>
+
+    <!-- 3. FNB + ABSA -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-neutral-200 bg-white px-4 py-3 shadow-sm hover:bg-neutral-50 transition-colors">
+        <span class="toggle-icon text-neutral-400 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-neutral-950">Pipeline: FNB Bank + ABSA</div>
+          <div class="text-sm text-neutral-600">Two SA banks at decision-maker level. Andile's biggest wins yet.</div>
+        </div>
+        <div class="text-xs text-neutral-400">1 action</div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p><strong>FNB (First National Bank SA / FirstRand):</strong> Andile reached the CEO of Personal & Retail Banking, who responded and put him in touch with two senior leaders -- a COO and a CEO of the Personal Core Banking unit. These are decision-makers inside the bank. Use case: AI for loan origination process streamlining + debt collections operations. Value prop: process more loans faster, compliance audit trails, scale without headcount. Andile forwarded email communications to Ori. Ori states he wants to "start getting ready for a possible meeting."</p>
+        <p class="mt-2"><strong>ABSA Bank:</strong> Second SA bank with meeting pending a date. Andile forwarded the email exchange to Ori. Two concurrent enterprise banking opportunities from Andile's outreach.</p>
+        <p class="mt-2">This validates the coaching investment. Andile went from zero banking responses (4+ months, 8 targets) to decision-maker engagement at two of South Africa's top 5 banks. Deal registry updated: FNB #36 (upgraded), ABSA #37 (new).</p>
+        <div class="mt-3 pt-3 border-t border-neutral-100">
+          <div class="text-xs font-semibold uppercase tracking-wide text-neutral-500 mb-2">Action items</div>
+          <p class="text-sm"><strong>Ori:</strong> Review FNB and ABSA email threads, prep for possible FNB meeting.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. TCC Loss -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-neutral-200 bg-white px-4 py-3 shadow-sm hover:bg-neutral-50 transition-colors">
+        <span class="toggle-icon text-neutral-400 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-neutral-950">StrataBlue: TCC Stopped Service</div>
+          <div class="text-sm text-neutral-600">Verizon governance/security standards not met. Client lost.</div>
+        </div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p>Sam VanMeter (StrataBlue) confirmed in #stratablue-trillet (Apr 6): "They stopped service last week we did not meet their governance security standards from Verizon directly." Laurence asked if on-prem was offered; Sam confirmed he exhausted all options.</p>
+        <p class="mt-2">TCC was one of StrataBlue's larger deployments (~1,176 calls in 30-day CMS snapshot, source: Mar 17 CMS pull). The other StrataBlue accounts (Kayak-Pools, Mr Quik, Helm, nGroup, Gameday) are unaffected.</p>
+        <p class="mt-2"><strong>Pattern note:</strong> Enterprise security/governance is emerging as a recurring blocker. The org assessment flagged security gaps. Verizon's standards are likely SOC2 or equivalent -- Trillet doesn't have formal compliance certifications. This will recur with other enterprise clients.</p>
+      </div>
+    </div>
+
+    <!-- 5. Dev to Prod -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-neutral-200 bg-white px-4 py-3 shadow-sm hover:bg-neutral-50 transition-colors">
+        <span class="toggle-icon text-neutral-400 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-neutral-950">Operations: Dev &rarr; Prod Push</div>
+          <div class="text-sm text-neutral-600">Major deployment today. Aargon fix, subscription bugs, TTS cache, Gemini testing.</div>
+        </div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p>Isaam announced (Apr 6, #dev-trillet): "We're going live with dev &rarr; prod today." Key items shipping:</p>
+        <ul class="mt-2 list-disc ml-4 space-y-1">
+          <li><strong>Aargon P1 fix (Saad):</strong> Root cause identified -- MongoDB <code>$regex</code> query forcing full collection scan on every inbound call, blocking the event loop 60s+. Fixed with exact-match <code>$or</code> clauses. Deployed.</li>
+          <li><strong>Subscription resubscribe bug (Abdullah):</strong> Returning users were getting another free trial on resubscription. Fixed: resubscribe checkout now skips trial, charges immediately. New 3-step cancellation flow: consequences &rarr; reason/feedback &rarr; confirmation.</li>
+          <li><strong>TTS Cache enabled globally (Saad):</strong> Was on Aargon and TCC only. Now all workspaces.</li>
+          <li><strong>Callflow code actions saving bug (Abdullah):</strong> v1 UI wasn't passing code actions in save payload; v1+v2 were not stripping temp IDs. Fixed.</li>
+          <li><strong>Workflows hidden (Ibrahim Basit):</strong> Not ready for prod. Hidden from sidebar.</li>
+        </ul>
+        <p class="mt-2"><strong>Gemini 3.1 Flash Live testing (Sharjeel):</strong> Results in. Andrew's assessment: "rip so its crap at tool calling so far." Saad investigating whether errors are logical or integration-level.</p>
+        <p class="mt-2"><strong>Operational signal:</strong> Isaam asking "does anyone recall why we use variable for basic pricing instead of $49/mo?" -- Andrew: "bc minutes, the cost is dependent on how many minutes you need." They agreed to show "starting from $49/mo." This suggests pricing display details aren't documented in a shared knowledge base.</p>
+      </div>
+    </div>
+
+    <!-- 6. Kayak -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-neutral-200 bg-white px-4 py-3 shadow-sm hover:bg-neutral-50 transition-colors">
+        <span class="toggle-icon text-neutral-400 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-neutral-950">Kayak / Ryan Klein: Production-Ready</div>
+          <div class="text-sm text-neutral-600">All issues resolved. Ryan confirmed ready for prod rollout.</div>
+        </div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p>Isaam shared the full conversation with Ryan Klein in #prompt-trillet (Apr 6). Key points:</p>
+        <ul class="mt-2 list-disc ml-4 space-y-1">
+          <li>Production flow ready, API endpoints updated, transfer number added (+1 317 528 0002).</li>
+          <li>Nebraska and Kansas added as valid states (alongside Arizona).</li>
+          <li>Ryan states: no production testing allowed (impacts dashboards and statistics). Test calls OK if no dummy appointment records created.</li>
+          <li>Ryan: "Otherwise -- I'm ready to proceed with production rollout."</li>
+          <li>Isaam confirmed all issues resolved, states "Ready to take this live."</li>
+        </ul>
+        <p class="mt-2">This is StrataBlue's largest account (Kayak-Pools: 3,657 calls in 30d CMS snapshot). Going live is a milestone. Ryan through StrataBlue is Trillet's most operationally demanding client -- his production standards (no test data in prod) signal enterprise rigor that other clients don't demand.</p>
+      </div>
+    </div>
+
+    <!-- 7. CMS MRR -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-neutral-200 bg-white px-4 py-3 shadow-sm hover:bg-neutral-50 transition-colors">
+        <span class="toggle-icon text-neutral-400 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-neutral-950">CMS: MRR Down 5%</div>
+          <div class="text-sm text-neutral-600">$13,587 USD (was $14,305). First contraction after sustained growth.</div>
+        </div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p>CMS sync (Apr 7): MRR $13,587 USD, down $718 (-5.0%) from $14,305 on Apr 5. 185 total subscriptions (down 5 from 190).</p>
+        <p class="mt-2"><strong>Breakdown:</strong> AgencyPlus drives 76% of net MRR ($10,345 from 26 active subs). 9 AgencyPlus trials in the pipeline -- conversion of these is the single biggest MRR lever. 9 past-due dunning records represent ~$1,281 at risk.</p>
+        <p class="mt-2">No individual subscription IDs flagged as added or removed in the delta. The drop is likely trial expirations or downgrades between snapshots, not explicit cancellations. This is the first contraction after several weeks of growth (Feb $6,600 &rarr; Mar $14,000 &rarr; early Apr $15,800 peak).</p>
+        <p class="mt-2"><strong>Context for Muly conversation:</strong> The 122% MoM growth shown to Muly (~Apr 4-5) was real, but MRR has since pulled back. Worth monitoring whether this is a blip or the start of churn after rapid trial-driven growth.</p>
+      </div>
+    </div>
+
+    <!-- 8. Google Cloud -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-neutral-200 bg-white px-4 py-3 shadow-sm hover:bg-neutral-50 transition-colors">
+        <span class="toggle-icon text-neutral-400 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-neutral-950">Brand: Google Cloud Customer Story Published</div>
+          <div class="text-sm text-neutral-600">Live at cloud.google.com/customers/trilletai</div>
+        </div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p>Ming shared in Slack DM (Apr 6): Trillet is now a published Google Cloud customer story at <a href="https://cloud.google.com/customers/trilletai" class="text-blue-600 underline">cloud.google.com/customers/trilletai</a>. Ming states the interview was done last year before Ori joined; Google published it a few days ago.</p>
+        <p class="mt-2">This is a credibility asset for enterprise conversations -- Google Cloud featuring you as a customer story is stronger than any self-reported claim. Useful for: investor materials, enterprise sales decks, website proof strip.</p>
+      </div>
+    </div>
+
+    <!-- 9. Management / Team -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-neutral-200 bg-white px-4 py-3 shadow-sm hover:bg-neutral-50 transition-colors">
+        <span class="toggle-icon text-neutral-400 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-neutral-950">Team: Ming Back, Danny on Website</div>
+          <div class="text-sm text-neutral-600">Ming returned from China. Danny reassigned for 48hr website push.</div>
+        </div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p>Ming returned Apr 6 after ~2.5 weeks in China. He logged into Slack (#dev-trillet): "im back guys. ive got ~400 emails and msgs to catch up on, if theres anything p0 let me know."</p>
+        <p class="mt-2">In #management (Apr 6), Laurence requested: "need Danny for 48 hours with Ming please. take him off whatever he is doing." Danny was on: CRM unsub data display + website/LP currency localization. Danny's laptop is broken (getting fixed), but Ming states he won't need Danny for another 6+ hours.</p>
+        <p class="mt-2"><strong>Also in management:</strong> Laurence had a no-show for a meeting. He's also working a refund for a customer who signed up before T&C changes. NexaDental still blocked on Mak's end -- Isaam flagged with Chris, hard deadline at risk.</p>
+      </div>
+    </div>
+
+    <!-- 10. CRM -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-neutral-200 bg-white px-4 py-3 shadow-sm hover:bg-neutral-50 transition-colors">
+        <span class="toggle-icon text-neutral-400 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-neutral-950">CRM: Flatline</div>
+          <div class="text-sm text-neutral-600">411 tasks (+10). Pipeline $652K flat. April MTD $0.</div>
+        </div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p>CRM sync (Apr 7): 411 total tasks (up 10 from 401 on Apr 4, all in DEV project). Pipeline $652,881 USD unchanged. 3 opportunities (HomeSec, Flexa/Won, Banca Transilvania). April revenue: $0 MTD. Token healthy, expires Apr 10.</p>
+        <p class="mt-2">Developer report generated: 106 open tasks across 10 developers, 43 resolved in last 7 days. Full report at <code>trillet/barak/artifacts/2026-04-07-crm-developer-report.md</code>.</p>
+      </div>
+    </div>
+
+    <!-- 11. Quiet Threads -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-neutral-200 bg-white px-4 py-3 shadow-sm hover:bg-neutral-50 transition-colors">
+        <span class="toggle-icon text-neutral-400 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-neutral-950">Quiet Threads</div>
+          <div class="text-sm text-neutral-600">No activity on 15+ threads since last sweep.</div>
+        </div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p><strong>No Slack activity:</strong> Laurence DM, Ali DM, Isaam DM, Chris DM, Barak DM, L+M+O social group.</p>
+        <p class="mt-2"><strong>No channel activity:</strong> #nexadental, #management-agency, #imlive1, #transformitive, #market-research, #mark-allen, #bigotyres, #relatient, #bootstrapps, #quebecre, #enterprisereadiness, #dianeb, #vafy.</p>
+        <p class="mt-2"><strong>Key dormant deals:</strong> Quebec (demo delivered, Alexandra unanswered since Mar 16). Property24 (awaiting Ismail shortlist). HeroForge (blocked on Mak). Relatient (blocked on commercial).</p>
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="border-t border-neutral-200 bg-stone-50">
+    <div class="mx-auto max-w-3xl px-4 py-4 text-xs text-neutral-400">
+      Generated from Trillet PKM. Questions? Message Ori.
+    </div>
+  </footer>
+
+  <script>
+    function toggle(btn) {
+      const detail = btn.nextElementSibling;
+      const icon = btn.querySelector('.toggle-icon');
+      detail.classList.toggle('open');
+      icon.classList.toggle('open');
+    }
+
+    // Expand all on double-click header
+    document.querySelector('header').addEventListener('dblclick', () => {
+      document.querySelectorAll('.detail').forEach(d => d.classList.add('open'));
+      document.querySelectorAll('.toggle-icon').forEach(i => i.classList.add('open'));
+    });
+  </script>
+
+</body>
+</html>
