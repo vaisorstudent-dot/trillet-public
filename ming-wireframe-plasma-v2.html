@@ -170,9 +170,11 @@
     background-clip: text;
   }
 
-  /* Sections */
+  /* Sections -- #9: varied rhythm */
   .section { padding: 5rem 0; }
   .section-sm { padding: 3rem 0; }
+  .section-breathe { padding: 6rem 0; }
+  .section-tight { padding: 4rem 0; }
   .divider { border: none; border-top: 1px solid rgba(148, 163, 184, 0.08); margin: 0; }
 
   /* Compliance trust bar */
@@ -225,12 +227,27 @@
     gap: 0.5rem;
     padding: 0.35rem 1rem;
     background: rgba(0, 102, 255, 0.1);
-    border: 1px solid rgba(0, 102, 255, 0.2);
+    border: 1px solid transparent;
+    border-image: linear-gradient(to right, rgba(0,102,255,0.3), rgba(45,212,191,0.3)) 1;
     border-radius: 9999px;
     font-size: 0.8rem;
     font-weight: 500;
     color: var(--blue-300);
     margin-bottom: 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-pill::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 9999px;
+    padding: 1px;
+    background: linear-gradient(to right, rgba(0,102,255,0.3), rgba(45,212,191,0.3));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
   }
   .hero h1 {
     font-size: clamp(3rem, 6vw, 5rem);
@@ -282,7 +299,7 @@
     border: 1px solid rgba(0, 102, 255, 0.15);
   }
 
-  /* Chapter label */
+  /* Chapter label -- #3: gradient dot accent */
   .chapter-label {
     font-size: 0.7rem;
     font-weight: 600;
@@ -290,6 +307,18 @@
     text-transform: uppercase;
     color: var(--blue-400);
     margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .chapter-label::before {
+    content: '';
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--gradient-1), var(--gradient-3));
+    flex-shrink: 0;
   }
 
   /* Problem section */
@@ -335,6 +364,7 @@
     font-size: 0.7rem;
     color: var(--slate-500);
     margin-top: 0.25rem;
+    line-height: 1.4;
   }
 
   /* Industry pills */
@@ -398,6 +428,7 @@
     background: linear-gradient(135deg, rgba(0, 102, 255, 0.06) 0%, rgba(20, 184, 166, 0.03) 100%);
     border: 1px solid rgba(0, 102, 255, 0.12);
     border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.25);
   }
   .enterprise-card h2 {
     font-size: 1.25rem;
@@ -452,12 +483,13 @@
   .compare-col {
     padding: 1.5rem;
     border-radius: 12px;
-    background: rgba(255,255,255,0.02);
-    border: 1px solid rgba(148, 163, 184, 0.06);
+    background: rgba(239, 68, 68, 0.03);
+    border: 1px solid rgba(239, 68, 68, 0.06);
   }
   .compare-col.trillet-col {
-    background: rgba(0, 102, 255, 0.05);
-    border-color: rgba(0, 102, 255, 0.15);
+    background: rgba(0, 102, 255, 0.07);
+    border-color: rgba(0, 102, 255, 0.18);
+    box-shadow: 0 4px 24px rgba(0, 102, 255, 0.06);
   }
   .compare-col h4 {
     font-size: 0.875rem;
@@ -677,6 +709,7 @@
     .compare-grid { grid-template-columns: 1fr; }
     .pricing-grid { grid-template-columns: repeat(2, 1fr); }
     .nav-links { display: none; }
+    .problem [style*="grid-template-columns"] { grid-template-columns: 1fr !important; }
   }
   @media (max-width: 480px) {
     .pricing-grid { grid-template-columns: 1fr; }
@@ -740,32 +773,38 @@
 
   <hr class="divider">
 
-  <!-- Chapter 2: Problem -->
+  <!-- Chapter 2: Problem -- #10: asymmetric layout -->
   <section class="section problem">
-    <div class="chapter-label">The problem you eliminate</div>
-    <h2>Every client build shouldn't start from zero.</h2>
-    <p>Building on raw voice AI infrastructure means wiring every component yourself. The call logic. The post-call actions. The CRM sync. The client billing. Each new deployment is the same weeks of assembly -- before a single call is handled.</p>
-    <p>Trillet replaces the assembly. Scan a client's website or live database, and their agent is built, branded, and live under your name in under an hour.</p>
-    <div class="stat-row">
-      <div class="stat-card"><div class="num">1,000+</div><div class="lbl">Businesses served</div></div>
-      <div class="stat-card"><div class="num">99.99%</div><div class="lbl">Uptime SLA</div></div>
-      <div class="stat-card"><div class="num">1.9s</div><div class="lbl">Avg response time</div></div>
-      <div class="stat-card"><div class="num">10+</div><div class="lbl">Languages</div></div>
-    </div>
-    <div class="pill-row">
-      <span class="pill">Finance</span>
-      <span class="pill">Telecom</span>
-      <span class="pill">Healthcare</span>
-      <span class="pill">Government</span>
-      <span class="pill">Real estate</span>
-      <span class="pill">Logistics</span>
+    <div style="display:grid;grid-template-columns:1.1fr 0.9fr;gap:3rem;align-items:start;">
+      <div>
+        <div class="chapter-label">The problem you eliminate</div>
+        <h2>Every client build shouldn't start from zero.</h2>
+        <p>Building on raw voice AI infrastructure means wiring every component yourself. The call logic. The post-call actions. The CRM sync. The client billing. Each new deployment is the same weeks of assembly -- before a single call is handled.</p>
+        <p>Trillet replaces the assembly. Scan a client's website or live database, and their agent is built, branded, and live under your name in under an hour.</p>
+        <div class="pill-row">
+          <span class="pill">Finance</span>
+          <span class="pill">Telecom</span>
+          <span class="pill">Healthcare</span>
+          <span class="pill">Government</span>
+          <span class="pill">Real estate</span>
+          <span class="pill">Logistics</span>
+        </div>
+      </div>
+      <div>
+        <div class="stat-row" style="grid-template-columns:1fr 1fr;margin-top:0;">
+          <div class="stat-card"><div class="num">1,000+</div><div class="lbl">Businesses served</div></div>
+          <div class="stat-card"><div class="num">99.99%</div><div class="lbl">Uptime SLA</div></div>
+          <div class="stat-card"><div class="num">1.9s</div><div class="lbl">Avg response time</div></div>
+          <div class="stat-card"><div class="num">10+</div><div class="lbl">Languages</div></div>
+        </div>
+      </div>
     </div>
   </section>
 
   <hr class="divider">
 
   <!-- Chapter 3: How it works + Enterprise door -->
-  <section class="section">
+  <section class="section-breathe">
     <div class="chapter-label">How fast the after state arrives</div>
     <p style="font-size:1.1rem;font-weight:600;color:white;line-height:1.5;margin-bottom:2rem;max-width:680px;">The same infrastructure running inside regulated banks and enterprise call centres. Available to deploy for any business, in under an hour.</p>
     <div class="step-grid">
@@ -809,7 +848,7 @@
   <hr class="divider">
 
   <!-- Chapter 4: Post-call differentiation -->
-  <section class="section compare-section">
+  <section class="section-breathe compare-section">
     <div class="chapter-label">What's already included</div>
     <h2>Other platforms end when the call ends. <span class="text-gradient">Trillet keeps working.</span></h2>
     <p>Every post-call action you would have wired yourself is already included. Nothing to build. Nothing to connect.</p>
@@ -895,7 +934,7 @@
   <hr class="divider">
 
   <!-- Chapter 6: Social proof -->
-  <section class="section">
+  <section class="section-tight">
     <div class="chapter-label">Proof</div>
     <div class="testimonial-grid">
       <div class="testimonial">
