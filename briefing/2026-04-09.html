@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trillet Briefing -- 2026-04-09</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', system-ui, sans-serif; }
+    .detail { display: none; }
+    .detail.open { display: block; }
+    .toggle-icon { transition: transform 0.2s; }
+    .toggle-icon.open { transform: rotate(90deg); }
+  </style>
+</head>
+<body class="min-h-screen bg-stone-50 text-neutral-950">
+
+  <header class="sticky top-0 z-50 border-b border-neutral-200/80 bg-stone-50/90 backdrop-blur-xl">
+    <div class="mx-auto max-w-3xl px-4 py-3 flex items-center justify-between">
+      <div>
+        <div class="text-sm font-semibold tracking-tight">Trillet Daily Briefing</div>
+        <div class="text-xs text-neutral-500">2026-04-09 -- prepared for Barak</div>
+      </div>
+      <div class="text-xs text-neutral-400">12 items</div>
+    </div>
+  </header>
+
+  <main class="mx-auto max-w-3xl px-4 py-6">
+
+    <div class="mb-4 rounded-xl border border-red-300 bg-red-100 px-4 py-3">
+      <div class="text-xs font-semibold uppercase tracking-wide text-red-700">Day headline</div>
+      <div class="text-sm text-red-900 mt-1">Apr 9 is the most significant day in the Trillet relationship arc to date. Option B locked in principle at 16+16 equity across three venues (founders meeting, Barak-Muly call, Ori-Laurence evening huddle). Pre-signing financial DD starting. Plus a $40M MSP fund warm inbound (TopDown) arrived the same day Joe Markert took the meeting.</div>
+    </div>
+
+    <!-- 1. OPTION B LOCKED -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-red-300 bg-red-50 px-4 py-3 shadow-sm hover:bg-red-100 transition-colors">
+        <span class="toggle-icon text-red-500 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-red-900">Option B LOCKED in Principle -- 32% Equity to Ori+Barak</div>
+          <div class="text-sm text-red-700">Founders meeting: Ming + Laurence "full yes in principle." Ori-Laurence evening huddle confirmed 16+16. "Tie the knot in next few days."</div>
+        </div>
+        <div class="text-xs text-red-500">CRITICAL</div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p>The Thursday founders meeting (all four principals, ~1 hour, morning MDT) delivered an agreement in principle on Option B. Laurence stated "we are sure that with both of you on board, we would grow to the next level." Ming stated Ori and Barak are "desperately needed in the business." Both gave full yes in principle.</p>
+        <p class="mt-2"><strong>The strategic frame shifted:</strong> the "central strategic question" (what does Trillet US do?) answered itself through demonstration. Trillet US brings Ori and Barak -- operational restructuring, enterprise sales, strategic design, technology implementation, and the Muly relationship. Muly is an accelerant (investment, connections, trust signal), not the primary reason for the yes. The primary driver was Ori and Barak's demonstrated operational value over the prior two months: org assessment, API mapping, rebranding, competitive research, sales call analysis, CRM observability.</p>
+        <p class="mt-2"><strong>Equity structure (Apr 9 evening huddle, Ori+Laurence):</strong> Laurence confirmed he and Ming aligned on their side: "if it's somewhere around that 30% mark we're doing a deal." Ori proposed 16+16 (Ori+Barak), 1-year vesting. Laurence confirmed: "You're on the money." Muly's 16% is conditional on contribution (cash, connections, or operational work) -- "everybody that comes to the table has to bring value." Laurence acknowledged Muly may pass on that contribution path.</p>
+        <p class="mt-2"><strong>Vesting logic:</strong> work-based, not capital-based. AU can fire Ori+Barak at end of vesting period if they "suck." Ori is pushing for immediate vesting triggers if Muly, Joe, or other strategic investors come in. Laurence flagged dilution will compound as investment comes in.</p>
+        <p class="mt-2"><strong>Closing timeline (post-huddle Slack 20:07-20:17 MDT):</strong> Ori to Laurence: "I expect we can tie the knot in the next few days." Triangulation through both AU founders held.</p>
+        <p class="mt-2">Sources: <code>trillet/artifacts/2026-04-09-transcript-org-review-option-b.md</code>, <code>trillet/artifacts/2026-04-09-huddle-ori-laurence-evening.md</code>, <code>trillet/team/artifacts/2026-04-09-slack-dm-ori-laurence-post-huddle-followthrough.md</code>.</p>
+      </div>
+    </div>
+
+    <!-- 2. Barak-Muly call outcome -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-amber-300 bg-amber-50 px-4 py-3 shadow-sm hover:bg-amber-100 transition-colors">
+        <span class="toggle-icon text-amber-500 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-amber-900">Barak-Muly Option B Call: Engaged, "Don't Leave Me Out"</div>
+          <div class="text-sm text-amber-700">Muly engaged and constructive. 16+16+16 proposed. Exit protection counter-proposal. "זה משנה את התנועה."</div>
+        </div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p>Barak briefed Muly on the morning AU meeting via Zoom the same day. This is the summary Ori extracted from the Hebrew transcript -- Barak already lived the call but a few specific lines worth re-surfacing:</p>
+        <p class="mt-2"><strong>Muly's posture:</strong> engaged and constructive, not hesitant. Immediately asked "where is my interest? Do you think my interest is protected?" On the 16+16+16 structure (AU keeps 52%), Muly stated: "Once everyone has 16, everyone has the incentive to do the best possible." Later told Barak (per WhatsApp relay to Ori): "don't leave me out... include me too" (תכניסו אותי גם).</p>
+        <p class="mt-2"><strong>Exit protection (Muly's counter-proposal):</strong> if AU fires during vesting, pro-rata PLUS 50% penalty on unvested portion. If Ori+Barak leave voluntarily, only earned equity, no penalty. Muly coaching Barak: "let them say it" -- don't raise the fairness question, let AU surface it.</p>
+        <p class="mt-2"><strong>Cash investment caution:</strong> Muly stated "I don't think right now any of us want to put in money when we still don't see what it does. Also giving them all the work, management, connections, AND money..." Consistent with prior "show me $1 in, $1.50 out" stance.</p>
+        <p class="mt-2"><strong>Agency growth reality check:</strong> Barak corrected the MRR number to $13,792 USD (not $16K USD as previously reported to Muly) and stated $50-60K USD will not happen without marketing investment. Muly's response: "זה משנה את התנועה" (this changes the trajectory). Muly is recalibrating fundraising timeline based on real vs projected growth.</p>
+        <p class="mt-2"><strong>Roles framing:</strong> Barak stated Laurence should be CTO, Ming should be Innovation/Research, Ori+Barak fill CEO/COO -- "they're just not good at [management] and we fit."</p>
+        <p class="mt-2"><strong>External validation:</strong> Muly stated "אמרו לי אם זה מה שאתה מראה, אז יהיה לך גיוץ" -- unidentified parties told Muly the agency growth curve is fundable. Muly has been showing the numbers externally.</p>
+        <p class="mt-2"><strong>Quebec as cautionary tale:</strong> Muly stated "exactly like I told you with the Canadians, you were sure... $46K, they still haven't signed, they want a POC." Pattern: Barak optimist, Muly skeptic.</p>
+        <p class="mt-2">Source: <code>trillet/muly/artifacts/2026-04-09-transcript-barak-muly-option-b.md</code> (Hebrew original).</p>
+      </div>
+    </div>
+
+    <!-- 3. TopDown Ventures -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-red-300 bg-red-50 px-4 py-3 shadow-sm hover:bg-red-100 transition-colors">
+        <span class="toggle-icon text-red-500 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-red-900">TopDown Ventures Warm Inbound -- $40M MSP-Focused Fund</div>
+          <div class="text-sm text-red-700">Joe Markert meeting happened 10:30 MDT. Joe is LP + advisor. GP Chris Day independently raised voice AI for portfolio. Triggered reach-out.</div>
+        </div>
+        <div class="text-xs text-red-500">FLAGGED</div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p>Joe Markert (CEO of TransformITive, our quiet-since-February POC contact) turned out to be more than an MSP customer. He is an LP in TopDown Ventures (personal money) AND a paid strategic advisor across their portfolio. Design partner for Lexful since Nov 2025. Known Chris Day since 2015. <strong>Insider, not random customer.</strong></p>
+        <p class="mt-2"><strong>Who TopDown is:</strong> $40M USD MSP-focused venture fund. Fund I (Founders Fund I) closes Apr 17, 2026 (8 days out). Three GPs: Chris Day (founded IT Glue, sold to Kaseya 2018 as part of $1.5B ARR company; founded ScalePad, resumed CEO role), Mark Scott (co-founded N-able, NYSE), Joel Abramson (CEO of Fully Managed, grown to $100M revenue, sold to TELUS 2022). Claim >$2B USD enterprise value created. Thesis: seed to Series A MSP SaaS with $1M+ ARR, checks up to $3M USD. Only institutional VC focused exclusively on early-stage MSP software. 50%+ of LPs are MSP operators.</p>
+        <p class="mt-2"><strong>What triggered the call:</strong> NOT our POC. Chris Day independently raised voice AI as a capability need for the TopDown portfolio. Joe connected that to Trillet and reached out. Lost Zofiq to ConnectWise Jan 2026 (agentic AI for MSP service desks). Gap in portfolio: AI automation for MSP service delivery, specifically voice.</p>
+        <p class="mt-2"><strong>Technical vision Joe articulated:</strong> Trillet voice agent -> grounded on Lexful documentation data -> identity verification at call start -> action-taking in MSP environment -> after-hours as entry use case, expanding to 24/7. Lexful is TopDown's AI-native documentation platform for MSPs (CEO Pinar Ormeci, uses Anthropic Claude via AWS Bedrock, 80-90% Claude Code generated). Joe committed to provisioning read-only Lexful access.</p>
+        <p class="mt-2"><strong>The $30M competitor Trillet didn't know about:</strong> Thread (GetThread) -- NY-based, 600+ MSP customers, Voice AI launched GA Jan 1, 2026 (3 months ago). PSA-agnostic. But MSP-only, no on-prem, no identity verification, no data residency, no HIPAA/compliance credentials, chat-first with voice additive. Neither Thread nor Trillet appear in general voice AI landscape maps. <strong>MSP voice AI isn't even a recognized category yet -- first-mover advantage is real.</strong></p>
+        <p class="mt-2"><strong>Joe's influence:</strong> Real but indirect -- can recommend, introduce, advocate. Investment decisions go through Joel Abramson and Denisia Pereira (Principal, ex-BDC Venture Capital $300M). Joe is the scout and bridge.</p>
+        <p class="mt-2"><strong>Fundraising paths now three, not one:</strong> (1) Muly (personal wealth + network, ~June 2026, $4-5M USD at $20-25M USD valuation), (2) TopDown (Fund II $250M target or Chris Day personal/ScalePad strategic post-Apr 17, $500K-$3M USD strategic with portfolio integration), (3) Internal (Option B operational efficiency gains, bottom-line improvement funds growth without dilution). Complementary, not competing.</p>
+        <p class="mt-2"><strong>CRITICAL COORDINATION POINT:</strong> Joe/TopDown intel is being <strong>withheld from Muly for now</strong>. Joint decision by Ori and Laurence in the evening huddle. Ori stated: "He doesn't know about the Joe thing, this just happened. We're not gonna jump to tell him because we have to tell him in a certain way. I think that will make him even more so around the whole thing." Laurence agreed: "He's done a deal." Muly being told about a strategic fund investment angle before the equity structure is locked would either accelerate close or give him leverage -- timing needs to land after Option B terms are set.</p>
+        <p class="mt-2">Sources: <code>trillet/accounts/transformitive/artifacts/2026-04-09-transcript-ori-joe-markert-topdown.md</code>, <code>trillet/accounts/transformitive/artifacts/2026-04-09-research-topdown-ventures-dd.md</code>, <code>trillet/accounts/transformitive/artifacts/2026-04-09-research-brief-topdown-markert.docx</code>.</p>
+        <div class="mt-3 pt-3 border-t border-neutral-100">
+          <div class="text-xs font-semibold uppercase tracking-wide text-neutral-500 mb-2">Next moves</div>
+          <p class="text-sm text-neutral-600">This week: get Lexful access from Joe; draft Option B skeleton including TopDown interest as external-validation bullet (not centerpiece). Next week: 2-page Trillet+Lexful integration concept brief, send Trillet materials to Joe (website redo pending). 2-3 weeks: Joe intros to Joel Abramson and Denisia Pereira.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. Pre-signing financial DD + no-big-decisions rule -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-amber-300 bg-amber-50 px-4 py-3 shadow-sm hover:bg-amber-100 transition-colors">
+        <span class="toggle-icon text-amber-500 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-amber-900">Pre-Signing AU Financial DD Started + "No Big Decisions" Rule</div>
+          <div class="text-sm text-amber-700">Ori requested AU accounting snapshot + Excel from Laurence. Blocked an AUD $2,500-3,000/mo office rental unilateral move.</div>
+        </div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p>In the post-huddle Slack DM 20:07-20:17 MDT, Laurence floated spending AUD $2,500-3,000 USD per month on an office (3 people + agency partners, 45 min from Ming, 12-month lease). Ori's response chain: "Home for sure" -> "Don't make big decisions until me and Barak are in" -> "As a rule. We will make better decisions when we're all together." Pushed Laurence to co-work, then to "hold off for a bit until the dust settles."</p>
+        <p class="mt-2"><strong>New governance rule:</strong> Ori declared a founder-level no-big-decisions rule covering the window between the Apr 9 Option B agreement-in-principle and the formalization. First instance Ori has pulled this lever with Laurence.</p>
+        <p class="mt-2"><strong>Pay-yourself-first advice:</strong> Ori told Laurence "I know you've been having difficulty paying you guys. So I think the priority would be to pay yourself first. Right?" Laurence deflected: "100% the priority, but we are just selling and working on deals and that will look after it self eventually." Laurence treats founder wages as a downstream-of-momentum question, not a discipline question. Ori did not push further.</p>
+        <p class="mt-2"><strong>Financial DD request:</strong> Ori asked Laurence for AU financials + the Excel sheet shown in the earlier huddle. "I can start doing work on it early that way." Laurence committed to sending an unreconciled accounting snapshot plus the updated Excel. <strong>This compresses the typical "sign, then DD" sequence</strong> -- Ori is beginning independent financial due diligence BEFORE Option B signs. Ties directly to the working-hypothesis ~$500K USD ARR figure (assessed, not validated).</p>
+        <p class="mt-2">Source: <code>trillet/team/artifacts/2026-04-09-slack-dm-ori-laurence-post-huddle-followthrough.md</code>.</p>
+      </div>
+    </div>
+
+    <!-- 5. COO/CEO transition framework -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-neutral-200 bg-white px-4 py-3 shadow-sm hover:bg-neutral-50 transition-colors">
+        <span class="toggle-icon text-neutral-400 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-neutral-950">Barak's Leadership Transition Framework Delivered</div>
+          <div class="text-sm text-neutral-600">30/60/90 day plan. CEO mandate (Ori), COO mandate (Barak). Operating skeleton beneath the skeleton program.</div>
+        </div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p>Barak delivered a full Trillet Leadership Transition Framework via WhatsApp to Ori on Apr 9 afternoon (Claudette-generated). Logging here as the structure beneath the Option B skeleton program:</p>
+        <p class="mt-2"><strong>CEO mandate (Ori):</strong> Own what the company is and where it is going. Define direction, ICP, 90-day priorities, strategic tradeoffs, commercial positioning, top-level partnerships, resourcing decisions, executive accountability. <strong>Explicitly should NOT</strong> absorb day-to-day task chasing, process policing, QA follow-up, sprint hygiene, internal tool enforcement, ad-hoc firefighting. "If Ori gets dragged into operating detail too early, the CEO function will collapse back into founder-reactivity."</p>
+        <p class="mt-2"><strong>COO mandate (Barak):</strong> Own how the company runs. Install operating cadence, enforce task ownership and reporting hygiene, create company-wide visibility, define meeting rhythms and escalation paths, implement KPI and reporting systems, reduce key-person risk. <strong>Explicitly should NOT</strong> become the default PM for every team, do product work because product is vague, fill engineering management holes personally. "Your job is to build the system, not become the system."</p>
+        <p class="mt-2"><strong>First principle for transition:</strong> control, not optimization. Visibility, ownership, operating rules, escalation logic, information flow. Cites the assessment: 55% of DEV tasks had no assignee, work allocation depended on memory, roadmap not shared, engineering utilization not independently verifiable.</p>
+        <p class="mt-2"><strong>Days 1-30 non-negotiables:</strong> no active task without owner, no feature work without written scope, no bug without severity, no release without release owner, no customer escalation without named owner, no "waiting for X person to come back" on critical functions.</p>
+        <p class="mt-2"><strong>Weekly operating rhythm:</strong> Mon Executive leadership review / Tue Product and delivery planning / Wed Pipeline and revenue review / Thu Engineering and release review / Fri COO accountability check (Barak).</p>
+        <p class="mt-2"><strong>Political realities flagged:</strong> Ali defensive around visibility -- do not attack competence, shift to scale/resilience/shared visibility, theme is externalization, not blame. Ming mixed relief and discomfort (roadmap/product authority has been informal and centralized). Laurence relief if he trusts Barak. Chris skeptical unless delivery support becomes real.</p>
+        <p class="mt-2"><strong>First documents to create:</strong> CEO mandate (Ori), COO mandate (Barak), 30/60/90 day transition plan, Leadership meeting agenda, KPI dashboard template, Org chart and ownership matrix, Single point of failure register, Internal rollout note to the team.</p>
+        <p class="mt-2">Source: WhatsApp Ori-Barak Apr 9 13:33 MDT, captured in <code>trillet/barak/artifacts/2026-04-10-whatsapp-ori-barak-post-option-b.md</code>.</p>
+      </div>
+    </div>
+
+    <!-- 6. ePsych Billing discovery -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-green-300 bg-green-50 px-4 py-3 shadow-sm hover:bg-green-100 transition-colors">
+        <span class="toggle-icon text-green-500 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-green-900">ePsych Billing / Apex Behavioral -- Trillet Named PRIMARY Vendor in 25KB Spec</div>
+          <div class="text-sm text-green-700">Discovery call Apr 9. Alex delivered spec mid-call naming Trillet primary with Retell AI fallback. HIPAA is hard gate. 175-client distribution potential.</div>
+        </div>
+        <div class="text-xs text-green-500">1 action</div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p>Discovery call Apr 9 13:00-13:30 MT over Google Meet. Alex Trent (Owner, ePsych Billing, found Trillet via Claude AI referral) emailed a 25KB markdown spec + 100KB PDF mid-call -- a comprehensive 11-section technical specification he had prepared before the call.</p>
+        <p class="mt-2"><strong>Legal entity surprise:</strong> The legal entity is <strong>Apex Behavioral, LLC (Nevada)</strong>, NOT "ePsych Billing." Alex emails from alex@epsychbilling.com and signs "Owner, ePsych Billing" but the spec is titled "Apex Behavioral -- AI Integration Design & Specification Sheet." Relationship unresolved -- possible DBA, rebrand, or parent holding structure. Must clarify before any paper moves.</p>
+        <p class="mt-2"><strong>Business:</strong> 175-client mental health billing service serving therapists, psychologists, psychiatrists, LCSWs. Pricing is grandfathered tiered (2.75%/3.75%/4.75% of Net Collections with $250-400/mo minimums). Stated goal: "scale hard come August" with AI integration as unique selling proposition ("first mental health billing service that includes your front office"). Alex plans to require upgrade to the 4.75% tier as condition of AI access.</p>
+        <p class="mt-2"><strong>Spec names Trillet as PRIMARY vendor</strong> with explicit rationale: lowest all-in cost structure ($299/mo Agency + per-minute), HIPAA compliance marketed on all white-label plans (must verify in BAA conversation), unlimited subaccounts on Agency plan supports multi-tenant reseller model, smaller vendor = higher willingness to negotiate partnership terms, newer platform means Apex can influence roadmap. <strong>Alex sees Trillet as a roadmap influencer, not just a vendor.</strong></p>
+        <p class="mt-2"><strong>Fallback decision rule (in spec):</strong> "If Trillet passes HIPAA verification and agrees to the partnership terms outlined in the pitch, proceed with Trillet. If HIPAA is uncertain or partnership terms fall through, default to Retell AI with a white-label wrapper." Other fallbacks: Synthflow AI, OmniMD.</p>
+        <p class="mt-2"><strong>Compliance framework in spec is more rigorous than typical SMB customers:</strong> HIPAA with Apex as Business Associate to client practices (Covered Entities), required BAA chain with every subcontractor, pre-launch $2M USD cyber liability + $1M USD E&O insurance, 42 CFR Part 2 (substance use disorder records), crisis detection + 988 Lifeline routing, state-specific AI disclosure (Texas TRAIGA, California CMIA), psychotherapy notes exclusion as absolute rule, US data residency, 90-day call recording retention, 7-year transcript retention, 99.9% voice uptime SLA, <1 hour critical issue response.</p>
+        <p class="mt-2"><strong>HIPAA posture gap (load-bearing):</strong> Ori committed HIPAA compliance in writing to Alex pre-call ("Yes it is") and reconfirmed verbally mid-call. Ori then pinged Ming in Slack DM at 19:42 MDT: "Are we FULLY Hippa compliant. I need to know for a client." No Ming response yet. Trillet has no canonical HIPAA/BAA documentation in reference/. Ori is actively trying to reconcile before the follow-up email.</p>
+        <p class="mt-2"><strong>Pricing discrepancy to correct:</strong> Call transcript has Ori quoting "$2.99" for the Agency plan multiple times (likely mis-spoken for $299 or Fathom transcription error). Alex's spec shows he already knows the correct $299 figure. Ori's follow-up must explicitly state $299 USD/month so Alex does not build his economics around a 100x-lower figure.</p>
+        <p class="mt-2"><strong>Partnership framing, not transactional:</strong> Alex echoed Hormozi's "stupid not to take it" framing, wants to co-design offer economics with Trillet, plans webinars positioning himself as AI-in-mental-health educator. Russell Carraway Bear Claw pattern but in a higher-compliance vertical. <strong>Distribution multiplier potential: 175 clients + scaling from August.</strong></p>
+        <div class="mt-3 pt-3 border-t border-neutral-100">
+          <div class="text-xs font-semibold uppercase tracking-wide text-neutral-500 mb-2">Action items</div>
+          <p class="text-sm text-neutral-600"><strong>Ori:</strong> Follow-up email "today, worst case tomorrow" (Ori committed at call close). Must: (a) correct $2.99 -> $299 USD/month pricing, (b) answer all 7 must-verify items from spec section 4.1, (c) resolve HIPAA/BAA posture before Alex converts, (d) clarify Apex Behavioral LLC vs ePsych Billing entity relationship.</p>
+        </div>
+        <p class="mt-2">Source: <code>trillet/accounts/epsych-billing/state.v3.md</code>, <code>trillet/accounts/epsych-billing/artifacts/2026-04-09-apex-behavioral-ai-integration-spec.md</code>, <code>trillet/accounts/epsych-billing/artifacts/2026-04-09-transcript-ori-alex-epsych-discovery.md</code>.</p>
+      </div>
+    </div>
+
+    <!-- 7. Agency MRR April stretch -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-amber-300 bg-amber-50 px-4 py-3 shadow-sm hover:bg-amber-100 transition-colors">
+        <span class="toggle-icon text-amber-500 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-amber-900">Agency MRR Stretch Target: $30-35K USD by End of April</div>
+          <div class="text-sm text-amber-700">Ori to founders GDM: "a third of April is gone." Mechanism "to be discussed." Muly narrative dependency.</div>
+        </div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p>Ori framed April priorities to the founders GDM on Apr 9 morning: "Guys - were making progress on our end. We need to discuss how to get agencies to atleast 30-35k by end of April. I know it's a hell of a stretch goal but let's discuss." And: "A third of April is gone."</p>
+        <p class="mt-2"><strong>Three parallel priorities:</strong> (1) Website launch (Ming lead), (2) Agencies scaling to $30-35K USD MRR (mechanism "to be discussed"), (3) Bank of Transylvania (already in motion, tied to Ciprian workstream).</p>
+        <p class="mt-2"><strong>The Muly narrative dependency on this number:</strong> In the Ori-Laurence evening huddle, Ori stated momentum has to hold for Muly specifically. When Muly saw the MRR curve recently he extrapolated "wow, next month they're gonna go to 50" -- Ori had to pull him back ("don't hold your horses"). Consistent with Barak's Muly call where Barak corrected MRR to $13,792 USD and explicitly told Muly $50-60K USD will not happen without marketing investment. <strong>The April push is driven by the Muly-narrative need, not just the raw growth goal.</strong> If the curve breaks, the fundraising timeline and Muly confidence both break with it.</p>
+        <p class="mt-2"><strong>Ori to Barak via WhatsApp Apr 9 09:24-09:26 MDT:</strong> "We most take care of the agency marketing ASAP. I have a lot of calls today but we really need to keep the momentum going. A third of April is gone. If we can get it to 35k end of April we're still on the horse."</p>
+        <p class="mt-2"><strong>Current baseline (Apr 8 CMS sync):</strong> MRR $13,792 USD. 186 subs (165 active, 12 trialing, 9 past due). AgencyPlus: 27 active + 9 trialing, $10,644 USD MRR (77% of net). 9 dunning records totaling $1,371 USD at risk, 3 effectively dead. Gap to $35K target: ~$21K USD over 3 weeks = ~$1K USD/day net add. Impossible without marketing spend + conversion velocity.</p>
+        <p class="mt-2">Sources: <code>trillet/rebrand-vc/artifacts/2026-04-09-slack-founders-gdm.md</code>, <code>trillet/artifacts/2026-04-09-huddle-ori-laurence-evening.md</code>, <code>trillet/barak/artifacts/2026-04-10-whatsapp-ori-barak-post-option-b.md</code>.</p>
+      </div>
+    </div>
+
+    <!-- 8. Laurence commitment: Barak trains Andrew -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-neutral-200 bg-white px-4 py-3 shadow-sm hover:bg-neutral-50 transition-colors">
+        <span class="toggle-icon text-neutral-400 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-neutral-950">Laurence Huddle Follow-Through: Barak to Train Andrew on Agency Sales</div>
+          <div class="text-sm text-neutral-600">Ori committed in Ori-Laurence evening huddle that Barak (or Ori) would train Andrew on agency sales.</div>
+        </div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p>From the Ori-Laurence evening huddle (17:30-18:02 MDT), Ori relayed to Barak via WhatsApp at 19:40 MDT: "Said one of us (you) will train Andrew regarding agency sales." Ori is parking this with Barak as the default owner given Barak's coaching relationship with Andrew + the COO mandate framing.</p>
+        <p class="mt-2"><strong>Context:</strong> Andrew has been the front-line on agency/D2C inbound (1-2 leads/day per Ming Apr 7 sync). Workload/timeline concerns already flagged. The agency mechanism to hit $35K needs Andrew to convert better on the leads already arriving, not just more leads. Training him on the qualification/close mechanics directly addresses the booking funnel gap Ming identified last week.</p>
+        <div class="mt-3 pt-3 border-t border-neutral-100">
+          <div class="text-xs font-semibold uppercase tracking-wide text-neutral-500 mb-2">Action items</div>
+          <p class="text-sm text-neutral-600"><strong>Barak:</strong> Schedule agency sales training with Andrew. Confirm scope with Ori.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 9. Website wireframe pricing mismatch (carried from Apr 8 queue) -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-neutral-200 bg-white px-4 py-3 shadow-sm hover:bg-neutral-50 transition-colors">
+        <span class="toggle-icon text-neutral-400 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-neutral-950">Ming Wireframe: Pricing Mismatch Unresolved (Apr 8 flag)</div>
+          <div class="text-sm text-neutral-600">Wireframe shows $49/$99/$299. Locked pricing is $149/$299/$497. Founders meeting went to Option B, not resolved.</div>
+        </div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p>Item carried from Apr 8 briefing queue. Ming delivered v2 landing page wireframe (Plasma v2, at <a href="https://vaisorstudent-dot.github.io/trillet-public/ming-wireframe-plasma-v2.html" class="text-blue-600 underline">ming-wireframe-plasma-v2.html</a>). Pricing shown is $49 / $99 / $299 (current live site), not the locked $149 / $299 / $497 from the tier architecture. CMS data shows zero $99-to-$299 upgrades ever -- the $99 tier cannibalizes the functioning $299 acquisition motion.</p>
+        <p class="mt-2"><strong>Barak's reaction via WhatsApp Apr 8 08:59 MDT on the Plasma merged version:</strong> "לא התלהבתי 🫤 המסר לדעתי מתפזר" (I wasn't thrilled. In my opinion the message is scattered).</p>
+        <p class="mt-2"><strong>Status:</strong> Thursday founders meeting was consumed by Option B. Pricing alignment on the wireframe did not happen. Still pending.</p>
+        <p class="mt-2"><strong>Also relevant:</strong> "Another big reason to get the site launched soon" tease Ori posted to founders GDM at 14:46 MDT Apr 9 is very likely the TopDown/Joe opportunity -- a live serious VC process wanting to evaluate Trillet makes the current live site a risk to the raise.</p>
+        <div class="mt-3 pt-3 border-t border-neutral-100">
+          <div class="text-xs font-semibold uppercase tracking-wide text-neutral-500 mb-2">Action items</div>
+          <p class="text-sm text-neutral-600"><strong>Ori/Ming:</strong> Align wireframe pricing to $149/$299/$497 before site launch. Surface at next 3-way with Ming.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 10. FNB discovery scheduled -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-neutral-200 bg-white px-4 py-3 shadow-sm hover:bg-neutral-50 transition-colors">
+        <span class="toggle-icon text-neutral-400 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-neutral-950">FNB Discovery Scheduled -- Mon 4 May 2026, 15:30-16:00 SAST</div>
+          <div class="text-sm text-neutral-600">MS Teams. Andile coordinating. Discrepancy on whether Lesley-Ann Moses (PA to CEO) will attend.</div>
+        </div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p>FNB (First National Bank SA) discovery call confirmed via Slack GDM (Andile + Ori + Laurence) on Apr 9. Format: MS Teams. Date: Mon 4 May 2026, 15:30-16:00 SAST.</p>
+        <p class="mt-2"><strong>Discrepancy unresolved:</strong> Andile states Lesley-Ann Moses (PA to CEO) will attend. Calendar invite does not show her. To verify before the meeting.</p>
+        <p class="mt-2"><strong>Context:</strong> FNB is the decision-maker-level banking track Andile has been brokering. Paired with ABSA exchange still pending. Both are enterprise-scale South Africa banking plays.</p>
+        <p class="mt-2">Source: <code>trillet/accounts/fnb/artifacts/2026-04-09-slack-gdm-andile-ori-laurence.md</code>, <code>trillet/accounts/fnb/state.v3.md</code>.</p>
+      </div>
+    </div>
+
+    <!-- 11. Ops signals -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-neutral-200 bg-white px-4 py-3 shadow-sm hover:bg-neutral-50 transition-colors">
+        <span class="toggle-icon text-neutral-400 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-neutral-950">Ops Signals: 2SV Apr 13, welcomeMessage Bug Fixed, cal.com Meet Bug, Aargon $6K Top-Up</div>
+          <div class="text-sm text-neutral-600">Team pulse from #management + #dev-trillet. Mixed: one root-cause fix landing, two recurring patterns, one billing move.</div>
+        </div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p><strong>Google 2-Step Verification enforced from Mon Apr 13 (<code>&lt;!channel&gt;</code> post by Ali, Apr 9 00:20 MDT).</strong> All Google accounts on Trillet workspace must have 2SV configured. Action: Barak confirm his own 2SV is set up on any Trillet Google identities before Apr 13.</p>
+        <p class="mt-2"><strong>welcomeMessage enum bug -- root cause + refactor shipped (POSITIVE).</strong> Laurence traced the bug Apr 8 22:45-22:58 MDT: pathway.save() called with welcomeMessage: 'custom' while Mongoose schema enum only allows ['user_initiated', 'ai_dynamic', 'ai_custom']. Narrowed to agentService.js:739 -- attaching a phone number was saving 'custom' instead of 'ai_custom'. Isaam initially suspected AI builder; Laurence refuted. Tauseef shipped refactor Apr 9 09:23 MDT removing deprecated welcomeMessage fields across both the Portal and LK-Middleware repos. Treat as root-cause fix landing post-incident -- the kind of cleanup Barak's COO framework explicitly wants (no bug without severity, no release without owner).</p>
+        <p class="mt-2"><strong>cal.com Google Meet host-swap bug (PATTERN).</strong> Ori flagged in #management at 14:55 MDT: "on cal.com appts - google meet has an issue - if the guest gets in first, they become the host and need to let US in on our own scheduled call. some of them dont know how to." Laurence and Andrew acknowledged same experience. Laurence's workaround: wait until guest joins, then hop in. <strong>No fix proposed.</strong> This has hit twice this week (Danilo Apr 6, Alex ePsych Apr 9 -- both caused the host-scramble on high-stakes first calls). Pattern: Trillet team getting locked out of their own scheduled calls because Google Meet treats whoever joins first as the "host" when the cal.com integration doesn't bind Trillet identity as organizer. Reactive ops posture.</p>
+        <p class="mt-2"><strong>Aargon account $6,000 USD balance top-up (Laurence -> Ali, Apr 8 22:11 MDT).</strong> Ali replied "done" Apr 8 23:11 MDT. No accounts/aargon/ thread currently exists. Aargon is a high-volume enterprise customer with a $3K SLA penalty history (24 hard-deleted phone numbers Apr 1). Monthly-ish balance top-ups suggest recurring billing cadence. <strong>Structural question:</strong> should Aargon get a proper account thread to track the customer relationship, or is this strictly a billing ops pattern?</p>
+        <p class="mt-2">Sources: #dev-trillet C08AM2XFBCG, #management C08HA9BF4RE. Compiled in <code>trillet/WORK.md</code> Active Build section.</p>
+      </div>
+    </div>
+
+    <!-- 12. Framing correction: Muly "stepped back" was strategic -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-neutral-200 bg-white px-4 py-3 shadow-sm hover:bg-neutral-50 transition-colors">
+        <span class="toggle-icon text-neutral-400 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-neutral-950">Narrative Correction: "Muly Stepped Back" Was Strategic Framing</div>
+          <div class="text-sm text-neutral-600">Prior briefings reported Muly as trust-hesitant. Ori clarified Apr 9: this was strategic leverage for Option B, not real hesitation.</div>
+        </div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p>Logging for record-keeping: prior Trillet briefings (Apr 7, earlier) reported Muly as "stepped back" over the AU ARR misrepresentation. Ori corrected this on Apr 9: the "Muly stepped back" posture presented to Ming (Apr 7 huddle) and to Ming+Laurence (Apr 9 founders meeting) was <strong>strategic framing by Ori and Barak to create maximum leverage for the Option B partnership proposal.</strong> No real hesitation from Muly. The trust concern narrative was the lever to make Option B feel urgent.</p>
+        <p class="mt-2">Barak, you already lived this -- logging here for your records and because it recontextualizes how Muly will be positioned to AU going forward. The "Muly hesitation" lever is now spent; TopDown becomes the next external-validation lever, but that one is being held back from Muly until Option B formalizes (see item 3).</p>
+        <p class="mt-2"><strong>Muly FOMO state:</strong> Ori stated in the evening huddle that Muly was "a little impatient" but that "ended up being good because Muly got a little bit jealous" after Barak's briefing -- productive for the Option B close.</p>
+        <p class="mt-2">Source: <code>trillet/muly/state.md</code> (current truth updated Apr 9).</p>
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="border-t border-neutral-200 bg-stone-50">
+    <div class="mx-auto max-w-3xl px-4 py-4 text-xs text-neutral-400">
+      Generated from Trillet PKM. Questions? Message Ori.
+    </div>
+  </footer>
+
+  <script>
+    function toggle(btn) {
+      const detail = btn.nextElementSibling;
+      const icon = btn.querySelector('.toggle-icon');
+      detail.classList.toggle('open');
+      icon.classList.toggle('open');
+    }
+
+    document.querySelector('header').addEventListener('dblclick', () => {
+      document.querySelectorAll('.detail').forEach(d => d.classList.add('open'));
+      document.querySelectorAll('.toggle-icon').forEach(i => i.classList.add('open'));
+    });
+  </script>
+
+</body>
+</html>
