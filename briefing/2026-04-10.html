@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trillet Briefing -- 2026-04-10</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', system-ui, sans-serif; }
+    .detail { display: none; }
+    .detail.open { display: block; }
+    .toggle-icon { transition: transform 0.2s; }
+    .toggle-icon.open { transform: rotate(90deg); }
+  </style>
+</head>
+<body class="min-h-screen bg-stone-50 text-neutral-950">
+
+  <header class="sticky top-0 z-50 border-b border-neutral-200/80 bg-stone-50/90 backdrop-blur-xl">
+    <div class="mx-auto max-w-3xl px-4 py-3 flex items-center justify-between">
+      <div>
+        <div class="text-sm font-semibold tracking-tight">Trillet Daily Briefing</div>
+        <div class="text-xs text-neutral-500">2026-04-10 -- prepared for Barak</div>
+      </div>
+      <div class="text-xs text-neutral-400">22 items</div>
+    </div>
+  </header>
+
+  <main class="mx-auto max-w-3xl px-4 py-6">
+
+    <div class="mb-4 rounded-xl border border-red-300 bg-red-50 px-4 py-3">
+      <div class="text-xs font-semibold uppercase tracking-wide text-red-700">Headline</div>
+      <div class="mt-1 text-sm font-semibold text-red-900">Vafy disclosure surfaced. MOU circulated to Founders GDM. Countersigning is gated on cleaning up Chris's equity origin and Laurence's Verlat-Marco structure. Ori committed to a 2-week paperwork takeover with a target of Apr 24. Do not countersign the MOU until this is on paper.</div>
+    </div>
+
+    <!-- 1. VAFY -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-red-300 bg-white px-4 py-3 shadow-sm hover:bg-neutral-50 transition-colors">
+        <span class="toggle-icon text-neutral-400 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-red-700">Vafy / Cap Table / Verlat (NEW THREAD)</div>
+          <div class="text-sm text-neutral-600">Chris 11% = 5% work + 6% vafy. $30-40K+ USD/mo flowing to Chris personal, NOT in Trillet ARR. Verlat-Marco paper gap blocks Chris formalization. Ori committed 2-week paperwork takeover, target Apr 24. MOU countersigning GATED.</div>
+        </div>
+        <div class="text-xs text-red-600 font-semibold">GATE</div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p class="font-semibold text-red-700 mb-2">Surfaced Apr 10 midday in Ori-Ming Slack DM.</p>
+        <p>Ori asked Ming how much equity Chris held. Ming replied: Chris is 11% vested = 5% for real work + 6% awarded "for getting vafy". Vafy is an external revenue-generating entity on the AU side. Ming states "its 30k/month" and when Ori asked "You're getting an extra 30k a month from vafy??" Ming said "if not more, yes". Ming confirmed this is NOT included in Trillet ARR. Destination: "to chris' pockets" -- Chris Bland personally. Ming added "i get paid a bit too" (refined later to $10-20K USD/mo in the evening huddle).</p>
+        <p class="mt-2"><strong>Verlat Pty Ltd structure:</strong> Ming disclosed Laurence's Trillet stake is held under Verlat Pty Ltd jointly with former partner Marco. "verlat needs to strip marco out, otherwise marco gets some" of Trillet upside. Laurence has verbally worked a deal with Marco but "its not formalized on paper." Ming framed the paper gap as explicitly gating Chris's cap-table onboarding: "before we can actually get chris in."</p>
+        <p class="mt-2"><strong>Evening Ori-Ming huddle (Apr 10 20:13 MDT):</strong> Ming confirmed the paperwork has been stuck on Laurence for ~4 months. Reveal: the three Vafy prompt engineers are currently on Vafy's payroll doing Trillet implementation work free -- an off-balance-sheet subsidy pre-acquisition. Ori committed on-call to take the paperwork over from Laurence with a 2-week target (2026-04-24) driving: (1) Chris-Marco agreement terms in writing, (2) accountant engagement, (3) ASIC claim to strip Marco from Verlat, (4) Vafy acquisition paperwork itself. Ming clarified Chris accepted the trade because of Ming's own pitch ("I've convinced him that Trillet is the better ship"), not independent conviction.</p>
+        <p class="mt-2"><strong>Ori's posture:</strong> "fuck. You want to tell me that just because Laurence is dilly-dallying, 30k plus a month goes to Chris? That makes no sense. No sense at all. Did you include that in the ARR or not?" and "He needs to give it back. lol. critical. important imean. chris has to involve you.." Ori reassessed AU ARR to Barak via WhatsApp 22:05 MDT: "They might be at 1m with Vafy... I need to explain that" -- adds ~$360-480K USD/year to the ~$500K USD working hypothesis.</p>
+        <p class="mt-2 text-red-700"><strong>Full context:</strong> <code>trillet/accounts/vafy/state.v3.md</code> (9 events from Slack DM + 8 events from Ori's post-huddle edit) + verbatim DM artifact at <code>trillet/accounts/vafy/artifacts/2026-04-10-slack-dm-ming-vafy-equity-disclosure.md</code>.</p>
+        <div class="mt-3 pt-3 border-t border-neutral-100">
+          <div class="text-xs font-semibold uppercase tracking-wide text-neutral-500 mb-2">Action items</div>
+          <ul class="list-disc ml-5">
+            <li><strong>Barak: Do NOT countersign the founders MOU</strong> until Verlat-Marco is on paper and vafy revenue destination is settled. Flag to Ori before any formal signing step.</li>
+            <li><strong>Ori (2-week window, target Apr 24):</strong> Drive Chris-Marco agreement to written form; engage accountant for ASIC claim; draft Vafy acquisition paperwork.</li>
+            <li><strong>Ming (post-weekend breakdown, ~Apr 13):</strong> Grounded monthly vafy run rate + months of history; full Laurence-Marco verbal deal text; whether the 6% Chris allocation was contingent on Vafy-to-Trillet transfer or ongoing Chris personal receipt (double-compensation question).</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. MOU CIRCULATION -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-neutral-200 bg-white px-4 py-3 shadow-sm hover:bg-neutral-50 transition-colors">
+        <span class="toggle-icon text-neutral-400 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-neutral-950">Founders MOU -- circulated + iterated with Barak</div>
+          <div class="text-sm text-neutral-600">Ori circulated v6 to Founders GDM 13:26 MDT. Ming "good", Laurence "reading over it atm". Ori: "I expect we can tie the knot in the next few days." Countersigning gated on vafy thread.</div>
+        </div>
+        <div class="text-xs text-neutral-400">3</div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p>Ori posted to the Founders GDM (channel with Laurence + Ming + Ori + Barak) on Apr 10 at 13:26 MDT: "Here is the memo of understanding for your review and signing. We should get proper docs lined up within 30 days." Ming already stated "good" on the MOU earlier in Ming DM. Laurence responded in Laurence DM: "No problem, i am reading over it atm." Ori to Laurence: "I expect we can tie the knot in the next few days." 30-day definitive-docs window begins at signing.</p>
+        <p class="mt-2"><strong>Barak-side iteration trail:</strong> Before circulating to the Founders GDM, Ori iterated the MOU live with Barak via WhatsApp in 17 minutes -- three docx revisions shared in sequence: 19:45 MDT v1, 19:53 MDT v5, 20:02 MDT v6. Barak had opened the session with "נתחיל?" at 18:21 MDT. v6 appears to be the version circulated to the Founders GDM. First time Barak surfaces in the co-drafter role on the founders MOU text.</p>
+        <p class="mt-2"><strong>Gating:</strong> This MOU cannot be safely countersigned until the vafy thread is resolved. See item 1 for the full structural picture. The Trillet upside would leak to Marco via Verlat until the cut-out is on paper; Chris's 6%-for-vafy allocation is contentious until the vafy revenue destination is settled.</p>
+        <div class="mt-3 pt-3 border-t border-neutral-100">
+          <div class="text-xs font-semibold uppercase tracking-wide text-neutral-500 mb-2">Action items</div>
+          <ul class="list-disc ml-5">
+            <li>Barak to review v6 (three versions are in the WhatsApp thread). Ori did not pull them into <code>trillet/team/artifacts/</code> per your call.</li>
+            <li>Hold countersign until vafy resolution (see item 1).</li>
+            <li>Laurence comp principle confirmed: Ori to Laurence "I know you've been having difficulty paying you guys. So I think the priority would be to pay yourself first."</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. AU FINANCIALS REASSESSMENT -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-neutral-200 bg-white px-4 py-3 shadow-sm hover:bg-neutral-50 transition-colors">
+        <span class="toggle-icon text-neutral-400 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-neutral-950">AU financials reassessed -- "might be at 1m with Vafy"</div>
+          <div class="text-sm text-neutral-600">March numbers: $66,565 USD deposits, $29,705 USD profit, ~$7K bank, ~$30K CC debt, Ming $42K + Laurence $3K owed, no senior paid. Contradiction: Laurence said "everybody gets paid this month", Ming says no one has been.</div>
+        </div>
+        <div class="text-xs text-neutral-400">4</div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p>March 2026 Trillet AU financials recited in the Apr 10 20:13 MDT Ori-Ming huddle: March deposits $66,565 USD, March profit $29,705 USD, bank balance ~$7,000 USD, credit card debt ~$30,000 USD, Ming owed $42,000 USD, Laurence owed $3,000 USD, no senior founder paid this cycle. Paperwork stuck on Laurence approximately 4 months. Prompt engineers are on Vafy's payroll doing Trillet implementation work free -- an off-balance-sheet cost shift to Chris.</p>
+        <p class="mt-2"><strong>Contradiction preserved:</strong> Laurence previously stated to Ori "everybody gets paid this month." Ming contradicted that in the huddle, saying no one has been paid. Discrepancy unresolved.</p>
+        <p class="mt-2"><strong>ARR reassessment:</strong> Ori's prior working hypothesis was ~$500K USD ARR (AU-side). Adding the $30-40K+ USD/month Vafy layer flowing to Chris personally adds ~$360-480K USD/year to true AU cashflow, pushing combined toward $1M USD ARR. Ori flagged to Barak via WhatsApp (22:05 MDT LID): "They might be at 1m with Vafy... I need to explain that." "Explanation owed" to Muly -- Muly is currently evaluating Option B 16+16 against the lower ~$500K USD framing.</p>
+        <p class="mt-2"><strong>Ori's reaction:</strong> WhatsApp 22:04 MDT to Barak: "their financials are better than i thought.... Of course, maybe I'm not seeing the whole picture."</p>
+        <p class="mt-2">Source: <code>trillet/BRIEF.md</code> AU Financial section (updated), <code>trillet/accounts/vafy/state.v3.md</code> huddle events.</p>
+        <div class="mt-3 pt-3 border-t border-neutral-100">
+          <div class="text-xs font-semibold uppercase tracking-wide text-neutral-500 mb-2">Action items</div>
+          <ul class="list-disc ml-5">
+            <li>Ming to provide grounded vafy run rate + months of history post-weekend (~Apr 13).</li>
+            <li>Ori owes Muly an "explanation" between the prior ~$500K USD framing and the true vafy-inclusive picture. Timing pre-Muly formalization.</li>
+            <li>Resolve the Laurence-Ming payment contradiction. If "everybody gets paid this month" was never backed by money, that's a separate trust item.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. OPERATIONAL POSTURE -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-amber-300 bg-white px-4 py-3 shadow-sm hover:bg-neutral-50 transition-colors">
+        <span class="toggle-icon text-neutral-400 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-amber-700">Operational posture pattern -- four signals in one day</div>
+          <div class="text-sm text-neutral-600">cal.com bug narrowed to Ori-only (Ori hitting it, L+A never), ElevenLabs silent voice swap in prod, NexaDental end-client walked out of channel, Russell pricing proposal still overdue for Friday call.</div>
+        </div>
+        <div class="text-xs text-neutral-400">4</div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p><strong>cal.com Google Meet host-swap bug -- scope narrowed to Ori-only.</strong> Ori posted to #management Apr 10: "on cal.com appts - google meet has an issue - if the guest gets in first, they become the host and need to let US in on our own scheduled call. some of them dont know how to. solutions?" Laurence replied "Really? I mormally wait until i see them join then hop in. So this doesnt happen for me." Andrew: "This has also never happened to me^". This narrows the bug from platform-wide to an Ori-side account/permissions issue (Google Workspace host-assignment defaults). Pattern evidence: Ori has now hit this on Danilo Apr 6, Alex/ePsych Apr 9, and it's the third in a row. Fix is on Ori's plate, not a platform ticket.</p>
+        <p class="mt-2"><strong>ElevenLabs silent voice mutation in prod.</strong> Ryan Klein reported the voice answering Amy InboundClient prod calls sounded different from QA. Isaam investigated Apr 7: "it's set to 'Dakota T' from ElevenLabs (same as our dev flow). I listened to the recordings Ryan shared, and the voice there does sound different. To verify, I tested our dev flow as well, and it now sounds different compared to when we last tested it. This suggests that ElevenLabs may have updated or modified the voice." Fix shipped same day by Saad to prod. Pattern: Trillet has no voice version pinning with ElevenLabs -- upstream can silently mutate and production calls start sounding wrong with no alerting.</p>
+        <p class="mt-2"><strong>NexaDental end-client walked.</strong> On Apr 10 the #nexadental-trillet Slack channel fired a single bot message: "*Nexadental* has removed themselves from this channel." Nick / Mark Allen / NK Ortho physically exited the shared Slack Connect. Per prior run logs, HeroForge-Mak workspace had already separated. The NexaDental end-client has churned out of the HeroForge channel partnership. HeroForge parent thread remains alive pending Mak access but the NK Ortho sub-relationship is CLOSED. Deal registry #5 updated. The build was going to hit an April 30 deadline; that's now moot for NK.</p>
+        <p class="mt-2"><strong>Russell pricing proposal still overdue for Friday Apr 10 call.</strong> Commitment from <code>trillet/accounts/russell-carraway/state.v3.md evt_2026_04_04_010</code> was originally due Apr 7. Russell committed to Friday Apr 10 setup call expecting Ori's pricing proposal. Not surfaced in today's ingest as sent. Pattern of slipping written commitments on warm prospects.</p>
+      </div>
+    </div>
+
+    <!-- 5. HIPAA TRIPLE-SURFACED + Apr 11 Fathom -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-orange-300 bg-white px-4 py-3 shadow-sm hover:bg-neutral-50 transition-colors">
+        <span class="toggle-icon text-neutral-400 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-orange-700">ePsych (Apex Behavioral) -- proposal sent, BAA paper-trail gap persists</div>
+          <div class="text-sm text-neutral-600">Ori sent the Trillet proposal PDF Apr 10 with $5K eng + $299/mo Agency + $0.12/min + $75 per-practice + $15/practice/mo managed. Ball in Alex's court. HIPAA commitment triple-surfaced, Ming's Apr 11 verbal BAA yes does not name specific providers.</div>
+        </div>
+        <div class="text-xs text-neutral-400">3</div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p>Alex Trent booked the discovery call via Cal.com Apr 8 (source field: "Claude" -- AI referral). Discovery call ran Apr 9 13:00-13:30 MT. Mid-call Alex sent a 25KB markdown spec + 10-page PDF naming Trillet as PRIMARY vendor with Retell AI as explicit fallback if HIPAA fails. Alex's spec has "?" on Trillet's HIPAA status and lists 7 must-verify items before signing. Legal entity is Apex Behavioral LLC (Nevada); ePsych Billing DBA relationship unresolved. 175 clients scaling hard in August.</p>
+        <p class="mt-2"><strong>HIPAA commitment triple-surfaced:</strong> (1) pre-call written "Yes it is" email from Ori, (2) in-call verbal "Yes" from Ori, (3) Ori-to-Ming Slack escalation Apr 9 19:42 MDT: "Are we FULLY Hippa compliant. I need to know for a client." Ming did not respond in writing.</p>
+        <p class="mt-2"><strong>Apr 10 proposal sent:</strong> Ori sent the Trillet-branded customer-facing PDF (<code>Apex_Behavioral_Proposal.pdf</code>) with full commercial terms: $5,000 USD one-time engineering + $299 USD/month Agency + $0.12 USD/min voice + $75 USD per-practice onboarding + $15 USD/practice/month managed + $100 USD/hour ad-hoc. Email cover short with kickoff checklist. Ball in Alex's court. Open items post-send: Apex Behavioral LLC vs ePsych Billing entity clarification for MSA, first reference practice selection, BAA paper trail if it becomes blocking at contract stage.</p>
+        <p class="mt-2"><strong>Apr 11 Fathom meeting update:</strong> Ori used the first 2:30 of the impromptu Ori+Ming+Andrew meeting (while Andrew was in the waiting room) to press Ming directly on two ePsych gates: (a) BAA coverage of voice/LLM/STT sub-processors -- Ming verbal "We have BAAs with individual ones, yes" but did not name OpenAI/Deepgram/ElevenLabs/Twilio/LiveKit/Google specifically or confirm written attestation + willingness to sign a subcontractor BAA with Apex. (b) Uptime SLA for custom agents -- Ming: no, enterprise-only, constrained by model choice. The BAA paper-trail gap is still load-bearing for Alex's response. <code>trillet/accounts/epsych-billing/state.v3.md</code> updated with evt_2026_04_10_014 and evt_2026_04_10_015.</p>
+        <p class="mt-2"><strong>Pricing discrepancy flag:</strong> Ori's Apr 9 call transcript has Agency quoted as "$2.99" four times (transcription or misstatement). Actual proposal PDF is $299 USD/month. Flagged in earlier run log as needing a correction to Alex in the follow-up.</p>
+      </div>
+    </div>
+
+    <!-- 6. SOC2 + VERIZON -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-neutral-200 bg-white px-4 py-3 shadow-sm hover:bg-neutral-50 transition-colors">
+        <span class="toggle-icon text-neutral-400 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-neutral-950">SOC2 + ISO27001 Sprinto kickoff Wed Apr 15</div>
+          <div class="text-sm text-neutral-600">$15K USD 3-yr commitment ($4K/$5K/$6K), Vanta rejected ($17,500 USD/yr). Lost Verizon over compliance -- Ori re-targeting Verizon direct post-cert, bypass Stratablue/Slava.</div>
+        </div>
+        <div class="text-xs text-neutral-400">2</div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p>Laurence to Ori Apr 10 in Laurence DM: "FYI, we are starting SOC2 and ISO27001 compliance next week. Signed and already paid." Vendor: Sprinto. Pricing: $4,000 USD year 1, $5,000 USD year 2, $6,000 USD year 3 -- $15,000 USD total 3-year commitment for BOTH SOC2 + ISO27001 combined. Vanta quote was $17,500 USD/year, rejected. Timeline: ISO27001 in 4-5 weeks (targeting mid-May 2026), SOC2 in 4-6 months (Aug-Oct 2026). Kickoff Wed 2026-04-15. Laurence stated he "already mapped it out before their scanners so we can tick as many boxes on go live."</p>
+        <p class="mt-2"><strong>Verizon re-target:</strong> Laurence stated "we lost Verizon because of not having it." Ori's reply: "Let's go after Verizon directly after you get it. Bypass. What's his face?" Laurence: "Slava from stratablue". Ori confirmed the bypass. Direct Verizon pursuit post-certification (ISO window mid-May) is now on the register.</p>
+        <p class="mt-2"><strong>Bootstrapps side-note:</strong> Laurence asked "this audit made me think of bootstraps. what happened there?" Ori: "They never said the meeting. They never came to me. Like, it wasn't important for them." Bootstrapps compliance-driven deal died on their side, not Trillet's.</p>
+      </div>
+    </div>
+
+    <!-- 7. Lexful POC -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-green-300 bg-white px-4 py-3 shadow-sm hover:bg-neutral-50 transition-colors">
+        <span class="toggle-icon text-neutral-400 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-green-700">Lexful / TopDown POC -- demo-ready + production-verified</div>
+          <div class="text-sm text-neutral-600">Three In-Call APIs live against real Lexful tenant. Webhook proxy on Railway. Test suite 221 assertions all pass. Four live calls fixed three production bugs same-day. Ori self-test then send to Joe.</div>
+        </div>
+        <div class="text-xs text-neutral-400">1</div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p>Ori built the Lexful POC voice agent end-to-end over Apr 9-10. Three In-Call APIs are live against the real TransformITive-granted Lexful read-only tenant: <code>lex_query</code> (Path D AI chat), <code>lex_org_lookup</code> (REST organizations), <code>verify_caller</code> (deterministic KBA fixture). Webhook proxy deployed to Railway at <code>https://trillet-lexful-poc-production.up.railway.app</code>. Trillet flow <code>69d9110d5b99a5d6bb3fadb9</code> repointed to Railway. Local workstation proxy terminated -- the demo is independent of Ori's laptop. Four KBA personas retargeted to real Lexful organizations (Sarah Chen / BCV, Barak / Appalachia, Jane / Alanis Wrecker, Ori / Transformitive).</p>
+        <p class="mt-2"><strong>Test suite built:</strong> 221 assertions across 4 Python files: pre-flight smoke (46), proxy integration (56), behavioral (92), Playwright dashboard E2E (27). All passing end-to-end. <code>trillet/accounts/transformitive/sources.md</code> has the full list.</p>
+        <p class="mt-2"><strong>Three production bugs fixed live during real phone calls:</strong> (1) TIER_STATE pollution across callers -- fixed by session-scoping TIER_STATE by room_name/call_id with 10-min TTL; (2) agent abandoning verification on bad manager-name input -- fixed with Sticky Verification Context + Fact-Mismatch Recovery rules in the prompt; (3) lex_query timeout mismatch -- bumped webhook timeout 20s to 60s. Prompt is now 19,611 chars. Compliance monitoring disabled for demo (was false-positive-ing on HIPAA keywords). endCallOnSilence bumped to 45s.</p>
+        <p class="mt-2"><strong>Remaining before send to Joe:</strong> Ori self-test then send. Technical state is green.</p>
+      </div>
+    </div>
+
+    <!-- 8. DEALS THIS WEEK -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-neutral-200 bg-white px-4 py-3 shadow-sm hover:bg-neutral-50 transition-colors">
+        <span class="toggle-icon text-neutral-400 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-neutral-950">Deals with meetings this week (Apr 11-17)</div>
+          <div class="text-sm text-neutral-600">Sat Ahmed (Andrew-led), Sun Harcourts pre-meeting (Ming+MetaVoice+Ori), Mon Joel Davis ASP Frisco + BBH AU, Wed SOC2 kickoff + meeting with ABSA pending, Apr 17 Bank of Transylvania.</div>
+        </div>
+        <div class="text-xs text-neutral-400">5</div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p><strong>Sat Apr 11 00:30 MT -- Ahmed Abdelazez discovery (deal #39).</strong> Channel-partner pitch from Egypt, commission-based outbound, healthcare + real estate. Apr 9 Ori stated written policy "all partner/enterprise contacts should be routed to me" and committed same-day direct outreach. Cal.com invite still on Andrew's calendar as mechanical fallback; Andrew running it. Ahmed's own pitch misspells Trillet as "Treillt" (low attention-to-detail signal).</p>
+        <p class="mt-2"><strong>Sun Apr 12 (AEST) -- Harcourts pre-meeting (deal #41).</strong> Ming scheduled tentative Sunday pre-meeting with Jeremiah (20-year Ming friend, ex-Harcourts 8 years, CEO friend) + MetaVoice CEO + Ori. Purpose: show Jeremiah current state, signal seriousness via Ori's US presence, get Jeremiah's buy-in before pulling Harcourts CEO + board back for a second audience. Decision branch: MetaVoice vs XAI voice agent head-to-head, Jeremiah picks winner based on his Harcourts + real estate knowledge. Ori role framed by Ming: "once you're on board, Jeremiah's like, oh shit, American, big deal. Let me get my ducks in a row." Commercial vehicle unresolved (Trillet enterprise vs Ming-as-MetaVoice-channel) -- risk item. Harcourts CEO in October 2025 rejected Ming: "not production ready... unless you have a good enough version for human phone calls, don't bother coming back." 600-firm Australian real estate conglomerate.</p>
+        <p class="mt-2"><strong>Mon Apr 13 10:00 MDT -- Joel Davis / ASP Frisco discovery (deal #40).</strong> Verified as single ASP of Frisco TX franchisee within Authority Brands national network (100+ franchisees, HQ Macon GA). Existing customer: $49 USD/month Basic Plan since Feb 19 under user <code>mckinney@asppoolco.com</code>. Upcoming call is an expansion conversation on the existing $49 account, not net-new. Three ASP attendees on invite (Joel + <code>ericka@asppoolco.com</code> + <code>frisco@asppoolco.com</code>). Ladder upside: land Frisco then pitch Authority Brands corporate for network deal. Kayak Pools comparable per Laurence: ~1,000-3,000 calls/month, ~$20K USD spent with Trillet over the last year = single-franchise ceiling projection.</p>
+        <p class="mt-2"><strong>Mon Apr 13 (AEDT) -- BBH.com.au 2nd meeting (new deal #42).</strong> Ming-originated Australian accounting firm. Client quote Ming forwarded: "we are looking to build a system that could replace a couple of the systems we currently use... Do you do one off projects at all? We ideally want to build something for ourselves to test the concept and then potentially commercialise and sell it to other small/medium accounting firms." Ori not on the meeting, Ming running. Ambition: one-off custom build with resell-to-SMB-accounting-firms commercialization path.</p>
+        <p class="mt-2"><strong>Apr 13-17 window -- ABSA meeting (deal #37).</strong> Andile committed to push Penny Dlamini for a date in that window. Andile surfaced an unverified ABSA-Property24 partnership angle. Sequencing priority: ABSA before FNB.</p>
+        <p class="mt-2"><strong>Apr 17 -- Bank of Transylvania meeting (deal #22).</strong> Laurence signed Ciprian to contractor Apr 8. Ciprian personally knows 4 of 6 bank directors + the CTO (kids at same school). Andre returning from Poland mid-next week, meeting Apr 17. Ciprian going to Turkey for a week (tight window). Contractor terms: €400 EUR/quarter protocol, €1500 EUR signup fee, 5% MRR bank + sister companies. Laurence expects 9-month bank sales cycle.</p>
+        <p class="mt-2"><strong>May 4 -- FNB discovery (deal #36, thread birthed).</strong> Mon 15:30-16:00 SAST via MS Teams. Lee-Anne Van Zyl + Christelle Pretorius + Ori + Laurence + Andile. Andile listed Lesley-Ann Moses (PA to CEO) as third FNB attendee; ICS invite does not show her -- discrepancy unresolved.</p>
+      </div>
+    </div>
+
+    <!-- 9. FATHOM Apr 11 ANDREW MEETING -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-neutral-200 bg-white px-4 py-3 shadow-sm hover:bg-neutral-50 transition-colors">
+        <span class="toggle-icon text-neutral-400 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-neutral-950">Apr 11 Ori+Ming+Andrew Fathom meeting -- affiliate list review</div>
+          <div class="text-sm text-neutral-600">~18 min (projected 3). Andrew's 2-month-old list is mostly cold. Brendan (23K Skool) blocked by competitor free-for-life -- Ori to meet direct. Andrew agreed to sales training direct, no pushback. BAA sub-processor Q partially answered.</div>
+        </div>
+        <div class="text-xs text-neutral-400">4</div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p>Ming scheduled the meeting in the afternoon ("shouldnt go for more than 3mins"). Actual Fathom runtime was ~18:20 min. First ~2:25 Ori+Ming alone while Andrew waited -- Ori used the window to press Ming on the two ePsych gates (BAA + SLA, see item 5). 2:36-17:25 was the ostensible purpose: Andrew's school-affiliate / influencer list review.</p>
+        <p class="mt-2"><strong>Andrew's list is mostly cold.</strong> Andrew confirmed most of his prior 2-months-old list is dead. Top candidates surfaced:</p>
+        <ul class="list-disc ml-5 mt-2">
+          <li><strong>Brendan (#1)</strong> -- 23K-member Skool community. Blocked by a competitor offering free-for-life. Andrew has tried 5 times, no traction. Ori committed to meet Brendan directly despite Andrew's failed attempts, angle-framing: "I'm going to try to figure out what his motivation is... if he's giving him a churned product for zero money, he's done." No decision captured on what Trillet's counter-offer would actually be; Ming and Ori both rejected the match-free-for-life ask but did not discuss an alternative economic structure.</li>
+          <li><strong>Janice (#2)</strong> -- Mark Kashef friend, Ming skeptical ("I don't think Janice will be a go"). Andrew wants to retry -- believes the prior "found another company that did the same thing as us" story is fabricated. Andrew reports Mark's network is "focusing on Claude Code and then surrounding voice AI as a general."</li>
+          <li><strong>Henrik (#3)</strong> -- same skeptical/retry frame.</li>
+          <li><strong>Slots 4 and 5:</strong> TBD via Andrew filter work.</li>
+        </ul>
+        <p class="mt-2"><strong>Decision:</strong> Andrew delivers a filtered top-5 list and does the initial LinkedIn/email outreach himself (targets don't know Ori). Warm-handoff template to be drafted by Ming.</p>
+        <p class="mt-2"><strong>Sales training surfaced direct to Andrew (17:25-18:20 last minute of the meeting).</strong> Ori proposed a sales-call training/review session with Andrew, extension of the Apr 9 Ori+Laurence huddle training plan. Andrew agreed without pushback. Ownership unclear: Apr 9 plan had Laurence running it; Apr 11 framing used "we" and referenced Barak's existing call-recording access. Who actually runs the session (Laurence, Barak, joint Ori+Barak) is not decided.</p>
+        <p class="mt-2"><strong>Meeting end:</strong> Ming+Ori explicitly handed off to a continuation huddle ("No, we're going to go to a new meeting, so he gets two different") -- continuation transcript at <code>trillet/artifacts/2026-04-11-huddle-ori-ming-post-andrew.md</code>. Primary source: <code>trillet/artifacts/2026-04-11-transcript-ori-andrew-ming-meeting.md</code>.</p>
+      </div>
+    </div>
+
+    <!-- 10. SALES TRACKER GAP -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-amber-300 bg-white px-4 py-3 shadow-sm hover:bg-neutral-50 transition-colors">
+        <span class="toggle-icon text-neutral-400 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-amber-700">Andrew sales tracker gap -- no funnel visibility</div>
+          <div class="text-sm text-neutral-600">Ori asked Andrew for daily agency-sales meeting count + conversion. No CRM tracker. Running via Andrew's personal Google Calendar pull. "Not gonna be super accurate until we get the crm."</div>
+        </div>
+        <div class="text-xs text-neutral-400">2</div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p>Ori to Andrew Apr 10 in Andrew DM: "Hey Andrew, is there a way we can get on a daily level the number of Agency sales meeting you do, and then how many sign up vs not? do you keep track of that or cal.com?" Andrew: "Laurence is getting smth built for that in the crm. But no tracker atm." Andrew's workaround: run a manual pull through his own Google Calendar. Accuracy caveat: "sometimes ppl book through my own google calendar" and doesn't appear on cal.com, plus "this doesnt account for no shows/cancelations etc." Andrew: "not gonna be super accurate until we get the crm and i manually sift through these."</p>
+        <p class="mt-2"><strong>Barak action item from queue:</strong> Ori committed Apr 9 19:40 MDT via WhatsApp to Barak: "Said one of us (you) will train Andrew regarding agency sales." You're named owner on the Andrew sales training workstream. Apr 11 Fathom meeting surfaced the training plan directly to Andrew, Andrew agreed. Ownership between you / Laurence / joint Ori+Barak still undecided.</p>
+      </div>
+    </div>
+
+    <!-- 11. PAKIS REVOLTING + MING CHINA AEO -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-amber-300 bg-white px-4 py-3 shadow-sm hover:bg-neutral-50 transition-colors">
+        <span class="toggle-icon text-neutral-400 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-amber-700">Team resistance flag + Ming China AEO previously undisclosed</div>
+          <div class="text-sm text-neutral-600">Ori to you Apr 10 20:40 MDT: "ming accepted the MOU generally, but we also went into the pakis revolting against us coming." Pakistan dev team showing resistance to Ori+Barak onboarding. Ming also running AEO in China 2x/week that Ori didn't know about.</div>
+        </div>
+        <div class="text-xs text-neutral-400">2</div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p><strong>Pakistan team resistance.</strong> Ori's WhatsApp 20:40 MDT shorthand: "had a very important huddle with ming - he accepted the MOU generally, but we also went into the pakis revolting against us coming." Underlying signal: the Pakistan-based developer contingent is showing political resistance to Ori and Barak joining the company. Phrasing is Ori's casual framing, not the underlying texture; the details need to be pulled out of the huddle when Ori can sit with you. Material pre-Option B because you're the named operational partner running the AU org post-signing.</p>
+        <p class="mt-2"><strong>Ming China AEO.</strong> Ori's WhatsApp 21:02 MDT: "Apparently Ming was doing AEO in China twice a week. I didn't know that." Ming has been running a previously-undisclosed AEO workshop / session cadence in China at 2x/week. Matches the Apr 9 Fathom org-assessment transcript note "Ming China AI" that Ori had picked up on but hadn't connected. Not necessarily a problem but it's another example of what the org-assessment interview surfaced: Ming's external activity isn't visible to the rest of the team.</p>
+        <p class="mt-2"><strong>Context:</strong> This connects to the org knowledge-mapping workstream Ori committed to you in Hebrew 21:28 MDT: "It will be critical to start a process not only of mapping organizational knowledge, but also preserving and externalizing knowledge." The AU team currently holds undocumented tribal knowledge about vafy, pricing, compliance, Ming's external activities, and customer history that becomes a load-bearing dependency post-Option B.</p>
+      </div>
+    </div>
+
+    <!-- 12. WEBSITE + PRICING -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-neutral-200 bg-white px-4 py-3 shadow-sm hover:bg-neutral-50 transition-colors">
+        <span class="toggle-icon text-neutral-400 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-neutral-950">Website draft 1 with Danny + 49/149/299 USD pricing confirmed</div>
+          <div class="text-sm text-neutral-600">Ming passed draft 1 to Danny for spacing/border-radius/gradients. Ming: Laurence "has no eye for design". Ori wants first version live to line up with TopDown Ventures handoff. "$99 problem" still needs backend fix.</div>
+        </div>
+        <div class="text-xs text-neutral-400">2</div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p>Ming to Ori Apr 10 in Ming DM: "just passed it on to danny... for draft 1... wait for danny." Ori: "When do you think we'll get the first Version to go live? Now we have two big customers for it. If possible, I want to line it up with the top-down ventures. Hand off." Ming: "ill see if dannys working this wknd."</p>
+        <p class="mt-2"><strong>49/149/299 pricing confirmed.</strong> Ming: "49/149/299 d2c/studio/agency thats the plan yeah?" Ori: "yep". Final tier structure confirmed. Ming: "the $99 problem will need to change in the backend first -- we will have to line it up with the front end." $99 legacy pricing cleanup is blocking the frontend launch.</p>
+        <p class="mt-2"><strong>Enterprise section priority:</strong> Ori to Ming: "Btw - with the bank of Transylvania and top-down ventures looking at our website for sure.. we have to make sure Enterprise section is really well constructed." Enterprise tier reviewers are already visiting.</p>
+        <p class="mt-2"><strong>Office decision (held):</strong> Laurence asked Apr 10 about a $2,500-3,000 AUD/month office for himself+Ming+agency partners. Ori: "Home for sure. Don't make big decisions until me and Barak are in. As a rule. We will make better decisions when we're all together." Ori added "pay yourself first" principle. <strong>Your Apr 10 counter-proposal via WhatsApp:</strong> "Laurence really wants to get out of his house. I suggest not to dismiss this option off the table for a later phase." Your pushback is captured in <code>trillet/barak/state.v3.md</code> evt_2026_04_10_001.</p>
+      </div>
+    </div>
+
+    <!-- 13. RELATIENT -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-neutral-200 bg-white px-4 py-3 shadow-sm hover:bg-neutral-50 transition-colors">
+        <span class="toggle-icon text-neutral-400 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-neutral-950">Relatient phase-2 clarified + competitor hunt approved</div>
+          <div class="text-sm text-neutral-600">$0.12 USD/min clinic-onboarding tester + small build fee. "Tester to match bland." No enterprise. Laurence wants to hunt Relatient competitors in US market -- approved.</div>
+        </div>
+        <div class="text-xs text-neutral-400">1</div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p>Ori to Laurence: "Did the new phase with relatively go through? Relatient". Laurence: "its an onboarding agent with no enterprise... its purely the clinics call it to onboard to their bland service.... only pay usage of 12 cents a minute plus a small build fee like a tester to see if we can match bland at all." Usage-only, no enterprise commitment. Explicitly head-to-head Bland.</p>
+        <p class="mt-2"><strong>Competitor hunt approved.</strong> Laurence: "So Relatient is taking their time, but that whole space is going huge atm. If i give you a list of the competitors want to try and reach out to them? see if we can strike a similar deal?" Ori: "for sure". Laurence: "ill do some research and see which companies best fit in the US. I think we have a huge foot since we built Relatient." Laurence approved to pursue Relatient competitors in US market, leveraging "we built Relatient" as a sales angle.</p>
+      </div>
+    </div>
+
+    <!-- 14. ANDILE OUTBOUND -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-neutral-200 bg-white px-4 py-3 shadow-sm hover:bg-neutral-50 transition-colors">
+        <span class="toggle-icon text-neutral-400 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-neutral-950">Andile outbound tooling approved + AU/SA/US geo split</div>
+          <div class="text-sm text-neutral-600">Andile asked for Apollo-class tools ("guessing email addresses is slowing me down"). Ori approved paid tools + strategy. Target: Property24-like platforms, banks + non-bank lenders, geo split AU/SA/US, skip EU (language).</div>
+        </div>
+        <div class="text-xs text-neutral-400">2</div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p>Andile in the Andile+Ori+Laurence group DM Apr 10: "Gentlemen - do any of you use outbound tools like Apollo? I want to do more outreach to enterprises but I'm getting frustrated here with having to guess email addresses. (Really slowing me down here)." Ori: "Yes, let's discuss this. We will get you some paid tools. Get an actual strategy going." Andile's proposed strategy: target platforms like Property24 (replicate the P24 template elsewhere), double down on banks and non-bank lenders, geographic split "companies that operate in countries where each of us are. (Australia. South Africa. US/Canada)", explicitly skip Europe ("since I'm don't speak Spanish or French & the like"). Ori: "Do some initial research about the tools; then we will compare notes and decide what to go with." Andile: "On it."</p>
+        <p class="mt-2"><strong>First Trillet-funded tooling commitment for Andile's motion.</strong> Action split: Andile researches tool options, Ori gives final approval and sources budget. Trillet US campaigns can likely use the same toolset in parallel (flagged separately to Barak).</p>
+      </div>
+    </div>
+
+    <!-- 15. CLOUDBURST + MYSTERY AI STUDIO -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-amber-300 bg-white px-4 py-3 shadow-sm hover:bg-neutral-50 transition-colors">
+        <span class="toggle-icon text-neutral-400 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-amber-700">Mystery Laurence deals -- Cloudburst + "AI builder/studio"</div>
+          <div class="text-sm text-neutral-600">Ming mentioned two Laurence-originated deals Ori hasn't been briefed on. "ask him about it some time." Ming was told to "not enquire on product" so he's fuzzy on details.</div>
+        </div>
+        <div class="text-xs text-neutral-400">1</div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p>Ming to Ori Apr 10: "laurence is cooking up more deals on this end... not sure if he told u about cloudbuhrst... ask him about it some time." Ori: "Nope." Ming: "he has a note pad that he uses to write down the important stuff but sometimes he needs to write down smaller things too i reckon."</p>
+        <p class="mt-2"><strong>Separately, an "AI builder/studio" deal:</strong> Ori asked Ming: "What about that tool you told me or that idea Laurence had that was big? Remember, you said, 'Oh, he's doing agents. It's like what you're doing.'" Ming: "i havent had the chance to tlak to him about it because i was told to 'not enquire on product and focus on catching up on marketing and website'... you can ask him directly about it. its some ai builder/studio thing that apparently has everything hooked up." Ori: "I'm surprised he didn't mention it to me then.. He mentioned a bunch of other stuff."</p>
+        <p class="mt-2"><strong>Flag:</strong> Two deals Laurence is running that Ori is not briefed on. Ming was directed away from probing. Open action: Ori to ask Laurence directly about Cloudburst and the AI builder/studio thing in the next 1-1.</p>
+      </div>
+    </div>
+
+    <!-- 16. MULY FOMO -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-neutral-200 bg-white px-4 py-3 shadow-sm hover:bg-neutral-50 transition-colors">
+        <span class="toggle-icon text-neutral-400 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-neutral-950">Muly FOMO already active -- "include me too"</div>
+          <div class="text-sm text-neutral-600">Your Apr 9 Hebrew report: Muly said "don't leave me out... include me too." Now Ori owes Muly an "explanation" on the vafy-inclusive AU ARR number.</div>
+        </div>
+        <div class="text-xs text-neutral-400">2</div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p>From your Apr 9 WhatsApp report in Hebrew after the Muly call: Muly explicitly told you "don't leave me out... include me too." This was hours BEFORE Ori locked equity with Laurence and BEFORE the Ori+Laurence strategic decision to withhold Joe/TopDown from Muly. Muly's FOMO is already active; the withhold strategy is operating against a prospect who is already asking in.</p>
+        <p class="mt-2"><strong>New layer from today (item 3):</strong> Ori's "might be at 1m with Vafy" reassessment means Muly is currently evaluating Option B 16+16 against a ~$500K USD ARR framing that turns out to materially understate AU cashflow. Ori flagged to you via WhatsApp 22:05 MDT that he owes Muly an "explanation" -- between the prior public number and the true vafy-inclusive reality. Timing matters: the explanation has to land before Muly formalizes his position on Option B, otherwise it reads as a retroactive revision.</p>
+        <p class="mt-2"><strong>Your Apr 8 wireframe reaction (not told to Ming):</strong> Your WhatsApp Hebrew feedback on Ming's Plasma wireframe was "I wasn't thrilled, the message is scattered." Ori's response was qualified endorsement. Ming has NOT been told. Discrepancy preserved for your awareness as Ming's new draft goes live this week.</p>
+      </div>
+    </div>
+
+    <!-- 17. BACKGROUND DATA -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-neutral-200 bg-white px-4 py-3 shadow-sm hover:bg-neutral-50 transition-colors">
+        <span class="toggle-icon text-neutral-400 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-neutral-950">CMS + CRM + April growth claim</div>
+          <div class="text-sm text-neutral-600">MRR $13,692.99 USD, -$99 vs Apr 8. 3 new AgencyPlus past-due. CRM token expired (predicted). Ori's "up 23% since end March" claim needs CMS reconciliation.</div>
+        </div>
+        <div class="text-xs text-neutral-400">2</div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p><strong>CMS sync Apr 11 04:37 UTC:</strong> MRR $13,692.99 USD (ARR $164,315.92 USD). Delta vs Apr 8 baseline ($13,792): -$99.01. Subs: 189 total (168 active, 10 trialing, 11 past-due). Past-due +3 this cycle. <strong>All 3 new past-dues are AgencyPlus</strong> (Seth Anderson, Osmon Traore, Davide Doe) -- ~$897 USD of $1,469 USD total at-risk is AgencyPlus-concentrated. Dunning records: 11, $1,469 USD MRR at risk. Trial-to-active conversions: 2 (stellaywu Studio, gino@choosemysite AgencyPlus). Net lost subs: 4.</p>
+        <p class="mt-2"><strong>CRM token expired Apr 10 as predicted.</strong> 7-day JWT from Apr 3. Auto-refresh attempted by scraper but CRM_REFRESH_TOKEN also dead. Requires interactive Google SSO to resurrect. Status data is 3-4 days stale as of this briefing.</p>
+        <p class="mt-2"><strong>"Up 23% since end March" claim unreconciled.</strong> Ori told you via WhatsApp 21:02 MDT: "April is still going strong. We're up 23% compared to the end of March. It hasn't slowed down." Contradiction: CMS total MRR Apr 10 is $13,692.99 USD, vs ~$13,587 USD on Apr 7, not a 23% delta. Ori's 23% claim likely refers to gross billings or agency-tier specific growth, not total MRR. Needs reconciliation before the number lands in any Muly or external narrative.</p>
+        <p class="mt-2"><strong>Aargon wallet +$6,000 USD Apr 9.</strong> Laurence request, Ali confirmed done. Routine wallet top-up, noted for continuity.</p>
+      </div>
+    </div>
+
+    <!-- 18. PROMPT/DEV TEAM SIGNALS -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-neutral-200 bg-white px-4 py-3 shadow-sm hover:bg-neutral-50 transition-colors">
+        <span class="toggle-icon text-neutral-400 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-neutral-950">Team pulse -- Amy InboundClient fixes shipped, Ryan queued more</div>
+          <div class="text-sm text-neutral-600">Ryan Klein / Amy InboundClient prod issues: wrong voice (ElevenLabs silent mutation), notes appending instead of creating new rows, stale date-of-update. All fixed same-day. New backlog from Ryan on household email dedup + customer_id propagation.</div>
+        </div>
+        <div class="text-xs text-neutral-400">1</div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p>Ryan Klein reported three live issues on Amy InboundClient Apr 7: (1) voice answering was different from QA -- ElevenLabs silently mutated Dakota T (see item 4); (2) notes getting appended to existing rows instead of creating new -- fix: always create new note; (3) Date of Update was pulling stale DB timestamp -- resolved by the always-new-note fix. Saad pushed the voice fix to prod, Ibrahim shipped the note creation fix. Both live in prod as of Apr 7 end-of-day. Isaam: "it wont effect the previous notes and will always create a new note. This way the new date will be added."</p>
+        <p class="mt-2"><strong>New backlog items from Ryan (queued):</strong> (a) Household / family email dedup -- when "Tom" calls and provides an email matching an existing customer "Lynn" (spouse), system should treat as same household, not create a new file. (b) When sal_leads has a customer_id value, include it in the cust_customer_callbacks insert (currently missing, creating orphaned rows). Both assigned to the prompt/dev team, not yet scheduled.</p>
+      </div>
+    </div>
+
+    <!-- 19. FAITH DR WCAD -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-neutral-200 bg-white px-4 py-3 shadow-sm hover:bg-neutral-50 transition-colors">
+        <span class="toggle-icon text-neutral-400 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-neutral-950">OVE cross-domain -- Faith Dr WCAD protest deadline May 15</div>
+          <div class="text-sm text-neutral-600">$546,712 USD appraisal (+$40,355 USD YoY). 3 comparable Faith Dr sales 2025: $530-598K USD, substantially above Sachin's Oct 2025 ~$377K USD debt figure. Load-bearing for Option B deed-transfer-to-Sachin path.</div>
+        </div>
+        <div class="text-xs text-neutral-400">1</div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p>2026 WCAD appraisal for 746 Faith Dr: $546,712 USD (+$40,355 USD year-over-year). Protest deadline May 15, 2026. Three comparable Faith Dr sales in 2025 ranged $530K-$598K USD -- substantially above the ~$377K USD debt figure Sachin cited in the Oct 2025 negotiation. Material implication for the Option B deed-transfer-to-Sachin resolution path: if Sachin takes the deed, he's taking a property that's worth materially more than his debt claim, which changes the settlement math.</p>
+        <p class="mt-2">Cross-domain OVE item but affects Ori's time and the Option B structural conversation. Briefed to you for awareness.</p>
+      </div>
+    </div>
+
+    <!-- 20. SMS BRIDGE + PM2 FIX -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-neutral-200 bg-white px-4 py-3 shadow-sm hover:bg-neutral-50 transition-colors">
+        <span class="toggle-icon text-neutral-400 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-neutral-950">Infra -- WhatsApp bridge fixed + Vafy thread + system commits</div>
+          <div class="text-sm text-neutral-600">WhatsApp bridge brought back under PM2 mid-session (was crash-looping without supervisor). New native V3 thread accounts/vafy born. PM2 auto-resurrects across reboot.</div>
+        </div>
+        <div class="text-xs text-neutral-400">1</div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p><strong>WhatsApp bridge.</strong> WhatsApp bridge was down at the start of the Apr 10 second ingest sweep. Root cause: the bridge was never registered with PM2 (a start.bat existed to do exactly that but had not been run), and Baileys was crash-looping on routine WhatsApp Web "Connection Closed" (statusCode 428) unhandled promise rejections with no supervisor to restart node. Fixed mid-session: <code>pm2 start tools/whatsapp-bridge/server.js --name wa-bridge</code>, <code>pm2 save</code>. pm2-windows-startup was already registered in the HKCU Run key, so the daemon auto-resurrects on login and PM2 auto-restarts crashes. The bridge is now under supervision. SMS bridge still down per prior Ori directive not to fix the root cause yet.</p>
+        <p class="mt-2"><strong>New V3 thread <code>trillet/accounts/vafy</code> born.</strong> Native V3 (state.v3.md only), classified MINE in operating-posture.md. 17 events captured (9 from Slack DM, 8 from Ori's post-huddle edit). Full verbatim artifact at <code>artifacts/2026-04-10-slack-dm-ming-vafy-equity-disclosure.md</code> + parent-level huddle transcript. STATE.md regenerated via build_governance.py.</p>
+      </div>
+    </div>
+
+    <!-- 21. OUTSTANDING ORI ACTIONS -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-red-300 bg-white px-4 py-3 shadow-sm hover:bg-neutral-50 transition-colors">
+        <span class="toggle-icon text-neutral-400 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-red-700">Outstanding Ori commitments (top of register)</div>
+          <div class="text-sm text-neutral-600">Vafy paperwork Apr 24 target, Muly "1M explanation", Brendan direct outreach, Russell pricing proposal overdue, cal.com Ori-side fix, CRM token interactive SSO, Bank of Transylvania prep.</div>
+        </div>
+        <div class="text-xs text-neutral-400">7</div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <ol class="list-decimal ml-5">
+          <li><strong>Vafy paperwork takeover from Laurence -- 2-week target Apr 24.</strong> Drive Chris-Marco agreement to written form; engage accountant for ASIC claim stripping Marco from Verlat; draft Vafy acquisition paperwork.</li>
+          <li><strong>Explanation owed to Muly</strong> -- between prior ~$500K USD ARR framing and vafy-inclusive ~$1M USD reality. Must land before Muly formalizes Option B.</li>
+          <li><strong>Russell pricing proposal</strong> -- still overdue from Apr 7 commitment for the Friday Apr 10 setup call. Nothing captured as sent today.</li>
+          <li><strong>Brendan direct outreach</strong> -- committed in the Apr 11 Andrew meeting. 23K Skool, blocked by competitor free-for-life. No decision on counter-offer shape.</li>
+          <li><strong>cal.com Google Meet host-swap</strong> -- Ori-side investigation (Google Workspace host-assignment defaults on Ori's cal.com + Workspace accounts). Third prospect call hit this week.</li>
+          <li><strong>CRM token interactive SSO refresh</strong> -- run <code>python .claude/skills/ingest/scripts/refresh-crm-token.py --headed</code>. 3-4 day stale CRM pipeline data until resolved.</li>
+          <li><strong>Ask Laurence directly</strong> about Cloudburst and the "AI builder/studio" deals Ming surfaced. Two deals Ori isn't briefed on.</li>
+          <li><strong>$2.99 vs $299 pricing correction</strong> to Alex Trent (ePsych) in the follow-up email if it went out already, or on next contact.</li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- 22. BARAK ACTIONS -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-red-300 bg-white px-4 py-3 shadow-sm hover:bg-neutral-50 transition-colors">
+        <span class="toggle-icon text-neutral-400 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-red-700">Your action items (Barak)</div>
+          <div class="text-sm text-neutral-600">Hold MOU countersign until vafy resolution, Andrew sales training plan ownership, review v6 MOU in WhatsApp thread, surface any Muly dynamic ahead of the explanation delivery.</div>
+        </div>
+        <div class="text-xs text-neutral-400">4</div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <ol class="list-decimal ml-5">
+          <li><strong>Do NOT countersign the MOU</strong> until the vafy thread is resolved on paper (Verlat-Marco cut-out) and the vafy revenue destination is settled. Flag to Ori before any formal signing step.</li>
+          <li><strong>Andrew sales training</strong> -- you are the named owner from Ori's Apr 9 WhatsApp. Apr 11 Fathom meeting surfaced the plan to Andrew, Andrew agreed. Decide whether you run the session, Laurence runs it, or you run it jointly -- Apr 11 framing was ambiguous.</li>
+          <li><strong>Review MOU v6</strong> -- three docx versions sitting in your WhatsApp thread with Ori from Apr 10 19:45 / 19:53 / 20:02 MDT. Ori did not pull them into <code>trillet/team/artifacts/</code> per his call to keep them on WhatsApp.</li>
+          <li><strong>Surface any Muly dynamic</strong> you're picking up ahead of Ori's "1M explanation" conversation with Muly. Timing matters -- explanation should land before Muly formalizes.</li>
+        </ol>
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="border-t border-neutral-200 bg-stone-50">
+    <div class="mx-auto max-w-3xl px-4 py-4 text-xs text-neutral-400">
+      Generated from Trillet PKM. Questions? Message Ori.
+    </div>
+  </footer>
+
+  <script>
+    function toggle(btn) {
+      const detail = btn.nextElementSibling;
+      const icon = btn.querySelector('.toggle-icon');
+      detail.classList.toggle('open');
+      icon.classList.toggle('open');
+    }
+
+    // Expand all on double-click header
+    document.querySelector('header').addEventListener('dblclick', () => {
+      document.querySelectorAll('.detail').forEach(d => d.classList.add('open'));
+      document.querySelectorAll('.toggle-icon').forEach(i => i.classList.add('open'));
+    });
+  </script>
+
+</body>
+</html>
