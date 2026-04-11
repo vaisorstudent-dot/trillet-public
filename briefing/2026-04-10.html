@@ -23,7 +23,7 @@
         <div class="text-sm font-semibold tracking-tight">Trillet Daily Briefing</div>
         <div class="text-xs text-neutral-500">2026-04-10 -- prepared for Barak</div>
       </div>
-      <div class="text-xs text-neutral-400">22 items</div>
+      <div class="text-xs text-neutral-400">22 items -- updated Apr 11</div>
     </div>
   </header>
 
@@ -120,14 +120,14 @@
         <span class="toggle-icon text-neutral-400 text-sm">&#9654;</span>
         <div class="flex-1">
           <div class="text-sm font-semibold text-amber-700">Operational posture pattern -- four signals in one day</div>
-          <div class="text-sm text-neutral-600">cal.com bug narrowed to Ori-only (Ori hitting it, L+A never), ElevenLabs silent voice swap in prod, NexaDental end-client walked out of channel, Russell pricing proposal still overdue for Friday call.</div>
+          <div class="text-sm text-neutral-600">cal.com bug narrowed to Ori-only (Ori hitting it, L+A never), ElevenLabs silent voice swap in prod, NexaDental Slack workspace exited #nexadental-trillet (assessed as Slack tier expiry, NOT churn), Russell pricing proposal still overdue for Friday call.</div>
         </div>
         <div class="text-xs text-neutral-400">4</div>
       </button>
       <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
         <p><strong>cal.com Google Meet host-swap bug -- scope narrowed to Ori-only.</strong> Ori posted to #management Apr 10: "on cal.com appts - google meet has an issue - if the guest gets in first, they become the host and need to let US in on our own scheduled call. some of them dont know how to. solutions?" Laurence replied "Really? I mormally wait until i see them join then hop in. So this doesnt happen for me." Andrew: "This has also never happened to me^". This narrows the bug from platform-wide to an Ori-side account/permissions issue (Google Workspace host-assignment defaults). Pattern evidence: Ori has now hit this on Danilo Apr 6, Alex/ePsych Apr 9, and it's the third in a row. Fix is on Ori's plate, not a platform ticket.</p>
         <p class="mt-2"><strong>ElevenLabs silent voice mutation in prod.</strong> Ryan Klein reported the voice answering Amy InboundClient prod calls sounded different from QA. Isaam investigated Apr 7: "it's set to 'Dakota T' from ElevenLabs (same as our dev flow). I listened to the recordings Ryan shared, and the voice there does sound different. To verify, I tested our dev flow as well, and it now sounds different compared to when we last tested it. This suggests that ElevenLabs may have updated or modified the voice." Fix shipped same day by Saad to prod. Pattern: Trillet has no voice version pinning with ElevenLabs -- upstream can silently mutate and production calls start sounding wrong with no alerting.</p>
-        <p class="mt-2"><strong>NexaDental end-client walked.</strong> On Apr 10 the #nexadental-trillet Slack channel fired a single bot message: "*Nexadental* has removed themselves from this channel." Nick / Mark Allen / NK Ortho physically exited the shared Slack Connect. Per prior run logs, HeroForge-Mak workspace had already separated. The NexaDental end-client has churned out of the HeroForge channel partnership. HeroForge parent thread remains alive pending Mak access but the NK Ortho sub-relationship is CLOSED. Deal registry #5 updated. The build was going to hit an April 30 deadline; that's now moot for NK.</p>
+        <p class="mt-2"><strong>NexaDental Slack workspace exited #nexadental-trillet (Slack tier expiry, not churn).</strong> On Apr 10 ~10:56 MDT the #nexadental-trillet Slack channel fired a single bot message: "*Nexadental* has removed themselves from this channel." Nobody from any side commented. <strong>Assessed Apr 11 as the same Slack free-tier expiry pattern HeroForge hit ~24 hours earlier on Apr 9</strong> -- HeroForge workspace removed itself 08:07 UTC, Chris speculated "Did they run out of slack free trial?", Laurence "I would assume so", HeroForge upgraded to a paid plan and rejoined ~15 hours later, Mak stated "Upgraded us just now." NexaDental is expected to follow the same path. The HeroForge build scope, April 30 conference deadline, expected Nick feedback on Demo2 all remain in force pending the workspace rejoin. <strong>Earlier briefing framing of "end-client churned" was retracted</strong> -- it was an inference without statement-level evidence. Watch for rejoin Apr 12-13; if still gone after 48hr, ping Mak to confirm tier resolution. Deal registry #5 + heroforge/state.md corrected.</p>
         <p class="mt-2"><strong>Russell pricing proposal still overdue for Friday Apr 10 call.</strong> Commitment from <code>trillet/accounts/russell-carraway/state.v3.md evt_2026_04_04_010</code> was originally due Apr 7. Russell committed to Friday Apr 10 setup call expecting Ori's pricing proposal. Not surfaced in today's ingest as sent. Pattern of slipping written commitments on warm prospects.</p>
       </div>
     </div>
