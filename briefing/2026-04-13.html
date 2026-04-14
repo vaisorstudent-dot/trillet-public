@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trillet Briefing -- April 13, 2026</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', system-ui, sans-serif; }
+    .detail { display: none; }
+    .detail.open { display: block; }
+    .toggle-icon { transition: transform 0.2s; }
+    .toggle-icon.open { transform: rotate(90deg); }
+  </style>
+</head>
+<body class="min-h-screen bg-stone-50 text-neutral-950">
+
+  <header class="sticky top-0 z-50 border-b border-neutral-200/80 bg-stone-50/90 backdrop-blur-xl">
+    <div class="mx-auto max-w-3xl px-4 py-3 flex items-center justify-between">
+      <div>
+        <div class="text-sm font-semibold tracking-tight">Trillet Daily Briefing</div>
+        <div class="text-xs text-neutral-500">April 13, 2026 -- prepared for Barak</div>
+      </div>
+      <div class="text-xs text-neutral-400">11 items</div>
+    </div>
+  </header>
+
+  <main class="mx-auto max-w-3xl px-4 py-6">
+
+    <!-- PRIORITY: MOU SIGNED -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-emerald-300 bg-emerald-50 px-4 py-3 shadow-sm hover:bg-emerald-100 transition-colors">
+        <span class="toggle-icon text-emerald-500 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-emerald-900">MOU Signed by All Four Founders</div>
+          <div class="text-sm text-emerald-700">Ori + Barak enter at 16%+16% in Zerodue AI. 30-day definitive-docs clock now running.</div>
+        </div>
+        <div class="text-xs text-emerald-600 font-medium">Critical</div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p>The Option B MOU was signed by all four parties today — Ori, Barak, Laurence, and Ming. Terms: Ori + Barak each receive 16% equity in Zerodue AI Pty Ltd (the AU entity), vesting monthly over 12 months from today (April 13). Acceleration clause triggers on bringing a strategic investor at USD $300,000 minimum; both Ori and Barak commit to active engagement for 6 months post-acceleration.</p>
+        <p>The pre-signing gates that were holding this up — Verlat-Marco ASIC claim and Vafy revenue destination — were confirmed resolved by Ori before signing. This is a clean close.</p>
+        <p>The 30-day definitive-documents clock started today, with a target deadline of approximately <strong>May 13, 2026</strong>. Required: shareholders agreement, employment/contractor agreements for Ori and Barak, company constitution review, board resolutions, and ASIC Form 484 share issuance filings. No AU corporate lawyer is currently retained — engaging one by <strong>April 18</strong> is on the critical path. Cross-border tax implications apply for both Ori (US) and Barak (Israel).</p>
+        <p>Working cap table post full dilution per Ori's stated intent: Ming + Laurence ~50%, Ori 16%, Barak 16%, Andrew Wang 7%, Chris/Vafy 11%.</p>
+        <div class="mt-3 pt-3 border-t border-neutral-100">
+          <div class="text-xs font-semibold uppercase tracking-wide text-neutral-500 mb-2">Action items</div>
+          <ul class="space-y-1 text-sm">
+            <li>🔴 <strong>Ori + Barak:</strong> Engage AU corporate lawyer by April 18 — this is the hard critical path item</li>
+            <li>📋 <strong>Process map:</strong> <code>trillet/zerodue/artifacts/2026-04-13-definitive-docs-process-map.md</code></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- PRIORITY: LEADERSHIP STRUCTURE CONFIRMED -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-neutral-200 bg-white px-4 py-3 shadow-sm hover:bg-neutral-50 transition-colors">
+        <span class="toggle-icon text-neutral-400 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-neutral-950">Leadership Roles Confirmed -- CEO / COO / CTO / CPO</div>
+          <div class="text-sm text-neutral-600">All four agreed in today's Zoom. Governance model set: "cannot fire a founder."</div>
+        </div>
+        <div class="text-xs text-neutral-400">2 actions</div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p>Confirmed in this morning's all-hands Zoom (all four founders): <strong>Ori Vaisbort = CEO</strong> (operating rhythm, external/commercial, US market), <strong>Barak Blatman = COO</strong> (operations, execution, internal systems), <strong>Laurence Latin = CTO</strong> (engineering, architecture, delivery), <strong>Ming = CPO</strong> (product direction, innovation).</p>
+        <p>Governance model: key decisions require discussion among all four. Founders (Laurence + Ming) have approval rights on key changes. Ori stated explicitly: <em>"I cannot fire a founder."</em> HR/people matters escalate to all four. No dedicated CFO hire planned — Ori + possibly Barak carry that function.</p>
+        <p>Laurence had questioned Ori's CEO title via Slack before the meeting ("what experience do you have as CEO?") — this was resolved in the Zoom. Laurence accepted without objection. Barak as COO was accepted without question from any party.</p>
+        <p>Next: within about 2 days there's a follow-on leadership meeting to continue the 30-day plan and team comms plan.</p>
+        <div class="mt-3 pt-3 border-t border-neutral-100">
+          <div class="text-xs font-semibold uppercase tracking-wide text-neutral-500 mb-2">Action items</div>
+          <ul class="space-y-1 text-sm">
+            <li>📄 <strong>Ori:</strong> Draft role one-pagers (one page per founder summarizing responsibilities) — committed in Zoom</li>
+            <li>🗓 <strong>All four:</strong> Draft 30-day working plan + team comms plan — next leadership meeting ~2 days</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- BARAK: COO ACTION LIST -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-neutral-200 bg-white px-4 py-3 shadow-sm hover:bg-neutral-50 transition-colors">
+        <span class="toggle-icon text-neutral-400 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-neutral-950">Barak COO — First Actions Posted (Your 9-Point List)</div>
+          <div class="text-sm text-neutral-600">Eng interviews, admin hire, US recruiter, Issam as right-hand, daily standups flagged.</div>
+        </div>
+        <div class="text-xs text-neutral-400">9 actions</div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p>Barak's 9-point COO first-action list from WhatsApp this morning (flagged by Claude as ingested from your DM, no response needed here — just confirming it was captured):</p>
+        <ol class="list-decimal ml-5 space-y-1">
+          <li><strong>$29 D2C critical issue</strong> — Basic plan client can create customized agent (see separate item below)</li>
+          <li><strong>Issam = right-hand</strong> — Barak positions Issam as his primary ops contact</li>
+          <li><strong>Engineering interviews</strong> — start hiring process</li>
+          <li><strong>US agency recruiter</strong> — identified as a need</li>
+          <li><strong>Company-wide meeting</strong> — to be organized</li>
+          <li><strong>Daily standups</strong> — reintroduce for engineering team</li>
+          <li><strong>Salary review</strong> — backend changes needed ($99→$149 pricing, plus comp review)</li>
+          <li><strong>Old Ming/Laurence morning meeting</strong> — Ori asked Barak to cancel it; Barak confirmed "Ok"</li>
+          <li><strong>Ali + Issam meeting this week</strong> — Barak + Laurence to schedule (do NOT announce at stand-up)</li>
+        </ol>
+        <p class="mt-2">Source: Barak WhatsApp DM to Ori, Apr 13 morning.</p>
+      </div>
+    </div>
+
+    <!-- MULY -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-neutral-200 bg-white px-4 py-3 shadow-sm hover:bg-neutral-50 transition-colors">
+        <span class="toggle-icon text-neutral-400 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-neutral-950">Muly — "Duck" Strategy Confirmed, Hebrew Draft Approved</div>
+          <div class="text-sm text-neutral-600">Barak sending Hebrew message to Muly tomorrow. Muly equity assessed as probably out.</div>
+        </div>
+        <div class="text-xs text-neutral-400">1 action</div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p>The "duck Muly" approach — don't confront or pressure, just position the MOU signing as good news and let Muly decide to engage or not — was confirmed by Barak this morning, and Timi (Barak's advisor) agrees. Ori and Barak aligned on this posture.</p>
+        <p>Barak's Hebrew draft to send to Muly tomorrow: <em>"We met with the Australians and signed a MOU with them. They will be happy to receive an offer from you but they didn't want to propose. Regarding the Facebook project, I suggest we proceed."</em> Ori approved this draft (thumbs-up reaction on WhatsApp).</p>
+        <p>Separately, Ori's assessment as of today: Muly is <strong>probably out</strong> on the 16% Zerodue stake. Working cap table accounts for this (Muly's 16% is not relied upon). Pre-emptive rights in the forthcoming SHA will govern any re-engagement. The fundraising gate ($4-5M at $20-25M valuation) that Muly dangled is now contingent on this assessment.</p>
+        <div class="mt-3 pt-3 border-t border-neutral-100">
+          <div class="text-xs font-semibold uppercase tracking-wide text-neutral-500 mb-2">Action items</div>
+          <ul class="space-y-1 text-sm">
+            <li>✉️ <strong>Barak:</strong> Send Hebrew message to Muly (tomorrow, April 14) — draft approved by Ori</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- $29 D2C CRITICAL -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-red-300 bg-red-50 px-4 py-3 shadow-sm hover:bg-red-100 transition-colors">
+        <span class="toggle-icon text-red-500 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-red-900">CRITICAL: $29 D2C Client Can Create Customized Agent</div>
+          <div class="text-sm text-red-700">Basic plan users accessing enterprise-tier feature. Revenue architecture risk. Engineering investigation required.</div>
+        </div>
+        <div class="text-xs text-red-600 font-medium">P1 — Open</div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p>Barak flagged this as a critical issue in WhatsApp this morning: a D2C Basic plan client at $29 USD/month can create their own customized agent. The customized-agent capability is supposed to be a higher-tier feature, and if the gate isn't enforced in code, Basic plan customers have unintended access to enterprise-level functionality.</p>
+        <p>Impact: undermines the upgrade path (why would anyone move from $29 to $149+ if they can already customize their agent?), and potentially undercuts the entire tier architecture Ori + Ming have been designing.</p>
+        <p>Three immediate investigation steps needed: (1) confirm whether the feature gate exists in code, (2) assess how many D2C accounts have already used it (exposure scope), (3) decide whether to gate immediately or grandfather existing users.</p>
+        <div class="mt-3 pt-3 border-t border-neutral-100">
+          <div class="text-xs font-semibold uppercase tracking-wide text-neutral-500 mb-2">Action items</div>
+          <ul class="space-y-1 text-sm">
+            <li>🔴 <strong>Laurence / Engineering:</strong> Investigate feature gate for customized agent — confirm code-level enforcement, assess exposure, propose gate or grandfather decision</li>
+            <li>📋 <strong>Source:</strong> Barak WhatsApp DM Apr 13 18:12 UTC</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- WEBSITE -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-neutral-200 bg-white px-4 py-3 shadow-sm hover:bg-neutral-50 transition-colors">
+        <span class="toggle-icon text-neutral-400 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-neutral-950">Website — Ming Committed to Deliver Today</div>
+          <div class="text-sm text-neutral-600">90-95% complete as of this morning. Pricing discrepancy: $99→$149 vs Ori's $129. Must align before go-live.</div>
+        </div>
+        <div class="text-xs text-neutral-400">1 blocker</div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p>Ming stated in this morning's Zoom that the new website is 90-95% complete and committed to deliver today and push it live. New page structure confirmed in the Zoom: enterprise door, margin calculator, custom-agent CTA, and Trustpilot testimonials section.</p>
+        <p>ChatGPT is already driving >50% of agency signups organically (Ming: "they sign up without talking to anyone"), and the April signup curve is "still going up, really nice sign up" — meaning the current site is converting despite being outdated. The new site should significantly improve on this.</p>
+        <p><strong>Active blocker — pricing discrepancy:</strong> Ming wants to change the base plan from $99 to $149. Ori recalls the agreed target as $129. This discrepancy is unresolved. Ming's plan: "if rolled out tomorrow, stays $99; once Laurence changes the backend to $149, website updates." Confirmation with Laurence needed before the live site goes up with the new price.</p>
+        <p>Also: the $29 D2C issue (separate item above) could affect what goes on the pricing page — worth sequencing that investigation before publishing the new tier structure.</p>
+        <div class="mt-3 pt-3 border-t border-neutral-100">
+          <div class="text-xs font-semibold uppercase tracking-wide text-neutral-500 mb-2">Action items</div>
+          <ul class="space-y-1 text-sm">
+            <li>⚠️ <strong>Ori:</strong> Confirm $129 vs $149 with Laurence before Ming pushes live — pricing discrepancy must be resolved first</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- AU FINANCIALS -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-neutral-200 bg-white px-4 py-3 shadow-sm hover:bg-neutral-50 transition-colors">
+        <span class="toggle-icon text-neutral-400 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-neutral-950">AU Financials — Reconciled Picture Emerging</div>
+          <div class="text-sm text-neutral-600">March $60K Stripe recurring. Vafy adds $30K AUD/mo. ARR ~$400K USD. April still growing.</div>
+        </div>
+        <div class="text-xs text-neutral-400">2 actions</div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p>Laurence provided a cleaner financial picture in this morning's Zoom: <strong>March Stripe revenue = ~$60K USD</strong> (agency + D2C subscriptions only — excludes project deposits). This is the first explicit split between recurring Stripe revenue and one-off project deposits. Earlier figures ($66,565 deposits from Apr 10) appear to include project deposits that Xero is only just beginning to track properly.</p>
+        <p><strong>Bafi/Vafy stream:</strong> $30K AUD/month profit currently (up to $50K AUD last month). Chris Chau is set to enter the cap table at 11% in exchange for approximately $400K AUD/annum in recurring Bafi revenue (clients paying for engineering with minimums). Exact recurring vs one-off split still unknown — Laurence and Ori need to work through Stripe + Xero together to clarify.</p>
+        <p><strong>ARR components (Laurence assessment, unreconciled):</strong> Trillet recurring ~$400K USD/year. Add Bafi/Vafy stream. The "might be at $1M ARR" hypothesis from last week remains live but unconfirmed until the Stripe+Xero reconciliation is done.</p>
+        <p><strong>Growth signal:</strong> April signups "still going up, really nice sign up" (Ming). >50% of agency customers coming from ChatGPT AEO organic (no sales touchpoint). D2C is ~10-15% of business. Strong inbound tailwind continues.</p>
+        <p><strong>Outstanding admin gaps:</strong> AU accountant (~$400 AUD/month, third one, first good one) handling BAS + reconciliation. Part-time admin hire approved for Xero data entry + expense reconciliation. AU payroll carries mandatory 11% superannuation on wages. US payroll an unknown to AU team.</p>
+        <div class="mt-3 pt-3 border-t border-neutral-100">
+          <div class="text-xs font-semibold uppercase tracking-wide text-neutral-500 mb-2">Action items</div>
+          <ul class="space-y-1 text-sm">
+            <li>📊 <strong>Ori + Laurence:</strong> Work through Stripe + Xero together to clarify recurring vs one-off split — prerequisite for accurate ARR claim</li>
+            <li>💰 <strong>Ming (URGENT):</strong> AU AI/R&D grants — up to $220K AUD/year cashback on R&D wages. Lengthy application, not yet filed. Ming flagged as urgent in today's Zoom.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- OPERATIONS: ADMIN + 30-DAY -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-neutral-200 bg-white px-4 py-3 shadow-sm hover:bg-neutral-50 transition-colors">
+        <span class="toggle-icon text-neutral-400 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-neutral-950">Operations — Admin Hire + Engineering Team Plan</div>
+          <div class="text-sm text-neutral-600">Part-time admin approved. Ali + Issam meeting this week. No stand-up announcement.</div>
+        </div>
+        <div class="text-xs text-neutral-400">3 actions</div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p>From today's Zoom — operational decisions locked in:</p>
+        <p><strong>Admin hire:</strong> Fractional/hourly part-time admin approved. Scope: payroll entry into Xero, expense reconciliation, accountant liaison. Must be trained on AU expense categorization for June ATO year-end. This offloads admin from Laurence and unblocks proper financial tracking.</p>
+        <p><strong>Engineering team communication plan:</strong> NO announcement at the April 13 stand-up about the leadership changes. The plan is for Barak + Laurence to schedule an individual meeting with Ali and Issam within this week (tomorrow or the day after). Chris and Andrew don't need dedicated onboarding. This is a deliberate sequencing decision — the stand-up announcement can create noise before the 1:1 relationships are established.</p>
+        <p><strong>Engineering team power dynamic context (Barak's assessment):</strong> Ali and Issam's alignment matters critically. Current dynamics include a history of ultimatum-style behavior from some team members ("I'mLive ultimatum"), Ali's domain ownership, and low salary levels ($1-2.5K USD/month range with profit share 1-2% on exit only). The meeting this week is relationship-building before any process changes.</p>
+        <div class="mt-3 pt-3 border-t border-neutral-100">
+          <div class="text-xs font-semibold uppercase tracking-wide text-neutral-500 mb-2">Action items</div>
+          <ul class="space-y-1 text-sm">
+            <li>🗓 <strong>Barak + Laurence:</strong> Schedule Ali + Issam meeting this week — tomorrow or day after, do NOT announce at stand-up</li>
+            <li>👤 <strong>Ori (or Barak):</strong> Initiate part-time admin hire search — fractional, AU-based preferred</li>
+            <li>🧾 <strong>Ori:</strong> Engage AU tax advisor (hourly, tech/startup specialist) — after Stripe/Xero reconciliation stabilizes</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- SOC2 / COMPLIANCE -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-neutral-200 bg-white px-4 py-3 shadow-sm hover:bg-neutral-50 transition-colors">
+        <span class="toggle-icon text-neutral-400 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-neutral-950">SOC2 + ISO27001 — Sprinto Locked, Kickoff Wednesday</div>
+          <div class="text-sm text-neutral-600">ISO27001 target mid-May. SOC2 target Aug–Oct. Lost Verizon over this — compliance unlocks enterprise re-targeting.</div>
+        </div>
+        <div class="text-xs text-neutral-400">Context</div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p>Laurence confirmed via Slack DM on April 10: Trillet is starting SOC2 and ISO27001 compliance immediately. Vendor: <strong>Sprinto</strong> (signed and paid). Cost: $4K USD year 1, $5K year 2, $6K year 3 — $15K USD 3-year commitment covering both certifications. Vanta was evaluated and rejected at $17.5K USD/year.</p>
+        <p><strong>Kickoff: Wednesday April 15.</strong> Laurence has already done pre-work ("already mapped it out before their scanners") to maximize day-1 coverage. ISO27001 target: <strong>mid-May 2026</strong>. SOC2 target: <strong>August–October 2026</strong>.</p>
+        <p><strong>Commercial signal:</strong> Laurence explicitly stated "lost Verizon because of not having it." ISO27001 is a hard gate on enterprise customers. Once certified, Verizon becomes a re-target opportunity. This is directly relevant to enterprise pipeline sequencing.</p>
+        <p>Note: Laurence took this initiative before Ori and Barak joined as COO/CEO. It's proactive and well-executed. Good signal on Laurence's operational awareness.</p>
+      </div>
+    </div>
+
+    <!-- PIPELINE: ePsych / Alex Trent -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-neutral-200 bg-white px-4 py-3 shadow-sm hover:bg-neutral-50 transition-colors">
+        <span class="toggle-icon text-neutral-400 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-neutral-950">Pipeline: ePsych / Alex Trent — Proposal Out, $100K+ Year-1 Potential</div>
+          <div class="text-sm text-neutral-600">Mental-health billing vertical. Named Trillet as primary vendor. Awaiting reply to Apr 10 proposal.</div>
+        </div>
+        <div class="text-xs text-neutral-400">1 action</div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p>Alex Trent (ePsych Billing / Apex Behavioral, LLC) is an inbound Custom Agent prospect with 175 mental-health billing clients. He submitted a 10-page technical spec mid-discovery call naming Trillet as <strong>primary vendor</strong> (Retell AI as fallback only if HIPAA fails). Discovery call was April 9; Ori sent the full proposal on April 10.</p>
+        <p><strong>Commercial terms in the proposal:</strong> $5,000 USD one-time engineering (first agent live + deployment pipeline), $299 USD/month Agency, $0.12 USD/min voice, $0.008 USD/SMS A2P, $75 USD per-practice onboarding, $15 USD per-practice/month managed fee, $100 USD/hour ad-hoc support. Alex plans to scale to his full 175-client book starting August. Year-1 modeled revenue from Apex alone: ~$100–105K USD.</p>
+        <p><strong>Strategic angle:</strong> Alex wants to influence Trillet's mental-health-vertical roadmap — a potential distribution multiplier parallel to Russell Carraway in trades. Came via Claude AEO referral (continues the AEO origination pattern).</p>
+        <p><strong>Open item for BAA stage:</strong> Ori has made four HIPAA compliance affirmations verbally and in writing, but Trillet's subprocessor attestation list and BAA template have never been formally produced. Ping Ming proactively before contract stage lands rather than discovering the gap under pressure.</p>
+        <div class="mt-3 pt-3 border-t border-neutral-100">
+          <div class="text-xs font-semibold uppercase tracking-wide text-neutral-500 mb-2">Action items</div>
+          <ul class="space-y-1 text-sm">
+            <li>📧 <strong>Ori:</strong> Short bump to Alex if no reply by Apr 15–16 (3-5 business days from Apr 10 proposal)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- PIPELINE: ASP Frisco / Joel Davis -->
+    <div class="mb-3">
+      <button onclick="toggle(this)" class="w-full text-left flex items-center gap-3 rounded-xl border border-neutral-200 bg-white px-4 py-3 shadow-sm hover:bg-neutral-50 transition-colors">
+        <span class="toggle-icon text-neutral-400 text-sm">&#9654;</span>
+        <div class="flex-1">
+          <div class="text-sm font-semibold text-neutral-950">Pipeline: ASP Frisco / Joel Davis — Discovery Call Done, Agent Live</div>
+          <div class="text-sm text-neutral-600">No upgrade committed. Path forward: call flow spec from Joel + expert hours interest confirmed.</div>
+        </div>
+        <div class="text-xs text-neutral-400">1 action</div>
+      </button>
+      <div class="detail ml-8 mt-2 rounded-xl border border-neutral-100 bg-white px-4 py-3 text-sm leading-6 text-neutral-700">
+        <p>Discovery call with Joel Davis (ASP Frisco, Authority Brands franchise) completed today. The agent has been live since April 10, routing 3 locations to one number. Joel provided honest post-live feedback: negative customer experience — customers don't know they're talking to AI, it's not what they expected.</p>
+        <p>No upgrade committed. Joel is not moving forward without seeing a proper call flow spec first. He's interested in "expert hours" to customize the agent properly, and mentioned a $2K implementation budget as a possibility. He agreed to build the call flow spec and send it to Ori as the next step.</p>
+        <p>Potential ladder: Authority Brands network (ASP + 13 sister franchises). Joel could be the reference account for the full franchisee chain if the custom build goes well. Not yet a committed path — spec first.</p>
+        <div class="mt-3 pt-3 border-t border-neutral-100">
+          <div class="text-xs font-semibold uppercase tracking-wide text-neutral-500 mb-2">Action items</div>
+          <ul class="space-y-1 text-sm">
+            <li>📋 <strong>Ori:</strong> Wait for Joel's call flow spec — he committed to send it. Then kick off expert hours discussion.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="border-t border-neutral-200 bg-stone-50">
+    <div class="mx-auto max-w-3xl px-4 py-4 text-xs text-neutral-400">
+      Generated from Trillet PKM. Questions? Message Ori.
+    </div>
+  </footer>
+
+  <script>
+    function toggle(btn) {
+      const detail = btn.nextElementSibling;
+      const icon = btn.querySelector('.toggle-icon');
+      detail.classList.toggle('open');
+      icon.classList.toggle('open');
+    }
+
+    // Expand all on double-click header
+    document.querySelector('header').addEventListener('dblclick', () => {
+      document.querySelectorAll('.detail').forEach(d => d.classList.add('open'));
+      document.querySelectorAll('.toggle-icon').forEach(i => i.classList.add('open'));
+    });
+  </script>
+
+</body>
+</html>
