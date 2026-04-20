@@ -1,0 +1,436 @@
+/* Shared styles for Strategy B mockups · 2026-04-16 */
+/* Anchors preserved: brand blues, Inter, Urbanist family, dark-hero-pattern, brand motion */
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+/* ─────────────  Validation pass HIGH must-fixes (per ui-ux-pro-max audit)  ───────────── */
+/* 1. Focus-visible — keyboard navigation accessibility (HIGH severity per skill) */
+:focus { outline: none; }
+:focus-visible {
+  outline: 2px solid var(--brand-secondary, #27A3FD);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+.on-dark :focus-visible,
+.lb-panel :focus-visible,
+.op-console :focus-visible,
+.site-nav-dark :focus-visible {
+  outline-color: var(--brand-highlight, #83E4FF);
+}
+/* 2. Reduced motion — respect user preference (HIGH severity per skill) */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+/* 3. Cursor on interactive elements */
+button { cursor: pointer; }
+button:disabled { cursor: not-allowed; }
+
+/* Skip-to-main link (Medium severity per skill, accessibility win) */
+.skip-link {
+  position: absolute; left: -9999px; top: 0; z-index: 999;
+  padding: 12px 18px; background: var(--brand-primary, #0062E9); color: white;
+  font-weight: 600; border-radius: 0 0 8px 0;
+}
+.skip-link:focus { left: 0; }
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  margin: 0;
+  color: #1E293B;
+  background: #FFFFFF;
+  line-height: 1.5;
+}
+a { color: inherit; text-decoration: none; }
+
+:root {
+  /* Brand blues (anchored, unchanged) */
+  --brand-deep: #023A84;
+  --brand-primary: #0062E9;
+  --brand-secondary: #27A3FD;
+  --brand-highlight: #83E4FF;
+  /* Backgrounds */
+  --bg-white: #FFFFFF;
+  --bg-tint: #ECF1FD;     /* The pale-blue tint section bg, anchored from current site */
+  --bg-dark: #0A0F1E;      /* The dark hero-panel bg, anchored from current site */
+  --bg-dark-deeper: #050810;
+  /* Text */
+  --text-primary: #0A0F1E;
+  --text-body: #475569;
+  --text-muted: #94A3B8;
+  --text-on-dark: rgba(255,255,255,0.96);
+  --text-on-dark-body: rgba(255,255,255,0.78);
+  --text-on-dark-muted: rgba(255,255,255,0.5);
+  /* Borders */
+  --border-light: #E2E8F0;
+  --border-dark: rgba(255,255,255,0.10);
+  /* Status (existing usage preserved) */
+  --status-live: #10B981;
+  --status-eval: #F59E0B;
+  /* Radius */
+  --radius: 8px;
+}
+
+/* ─────────────  Top preview banner (mockup nav between options)  ───────────── */
+.preview-banner {
+  background: #050810; color: rgba(255,255,255,0.92);
+  font-size: 12px; font-weight: 500;
+  padding: 10px 24px;
+  display: flex; justify-content: space-between; align-items: center;
+  position: sticky; top: 0; z-index: 100;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.preview-banner .label { letter-spacing: 0.06em; text-transform: uppercase; opacity: 0.55; }
+.preview-banner .links { display: flex; gap: 8px; align-items: center; }
+.preview-banner .links a {
+  padding: 5px 11px; border-radius: 6px; font-size: 11px;
+  transition: background 0.15s;
+}
+.preview-banner .links a:hover { background: rgba(255,255,255,0.08); }
+.preview-banner .links a.active { background: var(--brand-primary); color: white; }
+
+/* ─────────────  Site nav  ───────────── */
+.site-nav {
+  height: 68px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 32px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  background: rgba(11, 14, 23, 0.86);
+  backdrop-filter: blur(14px);
+  position: sticky; top: 38px; z-index: 90;
+}
+.site-nav .wordmark img { height: 36px; display: block; }
+.site-nav nav { display: flex; gap: 28px; align-items: center; }
+.site-nav nav a {
+  font-size: 14px; font-weight: 500; color: rgba(245,246,250,0.82);
+  transition: color 0.15s;
+}
+.site-nav nav a:hover { color: var(--brand-highlight, #83E4FF); }
+.site-nav .cta {
+  background: #F5F6FA; color: #06080F;
+  padding: 9px 18px; border-radius: 8px; font-size: 14px; font-weight: 600;
+  transition: background 0.15s;
+}
+.site-nav .cta:hover { background: var(--brand-highlight, #83E4FF); }
+
+/* Dark variant of site nav (for full-dark hero options) */
+.site-nav-dark {
+  background: rgba(5, 8, 16, 0.85);
+  border-bottom-color: rgba(255,255,255,0.06);
+}
+.site-nav-dark .wordmark img { filter: brightness(0) invert(1) brightness(0.95); }
+.site-nav-dark nav a { color: rgba(255,255,255,0.78); }
+.site-nav-dark nav a:hover { color: var(--brand-highlight); }
+.site-nav-dark .cta { background: white; color: var(--bg-dark); }
+.site-nav-dark .cta:hover { background: var(--brand-highlight); }
+
+/* ─────────────  Trifecta pills  ───────────── */
+.tri-pill {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 6px 13px; border-radius: 999px;
+  border: 1px solid var(--border-light); background: white;
+  font-size: 13px; font-weight: 500; color: var(--text-primary);
+}
+.tri-pill .d {
+  width: 5px; height: 5px; border-radius: 50%;
+  background: var(--brand-secondary);
+}
+.tri-pill.on-dark {
+  border-color: rgba(255,255,255,0.12); background: rgba(255,255,255,0.04);
+  color: var(--text-on-dark-body);
+}
+.tri-pill.on-dark .d { background: var(--brand-highlight); }
+
+/* ─────────────  CTAs  ───────────── */
+.cta-primary {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--brand-primary); color: white;
+  padding: 13px 22px; border-radius: 10px;
+  font-size: 14px; font-weight: 600;
+  transition: background 0.15s, transform 0.15s;
+}
+.cta-primary:hover { background: var(--brand-deep); transform: translateY(-1px); }
+.cta-secondary {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: white; color: var(--text-primary);
+  border: 1px solid var(--border-light);
+  padding: 13px 22px; border-radius: 10px;
+  font-size: 14px; font-weight: 600;
+  transition: background 0.15s;
+}
+.cta-secondary:hover { background: var(--bg-tint); }
+.cta-primary.on-dark { background: white; color: var(--bg-dark); }
+.cta-primary.on-dark:hover { background: var(--brand-highlight); }
+.cta-secondary.on-dark {
+  background: transparent; color: var(--text-on-dark);
+  border-color: rgba(255,255,255,0.18);
+}
+.cta-secondary.on-dark:hover { background: rgba(255,255,255,0.06); }
+
+/* ─────────────  Status pill  ───────────── */
+.status-pill {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 11px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--text-muted);
+}
+.status-pill.on-dark { color: rgba(255,255,255,0.56); }
+.status-pill .dot-wrap { position: relative; display: inline-flex; width: 6px; height: 6px; }
+.status-pill .ping {
+  position: absolute; inset: 0; border-radius: 50%; background: var(--status-live);
+  opacity: 0.6; animation: ping 1.6s cubic-bezier(0,0,0.2,1) infinite;
+}
+.status-pill .core {
+  position: relative; display: inline-flex; width: 6px; height: 6px;
+  border-radius: 50%; background: var(--status-live);
+}
+@keyframes ping { 75%, 100% { transform: scale(2.2); opacity: 0; } }
+
+/* ─────────────  Heading typography (Urbanist 600, the bold-move evolution)  ───────────── */
+.h1-display {
+  font-family: 'Urbanist', system-ui, sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  line-height: 1.0;
+  margin: 0;
+  text-wrap: balance;
+}
+.h1-display.on-dark { color: var(--text-on-dark); }
+.h1-display.on-light { color: var(--text-primary); }
+.h2-display {
+  font-family: 'Urbanist', system-ui, sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  line-height: 1.05;
+  margin: 0;
+}
+
+.body-l2 {
+  font-size: clamp(15px, 1.4vw, 19px);
+  line-height: 1.6;
+  font-weight: 400;
+}
+.body-l2.on-dark { color: var(--text-on-dark-body); }
+.body-l2.on-light { color: var(--text-body); }
+
+/* ─────────────  Brand glow (anchor: glowingBorder pulse from current site)  ───────────── */
+.brand-glow {
+  border: 1px solid rgba(0, 98, 233, 0.5);
+  animation: brandGlow 1.5s ease-in-out infinite;
+}
+@keyframes brandGlow {
+  0%, 100% { border-color: rgba(0, 98, 233, 0.5); box-shadow: 0 0 10px rgba(0, 98, 233, 0.5); }
+  50% { border-color: rgba(0, 98, 233, 1); box-shadow: 0 0 20px rgba(0, 98, 233, 1); }
+}
+
+/* ─────────────  Operator console (recurring product UI motif — Strategy B's "one bold move")  ───────────── */
+.op-console {
+  background: var(--bg-dark);
+  border: 1px solid var(--border-dark);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 24px 64px rgba(2, 58, 132, 0.30);
+}
+.op-console-head {
+  padding: 16px 22px;
+  display: flex; justify-content: space-between; align-items: center;
+  border-bottom: 1px solid var(--border-dark);
+  background: rgba(255,255,255,0.015);
+}
+.op-console-head .title {
+  font-size: 12px; font-weight: 600; color: var(--text-on-dark);
+  display: flex; align-items: center; gap: 10px;
+}
+.op-console-head .live-pill {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  padding: 4px 10px; border-radius: 999px;
+  background: rgba(131, 228, 255, 0.12); color: var(--brand-highlight);
+  border: 1px solid rgba(131, 228, 255, 0.25);
+  box-shadow: 0 0 16px rgba(131, 228, 255, 0.15);
+}
+.op-console-head .live-pill .d {
+  width: 5px; height: 5px; border-radius: 50%; background: var(--status-live);
+  box-shadow: 0 0 6px var(--status-live);
+}
+.op-row {
+  padding: 13px 22px;
+  display: grid; grid-template-columns: 1fr auto;
+  gap: 12px; align-items: center;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+.op-row:last-child { border-bottom: none; }
+.op-row .phone {
+  font-family: 'JetBrains Mono', monospace; font-size: 13px;
+  color: var(--text-on-dark); font-variant-numeric: tabular-nums;
+}
+.op-row .meta {
+  font-size: 11px; color: var(--text-on-dark-muted); margin-top: 2px;
+}
+.op-row .meta .status {
+  font-family: 'JetBrains Mono', monospace; font-weight: 600; letter-spacing: 0.08em;
+}
+.op-row .meta .status.verify { color: var(--status-eval); }
+.op-row .meta .status.ground { color: var(--status-live); }
+.op-row .meta .status.act { color: var(--status-live); }
+.op-row .duration {
+  font-family: 'JetBrains Mono', monospace; font-size: 12px;
+  color: var(--text-on-dark-body); font-variant-numeric: tabular-nums;
+}
+
+/* ─────────────  Voice waveform (anchor: voice-first identity preserved)  ───────────── */
+.waveform {
+  display: flex; align-items: center; justify-content: center;
+  gap: 3px; height: 80px;
+}
+.waveform span {
+  display: inline-block; width: 3px;
+  background: linear-gradient(to top, var(--brand-secondary), var(--brand-highlight));
+  border-radius: 3px;
+  animation: wv 1.8s ease-in-out infinite;
+  box-shadow: 0 0 10px rgba(131, 228, 255, 0.4);
+}
+@keyframes wv {
+  0%, 100% { transform: scaleY(0.2); opacity: 0.5; }
+  50% { transform: scaleY(1); opacity: 1; }
+}
+
+/* ─────────────  Pale-blue tint section (anchor: rest rhythm from current site)  ───────────── */
+.section-tint { background: var(--bg-tint); }
+
+/* ─────────────  Generic section padding  ───────────── */
+.section-pad { padding: 96px 32px; }
+.section-pad-large { padding: 128px 32px; }
+.container { max-width: 1456px; margin: 0 auto; }
+.container-tight { max-width: 1160px; margin: 0 auto; }
+.container-narrow { max-width: 760px; margin: 0 auto; }
+
+/* ─────────────  Trust strip  ───────────── */
+.trust-strip {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1px;
+  background: var(--border-light);
+  border: 1px solid var(--border-light);
+  border-radius: 16px; overflow: hidden;
+}
+.trust-cell {
+  background: white; padding: 28px 32px;
+}
+.trust-cell .top {
+  display: flex; align-items: center; gap: 10px; margin-bottom: 12px;
+}
+.trust-cell .top .icon {
+  width: 32px; height: 32px; border-radius: 8px;
+  background: rgba(0, 98, 233, 0.08); color: var(--brand-primary);
+  display: flex; align-items: center; justify-content: center;
+}
+.trust-cell .top .name { font-size: 14px; font-weight: 600; color: var(--text-primary); }
+.trust-cell .desc { font-size: 13px; color: var(--text-body); line-height: 1.55; }
+
+/* ─────────────  Footer  ───────────── */
+.site-footer {
+  background: var(--bg-tint);
+  padding: 80px 32px 40px;
+  border-top: 1px solid var(--border-light);
+}
+.footer-inner {
+  max-width: 1456px; margin: 0 auto;
+  display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr 1fr;
+  gap: 48px;
+  margin-bottom: 64px;
+}
+.footer-mark {
+  display: flex; flex-direction: column; gap: 18px;
+}
+.footer-mark img {
+  height: 38px; width: auto; display: block;
+}
+.footer-mark p {
+  font-size: 13px; color: var(--text-body); line-height: 1.6;
+  margin: 0; max-width: 280px;
+}
+.footer-col h4 {
+  font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--text-muted); margin: 0 0 16px 0;
+}
+.footer-col ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
+.footer-col ul a { font-size: 14px; color: var(--text-body); transition: color 0.15s; }
+.footer-col ul a:hover { color: var(--brand-primary); }
+.footer-bar {
+  max-width: 1456px; margin: 0 auto;
+  padding-top: 32px; border-top: 1px solid var(--border-light);
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: 12px; color: var(--text-muted);
+}
+.footer-bar nav { display: flex; gap: 24px; }
+
+@media (max-width: 1024px) {
+  .footer-inner { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 640px) {
+  .footer-inner { grid-template-columns: 1fr; }
+  .site-nav nav a:not(.cta) { display: none; }
+  .preview-banner { flex-direction: column; gap: 6px; padding: 8px 16px; }
+}
+
+/* ─────────────  Option-footer marker  ───────────── */
+.option-footer {
+  background: #050810; padding: 36px 32px; text-align: center;
+  font-size: 13px; color: rgba(255,255,255,0.6);
+}
+.option-footer a { color: var(--brand-highlight); font-weight: 500; }
+.option-footer a:hover { color: white; }
+
+/* ─────────────  Reusable "footer" block (drop-in to each option page)  ───────────── */
+
+
+/* === HOMEPAGE-ALIGNED HERO CTA (2026-04-19) === */
+@keyframes heroNeonPulse {
+  0%, 100% { box-shadow: 0 0 22px rgba(131,228,255,0.32), 0 0 50px rgba(131,228,255,0.18); }
+  50%      { box-shadow: 0 0 28px rgba(131,228,255,0.45), 0 0 64px rgba(131,228,255,0.26); }
+}
+.cta-primary.on-dark {
+  background: linear-gradient(100deg, var(--brand-primary, #0057E0) 0%, var(--brand-highlight, #83E4FF) 60%, #ffffff 100%) !important;
+  background-size: 200% 100% !important;
+  background-position: 0% 50% !important;
+  color: #06080F !important;
+  font-weight: 600 !important;
+  border: 1px solid rgba(131, 228, 255, 0.6) !important;
+  box-shadow: 0 0 22px rgba(131, 228, 255, 0.32), 0 0 50px rgba(131, 228, 255, 0.18) !important;
+  transition: background-position 600ms ease, box-shadow 180ms ease !important;
+  animation: heroNeonPulse 4.8s ease-in-out infinite;
+}
+.cta-primary.on-dark:hover {
+  background-position: 100% 50% !important;
+  color: #06080F !important;
+  box-shadow: 0 0 28px rgba(131,228,255,0.55), 0 0 64px rgba(131,228,255,0.28) !important;
+}
+.cta-secondary.on-dark {
+  background: transparent !important;
+  color: rgba(245,246,250,0.92) !important;
+  border: 1px solid rgba(255,255,255,0.18) !important;
+}
+.cta-secondary.on-dark:hover {
+  background: rgba(255,255,255,0.06) !important;
+  border-color: rgba(131,228,255,0.4) !important;
+}
+
+
+/* EYEBROW-ALIGN-HOME (2026-04-19) — match homepage eyebrow language
+   (green dot + blue text) instead of cyan-all */
+.eyebrow {
+  color: var(--brand-primary, #0062E9) !important;
+}
+.eyebrow::before {
+  background: var(--status-live, #10B981) !important;
+  box-shadow: 0 0 8px rgba(16,185,129,0.45) !important;
+}

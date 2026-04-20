@@ -1,0 +1,2941 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>/platform · Trillet wireframe mockup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Urbanist:wght@300;400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link href="_shared.css" rel="stylesheet">
+<style>
+  /* PLATFORM-specific styles — extends locked-baseline visual register */
+  .pf-hero-wrap { padding: 40px 32px 96px; background: linear-gradient(to bottom, #FFFFFF 0%, #F7FAFF 100%); }
+  .pf-panel {
+    max-width: 1360px; margin: 0 auto;
+    background: var(--bg-dark);
+    border-radius: 28px; padding: 64px 56px;
+    position: relative; overflow: hidden;
+    display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 56px; align-items: center;
+    min-height: 540px;
+    box-shadow: 0 40px 80px rgba(2, 58, 132, 0.18);
+  }
+  .pf-panel::before {
+    content: ''; position: absolute; inset: 0; pointer-events: none;
+    background:
+      radial-gradient(ellipse 55% 45% at 78% 18%, rgba(131, 228, 255, 0.22) 0%, transparent 55%),
+      radial-gradient(ellipse 45% 45% at 12% 88%, rgba(2, 58, 132, 0.55) 0%, transparent 55%);
+  }
+  .pf-panel::after {
+    content: ''; position: absolute; inset: 0; pointer-events: none;
+    background-image: radial-gradient(rgba(255,255,255,0.04) 1px, transparent 1px);
+    background-size: 32px 32px; opacity: 0.6;
+    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 75%);
+  }
+  .pf-left { position: relative; z-index: 1; display: flex; flex-direction: column; gap: 24px; }
+  .pf-h1 { font-size: clamp(40px, 5.0vw, 60px); font-weight: 600; line-height: 1.05; }
+
+  /* Hero card · 4 stacked layer chips (per Ori C5 lock — collapse architecture-mini to chips) */
+  .layer-chips-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 20px; padding: 28px;
+    position: relative; z-index: 1;
+    backdrop-filter: blur(10px);
+    display: flex; flex-direction: column; gap: 10px;
+  }
+  .layer-chip {
+    padding: 18px 20px;
+    border-radius: 12px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    display: grid; grid-template-columns: auto 1fr auto; gap: 14px; align-items: center;
+  }
+  .layer-chip.verify {
+    padding: 22px 20px;
+    border-color: rgba(131, 228, 255, 0.3);
+    background: linear-gradient(90deg, rgba(131, 228, 255, 0.08) 0%, rgba(255,255,255,0.04) 100%);
+  }
+  .layer-chip .num {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 700;
+    letter-spacing: 0.14em; color: var(--brand-highlight); width: 24px;
+  }
+  .layer-chip .label {
+    font-family: 'Urbanist', sans-serif; font-weight: 600; font-size: 16px;
+    color: var(--text-on-dark);
+  }
+  .layer-chip.verify .label { font-size: 18px; }
+  .layer-chip .role {
+    font-size: 12px; color: var(--text-on-dark-muted); margin-top: 2px;
+  }
+  .layer-chip .indicator {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: #10B981; box-shadow: 0 0 6px #10B981;
+  }
+
+  /* Section heads — aligned to homepage v2 idiom: left-aligned, chapter eyebrow with § NN */
+  .sec-head { text-align: left; margin-bottom: 64px; max-width: 720px; }
+  .sec-head .eyebrow {
+    display: inline-flex; align-items: baseline; gap: 10px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--brand-primary); margin-bottom: 22px;
+  }
+  .sec-head .eyebrow .chap {
+    color: var(--text-muted); font-weight: 500; letter-spacing: 0.14em;
+  }
+  .sec-head h2 {
+    font-family: 'Urbanist', sans-serif; font-weight: 600;
+    font-size: clamp(32px, 4vw, 52px);
+    letter-spacing: -0.025em; line-height: 1.05;
+    color: var(--text-primary); margin: 0 0 18px 0;
+    text-wrap: balance;
+  }
+  .sec-head p {
+    font-size: 17px; color: var(--text-body); line-height: 1.6;
+    max-width: 640px; margin: 0;
+    text-wrap: pretty;
+  }
+
+  /* Architecture overview (TINT) */
+  .pf-arch { padding: 96px 32px; background: var(--bg-tint); }
+  .pf-arch-inner { max-width: 920px; margin: 0 auto; }
+  .arch-stack {
+    display: flex; flex-direction: column; gap: 4px;
+    margin-top: 32px; position: relative;
+  }
+  .arch-layer {
+    padding: 24px 32px;
+    background: white;
+    border: 1px solid var(--border-light);
+    border-radius: 12px;
+    display: grid; grid-template-columns: 80px 1fr 80px; gap: 20px; align-items: center;
+  }
+  .arch-layer.control {
+    border-color: var(--brand-primary);
+    background: linear-gradient(135deg, white 0%, var(--bg-tint) 100%);
+  }
+  .arch-layer.control::before {
+    content: '↕ wraps all'; position: absolute; right: 16px;
+    font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    color: var(--brand-primary); font-weight: 600;
+    letter-spacing: 0.06em; text-transform: uppercase;
+  }
+  .arch-layer .layer-num {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 700;
+    letter-spacing: 0.16em; color: var(--brand-primary);
+  }
+  .arch-layer .layer-content h3 {
+    font-family: 'Urbanist', sans-serif; font-weight: 600;
+    font-size: 18px; color: var(--text-primary); margin: 0 0 4px 0;
+  }
+  .arch-layer .layer-content p {
+    font-size: 13px; color: var(--text-body); margin: 0; line-height: 1.5;
+  }
+  .arch-layer .arrow {
+    font-family: 'JetBrains Mono', monospace; font-size: 14px;
+    color: var(--text-muted); text-align: right;
+  }
+  .arch-arrow-down {
+    text-align: center; color: var(--brand-primary); font-size: 14px;
+    margin: -2px 0;
+  }
+
+  /* VERIFY SECTION (DEEPEST, ~100vh) */
+  .pf-verify { padding: 112px 32px; background: white; }
+  .pf-verify-inner {
+    max-width: 1360px; margin: 0 auto;
+    display: grid; grid-template-columns: 0.95fr 1.05fr;
+    gap: 56px; align-items: start;
+  }
+  .pf-verify h2 {
+    font-family: 'Urbanist', sans-serif; font-weight: 600;
+    font-size: clamp(32px, 4vw, 48px);
+    letter-spacing: -0.025em; line-height: 1.05;
+    color: var(--text-primary); margin: 0 0 20px 0;
+  }
+  .pf-verify .eyebrow {
+    display: inline-flex; align-items: baseline; gap: 10px;
+    font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 700;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--brand-primary); margin-bottom: 22px;
+  }
+  .pf-verify .eyebrow .chap {
+    color: var(--text-muted); font-weight: 500; letter-spacing: 0.14em;
+  }
+  .pf-verify > .pf-verify-inner > div > p {
+    font-size: 16px; color: var(--text-body); line-height: 1.65; margin: 0 0 24px 0;
+  }
+  .verify-modes {
+    display: flex; flex-direction: column; gap: 16px; margin-top: 32px;
+  }
+  .verify-mode {
+    padding: 18px 22px;
+    border: 1px solid var(--border-light);
+    border-radius: 12px;
+    background: white;
+  }
+  .verify-mode h4 {
+    font-family: 'Urbanist', sans-serif; font-weight: 600;
+    font-size: 16px; color: var(--text-primary); margin: 0 0 6px 0;
+  }
+  .verify-mode p {
+    font-size: 13px; color: var(--text-body); line-height: 1.55; margin: 0;
+  }
+  /* Verify operator panel · stylized */
+  .verify-panel {
+    background:
+      radial-gradient(ellipse 60% 50% at 80% 20%, rgba(131, 228, 255, 0.10) 0%, transparent 60%),
+      linear-gradient(135deg, #0F1E47 0%, #1A3068 100%);
+    border: 1px solid rgba(131, 228, 255, 0.16);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 32px 80px rgba(2, 58, 132, 0.32);
+  }
+  .verify-panel-head {
+    padding: 16px 22px;
+    display: flex; justify-content: space-between; align-items: center;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+    background: rgba(255, 255, 255, 0.025);
+  }
+  .verify-panel-head .title {
+    font-size: 12px; font-weight: 600; color: var(--text-on-dark);
+  }
+  .verify-panel-head .pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    padding: 4px 10px; border-radius: 999px;
+    background: rgba(131, 228, 255, 0.12); color: var(--brand-highlight);
+    border: 1px solid rgba(131, 228, 255, 0.25);
+  }
+  .verify-step-row {
+    padding: 18px 22px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    display: grid; grid-template-columns: 60px 1fr; gap: 16px; align-items: start;
+  }
+  .verify-step-row:last-child { border-bottom: none; }
+  .verify-step-row .step-num {
+    font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.16em; color: var(--brand-highlight);
+    background: rgba(131, 228, 255, 0.12);
+    padding: 6px 8px; border-radius: 6px; text-align: center;
+  }
+  .verify-step-row .step-content .what {
+    font-size: 13px; color: var(--text-on-dark); margin-bottom: 4px;
+  }
+  .verify-step-row .step-content .result {
+    font-family: 'JetBrains Mono', monospace; font-size: 12px;
+    color: var(--text-on-dark-body); font-variant-numeric: tabular-nums;
+  }
+  .verify-step-row .step-content .result.success { color: #6EE7B7; }
+  .verify-step-row .step-content .result.code { color: var(--brand-highlight); }
+  .verify-panel-foot {
+    padding: 16px 22px;
+    background: rgba(255, 255, 255, 0.02);
+    font-size: 12px; color: var(--text-on-dark-muted); line-height: 1.55;
+  }
+
+  /* GROUND, ACT, CONTROL sections */
+  .pf-ground { padding: 96px 32px; background: var(--bg-tint); }
+  .pf-act { padding: 96px 32px; background: white; }
+  .pf-control { padding: 96px 32px; background: var(--bg-tint); }
+
+  .pf-section-inner { max-width: 1160px; margin: 0 auto; }
+
+  /* Ground integration list */
+  .ground-rows {
+    display: flex; flex-direction: column; gap: 16px; margin-top: 56px;
+  }
+  .ground-row {
+    padding: 24px 28px;
+    background: white;
+    border: 1px solid var(--border-light);
+    border-radius: 12px;
+    display: grid; grid-template-columns: 200px 1fr 1.2fr; gap: 32px; align-items: center;
+  }
+  .ground-row .cat {
+    font-family: 'Urbanist', sans-serif; font-weight: 600;
+    font-size: 18px; color: var(--text-primary);
+  }
+  .ground-row .desc {
+    font-size: 14px; color: var(--text-body); line-height: 1.55;
+  }
+  .ground-row .vendors {
+    font-family: 'JetBrains Mono', monospace; font-size: 12px;
+    color: var(--text-muted); line-height: 1.6;
+  }
+
+  /* Act 6-card grid */
+  .act-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 56px;
+  }
+  .act-card {
+    padding: 24px;
+    background: white;
+    border: 1px solid var(--border-light);
+    border-radius: 12px;
+  }
+  .act-card .pill {
+    display: inline-flex; align-items: center; gap: 4px;
+    font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: #10B981; margin-bottom: 12px;
+  }
+  .act-card .pill::before {
+    content: ''; width: 5px; height: 5px; border-radius: 50%; background: #10B981;
+  }
+  .act-card h3 {
+    font-family: 'Urbanist', sans-serif; font-weight: 600;
+    font-size: 17px; color: var(--text-primary); margin: 0 0 8px 0;
+  }
+  .act-card p {
+    font-size: 13px; color: var(--text-body); line-height: 1.55; margin: 0;
+  }
+
+  /* Control 4-row capability list */
+  .control-rows {
+    display: flex; flex-direction: column; gap: 16px; margin-top: 56px;
+  }
+  .control-row {
+    padding: 24px 28px;
+    background: white;
+    border-left: 3px solid var(--brand-primary);
+    border-radius: 8px;
+  }
+  .control-row .num {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 700;
+    letter-spacing: 0.16em; color: var(--brand-primary); margin-bottom: 6px;
+  }
+  .control-row h3 {
+    font-family: 'Urbanist', sans-serif; font-weight: 600;
+    font-size: 17px; color: var(--text-primary); margin: 0 0 6px 0;
+  }
+  .control-row p {
+    font-size: 14px; color: var(--text-body); line-height: 1.55; margin: 0;
+  }
+
+  /* The full call (animated walk-through) */
+  .pf-fullcall { padding: 112px 32px; background: white; }
+  .pf-fullcall-inner { max-width: 1160px; margin: 0 auto; }
+  .phase-strip {
+    position: relative; margin: 56px 0 32px;
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px;
+  }
+  .phase-strip::before {
+    content: ''; position: absolute;
+    top: 16px; left: 12.5%; right: 12.5%; height: 2px;
+    background: linear-gradient(to right, var(--brand-secondary), var(--brand-highlight));
+  }
+  .phase-node { text-align: center; position: relative; z-index: 1; }
+  .phase-node .dot {
+    width: 32px; height: 32px; border-radius: 50%;
+    background: white; border: 3px solid var(--brand-primary);
+    margin: 0 auto 12px;
+  }
+  .phase-node .name {
+    font-family: 'Urbanist', sans-serif; font-weight: 600;
+    font-size: 16px; color: var(--text-primary);
+  }
+  .phase-cards {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-top: 32px;
+  }
+  .phase-card {
+    padding: 24px;
+    background: white;
+    border: 1px solid var(--border-light);
+    border-radius: 12px;
+  }
+  .phase-card h4 {
+    font-family: 'Urbanist', sans-serif; font-weight: 600;
+    font-size: 15px; color: var(--text-primary); margin: 0 0 6px 0;
+  }
+  .phase-card .desc {
+    font-size: 13px; color: var(--text-body); line-height: 1.55; margin: 0 0 12px 0;
+  }
+  .phase-card .ex {
+    font-size: 12px; color: var(--text-body); line-height: 1.55;
+    font-style: italic;
+    padding-top: 12px;
+    border-top: 1px solid var(--border-light);
+  }
+
+  /* CLOSE — dark-panel-in-light + 5-beat evaluation agenda (matches home idiom) */
+  .pf-close { padding: 112px 32px 32px; background: white; }
+  .pf-close-panel {
+    max-width: 1360px; margin: 0 auto;
+    background: var(--bg-dark);
+    border-radius: 28px;
+    padding: 80px 72px 64px;
+    position: relative; overflow: hidden;
+    box-shadow: 0 40px 80px rgba(2, 58, 132, 0.18);
+  }
+  .pf-close-panel::before {
+    content: ''; position: absolute; inset: 0; pointer-events: none;
+    background:
+      radial-gradient(ellipse 55% 45% at 22% 12%, rgba(131, 228, 255, 0.22) 0%, transparent 55%),
+      radial-gradient(ellipse 45% 45% at 88% 92%, rgba(2, 58, 132, 0.55) 0%, transparent 55%),
+      radial-gradient(ellipse 30% 30% at 25% 75%, rgba(39, 163, 253, 0.20) 0%, transparent 60%);
+  }
+  .pf-close-panel::after {
+    content: ''; position: absolute; inset: 0; pointer-events: none;
+    background-image: radial-gradient(rgba(255,255,255,0.04) 1px, transparent 1px);
+    background-size: 32px 32px; opacity: 0.6;
+    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 75%);
+  }
+  .pf-close-panel > * { position: relative; z-index: 1; }
+  .pf-close-row {
+    display: grid; grid-template-columns: 1.2fr 0.8fr;
+    gap: 56px; align-items: end; margin-bottom: 56px;
+  }
+  .pf-close-row .eyebrow {
+    display: inline-flex; align-items: baseline; gap: 10px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--brand-highlight);
+    margin-bottom: 14px;
+  }
+  .pf-close-row .eyebrow .chap {
+    color: rgba(255,255,255,0.40); font-weight: 500; letter-spacing: 0.14em;
+  }
+  .pf-close-row h2 {
+    font-family: 'Urbanist', sans-serif; font-weight: 600;
+    font-size: clamp(32px, 4vw, 48px);
+    letter-spacing: -0.025em; line-height: 1.05;
+    color: var(--text-on-dark); margin: 0 0 18px 0;
+    text-wrap: balance;
+  }
+  .pf-close-row p {
+    font-size: 16px; color: var(--text-on-dark-body);
+    line-height: 1.6; margin: 0; max-width: 560px;
+  }
+  .pf-close-row .ctas {
+    display: flex; flex-direction: column; gap: 12px; align-items: stretch;
+  }
+  .pf-close-agenda {
+    list-style: none; padding: 28px 0 0 0; margin: 0;
+    display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  .pf-close-agenda li {
+    display: flex; flex-direction: column; gap: 6px;
+    padding: 18px 0 0;
+  }
+  .pf-close-agenda li .num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; font-weight: 700; letter-spacing: 0.18em;
+    color: var(--brand-highlight);
+  }
+  .pf-close-agenda li .beat {
+    font-family: 'Urbanist', sans-serif; font-weight: 600;
+    font-size: 15px; color: var(--text-on-dark); line-height: 1.3;
+  }
+  .pf-close-agenda li .when {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; color: rgba(255,255,255,0.50);
+    letter-spacing: 0.08em;
+  }
+
+  @media (max-width: 1024px) {
+    .pf-panel { grid-template-columns: 1fr; }
+    .arch-layer { grid-template-columns: 60px 1fr; }
+    .arch-layer .arrow { display: none; }
+    .pf-verify-inner { grid-template-columns: 1fr; }
+    .ground-row { grid-template-columns: 1fr; gap: 12px; }
+    .act-grid { grid-template-columns: 1fr; }
+    .phase-strip, .phase-cards { grid-template-columns: 1fr 1fr; }
+    .phase-strip::before { display: none; }
+    .pf-close-row { grid-template-columns: 1fr; }
+    .pf-close .ctas { align-items: flex-start; }
+  }
+
+
+/* ===== STORY SECTION · single-call spine · moved from homepage 2026-04-19 per evt_P0_move-story-to-platform ===== */
+.lb-counter,
+  .proof-metric,
+  .lb-hero-proof-item .v,
+  .pf-story-phase-num,
+  .pf-story-caller-head,
+  #pf-story-duration,
+  .pf-story-caller-id,
+  .pf-story-chip-counter,
+  .lb-close-agenda .num,
+  .lb-close-agenda .min,
+  .pf-story-closure-time,
+  .pf-story-phase-counter,
+  .eyebrow .chap,
+  .mono, [class*="mono"],
+  [class*="-num"], [class*="-counter"],
+  [class*="-metric"], [class*="-time"] {
+    font-variant-numeric: tabular-nums !important;
+    font-feature-settings: "tnum" 1, "lnum" 1;
+  }
+
+.lb-proof-card,
+  .lb-deploy-card,
+  .pf-story-evidence,
+  .lb-close-agenda > li {
+    transition: transform var(--t-snap), border-color var(--t-snap), background var(--t-snap);
+  }
+
+.lb-proof-card:hover,
+  .lb-deploy-card:hover,
+  .pf-story-evidence:hover {
+    transform: var(--card-lift);
+    border-color: rgba(131, 228, 255, 0.55) !important;
+    background: rgba(131, 228, 255, 0.03);
+  }
+
+.lb-intro .eyebrow, .lb-proof-head .eyebrow, .lb-anatomy-head .eyebrow,
+  .pf-story-head .eyebrow, .lb-deploy-head .eyebrow,
+  .lb-compliance .eyebrow, .lb-close .eyebrow {
+    font-family: 'JetBrains Mono', monospace !important;
+    font-size: 11px !important; font-weight: 600 !important;
+    letter-spacing: 0.16em !important; text-transform: uppercase;
+    color: var(--ink-3) !important;
+    display: inline-flex !important; align-items: center; gap: 12px;
+    margin-bottom: 22px !important;
+  }
+
+.lb-intro .eyebrow::before, .lb-proof-head .eyebrow::before,
+  .lb-anatomy-head .eyebrow::before, .pf-story-head .eyebrow::before,
+  .lb-deploy-head .eyebrow::before, .lb-compliance .eyebrow::before,
+  .lb-close .eyebrow::before {
+    /* Recurring motif (2026-04-18 cohesion pass) — breathing dot.
+       Cyan-restraint pass (2026-04-18): dot is now dim-white rather than cyan so
+       the orb remains the page's only cyan "presence" element. Shape + breath
+       still recur; the fingerprint is the gesture, not the color. */
+    content: '' !important;
+    width: 8px !important; height: 8px !important;
+    border-radius: 50% !important;
+    background: rgba(245, 246, 250, 0.55) !important;
+    box-shadow:
+      0 0 6px rgba(245, 246, 250, 0.18),
+      0 0 0 3px rgba(245, 246, 250, 0.06) !important;
+    display: inline-block !important;
+    animation: motif-breath 3.2s ease-in-out infinite;
+    flex-shrink: 0;
+  }
+
+@media (prefers-reduced-motion: reduce) {
+    .lb-intro .eyebrow::before, .lb-proof-head .eyebrow::before,
+    .lb-anatomy-head .eyebrow::before, .pf-story-head .eyebrow::before,
+    .lb-deploy-head .eyebrow::before, .lb-compliance .eyebrow::before,
+    .lb-close .eyebrow::before { animation: none !important; }
+  }
+
+.lb-intro h2, .lb-anatomy-head h2, .pf-story-head h2,
+  .lb-deploy-head h2, .lb-compliance-head h2, .lb-close h2 {
+    font-size: clamp(38px, 4.4vw, 56px) !important;
+    line-height: 1.02 !important; letter-spacing: -0.032em !important;
+    text-wrap: balance;
+  }
+
+.lb-intro p, .lb-anatomy-head p, .pf-story-head p,
+  .lb-deploy-head p, .lb-compliance-head p, .lb-close p {
+    font-size: 17.5px !important; line-height: 1.55 !important;
+    color: var(--ink-2) !important; max-width: 640px;
+  }
+
+.lb-proof-head, .lb-deploy-head, .pf-story-head,
+  .lb-compliance-head, .lb-close .lb-close-row > div:first-child {
+    text-align: left !important;
+    max-width: 720px;
+  }
+
+.lb-proof-head .eyebrow,
+  .lb-deploy-head .eyebrow,
+  .pf-story-head .eyebrow,
+  .lb-compliance-head .eyebrow,
+  .lb-close .eyebrow {
+    margin-bottom: var(--space-eyebrow-to-h2) !important;
+  }
+
+.lb-proof-head h2,
+  .lb-deploy-head h2,
+  .pf-story-head h2,
+  .lb-compliance-head h2,
+  .lb-close h2 {
+    margin: 0 0 var(--space-h2-to-lede) 0 !important;
+  }
+
+.lb-proof-head p,
+  .lb-deploy-head p,
+  .pf-story-head p,
+  .lb-compliance-head p,
+  .lb-close p {
+    margin: 0 !important;
+  }
+
+.lb-proof-head,
+  .lb-deploy-head,
+  .pf-story-head,
+  .lb-compliance-head {
+    margin-bottom: var(--space-head-to-body) !important;
+  }
+
+.pf-story-head { margin-left: 0 !important; margin-right: 0 !important; }
+
+.pf-story { padding: var(--section-pad) 32px !important; background: var(--surface) !important; border-top: 1px solid var(--rule-hair); }
+
+.pf-story-head { text-align: left !important; max-width: 720px; margin: 0 0 56px 0 !important; }
+
+.pf-story-progress-wrap { display: none !important; }
+
+.pf-story-phase[data-phase="verify"] .pf-story-phase-num,
+  .pf-story-phase[data-phase="ground"] .pf-story-phase-num,
+  .pf-story-phase[data-phase="act"] .pf-story-phase-num,
+  .pf-story-phase[data-phase="follow"] .pf-story-phase-num {
+    background: transparent !important; color: var(--ink) !important;
+    font-family: 'JetBrains Mono', monospace !important;
+    font-weight: 600 !important; font-size: 13px !important;
+    width: 40px !important; height: 40px !important;
+    border-radius: 0 !important;
+    border: 1px solid var(--rule-firm) !important;
+    letter-spacing: 0.05em !important;
+  }
+
+.pf-story-phase-header .name {
+    font-family: 'JetBrains Mono', monospace !important;
+    font-size: 11px !important; letter-spacing: 0.2em !important;
+    color: var(--ink) !important;
+  }
+
+.pf-story-phase-header .sep, .pf-story-phase-header .pledge { font-size: 11px !important; color: var(--ink-3) !important; }
+
+.pf-story-phase h3 { font-size: clamp(28px, 2.8vw, 38px) !important; letter-spacing: -0.025em !important; font-weight: 600 !important; line-height: 1.1 !important; max-width: 560px !important; }
+
+.pf-story-phase > p { font-size: 16px !important; color: var(--ink-2) !important; max-width: 560px !important; }
+
+.pf-story-evidence { border-radius: var(--radius-card) !important; padding: 26px !important; box-shadow: none !important; border: var(--card-border-dark) !important; }
+
+.pf-story-caller { border-radius: var(--radius-card) !important; padding: 28px !important; box-shadow: none !important; border: var(--card-border-dark) !important; }
+
+.pf-story-caller-col { position: sticky !important; top: 100px !important; }
+
+.pf-story-phase-chip { border-radius: var(--radius-inline) !important; }
+
+.pf-story-phase-chip[data-phase="verify"],
+  .pf-story-phase-chip[data-phase="ground"],
+  .pf-story-phase-chip[data-phase="act"],
+  .pf-story-phase-chip[data-phase="follow"] { border-color: rgba(131,228,255,0.35) !important; }
+
+.pf-story-phase-chip[data-phase="verify"] .label,
+  .pf-story-phase-chip[data-phase="ground"] .label,
+  .pf-story-phase-chip[data-phase="act"] .label,
+  .pf-story-phase-chip[data-phase="follow"] .label { color: white !important; }
+
+.pf-story-stop-callout {
+    padding: 36px 0 !important; margin: 16px 0 !important;
+    border-top: 1px solid var(--rule-hair) !important;
+    border-bottom: 1px solid var(--rule-hair) !important;
+    max-width: none !important; background: transparent !important;
+  }
+
+.pf-story-stop-callout::before, .pf-story-stop-callout::after { display: none !important; }
+
+.pf-story-stop-callout .line { color: var(--ink-3) !important; font-size: 11px !important; letter-spacing: 0.18em !important; }
+
+.pf-story-stop-callout .text {
+    font-family: 'Urbanist', sans-serif !important; font-size: 22px !important;
+    letter-spacing: -0.02em !important; font-weight: 500 !important;
+    max-width: 640px; margin: 0 auto; color: var(--ink-2) !important;
+  }
+
+.pf-story-stop-callout .text em { color: var(--ink) !important; font-weight: 600 !important; font-style: normal; }
+
+.pf-story-closure {
+    border-radius: var(--radius-card) !important;
+    background: linear-gradient(180deg, rgba(16,185,129,0.04), rgba(16,185,129,0.02)) !important;
+    border-color: rgba(16,185,129,0.22) !important; padding: 24px 28px !important;
+  }
+
+.pf-story-closure-text strong { color: var(--live) !important; }
+
+.pf-story-closure-time { background: rgba(16,185,129,0.14) !important; color: #047857 !important; }
+
+.pf-story-closure-icon { background: rgba(16,185,129,0.16) !important; color: #047857 !important; }
+
+.pf-story-scale { border-top: 1px solid var(--rule-hair) !important; margin-top: 96px !important; padding-top: 48px !important; }
+
+.pf-story-platform-link {
+    margin-top: 72px; padding-top: 32px;
+    border-top: 1px solid var(--rule-hair);
+    display: flex; justify-content: center;
+  }
+
+.pf-story-platform-link a {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px; font-weight: 700;
+    letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--text-subtle);
+    text-decoration: none;
+    transition: color 160ms ease;
+  }
+
+.pf-story-platform-link a:hover { color: var(--brand-primary); }
+
+.pf-story-scale .lead { font-size: clamp(22px, 2.4vw, 30px) !important; color: var(--ink) !important; font-weight: 500 !important; letter-spacing: -0.02em !important; }
+
+.pf-story-scale .lead em { color: var(--brand-primary) !important; font-style: normal; }
+
+.pf-story-caller .orb-aura { width: 190px !important; height: 190px !important; }
+
+.pf-story-caller .orb-aura::after { inset: -28px !important; }
+
+.pf-story-caller .orb-ring-3 { width: 260px !important; height: 260px !important; }
+
+.pf-story-caller .orb { width: 164px !important; height: 164px !important; }
+
+.pf-story-caller .orb-wrap::before { width: 340px; height: 340px; }
+
+.pf-story-caller .orb-wrap::after { width: 320px; height: 320px; }
+
+.pf-story-caller .orb-aura { width: 190px !important; height: 190px !important; }
+
+.pf-story-caller .orb-aura::after { inset: -28px !important; }
+
+.pf-story-caller .orb-ring-3 { width: 260px !important; height: 260px !important; }
+
+.pf-story-caller .orb { width: 164px !important; height: 164px !important; }
+
+.pf-story-caller .orb-wrap::before { width: 340px; height: 340px; }
+
+.pf-story-caller .orb-wrap::after { width: 320px; height: 320px; }
+
+.lb-proof, .lb-deploy, .pf-story, .lb-compliance {
+    position: relative;
+    isolation: isolate;
+  }
+
+.lb-proof, .lb-deploy, .pf-story, .lb-compliance {
+    position: relative;
+    isolation: isolate;
+  }
+
+body.atm-rules .lb-proof::before,
+  body.atm-rules .lb-deploy::before,
+  body.atm-rules .pf-story::before,
+  body.atm-rules .lb-compliance::before {
+    content: ''; position: absolute; inset: 0; pointer-events: none; z-index: -1;
+    background-image: repeating-linear-gradient(
+      to bottom,
+      transparent 0,
+      transparent 47px,
+      rgba(2, 58, 132, 0.06) 47px,
+      rgba(2, 58, 132, 0.06) 48px
+    );
+    mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
+  }
+
+body.atm-spine .lb-proof::before,
+  body.atm-spine .lb-deploy::before,
+  body.atm-spine .pf-story::before,
+  body.atm-spine .lb-compliance::before {
+    content: ''; position: absolute; top: 0; bottom: 0; left: 50%; width: 1px;
+    background: rgba(2, 58, 132, 0.10);
+    pointer-events: none; z-index: 0;
+  }
+
+body.atm-spine .lb-proof::after,
+  body.atm-spine .lb-deploy::after,
+  body.atm-spine .pf-story::after,
+  body.atm-spine .lb-compliance::after {
+    position: absolute;
+    top: 48px; left: 50%; transform: translateX(-50%);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; font-weight: 600;
+    letter-spacing: 0.28em;
+    color: rgba(2, 58, 132, 0.55);
+    pointer-events: none;
+    padding: 0 14px;
+  }
+
+body.atm-spine .pf-story { background: var(--bg-tint); }
+
+body.atm-spine .pf-story::after       { content: '§ 06'; background: var(--bg-tint); }
+
+body.atm-alt .pf-story       { background: #EEF3FC; }
+
+body.atm-alt .lb-proof,
+  body.atm-alt .pf-story { border-top: 1px solid rgba(2,58,132,0.08); border-bottom: 1px solid rgba(2,58,132,0.08); }
+
+body.atm-frames .lb-proof,
+  body.atm-frames .lb-deploy,
+  body.atm-frames .pf-story {
+    background: transparent !important;
+    border: none !important;
+    padding-left: 24px; padding-right: 24px;
+    padding-top: 88px; padding-bottom: 88px;
+  }
+
+body.atm-frames .lb-proof::before,
+  body.atm-frames .lb-deploy::before,
+  body.atm-frames .pf-story::before,
+  body.atm-frames .lb-compliance::before {
+    content: ''; position: absolute;
+    top: 16px; bottom: 16px; left: 24px; right: 24px;
+    border-radius: 28px;
+    z-index: -1;
+  }
+
+body.atm-frames .pf-story::before {
+    background: var(--bg-tint);
+    box-shadow: 0 24px 56px rgba(2, 58, 132, 0.10), 0 1px 0 rgba(255,255,255,0.7) inset, 0 0 0 1px rgba(2, 58, 132, 0.05);
+  }
+
+body.atm-frames .lb-proof-head .eyebrow .chap,
+  body.atm-frames .lb-deploy-head .eyebrow .chap,
+  body.atm-frames .pf-story-head .eyebrow .chap,
+  body.atm-frames .lb-compliance-head .eyebrow .chap,
+  body.atm-frames .lb-close .eyebrow .chap {
+    display: inline-block;
+  }
+
+body.atm-frames .lb-proof-head .eyebrow::after,
+  body.atm-frames .lb-deploy-head .eyebrow::after,
+  body.atm-frames .pf-story-head .eyebrow::after,
+  body.atm-frames .lb-compliance-head .eyebrow::after {
+    content: none !important;
+  }
+
+body.atm-bleed .lb-proof::after,
+  body.atm-bleed .lb-deploy::after,
+  body.atm-bleed .pf-story::after {
+    content: ''; position: absolute; left: 0; right: 0; bottom: -1px; height: 8px;
+    background: linear-gradient(90deg,
+      var(--brand-primary) 0%,
+      var(--brand-primary) 20%,
+      var(--brand-dark) 20%,
+      var(--brand-dark) 45%,
+      var(--brand-secondary) 45%,
+      var(--brand-secondary) 60%,
+      rgba(2,58,132,0.3) 60%,
+      rgba(2,58,132,0.3) 100%);
+    opacity: 0.55;
+  }
+
+body.atm-bleed .lb-proof,
+  body.atm-bleed .lb-deploy,
+  body.atm-bleed .pf-story,
+  body.atm-bleed .lb-compliance {
+    border-top: 1px solid rgba(2,58,132,0.08);
+  }
+
+body.atm-gutter .lb-proof::before,
+  body.atm-gutter .lb-deploy::before,
+  body.atm-gutter .pf-story::before,
+  body.atm-gutter .lb-compliance::before {
+    position: absolute;
+    top: 120px; left: 28px;
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; font-weight: 600;
+    letter-spacing: 0.35em;
+    color: rgba(2, 58, 132, 0.40);
+    pointer-events: none;
+  }
+
+body.atm-gutter .pf-story::before      { content: '§ 03  —  SINGLE-CALL SPINE'; }
+
+body.atm-gutter .lb-proof::after,
+  body.atm-gutter .lb-deploy::after,
+  body.atm-gutter .pf-story::after,
+  body.atm-gutter .lb-compliance::after {
+    content: ''; position: absolute; top: 120px; bottom: 120px; left: 64px;
+    width: 1px; background: rgba(2,58,132,0.08);
+  }
+
+.pf-story {
+    background: white; padding: 120px 32px 140px;
+    position: relative;
+  }
+
+.pf-story-inner { max-width: var(--page-max); margin: 0 auto; }
+
+.pf-story-head { max-width: 720px; margin: 0 auto 80px; text-align: center; }
+
+.pf-story-head .eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--brand-primary); margin-bottom: 18px;
+  }
+
+.pf-story-head .eyebrow::before {
+    content: ''; width: 6px; height: 6px; border-radius: 50%;
+    background: var(--status-live); box-shadow: 0 0 8px var(--status-live);
+  }
+
+.pf-story-head h2 {
+    font-family: 'Urbanist', sans-serif; font-weight: 600;
+    font-size: clamp(32px, 4vw, 52px);
+    letter-spacing: -0.025em; line-height: 1.05;
+    color: var(--text-primary); margin: 0 0 16px 0;
+  }
+
+.pf-story-head p {
+    font-size: 17px; color: var(--text-body); line-height: 1.6;
+    margin: 0;
+  }
+
+.pf-story-grid {
+    display: grid; grid-template-columns: 0.85fr 1.15fr;
+    gap: 64px; align-items: start;
+  }
+
+.pf-story-caller-col { position: relative; }
+
+.pf-story-caller {
+    will-change: transform;
+    background:
+      radial-gradient(ellipse 60% 50% at 80% 20%, rgba(131, 228, 255, 0.12) 0%, transparent 55%),
+      radial-gradient(ellipse 50% 60% at 15% 90%, rgba(39, 163, 253, 0.12) 0%, transparent 60%),
+      linear-gradient(135deg, #0A1938 0%, #14265A 100%);
+    border: 1px solid rgba(131, 228, 255, 0.18);
+    border-radius: 20px;
+    padding: 28px;
+    box-shadow: none;
+    border: var(--card-border-dark);
+    color: white;
+  }
+
+.pf-story-caller-head {
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 11px; color: var(--text-on-dark-muted);
+    letter-spacing: 0.04em;
+    padding-bottom: 18px; margin-bottom: 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+
+.pf-story-caller-head .dot {
+    width: 6px; height: 6px; border-radius: 50%; background: var(--status-live);
+    display: inline-block; margin-right: 6px; box-shadow: 0 0 8px var(--status-live);
+  }
+
+.pf-story-caller-id {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 16px; font-weight: 700; color: white;
+    letter-spacing: 0.02em;
+  }
+
+.pf-story-caller-meta {
+    display: flex; flex-direction: column; gap: 2px;
+    margin-top: 6px; font-size: 12px; color: var(--text-on-dark-body);
+  }
+
+.pf-story-caller-meta .deployment {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    color: var(--brand-highlight); letter-spacing: 0.04em;
+  }
+
+.pf-story-orb-wrap {
+    display: flex; justify-content: center; align-items: center;
+    padding: 28px 0 20px; position: relative; min-height: 220px;
+  }
+
+.pf-story-caller .orb-aura {
+    width: 170px; height: 170px;
+  }
+
+.pf-story-caller .orb-aura::after { inset: -22px; }
+
+.pf-story-caller .orb-ring-3 {
+    width: 236px; height: 236px;
+  }
+
+.pf-story-caller .orb {
+    width: 150px; height: 150px;
+  }
+
+.pf-story-phase-chip {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 16px; border-radius: 12px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.18em;
+    text-transform: uppercase;
+    transition: all 400ms ease;
+  }
+
+.pf-story-phase-chip .label {
+    display: flex; align-items: center; gap: 10px;
+    color: white;
+  }
+
+.pf-story-phase-chip .label .active-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--status-live);
+    box-shadow: 0 0 10px var(--status-live);
+    animation: pulseDot 1.6s ease-in-out infinite;
+  }
+
+.pf-story-phase-chip[data-phase="verify"] { border-color: rgba(246, 196, 83, 0.45); }
+
+.pf-story-phase-chip[data-phase="verify"] .label { color: #F6C453; }
+
+.pf-story-phase-chip[data-phase="ground"] { border-color: rgba(72, 207, 132, 0.45); }
+
+.pf-story-phase-chip[data-phase="ground"] .label { color: #48CF84; }
+
+.pf-story-phase-chip[data-phase="act"] { border-color: rgba(131, 228, 255, 0.45); }
+
+.pf-story-phase-chip[data-phase="act"] .label { color: #83E4FF; }
+
+.pf-story-phase-chip[data-phase="follow"] { border-color: rgba(168, 132, 255, 0.45); }
+
+.pf-story-phase-chip[data-phase="follow"] .label { color: #A884FF; }
+
+.pf-story-phase-chip .counter {
+    color: var(--text-on-dark-muted); font-weight: 500; letter-spacing: 0.12em;
+  }
+
+.pf-story-timer {
+    margin-top: 14px;
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 11px; color: var(--text-on-dark-muted);
+    padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.06);
+  }
+
+.pf-story-timer .elapsed {
+    font-family: 'JetBrains Mono', monospace; font-size: 13px;
+    font-weight: 700; color: white; letter-spacing: 0.08em;
+  }
+
+.pf-story-phases { display: flex; flex-direction: column; gap: 64px; }
+
+.pf-story-phase {
+    min-height: 520px;
+    display: flex; flex-direction: column; gap: 20px;
+    scroll-margin-top: 80px;
+  }
+
+.pf-story-phase-header {
+    display: flex; align-items: center; gap: 14px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+.pf-story-phase-num {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 32px; height: 32px; border-radius: 8px;
+    font-size: 12px; font-weight: 700; letter-spacing: 0;
+    background: var(--bg-tint); color: var(--brand-primary);
+  }
+
+.pf-story-phase[data-phase="verify"] .pf-story-phase-num { background: rgba(246, 196, 83, 0.14); color: #B4831A; }
+
+.pf-story-phase[data-phase="ground"] .pf-story-phase-num { background: rgba(72, 207, 132, 0.14); color: #1F8B52; }
+
+.pf-story-phase[data-phase="act"] .pf-story-phase-num { background: rgba(2, 98, 233, 0.12); color: var(--brand-primary); }
+
+.pf-story-phase[data-phase="follow"] .pf-story-phase-num { background: rgba(168, 132, 255, 0.14); color: #6C4DD6; }
+
+.pf-story-phase-header .name { color: var(--text-primary); font-weight: 700; }
+
+.pf-story-phase-header .sep { color: var(--border-medium); }
+
+.pf-story-phase-header .pledge { color: var(--text-subtle); }
+
+.pf-story-phase h3 {
+    font-family: 'Urbanist', sans-serif; font-weight: 600;
+    font-size: clamp(26px, 2.6vw, 36px);
+    line-height: 1.15; letter-spacing: -0.018em;
+    color: var(--text-primary); margin: 0;
+    max-width: 540px;
+  }
+
+.pf-story-phase > p {
+    font-size: 16px; line-height: 1.65; color: var(--text-body);
+    max-width: 540px; margin: 0;
+  }
+
+.pf-story-evidence {
+    margin-top: 12px;
+    background:
+      linear-gradient(135deg, #0A1938 0%, #14265A 100%);
+    border: 1px solid rgba(131, 228, 255, 0.12);
+    border-radius: 16px;
+    padding: 24px;
+    color: white;
+    box-shadow: none;
+    border: var(--card-border-dark);
+  }
+
+.pf-story-evidence-head {
+    display: flex; justify-content: space-between; align-items: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; font-weight: 700; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--text-on-dark-muted);
+    padding-bottom: 14px; margin-bottom: 16px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+
+.pf-story-evidence-title { color: var(--brand-highlight); }
+
+.pf-story-stop-callout {
+    position: relative;
+    margin: 8px auto;
+    padding: 28px 24px 20px;
+    max-width: 580px;
+    text-align: center;
+  }
+
+.pf-story-stop-callout::before,
+  .pf-story-stop-callout::after {
+    content: ''; position: absolute; left: 50%; transform: translateX(-50%);
+    width: 1px; height: 28px;
+    background: linear-gradient(to bottom, transparent, rgba(2,58,132,0.3));
+  }
+
+.pf-story-stop-callout::before { top: 0; }
+
+.pf-story-stop-callout::after {
+    bottom: 0; background: linear-gradient(to top, transparent, rgba(2,58,132,0.3));
+  }
+
+.pf-story-stop-callout .line {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--brand-primary);
+    margin-bottom: 6px;
+  }
+
+.pf-story-stop-callout .text {
+    font-family: 'Urbanist', sans-serif; font-weight: 500;
+    font-size: 18px; color: var(--text-primary); line-height: 1.35;
+    letter-spacing: -0.01em;
+  }
+
+.pf-story-stop-callout .text em {
+    font-style: normal; color: var(--brand-primary);
+  }
+
+.pf-story-progress-wrap {
+    position: relative; z-index: 1;
+    margin: 40px auto 48px;
+    max-width: 920px;
+    /* sticky needs a container that defines the flow context */
+  }
+
+.pf-story-progress {
+    display: flex; gap: 0; align-items: stretch;
+    border-radius: 14px;
+    border: 1px solid var(--border-soft);
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    overflow: hidden;
+    font-family: 'JetBrains Mono', monospace;
+    box-shadow: none;
+    border: var(--card-border);
+  }
+
+.pf-story-progress-step {
+    flex: 1;
+    display: flex; align-items: center; gap: 12px;
+    padding: 16px 20px;
+    border-right: 1px solid var(--border-soft);
+    transition: background 350ms ease, color 350ms ease;
+    position: relative;
+  }
+
+.pf-story-progress-step:last-child { border-right: none; }
+
+.pf-story-progress-num {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 26px; height: 26px; border-radius: 7px;
+    font-size: 11px; font-weight: 700;
+    background: var(--bg-tint); color: var(--text-subtle);
+    transition: all 350ms ease;
+  }
+
+.pf-story-progress-label {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--text-subtle);
+    transition: color 350ms ease;
+  }
+
+.pf-story-progress-step.is-active[data-phase="verify"] { background: rgba(246,196,83,0.08); }
+
+.pf-story-progress-step.is-active[data-phase="verify"] .pf-story-progress-num { background: rgba(246,196,83,0.2); color: #B4831A; }
+
+.pf-story-progress-step.is-active[data-phase="verify"] .pf-story-progress-label { color: #B4831A; }
+
+.pf-story-progress-step.is-active[data-phase="ground"] { background: rgba(72,207,132,0.08); }
+
+.pf-story-progress-step.is-active[data-phase="ground"] .pf-story-progress-num { background: rgba(72,207,132,0.2); color: #1F8B52; }
+
+.pf-story-progress-step.is-active[data-phase="ground"] .pf-story-progress-label { color: #1F8B52; }
+
+.pf-story-progress-step.is-active[data-phase="act"] { background: rgba(2,98,233,0.08); }
+
+.pf-story-progress-step.is-active[data-phase="act"] .pf-story-progress-num { background: rgba(2,98,233,0.18); color: var(--brand-primary); }
+
+.pf-story-progress-step.is-active[data-phase="act"] .pf-story-progress-label { color: var(--brand-primary); }
+
+.pf-story-progress-step.is-active[data-phase="follow"] { background: rgba(168,132,255,0.08); }
+
+.pf-story-progress-step.is-active[data-phase="follow"] .pf-story-progress-num { background: rgba(168,132,255,0.2); color: #6C4DD6; }
+
+.pf-story-progress-step.is-active[data-phase="follow"] .pf-story-progress-label { color: #6C4DD6; }
+
+.pf-story-progress-step.is-done .pf-story-progress-num {
+    background: rgba(72,207,132,0.18); color: #1F8B52;
+  }
+
+.pf-story-caller-transcript {
+    margin-top: 14px;
+    padding: 12px 14px;
+    background: rgba(255,255,255,0.04);
+    border-left: 2px solid rgba(131, 228, 255, 0.5);
+    border-radius: 0 8px 8px 0;
+    font-size: 12px; line-height: 1.5;
+    color: var(--text-on-dark-body);
+    min-height: 56px;
+    transition: opacity 280ms ease;
+  }
+
+.pf-story-caller-transcript .speaker {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; font-weight: 700; letter-spacing: 0.14em;
+    color: var(--brand-highlight);
+    text-transform: uppercase;
+    display: block; margin-bottom: 4px;
+  }
+
+.pf-story-caller-transcript.is-changing { opacity: 0; }
+
+.pf-story-caller-activity {
+    margin-top: 12px;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 10px 12px;
+    background: rgba(0,0,0,0.18);
+    border-radius: 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+.pf-story-caller-activity .left { color: var(--text-on-dark-muted); }
+
+.pf-story-caller-activity .right { color: white; font-weight: 700; }
+
+.pf-story-caller-activity .pulse {
+    display: inline-block; width: 6px; height: 6px; border-radius: 50%;
+    margin-right: 6px; vertical-align: 1px;
+    background: var(--brand-highlight);
+    box-shadow: 0 0 6px var(--brand-highlight);
+    animation: pulseDot 1.4s ease-in-out infinite;
+  }
+
+.pf-story-closure {
+    margin-top: 32px;
+    padding: 22px 24px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, rgba(72,207,132,0.06) 0%, rgba(2,98,233,0.04) 100%);
+    border: 1px solid rgba(72,207,132,0.22);
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 20px;
+  }
+
+.pf-story-closure-left { display: flex; align-items: center; gap: 14px; }
+
+.pf-story-closure-icon {
+    width: 36px; height: 36px; border-radius: 10px;
+    background: rgba(72,207,132,0.18);
+    display: inline-flex; align-items: center; justify-content: center;
+    color: #1F8B52;
+  }
+
+.pf-story-closure-text {
+    font-family: 'Urbanist', sans-serif; font-weight: 500;
+    font-size: 16px; color: var(--text-primary);
+  }
+
+.pf-story-closure-text strong { font-weight: 700; color: #1F8B52; }
+
+.pf-story-closure-time {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px; font-weight: 700; letter-spacing: 0.14em;
+    color: #1F8B52;
+    padding: 8px 14px; border-radius: 8px;
+    background: rgba(72,207,132,0.12);
+  }
+
+.pf-story-scale {
+    margin-top: 80px; text-align: center;
+    padding: 32px 20px 0;
+    border-top: 1px solid rgba(2,58,132,0.08);
+  }
+
+.pf-story-scale .lead {
+    font-family: 'Urbanist', sans-serif; font-weight: 500;
+    font-size: clamp(20px, 2vw, 26px);
+    color: var(--text-primary); line-height: 1.4;
+    letter-spacing: -0.01em; max-width: 640px; margin: 0 auto;
+  }
+
+.pf-story-scale .lead em {
+    font-style: normal; color: var(--brand-primary); font-weight: 600;
+  }
+
+@media (max-width: 1024px) {
+    .pf-story-grid { grid-template-columns: 1fr; }
+    .pf-story-caller-col { position: static; }
+    .pf-story-phase { min-height: auto; }
+    .ev-follow { grid-template-columns: 1fr; }
+  }
+
+body[data-palette="dark"] .lb-hero-wrap,
+  body[data-palette="dark"] .lb-proof,
+  body[data-palette="dark"] .pf-story,
+  body[data-palette="dark"] .lb-compliance,
+  body[data-palette="dark"] .lb-close {
+    background: #0B0E17 !important;
+    border-top-color: rgba(255,255,255,0.06) !important;
+  }
+
+body[data-palette="dark"] .pf-story-phase h3,
+  body[data-palette="dark"] .pf-story-phase .pf-story-phase-num,
+  body[data-palette="dark"] .pf-story-phase-header .label {
+    color: #F5F6FA !important;
+  }
+
+body[data-palette="dark"] .pf-story-phase > p {
+    color: rgba(245,246,250,0.78) !important;
+  }
+
+body[data-palette="dark"] .pf-story-phase .pf-story-phase-num {
+    border-color: rgba(255,255,255,0.22) !important;
+  }
+
+body[data-palette="dark"] .pf-story-stop-callout .text {
+    color: rgba(245,246,250,0.82) !important;
+  }
+
+body[data-palette="dark"] .pf-story-stop-callout .text em { color: #F5F6FA !important; }
+
+body[data-palette="dark"] .pf-story-stop-callout {
+    border-top-color: rgba(255,255,255,0.08) !important;
+    border-bottom-color: rgba(255,255,255,0.08) !important;
+  }
+
+body[data-palette="dark"] .pf-story-scale {
+    border-top-color: rgba(255,255,255,0.08) !important;
+  }
+
+body[data-palette="dark"] .pf-story-scale .lead {
+    color: #F5F6FA !important;
+  }
+
+body[data-palette="dark"] .lb-proof-head h2,
+  body[data-palette="dark"] .lb-deploy-head h2,
+  body[data-palette="dark"] .pf-story-head h2,
+  body[data-palette="dark"] .lb-compliance-head h2 {
+    color: #F5F6FA !important;
+  }
+
+body[data-palette="dark"] .lb-proof-head p,
+  body[data-palette="dark"] .lb-deploy-head p,
+  body[data-palette="dark"] .pf-story-head p,
+  body[data-palette="dark"] .lb-compliance-head p {
+    color: rgba(245,246,250,0.72) !important;
+  }
+
+body[data-palette="dark"] .lb-proof-head .eyebrow::before,
+  body[data-palette="dark"] .lb-deploy-head .eyebrow::before,
+  body[data-palette="dark"] .pf-story-head .eyebrow::before,
+  body[data-palette="dark"] .lb-compliance .eyebrow::before {
+    background: rgba(245, 246, 250, 0.65) !important;
+    box-shadow:
+      0 0 8px rgba(245, 246, 250, 0.22),
+      0 0 0 3px rgba(245, 246, 250, 0.08) !important;
+  }
+
+body[data-palette="dark"] .lb-proof-head .eyebrow,
+  body[data-palette="dark"] .lb-deploy-head .eyebrow,
+  body[data-palette="dark"] .pf-story-head .eyebrow,
+  body[data-palette="dark"] .lb-compliance .eyebrow {
+    color: rgba(245,246,250,0.78) !important;
+  }
+
+body[data-palette="dark"] .lb-proof-card:hover,
+  body[data-palette="dark"] .lb-deploy-card:hover,
+  body[data-palette="dark"] .pf-story-evidence:hover {
+    border-color: rgba(131, 228, 255, 0.55) !important;
+    background: rgba(131, 228, 255, 0.05) !important;
+  }
+
+body[data-palette="dark"].atm-frames .lb-proof::before,
+  body[data-palette="dark"].atm-frames .lb-deploy::before,
+  body[data-palette="dark"].atm-frames .pf-story::before,
+  body[data-palette="dark"].atm-frames .lb-compliance::before {
+    background: transparent !important;
+    box-shadow: none !important;
+    border-color: rgba(255,255,255,0.06) !important;
+  }
+
+body[data-palette="dark"].atm-frames .lb-proof::after,
+  body[data-palette="dark"].atm-frames .lb-deploy::after,
+  body[data-palette="dark"].atm-frames .pf-story::after,
+  body[data-palette="dark"].atm-frames .lb-compliance::after {
+    background: transparent !important;
+    color: rgba(255,255,255,0.28) !important;
+  }
+
+/* =================================================================
+   PLATFORM v3 — section body redesigns (2026-04-19 coherence pass)
+   Architecture · Verify modes · Ground · Act · Control
+   One shared visual language: numbered rail, strong mono accents, hover.
+   ================================================================= */
+
+/* ----- SHARED: numbered rail + node ----- */
+/* Fix sec-head h2→p spacing (overridden by global !important rules) */
+.pf-arch .sec-head h2,
+.pf-ground .sec-head h2,
+.pf-act .sec-head h2,
+.pf-control .sec-head h2 {
+  margin: 0 0 24px 0 !important;
+  max-width: 900px !important;
+  line-height: 1.08 !important;
+  padding-bottom: 4px; /* descender safety for text-wrap: balance multi-line renders */
+}
+.pf-arch .sec-head p,
+.pf-ground .sec-head p,
+.pf-act .sec-head p,
+.pf-control .sec-head p {
+  margin: 0 !important;
+}
+
+.pf-rail {
+  display: grid; gap: 14px;
+  margin-top: 8px;
+}
+.pf-rail-item {
+  position: relative;
+  display: grid; grid-template-columns: 56px 1fr auto; gap: 24px;
+  align-items: start;
+  padding: 22px 28px 22px 0;
+  border-top: 1px solid var(--rule-hair, rgba(2,58,132,0.08));
+  transition: background 200ms ease;
+}
+.pf-rail-item:last-child { border-bottom: 1px solid var(--rule-hair, rgba(2,58,132,0.08)); }
+.pf-rail-item:hover { background: rgba(2, 98, 233, 0.025); }
+.pf-rail-item .pf-rail-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.18em;
+  color: var(--brand-primary);
+  padding-top: 4px;
+}
+.pf-rail-item .pf-rail-body h3,
+.pf-rail-item .pf-rail-body .pf-rail-title {
+  font-family: 'Urbanist', sans-serif; font-weight: 600;
+  font-size: 19px; color: var(--text-primary);
+  margin: 0 0 6px 0; letter-spacing: -0.01em;
+}
+.pf-rail-item .pf-rail-body p {
+  font-size: 14.5px; color: var(--text-body);
+  line-height: 1.55; margin: 0 0 10px 0; max-width: 620px;
+}
+.pf-rail-item .pf-rail-meta {
+  display: flex; flex-wrap: wrap; gap: 6px 8px; margin-top: 8px;
+}
+.pf-rail-item .pf-rail-meta .chip {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10.5px; letter-spacing: 0.04em;
+  color: var(--text-muted);
+  padding: 3px 9px; border-radius: 4px;
+  background: rgba(2, 58, 132, 0.045);
+  border: 1px solid rgba(2, 58, 132, 0.10);
+}
+.pf-rail-item .pf-rail-aside {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10.5px; font-weight: 700; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--text-muted);
+  padding-top: 6px; white-space: nowrap;
+}
+
+/* ----- ARCHITECTURE · proper system diagram, not rounded boxes ----- */
+.pf-arch { padding: 112px 32px; background: var(--bg-tint); }
+.pf-arch-inner { max-width: 1160px; margin: 0 auto; }
+.pf-arch-diagram {
+  margin-top: 16px;
+  display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 64px; align-items: start;
+}
+.pf-arch-diagram .legend {
+  padding-top: 8px;
+}
+.pf-arch-diagram .legend h3 {
+  font-family: 'Urbanist', sans-serif; font-weight: 600;
+  font-size: 18px; color: var(--text-primary); margin: 0 0 8px 0;
+}
+.pf-arch-diagram .legend p {
+  font-size: 14.5px; color: var(--text-body); line-height: 1.55;
+  margin: 0 0 24px 0; max-width: 440px;
+}
+.pf-arch-diagram .legend .legend-key {
+  display: grid; gap: 10px;
+  padding: 18px 20px; background: white;
+  border: 1px solid var(--rule-hair, rgba(2,58,132,0.08));
+  border-radius: 10px;
+}
+.pf-arch-diagram .legend .legend-key .row {
+  display: grid; grid-template-columns: 14px 1fr; gap: 12px; align-items: center;
+  font-size: 13px; color: var(--text-body);
+}
+.pf-arch-diagram .legend .legend-key .row .swatch {
+  width: 14px; height: 14px; border-radius: 3px;
+}
+.pf-arch-diagram .legend .legend-key .row.control .swatch {
+  background: transparent;
+  border: 1.5px dashed var(--brand-primary);
+}
+.pf-arch-diagram .legend .legend-key .row .name {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--text-primary);
+  margin-right: 10px;
+}
+.pf-arch-diagram .legend .legend-key .row .desc { color: var(--text-muted); font-size: 12.5px; }
+
+.pf-arch-system {
+  position: relative;
+  padding: 28px;
+  border: 1.5px dashed var(--brand-primary);
+  border-radius: 16px;
+  background: white;
+}
+.pf-arch-system::before {
+  content: 'CONTROL · wraps all';
+  position: absolute; top: -10px; left: 22px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10.5px; font-weight: 700; letter-spacing: 0.18em;
+  color: var(--brand-primary);
+  background: var(--bg-tint);
+  padding: 2px 10px; border-radius: 4px;
+}
+.pf-arch-system .pf-arch-tier {
+  display: grid; grid-template-columns: 44px 1fr; gap: 16px; align-items: center;
+  padding: 18px 22px;
+  border-radius: 10px;
+  background: white;
+  border: 1px solid var(--rule-hair, rgba(2,58,132,0.08));
+  margin-bottom: 10px;
+  transition: transform 200ms ease, border-color 200ms ease;
+}
+.pf-arch-system .pf-arch-tier:hover {
+  transform: translateX(3px);
+  border-color: rgba(2, 98, 233, 0.35);
+}
+.pf-arch-system .pf-arch-tier:last-child { margin-bottom: 0; }
+.pf-arch-system .pf-arch-tier .tier-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px; font-weight: 700; letter-spacing: 0.14em;
+  color: var(--brand-primary);
+  text-align: center;
+}
+.pf-arch-system .pf-arch-tier .tier-body h4 {
+  font-family: 'Urbanist', sans-serif; font-weight: 600;
+  font-size: 16px; color: var(--text-primary); margin: 0 0 2px 0;
+  letter-spacing: -0.01em;
+}
+.pf-arch-system .pf-arch-tier .tier-body p {
+  font-size: 13px; color: var(--text-body); line-height: 1.5; margin: 0;
+}
+.pf-arch-system .pf-arch-foundation {
+  margin-top: 14px;
+  padding: 14px 22px;
+  background: rgba(2, 58, 132, 0.04);
+  border-radius: 8px;
+  display: grid; grid-template-columns: 44px 1fr; gap: 16px; align-items: center;
+}
+.pf-arch-system .pf-arch-foundation .fnum {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 18px; font-weight: 400; color: var(--text-muted);
+  text-align: center;
+}
+.pf-arch-system .pf-arch-foundation .fbody h4 {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--text-muted); margin: 0 0 2px 0;
+}
+.pf-arch-system .pf-arch-foundation .fbody p {
+  font-size: 12.5px; color: var(--text-muted); margin: 0; line-height: 1.45;
+}
+
+/* ----- VERIFY modes — numbered rail (overrides pale .verify-mode) ----- */
+.pf-verify .verify-modes {
+  display: grid; gap: 0; margin-top: 40px;
+}
+.pf-verify .verify-mode {
+  position: relative;
+  display: grid; grid-template-columns: 56px 1fr auto; gap: 24px; align-items: start;
+  padding: 22px 0;
+  border: none;
+  border-top: 1px solid var(--rule-hair, rgba(2,58,132,0.08));
+  border-radius: 0;
+  background: transparent;
+  transition: background 200ms ease;
+}
+.pf-verify .verify-mode:last-child { border-bottom: 1px solid var(--rule-hair, rgba(2,58,132,0.08)); }
+.pf-verify .verify-mode:hover { background: rgba(2, 98, 233, 0.025); }
+.pf-verify .verify-mode::before {
+  content: attr(data-num);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.18em;
+  color: var(--brand-primary);
+  padding-top: 4px;
+  padding-left: 4px;
+}
+.pf-verify .verify-mode h4 {
+  font-family: 'Urbanist', sans-serif; font-weight: 600;
+  font-size: 18px; color: var(--text-primary);
+  margin: 0 0 6px 0; letter-spacing: -0.01em;
+}
+.pf-verify .verify-mode p {
+  font-size: 14px; color: var(--text-body); line-height: 1.55; margin: 0;
+}
+.pf-verify .verify-mode .status {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10.5px; font-weight: 700; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--text-muted);
+  padding-top: 6px; white-space: nowrap;
+}
+
+/* ----- GROUND — replace 3-col rows with rail ----- */
+.pf-ground .ground-rows { display: grid; gap: 0; margin-top: 40px; }
+.pf-ground .ground-row {
+  position: relative;
+  display: grid; grid-template-columns: 56px 200px 1fr; gap: 24px; align-items: start;
+  padding: 22px 28px 22px 0;
+  background: transparent;
+  border: none;
+  border-top: 1px solid var(--rule-hair, rgba(2,58,132,0.08));
+  border-radius: 0;
+  transition: background 200ms ease;
+}
+.pf-ground .ground-row:last-child { border-bottom: 1px solid var(--rule-hair, rgba(2,58,132,0.08)); }
+.pf-ground .ground-row:hover { background: rgba(2, 98, 233, 0.025); }
+.pf-ground .ground-row::before {
+  content: attr(data-num);
+  position: absolute; left: 0; top: 22px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.18em;
+  color: var(--brand-primary);
+  padding-left: 4px;
+}
+.pf-ground .ground-row > :first-child { grid-column: 2; }
+.pf-ground .ground-row .cat {
+  font-family: 'Urbanist', sans-serif; font-weight: 600;
+  font-size: 18px; color: var(--text-primary); letter-spacing: -0.01em;
+}
+.pf-ground .ground-row .desc {
+  font-size: 14.5px; color: var(--text-body); line-height: 1.55;
+  margin: 0 0 10px 0;
+}
+.pf-ground .ground-row .right {
+  display: flex; flex-direction: column; gap: 8px;
+}
+.pf-ground .ground-row .vendors {
+  display: flex; flex-wrap: wrap; gap: 6px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0; /* kill whitespace between chips */
+}
+.pf-ground .ground-row .vendors .v {
+  font-size: 11px; font-weight: 500; letter-spacing: 0.02em;
+  color: var(--text-muted);
+  padding: 4px 10px; border-radius: 4px;
+  background: rgba(2, 58, 132, 0.045);
+  border: 1px solid rgba(2, 58, 132, 0.10);
+}
+.pf-ground .ground-row .rw {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; font-weight: 700; letter-spacing: 0.14em;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+.pf-ground .ground-row .rw b {
+  color: var(--brand-primary); font-weight: 700;
+}
+
+/* ----- ACT — 6 numbered rail items (replaces 3-col grid) ----- */
+.pf-act .act-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+  margin-top: 40px;
+  border-top: 1px solid var(--rule-hair, rgba(2,58,132,0.08));
+}
+.pf-act .act-card {
+  position: relative;
+  padding: 24px 32px 24px 76px;
+  background: transparent;
+  border: none;
+  border-right: 1px solid var(--rule-hair, rgba(2,58,132,0.08));
+  border-bottom: 1px solid var(--rule-hair, rgba(2,58,132,0.08));
+  border-radius: 0;
+  transition: background 200ms ease;
+}
+.pf-act .act-card:nth-child(2n) { border-right: none; }
+.pf-act .act-card:hover { background: rgba(2, 98, 233, 0.025); }
+.pf-act .act-card::before {
+  content: attr(data-num);
+  position: absolute; left: 28px; top: 26px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.18em;
+  color: var(--brand-primary);
+}
+.pf-act .act-card .pill {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; font-weight: 700; letter-spacing: 0.16em;
+  text-transform: uppercase; color: #10B981;
+  margin-bottom: 10px;
+}
+.pf-act .act-card .pill::before {
+  content: ''; width: 5px; height: 5px; border-radius: 50%;
+  background: #10B981; box-shadow: 0 0 6px rgba(16, 185, 129, 0.6);
+  animation: pulseDot 2s ease-in-out infinite;
+}
+.pf-act .act-card h3 {
+  font-family: 'Urbanist', sans-serif; font-weight: 600;
+  font-size: 18px; color: var(--text-primary);
+  margin: 0 0 6px 0; letter-spacing: -0.01em;
+}
+.pf-act .act-card p {
+  font-size: 14px; color: var(--text-body); line-height: 1.55; margin: 0;
+}
+
+/* ----- CONTROL — numbered rail, replace left-border blocks ----- */
+.pf-control .control-rows { display: grid; gap: 0; margin-top: 40px; }
+.pf-control .control-row {
+  position: relative;
+  display: grid; grid-template-columns: 56px 240px 1fr; gap: 24px; align-items: start;
+  padding: 22px 28px 22px 0;
+  background: transparent;
+  border: none;
+  border-left: none;
+  border-top: 1px solid var(--rule-hair, rgba(2,58,132,0.08));
+  border-radius: 0;
+  transition: background 200ms ease;
+}
+.pf-control .control-row:last-child { border-bottom: 1px solid var(--rule-hair, rgba(2,58,132,0.08)); }
+.pf-control .control-row:hover { background: rgba(2, 98, 233, 0.025); }
+.pf-control .control-row .num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.18em;
+  color: var(--brand-primary);
+  margin-bottom: 0;
+  padding-top: 4px; padding-left: 4px;
+}
+.pf-control .control-row h3 {
+  font-family: 'Urbanist', sans-serif; font-weight: 600;
+  font-size: 18px; color: var(--text-primary);
+  margin: 0; letter-spacing: -0.01em;
+}
+.pf-control .control-row p {
+  font-size: 14.5px; color: var(--text-body); line-height: 1.55; margin: 0;
+}
+
+/* ----- responsive ----- */
+@media (max-width: 900px) {
+  .pf-arch-diagram { grid-template-columns: 1fr; gap: 32px; }
+  .pf-verify .verify-mode { grid-template-columns: 40px 1fr; gap: 14px; }
+  .pf-verify .verify-mode .status { display: none; }
+  .pf-ground .ground-row,
+  .pf-control .control-row { grid-template-columns: 1fr; gap: 8px; padding-left: 40px; }
+  .pf-ground .ground-row > :first-child,
+  .pf-control .control-row > :first-child { grid-column: auto; }
+  .pf-act .act-grid { grid-template-columns: 1fr; }
+  .pf-act .act-card:nth-child(2n) { border-right: none; }
+}
+
+/* =================================================================
+   DARK-MODE ALIGNMENT (2026-04-19) — match homepage-v2-option-a-v2
+   The homepage is entirely dark-bg. Platform page sections must read
+   as the same system. Convert light/tint sections to ink with the
+   same cyan-eyebrow + mono-number + hairline vocabulary.
+   ================================================================= */
+
+/* Page backdrop below the hero panel — deep ink like the homepage */
+:root {
+  --pf-ink: #0A0F1E;
+  --pf-ink-soft: #0E1527;
+  --pf-rule: rgba(255, 255, 255, 0.08);
+  --pf-rule-soft: rgba(255, 255, 255, 0.04);
+  --pf-text: #F5F6FA;
+  --pf-text-body: rgba(245, 246, 250, 0.78);
+  --pf-text-muted: rgba(245, 246, 250, 0.52);
+  --pf-chip-bg: rgba(255, 255, 255, 0.04);
+  --pf-chip-border: rgba(255, 255, 255, 0.10);
+  --pf-cyan: #83E4FF;
+  --pf-blue: #4D9BFF;
+}
+
+/* Body & main backdrop — kill the light gutter around the hero panel */
+html, body { background: var(--pf-ink) !important; }
+main#main { background: var(--pf-ink) !important; }
+.pf-hero-wrap { background: var(--pf-ink) !important; }
+/* If any ::before/::after overlay is painting light, neutralize */
+.pf-hero-wrap::before, .pf-hero-wrap::after { background: var(--pf-ink) !important; }
+
+/* ----- ARCHITECTURE (§ 01) -------------------------------------- */
+.pf-arch {
+  background: var(--pf-ink) !important;
+  padding: 112px 32px;
+  border-top: 1px solid var(--pf-rule);
+}
+.pf-arch .sec-head .eyebrow {
+  color: var(--brand-primary, #0062E9) !important;
+}
+/* EYEBROW-GREEN-DOT (2026-04-19) — match homepage */
+.eyebrow::before {
+  background: var(--status-live, #10B981) !important;
+  box-shadow: 0 0 8px rgba(16,185,129,0.45), 0 0 0 3px rgba(16,185,129,0.08) !important;
+}
+.pf-arch .sec-head .eyebrow .chap {
+  color: rgba(255,255,255,0.42) !important;
+}
+.pf-arch .sec-head h2 { color: var(--pf-text) !important; }
+.pf-arch .sec-head p { color: var(--pf-text-body) !important; }
+
+.pf-arch-diagram .legend h3 { color: var(--pf-text); }
+.pf-arch-diagram .legend p { color: var(--pf-text-body); }
+.pf-arch-diagram .legend .legend-key {
+  background: var(--pf-ink-soft);
+  border-color: var(--pf-rule);
+}
+.pf-arch-diagram .legend .legend-key .row { color: var(--pf-text-body); }
+.pf-arch-diagram .legend .legend-key .row .name { color: var(--pf-text); }
+.pf-arch-diagram .legend .legend-key .row .desc { color: var(--pf-text-muted); }
+.pf-arch-diagram .legend .legend-key .row.control .swatch {
+  border-color: var(--pf-cyan);
+}
+
+.pf-arch-system {
+  background: var(--pf-ink-soft);
+  border-color: var(--pf-cyan);
+}
+.pf-arch-system::before {
+  color: var(--pf-cyan);
+  background: var(--pf-ink);
+}
+.pf-arch-system .pf-arch-tier {
+  background: rgba(255, 255, 255, 0.02);
+  border-color: var(--pf-rule);
+}
+.pf-arch-system .pf-arch-tier:hover {
+  border-color: rgba(131, 228, 255, 0.45);
+  background: rgba(131, 228, 255, 0.04);
+}
+.pf-arch-system .pf-arch-tier .tier-num { color: var(--pf-cyan); }
+.pf-arch-system .pf-arch-tier .tier-body h4 { color: var(--pf-text); }
+.pf-arch-system .pf-arch-tier .tier-body p { color: var(--pf-text-body); }
+.pf-arch-system .pf-arch-foundation {
+  background: rgba(255, 255, 255, 0.02);
+}
+.pf-arch-system .pf-arch-foundation .fnum { color: var(--pf-text-muted); }
+.pf-arch-system .pf-arch-foundation .fbody h4,
+.pf-arch-system .pf-arch-foundation .fbody p { color: var(--pf-text-muted); }
+
+/* ----- GROUND (§ 03) -------------------------------------------- */
+.pf-ground {
+  background: var(--pf-ink) !important;
+  border-top: 1px solid var(--pf-rule);
+}
+.pf-ground .sec-head .eyebrow { color: var(--pf-cyan) !important; }
+.pf-ground .sec-head .eyebrow .chap { color: rgba(131, 228, 255, 0.42) !important; }
+.pf-ground .sec-head h2 { color: var(--pf-text) !important; }
+.pf-ground .sec-head p { color: var(--pf-text-body) !important; }
+
+.pf-ground .ground-row {
+  border-top-color: var(--pf-rule) !important;
+}
+.pf-ground .ground-row:last-child {
+  border-bottom-color: var(--pf-rule) !important;
+}
+.pf-ground .ground-row:hover {
+  background: rgba(131, 228, 255, 0.03) !important;
+}
+.pf-ground .ground-row::before {
+  color: var(--pf-cyan) !important;
+}
+.pf-ground .ground-row .cat { color: var(--pf-text) !important; }
+.pf-ground .ground-row .desc { color: var(--pf-text-body) !important; }
+.pf-ground .ground-row .vendors .v {
+  color: var(--pf-text-muted);
+  background: var(--pf-chip-bg);
+  border-color: var(--pf-chip-border);
+}
+.pf-ground .ground-row .rw {
+  color: var(--pf-text-muted);
+}
+.pf-ground .ground-row .rw b {
+  color: var(--pf-cyan);
+}
+
+/* ----- ACT (§ 04) ------------------------------------------------ */
+.pf-act {
+  background: var(--pf-ink) !important;
+  border-top: 1px solid var(--pf-rule);
+}
+.pf-act .sec-head .eyebrow { color: var(--pf-cyan) !important; }
+.pf-act .sec-head .eyebrow .chap { color: rgba(131, 228, 255, 0.42) !important; }
+.pf-act .sec-head h2 { color: var(--pf-text) !important; }
+.pf-act .sec-head p { color: var(--pf-text-body) !important; }
+
+.pf-act .act-grid {
+  border-top-color: var(--pf-rule) !important;
+}
+.pf-act .act-card {
+  border-right-color: var(--pf-rule) !important;
+  border-bottom-color: var(--pf-rule) !important;
+}
+.pf-act .act-card:hover {
+  background: rgba(131, 228, 255, 0.03) !important;
+}
+.pf-act .act-card::before {
+  color: var(--pf-cyan) !important;
+}
+.pf-act .act-card h3 { color: var(--pf-text) !important; }
+.pf-act .act-card p { color: var(--pf-text-body) !important; }
+
+/* ----- CONTROL (§ 05) -------------------------------------------- */
+.pf-control {
+  background: var(--pf-ink) !important;
+  border-top: 1px solid var(--pf-rule);
+}
+.pf-control .sec-head .eyebrow { color: var(--pf-cyan) !important; }
+.pf-control .sec-head .eyebrow .chap { color: rgba(131, 228, 255, 0.42) !important; }
+.pf-control .sec-head h2 { color: var(--pf-text) !important; }
+.pf-control .sec-head p { color: var(--pf-text-body) !important; }
+
+.pf-control .control-row {
+  border-top-color: var(--pf-rule) !important;
+}
+.pf-control .control-row:last-child {
+  border-bottom-color: var(--pf-rule) !important;
+}
+.pf-control .control-row:hover {
+  background: rgba(131, 228, 255, 0.03) !important;
+}
+.pf-control .control-row .num { color: var(--pf-cyan) !important; }
+.pf-control .control-row h3 { color: var(--pf-text) !important; }
+.pf-control .control-row p { color: var(--pf-text-body) !important; }
+
+/* ----- STORY (§ 06) — was rendered on dark but muted/gray; match the others ----- */
+.pf-story {
+  background: var(--pf-ink) !important;
+  border-top: 1px solid var(--pf-rule);
+}
+.pf-story-head .eyebrow,
+.pf-story .eyebrow {
+  color: var(--pf-cyan) !important;
+}
+.pf-story-head .eyebrow .chap,
+.pf-story .eyebrow .chap {
+  color: rgba(131, 228, 255, 0.42) !important;
+}
+.pf-story-head h2 { color: var(--pf-text) !important; }
+.pf-story-head p, .pf-story-head .lead { color: var(--pf-text-body) !important; }
+
+/* Constrain runaway SVGs in the evidence / verify-step widgets */
+.pf-story-evidence svg,
+.ev-verify svg,
+.ev-verify-step svg,
+.ev-verify-step .check svg,
+.pf-story-phase svg {
+  max-width: 16px; max-height: 16px;
+  width: 16px; height: 16px;
+  display: inline-block; vertical-align: middle;
+}
+.ev-verify-step .check {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 16px; height: 16px;
+}
+
+/* Story phase labels — were ink-on-light; recolor for dark bg */
+.pf-story-phase-num { color: var(--pf-cyan) !important; }
+.pf-story-phase .name { color: var(--pf-text) !important; }
+.pf-story-phase .sep { color: rgba(245,246,250,0.3) !important; }
+.pf-story-phase .pledge { color: var(--pf-text-muted) !important; }
+.pf-story-phase h3 { color: var(--pf-text) !important; }
+.pf-story-phase p { color: var(--pf-text-body) !important; }
+
+/* ----- general safety: any stray .ground-row bordered white bg -- */
+.pf-ground, .pf-act, .pf-control, .pf-arch {
+  color: var(--pf-text);
+}
+
+/* ----- VERIFY (§02) and CLOSE sections — force dark --------- */
+.pf-verify, .pf-close {
+  background: var(--pf-ink) !important;
+  color: var(--pf-text-body) !important;
+  border-top: 1px solid var(--pf-rule);
+}
+.pf-verify *, .pf-close * { border-color: var(--pf-rule); }
+.pf-verify h1, .pf-verify h2, .pf-verify h3, .pf-verify h4,
+.pf-close h1, .pf-close h2, .pf-close h3, .pf-close h4 {
+  color: var(--pf-text) !important;
+}
+.pf-verify p, .pf-verify li, .pf-verify span, .pf-verify div,
+.pf-close p, .pf-close li, .pf-close span, .pf-close div {
+  color: var(--pf-text-body);
+}
+.pf-verify .eyebrow, .pf-close .eyebrow,
+.pf-verify [class*="eyebrow"], .pf-close [class*="eyebrow"] {
+  color: var(--pf-cyan) !important;
+}
+.pf-verify .eyebrow .chap, .pf-close .eyebrow .chap,
+.pf-verify [class*="chap"], .pf-close [class*="chap"] {
+  color: rgba(131, 228, 255, 0.42) !important;
+}
+.pf-verify .sec-head p, .pf-close .sec-head p { color: var(--pf-text-body) !important; }
+/* cards/tiles inside those sections → ink-soft, not white */
+.pf-verify [class*="card"], .pf-verify [class*="tile"], .pf-verify [class*="box"],
+.pf-close [class*="card"], .pf-close [class*="tile"], .pf-close [class*="box"] {
+  background: var(--pf-ink-soft);
+  border-color: var(--pf-rule);
+  color: var(--pf-text-body);
+}
+.pf-verify a, .pf-close a { color: var(--pf-cyan); }
+
+/* ----- STORY section — everything inside force to dark-palette text ---- */
+.pf-story-progress-label,
+.pf-story-phase-num,
+.pf-story-phase .name,
+.pf-story-phase .sep,
+.pf-story-phase .pledge,
+.pf-story-phase h3, .pf-story-phase p, .pf-story-phase strong,
+.pf-story .line, .pf-story .text,
+.pf-story em, .pf-story strong,
+.pf-story-platform-link, .pf-story-platform-link a,
+.pf-story span, .pf-story div {
+  /* default safe: body on dark */
+}
+.pf-story-progress-num, .pf-story-phase-num { color: var(--pf-cyan) !important; }
+.pf-story-progress-label { color: var(--pf-text) !important; }
+.pf-story-phase .name, .pf-story-phase h3, .pf-story strong { color: var(--pf-text) !important; }
+.pf-story-phase .sep { color: rgba(245,246,250,0.3) !important; }
+.pf-story-phase .pledge, .pf-story-phase p, .pf-story .text, .pf-story em {
+  color: var(--pf-text-body) !important;
+}
+.pf-story .line { color: var(--pf-text-muted) !important; }
+.pf-story-platform-link, .pf-story-platform-link a {
+  color: var(--pf-cyan) !important;
+}
+
+/* ----- NAV: force dark on /platform (shared.css defaults to light) ----- */
+.site-nav {
+  background: rgba(11, 14, 23, 0.86) !important;
+  border-bottom: 1px solid var(--pf-rule) !important;
+  backdrop-filter: blur(12px);
+}
+.site-nav a { color: var(--pf-text-body) !important; }
+.site-nav a:hover { color: var(--pf-text) !important; }
+.site-nav a.cta {
+  background: #F5F6FA !important;
+  color: #06080F !important;
+}
+.site-nav a[style*="color: var(--brand-primary)"] {
+  color: var(--pf-cyan) !important;
+}
+.site-nav .wordmark img { filter: brightness(0) invert(1); }
+
+/* Nav logo — use the dark-bg variant (white wordmark + colored flame) */
+.site-nav .wordmark img {
+  filter: none;
+  content: url('assets/trillet-logo-dark.svg');
+}
+
+/* ----- Force story grid to proper layout so caller col isn't huge ------ */
+.pf-story-grid {
+  grid-template-columns: minmax(0, 0.7fr) minmax(0, 1.3fr) !important;
+}
+@media (max-width: 1024px) {
+  .pf-story-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+.pf-story-caller-col { min-width: 0; }
+.pf-story-caller { max-width: 100%; }
+
+/* ----- Compact the sliding call card (always — orb was oversized) -- */
+.pf-story-orb-wrap {
+  max-height: 200px !important;
+  max-width: 320px;
+  width: 100%;
+  aspect-ratio: auto !important;
+  margin: 12px auto;
+}
+.pf-story-orb-wrap svg,
+.pf-story-orb-wrap canvas,
+.pf-story-orb-wrap > div { max-height: 200px; max-width: 100%; }
+.pf-story-caller { padding: 22px !important; }
+.pf-story-caller-head { font-size: 13px; }
+
+/* ----- Compact the sliding call card when layout collapses ------- */
+@media (max-width: 1024px) {
+  .pf-story-grid { grid-template-columns: 1fr !important; }
+  .pf-story-caller-col {
+    position: relative !important;
+    max-width: 440px;
+    margin: 0 auto 32px;
+  }
+  .pf-story-caller { max-width: 440px; margin: 0 auto; }
+  .pf-story-orb-wrap { max-height: 180px; }
+  .pf-story-orb-wrap svg,
+  .pf-story-orb-wrap canvas,
+  .pf-story-orb-wrap > div { max-height: 180px; height: 180px; }
+}
+
+/* ----- FOOTER — force dark to complete the page flow --------- */
+footer, .pf-footer, .lb-footer, .site-footer, [class*="footer"] {
+  background: var(--pf-ink) !important;
+  color: var(--pf-text-body) !important;
+  border-top: 1px solid var(--pf-rule) !important;
+}
+footer *, .pf-footer *, .lb-footer *, .site-footer *, [class*="footer"] * {
+  color: var(--pf-text-body);
+  border-color: var(--pf-rule);
+}
+footer a, .pf-footer a, .lb-footer a, .site-footer a, [class*="footer"] a {
+  color: var(--pf-text-body) !important;
+}
+footer a:hover, .pf-footer a:hover, .lb-footer a:hover, .site-footer a:hover {
+  color: var(--pf-cyan) !important;
+}
+/* footer eyebrows */
+footer .eyebrow, .pf-footer .eyebrow, [class*="footer"] [class*="label"] {
+  color: var(--pf-text-muted) !important;
+}
+/* Don't swallow the preview-banner which has its own styling */
+.preview-banner, .preview-banner * { background: unset; }
+.preview-banner { background: #022f6a !important; }
+</style>
+</head>
+<body>
+
+<a href="#main" class="skip-link">Skip to main content</a>
+
+<div class="preview-banner" style="background: #022f6a;">
+  <div class="label">📄 PAGE MOCKUP · /platform (priority 4, deepest ~590vh, Verify largest)</div>
+  <div class="links">
+    <a href="index.html">All pages</a>
+    <a href="../homepage-v2-option-a-v2.html">/ home</a>
+    <a href="enterprise.html">/enterprise</a>
+    <a href="agency.html">/agency</a>
+    <a href="trust.html">/trust</a>
+    <a class="active" href="platform.html">/platform</a>
+    <a href="agency-pricing.html">/agency/pricing</a>
+  </div>
+</div>
+
+<header class="site-nav">
+  <a href="../homepage-v2-option-a-v2.html" class="wordmark"><img src="assets/trillet-logo.svg" alt="Trillet"></a>
+  <nav>
+    <a href="platform.html" style="color: var(--brand-primary); font-weight: 600;">Platform</a>
+    <a href="enterprise.html">Enterprise</a>
+    <a href="agency.html">Agency</a>
+    <a href="agent.html">AI Agent</a>
+    <a href="https://docs.trillet.ai/v1/api-reference/introduction">Docs</a>
+    <a href="#">Sign in</a>
+    <a href="#" class="cta">Get started</a>
+  </nav>
+</header>
+
+<main id="main">
+
+<!-- HERO · 4 stacked layer chips replace architecture-mini per Ori C5 -->
+<section class="pf-hero-wrap">
+  <div class="pf-panel">
+    <div class="pf-left">
+      <div class="status-pill on-dark">
+        <span class="dot-wrap"><span class="ping"></span><span class="core"></span></span>
+        The platform
+      </div>
+      <h1 class="h1-display on-dark pf-h1">Four jobs. One operating layer. Every call.</h1>
+      <p class="body-l2 on-dark" style="max-width: 560px;">Identity-verified callers. Live business context. Authorized action. Operator-grade control. The platform that runs every Trillet call.</p>
+      <div class="lb-pills">
+        <span class="tri-pill on-dark"><span class="d"></span>Verify</span>
+        <span class="tri-pill on-dark"><span class="d"></span>Ground</span>
+        <span class="tri-pill on-dark"><span class="d"></span>Act</span>
+        <span class="tri-pill on-dark"><span class="d"></span>Control</span>
+      </div>
+      <div class="lb-ctas">
+        <a href="#" class="cta-primary on-dark">
+          Map your workflow
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </a>
+        <a href="trust.html" class="cta-secondary on-dark">Read trust posture</a>
+      </div>
+    </div>
+    <div class="layer-chips-card">
+      <div class="layer-chip verify">
+        <div class="num">01</div>
+        <div>
+          <div class="label">Verify</div>
+          <div class="role">Identity-aware from the first second of the call</div>
+        </div>
+        <div class="indicator"></div>
+      </div>
+      <div class="layer-chip">
+        <div class="num">02</div>
+        <div>
+          <div class="label">Ground</div>
+          <div class="role">Live business context, not stale exports</div>
+        </div>
+        <div class="indicator"></div>
+      </div>
+      <div class="layer-chip">
+        <div class="num">03</div>
+        <div>
+          <div class="label">Act</div>
+          <div class="role">Authorized action, per-deployment scope</div>
+        </div>
+        <div class="indicator"></div>
+      </div>
+      <div class="layer-chip">
+        <div class="num">04</div>
+        <div>
+          <div class="label">Control</div>
+          <div class="role">Operator-grade testing, observability, audit</div>
+        </div>
+        <div class="indicator"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ARCHITECTURE OVERVIEW · TINT, stacked layer diagram (canonical surface, not the hero mini) -->
+<section class="pf-arch">
+  <div class="pf-arch-inner">
+    <div class="sec-head">
+      <div class="eyebrow">Architecture <span class="chap">· § 01</span></div>
+      <h2>How the layers fit.</h2>
+      <p>Four jobs running on every call. Each layer has its own responsibility. Together they are the operating layer.</p>
+    </div>
+    <div class="pf-arch-diagram">
+      <div class="legend">
+        <h3>The system, top-to-bottom.</h3>
+        <p>Three active layers handle the call. A fourth wraps them in operator-grade control. Below, the voice &amp; telephony foundation — a layer we abstract from the call.</p>
+        <div class="legend-key">
+          <div class="row control"><div class="swatch"></div><span><span class="name">Wrap</span><span class="desc">Observes, audits, bounds the three below.</span></span></div>
+          <div class="row"><div class="swatch" style="background: rgba(2, 98, 233, 0.16); border: 1px solid rgba(2, 98, 233, 0.35);"></div><span><span class="name">Active</span><span class="desc">Runs the job on the call.</span></span></div>
+          <div class="row"><div class="swatch" style="background: rgba(2, 58, 132, 0.08); border: 1px solid rgba(2, 58, 132, 0.12);"></div><span><span class="name">Foundation</span><span class="desc">Abstracted &mdash; not your concern.</span></span></div>
+        </div>
+      </div>
+
+      <div class="pf-arch-system" aria-label="Platform architecture diagram">
+        <div class="pf-arch-tier">
+          <div class="tier-num">03</div>
+          <div class="tier-body">
+            <h4>Act</h4>
+            <p>Routing, summaries, CRM updates, owner alerts, escalations, follow-through &mdash; authorized action per deployment.</p>
+          </div>
+        </div>
+        <div class="pf-arch-tier">
+          <div class="tier-num">02</div>
+          <div class="tier-body">
+            <h4>Ground</h4>
+            <p>Live business context retrieval &mdash; CRM, calendar, identity, knowledge base, account state.</p>
+          </div>
+        </div>
+        <div class="pf-arch-tier">
+          <div class="tier-num">01</div>
+          <div class="tier-body">
+            <h4>Verify</h4>
+            <p>Identity verification gates the call &mdash; caller authenticated before any account-touching action.</p>
+          </div>
+        </div>
+        <div class="pf-arch-foundation">
+          <div class="fnum">∞</div>
+          <div class="fbody">
+            <h4>Voice + telephony foundation</h4>
+            <p>STT + TTS + LLM + telephony providers &mdash; abstracted from the call.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VERIFY (DEEPEST SECTION ~100vh) -->
+<section class="pf-verify">
+  <div class="pf-verify-inner">
+    <div>
+      <div class="eyebrow">Verify <span class="chap">· § 02</span></div>
+      <h2>Identity-aware from the first second.</h2>
+      <p>The agent verifies the caller before any account-touching action. Verification mode is configured per deployment. The same agent can use different verification modes for different call paths.</p>
+      <div class="verify-modes">
+        <div class="verify-mode" data-num="01">
+          <div>
+            <h4>Cell-phone 2FA</h4>
+            <p>SMS or voice-channel one-time code, configurable per deployment.</p>
+          </div>
+          <div class="status">Live</div>
+        </div>
+        <div class="verify-mode" data-num="02">
+          <div>
+            <h4>Voice biometrics</h4>
+            <p>Voice-pattern verification against an enrolled voice print. Available on enterprise engagement.</p>
+          </div>
+          <div class="status">Enterprise</div>
+        </div>
+        <div class="verify-mode" data-num="03">
+          <div>
+            <h4>Knowledge-based verification</h4>
+            <p>Account-specific challenge questions, configured per deployment.</p>
+          </div>
+          <div class="status">Live</div>
+        </div>
+        <div class="verify-mode" data-num="04">
+          <div>
+            <h4>Custom / regulated</h4>
+            <p>Higher-standard verification per regulated requirement &mdash; banking-grade identity check, HIPAA-compliant identity confirmation.</p>
+          </div>
+          <div class="status">Regulated</div>
+        </div>
+      </div>
+    </div>
+    <div class="verify-panel">
+      <div class="verify-panel-head">
+        <div class="title">Verify in progress · Live</div>
+        <div class="pill">VERIFYING</div>
+      </div>
+      <div class="verify-step-row">
+        <div class="step-num">STEP 1</div>
+        <div class="step-content">
+          <div class="what">Caller dials in · <span style="font-family: 'JetBrains Mono', monospace; color: var(--text-on-dark);">+1 (XXX) XXX · 0482</span></div>
+          <div class="result success">IDENTIFIED · phone match · CRM record found</div>
+        </div>
+      </div>
+      <div class="verify-step-row">
+        <div class="step-num">STEP 2</div>
+        <div class="step-content">
+          <div class="what">2FA code sent to caller's verified mobile</div>
+          <div class="result code">SENT · code: ***</div>
+        </div>
+      </div>
+      <div class="verify-step-row">
+        <div class="step-num">STEP 3</div>
+        <div class="step-content">
+          <div class="what">Caller speaks code</div>
+          <div class="result success">VERIFIED · authentication passed</div>
+        </div>
+      </div>
+      <div class="verify-step-row">
+        <div class="step-num">STEP 4</div>
+        <div class="step-content">
+          <div class="what">Account-touching action authorized</div>
+          <div class="result success">READY · agent proceeds with account changes</div>
+        </div>
+      </div>
+      <div class="verify-panel-foot">
+        Verification mode configured per deployment per call path. Failed verification routes per your escalation policy.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GROUND (TINT, 4-row integration list) -->
+<section class="pf-ground">
+  <div class="pf-section-inner">
+    <div class="sec-head">
+      <div class="eyebrow">Ground <span class="chap">· § 03</span></div>
+      <h2>Reads your live systems. Writes to them too.</h2>
+      <p>The agent works against the same business state your team works against &mdash; not a periodic export, not a cached snapshot.</p>
+    </div>
+    <div class="ground-rows">
+      <div class="ground-row" data-num="01">
+        <div class="cat">CRM</div>
+        <div class="right">
+          <div class="desc">Read account history, contact record, open tickets. Write call summary, next-step, status updates.</div>
+          <div class="vendors">
+            <span class="v">Salesforce</span>
+            <span class="v">HubSpot</span>
+            <span class="v">Zoho</span>
+            <span class="v">Pipedrive</span>
+            <span class="v">Custom API</span>
+          </div>
+          <div class="rw"><b>READ</b> history, contact &middot; <b>WRITE</b> summary, next-step</div>
+        </div>
+      </div>
+      <div class="ground-row" data-num="02">
+        <div class="cat">Calendar + booking</div>
+        <div class="right">
+          <div class="desc">Read availability per resource. Write bookings, reschedules, cancellations.</div>
+          <div class="vendors">
+            <span class="v">Google Calendar</span>
+            <span class="v">Outlook</span>
+            <span class="v">Cal.com</span>
+            <span class="v">Custom API</span>
+          </div>
+          <div class="rw"><b>READ</b> availability &middot; <b>WRITE</b> bookings, reschedules</div>
+        </div>
+      </div>
+      <div class="ground-row" data-num="03">
+        <div class="cat">Identity</div>
+        <div class="right">
+          <div class="desc">Verify caller against your identity provider. Read role + permissions for in-call authorization.</div>
+          <div class="vendors">
+            <span class="v">Okta</span>
+            <span class="v">Auth0</span>
+            <span class="v">Azure AD</span>
+            <span class="v">Custom SSO</span>
+          </div>
+          <div class="rw"><b>READ</b> identity, roles &middot; <b>VERIFY</b> at call start</div>
+        </div>
+      </div>
+      <div class="ground-row" data-num="04">
+        <div class="cat">Knowledge base</div>
+        <div class="right">
+          <div class="desc">Read live knowledge articles, intake rules, escalation paths. Per-deployment KB scope.</div>
+          <div class="vendors">
+            <span class="v">Notion</span>
+            <span class="v">Confluence</span>
+            <span class="v">Custom API</span>
+          </div>
+          <div class="rw"><b>READ</b> articles, rules, escalation paths</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ACT (Light, 6-card grid) -->
+<section class="pf-act">
+  <div class="pf-section-inner">
+    <div class="sec-head">
+      <div class="eyebrow">Act <span class="chap">· § 04</span></div>
+      <h2>Authorized action. Per-deployment scope.</h2>
+      <p>What the agent can do is configured per deployment. Authorized scope per call path. Human-in-the-loop where the call requires one.</p>
+    </div>
+    <div class="act-grid">
+      <div class="act-card" data-num="01"><div class="pill">Live</div><h3>Routing</h3><p>Route the call to the right team, queue, or human based on verified intent and account state.</p></div>
+      <div class="act-card" data-num="02"><div class="pill">Live</div><h3>Summaries</h3><p>Generate the call summary against your fields. Push to CRM, knowledge base, or downstream workflow.</p></div>
+      <div class="act-card" data-num="03"><div class="pill">Live</div><h3>CRM updates</h3><p>Write next-step, status, sentiment, intent into CRM during or after the call.</p></div>
+      <div class="act-card" data-num="04"><div class="pill">Live</div><h3>Owner alerts</h3><p>Notify the account owner via email, SMS, Slack, or webhook based on call outcome.</p></div>
+      <div class="act-card" data-num="05"><div class="pill">Live</div><h3>Escalations</h3><p>Escalate per policy: high-value deal, regulatory flag, sentiment threshold, agent-confidence threshold.</p></div>
+      <div class="act-card" data-num="06"><div class="pill">Live</div><h3>Follow-through</h3><p>Post-call workflow: SMS confirmation, email summary, calendar invite, follow-up call queued, ticket created.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTROL (TINT, 4-row capability list) -->
+<section class="pf-control">
+  <div class="pf-section-inner">
+    <div class="sec-head">
+      <div class="eyebrow">Control <span class="chap">· § 05</span></div>
+      <h2>Operator-grade control.</h2>
+      <p>Testing, observability, access controls, deployment boundaries. The platform behaves the way enterprise environments require.</p>
+    </div>
+    <div class="control-rows">
+      <div class="control-row">
+        <div class="num">01</div>
+        <h3>Testing</h3>
+        <p>Per-call test mode. Replay flagged calls in evaluation environment. A/B test prompts and routing logic on production traffic with controlled exposure.</p>
+      </div>
+      <div class="control-row">
+        <div class="num">02</div>
+        <h3>Observability</h3>
+        <p>Continuous metrics on call outcome, latency, sub-processor performance, intent classification accuracy. Configurable alerting per deployment.</p>
+      </div>
+      <div class="control-row">
+        <div class="num">03</div>
+        <h3>Access controls</h3>
+        <p>Role-scoped access to operator console, audit logs, configuration. Single-sign-on integration per deployment.</p>
+      </div>
+      <div class="control-row">
+        <div class="num">04</div>
+        <h3>Deployment boundaries</h3>
+        <p>Authorized scope per deployment per call path. What the agent can do is bounded, not open-ended.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- THE FULL CALL · animated walk-through -->
+<!-- END-TO-END · single-call spine, moved from homepage 2026-04-19 per P0 site-audit (homepage section 3 was 2300 lines, not homepage-shaped). Replaces the prior static pf-fullcall 4-card section; same four jobs, now dramatized as the caller moves through them. Sticky caller card on the left; 4 phase panels + live evidence cards on the right. IntersectionObserver updates state as each phase scrolls into view. -->
+<section class="pf-story" id="story" data-spine-section="story" aria-labelledby="story-heading">
+  <div class="pf-story-inner">
+
+    <div class="pf-story-head">
+      <div class="eyebrow" data-chapter="· § 06">One call, end to end <span class="chap">· § 06</span></div>
+      <h2 id="story-heading">Watch a single call go the distance.</h2>
+      <p>Most voice agents stop at the conversation. Trillet runs on your live business systems — verifying, grounding, acting, and following through on every call.</p>
+    </div>
+
+    <!-- PHASE PROGRESS STRIP — sticky skimmer aid; IO marks active step + completes prior steps -->
+    <div class="pf-story-progress-wrap">
+      <div class="pf-story-progress" role="progressbar" aria-label="Call progress">
+        <div class="pf-story-progress-step is-active" data-phase="verify">
+          <span class="pf-story-progress-num">01</span>
+          <span class="pf-story-progress-label">Verify</span>
+        </div>
+        <div class="pf-story-progress-step" data-phase="ground">
+          <span class="pf-story-progress-num">02</span>
+          <span class="pf-story-progress-label">Ground</span>
+        </div>
+        <div class="pf-story-progress-step" data-phase="act">
+          <span class="pf-story-progress-num">03</span>
+          <span class="pf-story-progress-label">Act</span>
+        </div>
+        <div class="pf-story-progress-step" data-phase="follow">
+          <span class="pf-story-progress-num">04</span>
+          <span class="pf-story-progress-label">Follow-through</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="pf-story-grid">
+
+      <!-- STICKY · the caller that is being traced throughout -->
+      <div class="pf-story-caller-col">
+        <div class="pf-story-caller">
+          <div class="pf-story-caller-head">
+            <span><span class="dot"></span>Live call · in progress</span>
+            <span id="pf-story-duration">00:34</span>
+          </div>
+          <div class="pf-story-caller-id">+1 (415) 555 · 0482</div>
+          <div class="pf-story-caller-meta">
+            <span>Inbound · U.S. retail banking customer</span>
+            <span class="deployment">retail-banking-v3 · enterprise</span>
+          </div>
+          <div class="pf-story-orb-wrap">
+            <div class="orb-aura"></div>
+            <div class="orb-ring-3"></div>
+            <div class="orb"></div>
+          </div>
+          <div class="pf-story-phase-chip" data-phase="verify" id="pf-story-chip">
+            <span class="label"><span class="active-dot"></span><span id="pf-story-chip-label">Verifying</span></span>
+            <span class="counter" id="pf-story-chip-counter">01 / 04</span>
+          </div>
+          <!-- Transcript snippet — swaps per phase via JS -->
+          <div class="pf-story-caller-transcript" id="pf-story-transcript">
+            <span class="speaker" id="pf-story-transcript-who">Caller</span>
+            <span id="pf-story-transcript-text">"Hi — I need to reset my password. I can't get into my account."</span>
+          </div>
+          <!-- Activity row — what the agent is doing right now -->
+          <div class="pf-story-caller-activity" id="pf-story-activity">
+            <span class="left"><span class="pulse"></span><span id="pf-story-activity-left">Verifying identity</span></span>
+            <span class="right" id="pf-story-activity-right">2FA · 6-digit</span>
+          </div>
+          <div class="pf-story-timer">
+            <span>Intent</span>
+            <span class="elapsed">Password reset</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- SCROLL · 4 phase panels -->
+      <div class="pf-story-phases">
+
+        <!-- 01 · VERIFY -->
+        <section class="pf-story-phase" data-phase="verify" id="pfs-phase-verify">
+          <div class="pf-story-phase-header">
+            <span class="pf-story-phase-num">01</span>
+            <span class="name">Verify</span>
+            <span class="sep">·</span>
+            <span class="pledge">no action before identity</span>
+          </div>
+          <h3>Before anything else happens, the caller is who they say they are.</h3>
+          <p>Trillet authenticates against your CRM record — 2FA out of band, voice biometrics, or whatever your compliance layer requires. No account-touching action begins until verification completes.</p>
+          <div class="pf-story-evidence">
+            <div class="pf-story-evidence-head">
+              <span class="pf-story-evidence-title">Identity challenge</span>
+              <span>retail-banking-v3</span>
+            </div>
+            <div class="ev-verify">
+              <div class="ev-verify-step">
+                <span class="check"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 6l3 3 5-6"/></svg></span>
+                <span>CRM record matched · account #8842</span>
+                <span class="time">00:04</span>
+              </div>
+              <div class="ev-verify-step">
+                <span class="check"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 6l3 3 5-6"/></svg></span>
+                <span>2FA code sent to mobile ending 4217</span>
+                <span class="time">00:09</span>
+              </div>
+              <div class="ev-verify-code">
+                <span>6</span><span>3</span><span>8</span><span>0</span><span>1</span><span>2</span>
+              </div>
+              <div class="ev-verify-step">
+                <span class="check"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 6l3 3 5-6"/></svg></span>
+                <span>Code confirmed · identity verified</span>
+                <span class="time">00:31</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 02 · GROUND -->
+        <section class="pf-story-phase" data-phase="ground" id="pfs-phase-ground">
+          <div class="pf-story-phase-header">
+            <span class="pf-story-phase-num">02</span>
+            <span class="name">Ground</span>
+            <span class="sep">·</span>
+            <span class="pledge">on your live systems</span>
+          </div>
+          <h3>The agent reads your systems the way a good rep would<br>&mdash; live, not from a stale extract.</h3>
+          <p>Account history, open tickets, per-product rules, calendar availability. Trillet grounds the conversation in whatever your business already runs, so the answers match what your CRM says right now.</p>
+          <div class="pf-story-evidence">
+            <div class="pf-story-evidence-head">
+              <span class="pf-story-evidence-title">Live context · read</span>
+              <span>4 sources · 120ms</span>
+            </div>
+            <div class="ev-ground">
+              <div class="ev-ground-row">
+                <span class="source">CRM</span>
+                <span class="value">account tier · platinum · 6y customer</span>
+                <span class="pulse"></span>
+              </div>
+              <div class="ev-ground-row">
+                <span class="source">Auth policy</span>
+                <span class="value">password reset · requires recent 2FA (✓)</span>
+                <span class="pulse"></span>
+              </div>
+              <div class="ev-ground-row">
+                <span class="source">Ticket history</span>
+                <span class="value">0 open · last issue resolved 2 weeks ago</span>
+                <span class="pulse"></span>
+              </div>
+              <div class="ev-ground-row">
+                <span class="source">Fraud signal</span>
+                <span class="value">clean · device + number match on file</span>
+                <span class="pulse"></span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- CONTRAST CALLOUT · where most voice agents stop -->
+        <div class="pf-story-stop-callout">
+          <div class="line">Where most voice agents stop</div>
+          <div class="text">The conversation ends. Nothing is <em>written</em>, <em>scheduled</em>, or <em>routed</em>. A human picks up the work after the call.</div>
+        </div>
+
+        <!-- 03 · ACT -->
+        <section class="pf-story-phase" data-phase="act" id="pfs-phase-act">
+          <div class="pf-story-phase-header">
+            <span class="pf-story-phase-num">03</span>
+            <span class="name">Act</span>
+            <span class="sep">·</span>
+            <span class="pledge">inside your systems, with scope</span>
+          </div>
+          <h3>Trillet takes the action the caller asked for<br>&mdash; on your systems, inside the scope you granted.</h3>
+          <p>Password reset issued, calendar event booked, ticket created, CRM updated. Every action runs against your live backend with an auditable trail, not an export.</p>
+          <div class="pf-story-evidence">
+            <div class="pf-story-evidence-head">
+              <span class="pf-story-evidence-title">Actions executed</span>
+              <span>3 actions · all succeeded</span>
+            </div>
+            <div class="ev-act">
+              <div class="ev-act-step">
+                <span class="icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
+                <span><div>Password reset · email + SMS sent</div><div class="label-sub">POST /accounts/8842/reset</div></span>
+                <span class="status">200 OK</span>
+              </div>
+              <div class="ev-act-step">
+                <span class="icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 13h6M9 17h3"/></svg></span>
+                <span><div>CRM summary written · interaction logged</div><div class="label-sub">PATCH /contacts/c-8842/interactions</div></span>
+                <span class="status">201 Created</span>
+              </div>
+              <div class="ev-act-step">
+                <span class="icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg></span>
+                <span><div>Fraud alert suppressed · signal clean</div><div class="label-sub">POST /risk/review/skip</div></span>
+                <span class="status">200 OK</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 04 · FOLLOW-THROUGH -->
+        <section class="pf-story-phase" data-phase="follow" id="pfs-phase-follow">
+          <div class="pf-story-phase-header">
+            <span class="pf-story-phase-num">04</span>
+            <span class="name">Follow-through</span>
+            <span class="sep">·</span>
+            <span class="pledge">what happens after the call ends</span>
+          </div>
+          <h3>The call wraps, and the work keeps moving — on its own.</h3>
+          <p>Confirmation queued. Next-best-action written into the CRM. Escalation routed to the right human if something needs one. The post-call layer is where most voice products quietly hand the work back to your team. Trillet doesn't.</p>
+          <div class="pf-story-evidence">
+            <div class="pf-story-evidence-head">
+              <span class="pf-story-evidence-title">Post-call queue</span>
+              <span>04 items · all dispatched</span>
+            </div>
+            <div class="ev-follow">
+              <div class="ev-follow-item">
+                <div class="kind">Email summary</div>
+                <div class="what">Sent to customer · "Your password has been reset. Full interaction log attached."</div>
+              </div>
+              <div class="ev-follow-item">
+                <div class="kind">CRM next-step</div>
+                <div class="what">30-day check-in scheduled · assigned to account owner Rachel L.</div>
+              </div>
+              <div class="ev-follow-item">
+                <div class="kind">SMS confirmation</div>
+                <div class="what">Queued for 09:00 tomorrow · "Your account is secure. Anything else we can help with?"</div>
+              </div>
+              <div class="ev-follow-item">
+                <div class="kind">Escalation</div>
+                <div class="what">None required · intent satisfied · confidence 0.97 · no hot signal flagged</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- CLOSURE BEAT — closes the loop emotionally; chip flips to WRAPPED in the caller card too via JS -->
+          <div class="pf-story-closure">
+            <div class="pf-story-closure-left">
+              <span class="pf-story-closure-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+              </span>
+              <span class="pf-story-closure-text"><strong>Call wrapped.</strong> All four post-call actions dispatched. Customer notified.</span>
+            </div>
+            <span class="pf-story-closure-time">04:23 · END</span>
+          </div>
+        </section>
+
+      </div>
+    </div>
+
+    <!-- Link into /platform — the architectural decomposition of the same four jobs. Muted, end-of-story. -->
+    <div class="pf-story-platform-link">
+      <a href="pages/platform.html">See the full platform architecture <span aria-hidden="true">→</span></a>
+    </div>
+
+    <!-- SCALE-OUT bridge line removed 2026-04-18 — was overclaiming, muddy prose.
+         The 1.4M+ counter in Proof Ledger does the scale-out work on its own. -->
+
+  </div>
+</section>
+
+<!-- § 06 CLOSE · dark-panel-in-light + 5-beat evaluation agenda -->
+<section class="pf-close">
+  <div class="pf-close-panel">
+    <div class="pf-close-row">
+      <div>
+        <div class="eyebrow">Evaluate the platform <span class="chap">· § 07</span></div>
+        <h2>Map your call paths. Map the platform underneath.</h2>
+        <p>We review your call-path mix, identity requirements, business systems, action authorization, and deployment shape. End with a real plan for what the platform looks like running in your environment.</p>
+      </div>
+      <div class="ctas">
+        <a href="#" class="cta-primary on-dark">
+          Map your workflow
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </a>
+        <a href="trust.html" class="cta-secondary on-dark">Read trust posture</a>
+      </div>
+    </div>
+    <ol class="pf-close-agenda" aria-label="Platform evaluation agenda">
+      <li>
+        <span class="num">01</span>
+        <span class="beat">Call-path review</span>
+        <span class="when">Week 1</span>
+      </li>
+      <li>
+        <span class="num">02</span>
+        <span class="beat">Identity &amp; auth mapping</span>
+        <span class="when">Week 1</span>
+      </li>
+      <li>
+        <span class="num">03</span>
+        <span class="beat">Systems integration plan</span>
+        <span class="when">Week 2</span>
+      </li>
+      <li>
+        <span class="num">04</span>
+        <span class="beat">Action scope &amp; guardrails</span>
+        <span class="when">Week 2</span>
+      </li>
+      <li>
+        <span class="num">05</span>
+        <span class="beat">Deployment proposal</span>
+        <span class="when">Week 3</span>
+      </li>
+    </ol>
+  </div>
+</section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-mark">
+      <img src="assets/trillet-footer.svg" alt="Trillet">
+      <p>Four jobs running on every call: verify, ground, act, control.</p>
+    </div>
+    <div class="footer-col"><h4>Platform</h4><ul><li><a href="platform.html">Overview</a></li><li><a href="enterprise.html">Enterprise</a></li><li><a href="agency.html">Agency</a></li><li><a href="agent.html">AI Agent</a></li><li><a href="agency-pricing.html">Pricing</a></li></ul></div>
+    <div class="footer-col"><h4>Trust</h4><ul><li><a href="trust.html">Compliance posture</a></li><li><a href="#">Sub-processors</a></li><li><a href="#">DPA</a></li></ul></div>
+    <div class="footer-col"><h4>Company</h4><ul><li><a href="#">About</a></li><li><a href="#">Careers</a></li><li><a href="#">Contact</a></li><li><a href="#">Privacy</a></li></ul></div>
+    <div class="footer-col"><h4>Resources</h4><ul><li><a href="https://docs.trillet.ai/v1/api-reference/introduction">Docs</a></li><li><a href="#">Changelog</a></li><li><a href="#">Blog</a></li><li><a href="#">Status</a></li></ul></div>
+  </div>
+  <div class="footer-bar">
+    <div>© 2026 Trillet. All rights reserved.</div>
+    <nav><a href="#">Privacy</a><a href="#">Terms</a><a href="trust.html">Security</a></nav>
+  </div>
+</footer>
+
+<div class="option-footer" style="background: #022f6a;">
+  <strong style="color: white;">📄 /platform PAGE MOCKUP · DEEPEST PAGE ~590vh · VERIFY SECTION LARGEST</strong> · 8-section spine: Hero (4 stacked layer chips replace architecture-mini per Ori C5) → Architecture overview (TINT, stacked diagram showing voice/telephony bottom → Verify → Ground → Act → Control wraps all) → **Verify (DEEPEST ~100vh)** (4 verify mode pills cell-phone-2FA / voice-biometrics / knowledge-based / custom-regulated, live verify operator panel showing 4-step identity check stylized with ***  for codes per Ori C3) → Ground (TINT, 4-row integration list) → Act (Light, 6-card grid) → Control (TINT, 4-row left-border-accent capability list) → The full call (Light, phase strip + per-phase narrative cards) → Close.
+  <p style="margin-top: 8px;">[LOCKED per Ori]: Hero chips (C5), stylized verify panel (C3). Architecture diagram visual = static design pass pending (F2). Voice biometrics availability pending Ming (D7).</p>
+</div>
+
+<script>
+  /* Option A · single-call spine
+     - IntersectionObserver updates the caller chip + transcript + activity row + phase progress strip
+     - Timer ticks up so the call feels live
+     - When user fully scrolls past Follow-through, closure mode kicks in (chip → WRAPPED)
+  */
+  (function () {
+    const phases = [
+      { id: 'pfs-phase-verify',  key: 'verify',  label: 'Verifying',           counter: '01 / 04',
+        transcript: { who: 'Caller', text: '"Hi — I need to reset my password. I can\'t get into my account."' },
+        activity:   { left: 'Verifying identity', right: '2FA · 6-digit' } },
+      { id: 'pfs-phase-ground',  key: 'ground',  label: 'Grounded',            counter: '02 / 04',
+        transcript: { who: 'Trillet', text: '"Thanks Sarah. I see you on the platinum tier — your last issue was resolved two weeks ago. Let\'s get you back in."' },
+        activity:   { left: 'Reading systems', right: '4 sources · 120ms' } },
+      { id: 'pfs-phase-act',     key: 'act',     label: 'Act · in progress',   counter: '03 / 04',
+        transcript: { who: 'Trillet', text: '"Resetting now. New temporary password sent to the email on file. You\'ll be prompted to change it on login."' },
+        activity:   { left: 'Writing actions', right: '2 systems · 2 OK' } },
+      { id: 'pfs-phase-follow',  key: 'follow',  label: 'Follow-through',      counter: '04 / 04',
+        transcript: { who: 'Trillet', text: '"Confirmation email sent. I\'ve scheduled a 30-day check-in with Rachel, your account owner. Anything else today?"' },
+        activity:   { left: 'Wrap queue', right: '4 items · dispatching' } }
+    ];
+    const wrappedState = { label: 'Wrapped', counter: '✓ COMPLETE',
+      transcript: { who: 'End of call', text: 'All four post-call actions dispatched. Customer notified. Loop closed without human handoff.' },
+      activity:   { left: 'Loop complete', right: '04:23 · END' } };
+
+    const chip          = document.getElementById('pf-story-chip');
+    const chipLabel     = document.getElementById('pf-story-chip-label');
+    const chipCounter   = document.getElementById('pf-story-chip-counter');
+    const timerEl       = document.getElementById('pf-story-duration');
+    const transcriptEl  = document.getElementById('pf-story-transcript');
+    const transcriptWho = document.getElementById('pf-story-transcript-who');
+    const transcriptTxt = document.getElementById('pf-story-transcript-text');
+    const activityLeft  = document.getElementById('pf-story-activity-left');
+    const activityRight = document.getElementById('pf-story-activity-right');
+    const progressSteps = document.querySelectorAll('.pf-story-progress-step');
+    if (!chip || !chipLabel || !chipCounter || !timerEl) return;
+
+    function fmt(sec) {
+      const m = Math.floor(sec / 60).toString().padStart(2, '0');
+      const s = Math.floor(sec % 60).toString().padStart(2, '0');
+      return m + ':' + s;
+    }
+    function applyState(state, phaseKey) {
+      // chip
+      chip.setAttribute('data-phase', phaseKey || 'follow');
+      chipLabel.textContent = state.label;
+      chipCounter.textContent = state.counter;
+      // transcript with quick fade
+      transcriptEl.classList.add('is-changing');
+      setTimeout(() => {
+        transcriptWho.textContent = state.transcript.who;
+        transcriptTxt.textContent = state.transcript.text;
+        activityLeft.textContent  = state.activity.left;
+        activityRight.textContent = state.activity.right;
+        transcriptEl.classList.remove('is-changing');
+      }, 200);
+    }
+    function updateProgress(activeKey) {
+      const order = ['verify','ground','act','follow'];
+      const activeIdx = order.indexOf(activeKey);
+      progressSteps.forEach((step) => {
+        const stepKey = step.dataset.phase;
+        const stepIdx = order.indexOf(stepKey);
+        step.classList.remove('is-active', 'is-done');
+        if (stepIdx < activeIdx) step.classList.add('is-done');
+        else if (stepIdx === activeIdx) step.classList.add('is-active');
+      });
+    }
+
+    // track which phase is currently "most in view"
+    let currentKey = 'verify';
+    let isWrapped = false;
+    const callerEl = document.querySelector('.pf-story-caller');
+    // Caller is sticky-pinned via CSS; no transform manipulation needed.
+    function rollCallerContinuous() { /* no-op — caller is CSS-sticky */ }
+    function rollCallerTo(_phaseKey) { /* no-op */ }
+    // Scroll-driven activation — picks the phase whose top crosses the viewport's upper-third.
+    // More reliable than IntersectionObserver when phases are tall and user scrolls at variable speed.
+    function pickActivePhase() {
+      const trigger = window.innerHeight * 0.35; // activation line at 35% from top
+      let active = phases[0].key;
+      phases.forEach((p) => {
+        const el = document.getElementById(p.id);
+        if (!el) return;
+        const top = el.getBoundingClientRect().top;
+        if (top <= trigger) active = p.key;
+      });
+      return active;
+    }
+    function syncToScroll() {
+      // Roll caller every tick for smooth pace-with-scroll motion.
+      if (!isWrapped) rollCallerContinuous();
+      if (isWrapped) return;
+      const key = pickActivePhase();
+      if (key !== currentKey) {
+        currentKey = key;
+        const phase = phases.find(p => p.key === key);
+        if (phase) {
+          applyState(phase, phase.key);
+          updateProgress(phase.key);
+        }
+      }
+    }
+    let rafId = null;
+    window.addEventListener('scroll', () => {
+      if (rafId) return;
+      rafId = requestAnimationFrame(() => { syncToScroll(); rafId = null; });
+    }, { passive: true });
+    // Initial sync in case page loads mid-section
+    syncToScroll();
+
+    phases.forEach(p => {
+      const el = document.getElementById(p.id);
+      // phases observed via scroll handler, no IO needed here
+      void el;
+    });
+
+    // Closure detection — when the closure card itself enters the viewport, flip to WRAPPED
+    const closureEl = document.querySelector('.pf-story-closure');
+    if (closureEl) {
+      const closureObs = new IntersectionObserver((entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting && !isWrapped) {
+            isWrapped = true;
+            applyState(wrappedState, 'follow');
+            updateProgress('follow');
+            rollCallerTo('follow');
+            // mark all steps done
+            progressSteps.forEach(step => {
+              step.classList.remove('is-active');
+              step.classList.add('is-done');
+            });
+          }
+        });
+      }, { threshold: 0.5 });
+      closureObs.observe(closureEl);
+    }
+
+    // Timer — advance based on which phase we're in
+    const baseTimes = { verify: 34, ground: 78, act: 142, follow: 218 };
+    let tick = baseTimes.verify;
+    setInterval(() => {
+      if (isWrapped) {
+        timerEl.textContent = '04:23';
+        return;
+      }
+      const target = baseTimes[currentKey] + 20;
+      if (tick < target) tick += 1;
+      else tick += 0.2;
+      timerEl.textContent = fmt(tick);
+    }, 1000);
+  })();
+</script>
+</body>
+</html>

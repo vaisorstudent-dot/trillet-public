@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>/agency · Trillet wireframe mockup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Urbanist:wght@300;400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link href="_shared.css" rel="stylesheet">
+<style>
+  /* AGENCY-specific styles — extends locked-baseline visual register */
+  .agc-hero-wrap { padding: 40px 32px 96px; background: linear-gradient(to bottom, #FFFFFF 0%, #F7FAFF 100%); }
+  .agc-panel {
+    max-width: 1360px; margin: 0 auto;
+    background: var(--bg-dark);
+    border-radius: 28px; padding: 64px 56px;
+    position: relative; overflow: hidden;
+    display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 56px; align-items: center;
+    min-height: 540px;
+    box-shadow: 0 40px 80px rgba(2, 58, 132, 0.18);
+  }
+  .agc-panel::before {
+    content: ''; position: absolute; inset: 0; pointer-events: none;
+    background:
+      radial-gradient(ellipse 55% 45% at 78% 18%, rgba(131, 228, 255, 0.22) 0%, transparent 55%),
+      radial-gradient(ellipse 45% 45% at 12% 88%, rgba(2, 58, 132, 0.55) 0%, transparent 55%),
+      radial-gradient(ellipse 30% 30% at 75% 75%, rgba(39, 163, 253, 0.20) 0%, transparent 60%);
+  }
+  .agc-panel::after {
+    content: ''; position: absolute; inset: 0; pointer-events: none;
+    background-image: radial-gradient(rgba(255,255,255,0.04) 1px, transparent 1px);
+    background-size: 32px 32px; opacity: 0.6;
+    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 75%);
+  }
+  .agc-left { position: relative; z-index: 1; display: flex; flex-direction: column; gap: 24px; }
+  .agc-h1 { font-size: clamp(40px, 5.0vw, 60px); font-weight: 600; line-height: 1.05; }
+
+  /* Multi-tenant dashboard card (replaces orb on /agency hero) */
+  .mt-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 20px; padding: 28px;
+    position: relative; z-index: 1;
+    backdrop-filter: blur(10px);
+  }
+  .mt-card-head {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 20px; padding-bottom: 16px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .mt-card-head .title {
+    font-size: 12px; font-weight: 600; color: var(--text-on-dark);
+    letter-spacing: 0.06em; text-transform: uppercase;
+  }
+  .mt-row {
+    padding: 16px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    display: grid; grid-template-columns: auto 1fr auto; gap: 14px; align-items: center;
+  }
+  .mt-row:last-child { border-bottom: none; }
+  .mt-row .brand-dot {
+    width: 32px; height: 32px; border-radius: 8px;
+    background: linear-gradient(135deg, var(--brand-secondary), var(--brand-highlight));
+    opacity: 0.5;
+  }
+  .mt-row:nth-child(3) .brand-dot { background: linear-gradient(135deg, #f59e0b, #fbbf24); }
+  .mt-row:nth-child(4) .brand-dot { background: linear-gradient(135deg, #8b5cf6, #c084fc); }
+  .mt-row .name {
+    font-size: 13px; font-weight: 600; color: var(--text-on-dark);
+  }
+  .mt-row .meta {
+    font-size: 11px; color: var(--text-on-dark-muted); margin-top: 2px;
+    font-family: 'JetBrains Mono', monospace; font-variant-numeric: tabular-nums;
+  }
+  .mt-row .status {
+    font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    padding: 3px 9px; border-radius: 999px;
+    background: rgba(16, 185, 129, 0.14); color: #34D399;
+    border: 1px solid rgba(16, 185, 129, 0.25);
+  }
+
+  /* Section heads */
+  .sec-head { text-align: center; margin-bottom: 56px; }
+  .sec-head .eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--brand-primary); margin-bottom: 18px;
+  }
+  .sec-head .eyebrow::before { content: ''; width: 24px; height: 1px; background: currentColor; }
+  .sec-head h2 {
+    font-family: 'Urbanist', sans-serif; font-weight: 600;
+    font-size: clamp(32px, 4vw, 48px);
+    letter-spacing: -0.025em; line-height: 1.05;
+    color: var(--text-primary); margin: 0 0 16px 0;
+  }
+  .sec-head p {
+    font-size: 16px; color: var(--text-body); line-height: 1.65;
+    max-width: 640px; margin: 0 auto;
+  }
+
+  /* White-label mechanics (3-col grid) */
+  .agc-mechanics { padding: 96px 32px; background: white; }
+  .agc-mechanics-inner { max-width: 1160px; margin: 0 auto; }
+  .agc-mech-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px;
+  }
+  .agc-mech-pillar {
+    padding: 0 24px;
+    border-left: 2px solid rgba(0, 98, 233, 0.18);
+  }
+  .agc-mech-pillar .num {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 700;
+    letter-spacing: 0.16em; color: var(--brand-primary); margin-bottom: 8px;
+  }
+  .agc-mech-pillar h3 {
+    font-family: 'Urbanist', sans-serif; font-weight: 600;
+    font-size: 20px; color: var(--text-primary); margin: 0 0 8px 0;
+  }
+  .agc-mech-pillar p {
+    font-size: 14px; color: var(--text-body); line-height: 1.6; margin: 0;
+  }
+
+  /* Multi-tenant management (TINT, operator console multi-tenant variant) */
+  .agc-mt { padding: 96px 32px; background: var(--bg-tint); }
+  .agc-mt-inner {
+    max-width: 1360px; margin: 0 auto;
+    display: grid; grid-template-columns: 0.9fr 1.1fr;
+    gap: 48px; align-items: start;
+  }
+  .agc-mt h2 {
+    font-family: 'Urbanist', sans-serif; font-weight: 600;
+    font-size: clamp(28px, 3.5vw, 44px);
+    letter-spacing: -0.025em; line-height: 1.05;
+    color: var(--text-primary); margin: 0 0 16px 0;
+  }
+  .agc-mt .eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--brand-primary); margin-bottom: 18px;
+  }
+  .agc-mt .eyebrow::before { content: ''; width: 24px; height: 1px; background: currentColor; }
+  .agc-mt p { font-size: 16px; color: var(--text-body); line-height: 1.65; margin: 0; }
+  .agc-mt .op-console {
+    background:
+      radial-gradient(ellipse 60% 50% at 80% 20%, rgba(131, 228, 255, 0.10) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 60% at 15% 90%, rgba(39, 163, 253, 0.10) 0%, transparent 65%),
+      linear-gradient(135deg, #0F1E47 0%, #1A3068 100%);
+    border-color: rgba(131, 228, 255, 0.16);
+    box-shadow: 0 32px 80px rgba(2, 58, 132, 0.32);
+  }
+  .agc-mt .op-row { grid-template-columns: 1.5fr 1fr auto; }
+  .agc-mt .op-row .client {
+    font-size: 13px; font-weight: 600; color: var(--text-on-dark);
+  }
+  .agc-mt .op-row .calls {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    color: var(--text-on-dark-body); font-variant-numeric: tabular-nums;
+  }
+
+  /* Deploy speed (4-step timeline) */
+  .agc-deploy { padding: 96px 32px; background: white; }
+  .agc-deploy-inner { max-width: 1160px; margin: 0 auto; }
+  .agc-timeline {
+    position: relative;
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px;
+    margin-top: 56px;
+  }
+  .agc-timeline::before {
+    content: ''; position: absolute;
+    top: 24px; left: 12.5%; right: 12.5%; height: 2px;
+    background: linear-gradient(to right, var(--brand-secondary), var(--brand-highlight));
+    opacity: 0.3;
+  }
+  .agc-step { text-align: center; position: relative; }
+  .agc-step .node {
+    width: 48px; height: 48px; border-radius: 50%;
+    background: white; border: 2px solid var(--brand-primary);
+    display: inline-flex; align-items: center; justify-content: center;
+    font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 14px;
+    color: var(--brand-primary); margin-bottom: 16px;
+    position: relative; z-index: 1;
+  }
+  .agc-step h3 {
+    font-family: 'Urbanist', sans-serif; font-weight: 600;
+    font-size: 16px; color: var(--text-primary); margin: 0 0 6px 0;
+  }
+  .agc-step p {
+    font-size: 13px; color: var(--text-body); line-height: 1.55; margin: 0;
+  }
+
+  /* Margin economics (TINT, worked example) */
+  .agc-margin { padding: 96px 32px; background: var(--bg-tint); }
+  .agc-margin-inner {
+    max-width: 1160px; margin: 0 auto;
+    display: grid; grid-template-columns: 1.4fr 0.6fr; gap: 48px; align-items: start;
+  }
+  .agc-margin-card {
+    background: white; padding: 36px;
+    border: 1px solid var(--border-light);
+    border-radius: 16px;
+  }
+  .agc-margin-card h3 {
+    font-family: 'Urbanist', sans-serif; font-weight: 600;
+    font-size: 18px; color: var(--text-primary); margin: 0 0 20px 0;
+  }
+  .margin-row {
+    display: grid; grid-template-columns: 1fr auto;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border-light);
+    font-size: 14px;
+  }
+  .margin-row:last-of-type { border-bottom: none; }
+  .margin-row.total {
+    font-weight: 700; color: var(--brand-primary);
+    border-top: 2px solid var(--brand-primary); margin-top: 8px;
+    padding-top: 14px; border-bottom: none;
+  }
+  .margin-row .label { color: var(--text-body); }
+  .margin-row .value {
+    font-family: 'JetBrains Mono', monospace; font-variant-numeric: tabular-nums;
+    color: var(--text-primary);
+  }
+  .agc-tier-ref {
+    background: white; padding: 28px;
+    border: 1px solid var(--border-light); border-radius: 16px;
+  }
+  .agc-tier-ref h4 {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 700;
+    letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--text-muted); margin: 0 0 16px 0;
+  }
+  .agc-tier-ref ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
+  .agc-tier-ref ul li {
+    font-size: 13px; color: var(--text-body);
+    padding: 10px 12px;
+    background: var(--bg-tint);
+    border-radius: 8px;
+  }
+  .agc-tier-ref ul li strong {
+    color: var(--text-primary); display: block; margin-bottom: 2px;
+  }
+  .agc-tier-ref a {
+    display: inline-flex; align-items: center; gap: 4px;
+    font-size: 13px; font-weight: 600; color: var(--brand-primary);
+    margin-top: 14px;
+  }
+
+  /* Reference operators */
+  .agc-ref { padding: 96px 32px; background: white; }
+  .agc-ref-inner { max-width: 1160px; margin: 0 auto; }
+  .agc-ref-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 56px;
+  }
+  .agc-ref-card {
+    padding: 28px;
+    border: 1px solid var(--border-light);
+    border-radius: 16px;
+    background: white;
+  }
+  .agc-ref-card .pill {
+    display: inline-flex; align-items: center; gap: 4px;
+    font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    padding: 3px 9px; border-radius: 999px;
+    background: rgba(16, 185, 129, 0.12); color: #047857;
+    border: 1px solid rgba(16, 185, 129, 0.25);
+    margin-bottom: 14px;
+  }
+  .agc-ref-card h3 {
+    font-family: 'Urbanist', sans-serif; font-weight: 600;
+    font-size: 17px; color: var(--text-primary); margin: 0 0 8px 0;
+  }
+  .agc-ref-card p {
+    font-size: 13px; color: var(--text-body); line-height: 1.55; margin: 0;
+  }
+  .agc-ref-footer { margin-top: 32px; text-align: center; }
+  .agc-ref-footer a {
+    font-size: 14px; font-weight: 600; color: var(--brand-primary);
+  }
+
+  /* Close section */
+  .agc-close { padding: 112px 32px; background: var(--bg-tint); }
+  .agc-close-inner { max-width: 1160px; margin: 0 auto; }
+  .agc-close-row {
+    display: grid; grid-template-columns: 1.2fr 0.9fr; gap: 56px; align-items: center;
+    margin-bottom: 56px;
+  }
+  .agc-close h2 {
+    font-family: 'Urbanist', sans-serif; font-weight: 600;
+    font-size: clamp(32px, 4vw, 48px);
+    letter-spacing: -0.025em; line-height: 1.05;
+    color: var(--text-primary); margin: 0 0 16px 0;
+  }
+  .agc-close .eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--brand-primary); margin-bottom: 14px;
+  }
+  .agc-close .eyebrow::before { content: ''; width: 24px; height: 1px; background: currentColor; }
+  .agc-close p { font-size: 16px; color: var(--text-body); line-height: 1.65; margin: 0; }
+  .agc-close .ctas { display: flex; flex-direction: column; gap: 12px; align-items: flex-end; }
+
+  @media (max-width: 1024px) {
+    .agc-panel { grid-template-columns: 1fr; }
+    .agc-mech-grid { grid-template-columns: 1fr; }
+    .agc-mt-inner { grid-template-columns: 1fr; }
+    .agc-timeline { grid-template-columns: 1fr 1fr; }
+    .agc-timeline::before { display: none; }
+    .agc-margin-inner { grid-template-columns: 1fr; }
+    .agc-ref-grid { grid-template-columns: 1fr; }
+    .agc-close-row { grid-template-columns: 1fr; }
+    .agc-close .ctas { align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<a href="#main" class="skip-link">Skip to main content</a>
+
+<div class="preview-banner" style="background: #022f6a;">
+  <div class="label">📄 PAGE MOCKUP · /agency (priority 2, renamed from /whitelabel)</div>
+  <div class="links">
+    <a href="index.html">All pages</a>
+    <a href="../homepage-v2-option-a-v2.html">/ home</a>
+    <a href="enterprise.html">/enterprise</a>
+    <a class="active" href="agency.html">/agency</a>
+    <a href="trust.html">/trust</a>
+    <a href="platform.html">/platform</a>
+    <a href="agency-pricing.html">/agency/pricing</a>
+    <a href="customers.html">/customers</a>
+  </div>
+</div>
+
+<header class="site-nav">
+  <a href="../homepage-v2-option-a-v2.html" class="wordmark"><img src="assets/trillet-logo.svg" alt="Trillet"></a>
+  <nav>
+    <a href="platform.html">Platform</a>
+    <a href="enterprise.html">Enterprise</a>
+    <a href="agency.html" style="color: var(--brand-primary); font-weight: 600;">Agency</a>
+    <a href="agent.html">AI Agent</a>
+    <a href="https://docs.trillet.ai/v1/api-reference/introduction">Docs</a>
+    <a href="#">Sign in</a>
+    <a href="#" class="cta">Get started</a>
+  </nav>
+</header>
+
+<main id="main">
+
+<!-- HERO · dark navy panel + multi-tenant dashboard card (NO orb) -->
+<section class="agc-hero-wrap">
+  <div class="agc-panel">
+    <div class="agc-left">
+      <div class="status-pill on-dark">
+        <span class="dot-wrap"><span class="ping"></span><span class="core"></span></span>
+        Agency operating layer
+      </div>
+      <h1 class="h1-display on-dark agc-h1">One platform. Many client deployments. Your brand on every call.</h1>
+      <p class="body-l2 on-dark" style="max-width: 560px;">Multi-tenant voice deployment for agencies. White-label the brand surface, keep the operating layer underneath, deploy clients in days not months.</p>
+      <div class="lb-pills">
+        <span class="tri-pill on-dark"><span class="d"></span>White-label brand</span>
+        <span class="tri-pill on-dark"><span class="d"></span>Multi-tenant</span>
+        <span class="tri-pill on-dark"><span class="d"></span>Deploy in days</span>
+      </div>
+      <div class="lb-ctas">
+        <a href="agency-pricing.html" class="cta-primary on-dark">
+          Start an agency deployment
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </a>
+        <a href="#" class="cta-secondary on-dark">Talk to agency ops</a>
+      </div>
+    </div>
+    <div class="mt-card">
+      <div class="mt-card-head">
+        <div class="title">Live client deployments</div>
+        <div class="op-console-head"><div class="live-pill"><span class="d"></span>3 live</div></div>
+      </div>
+      <div class="mt-row">
+        <div class="brand-dot"></div>
+        <div>
+          <div class="name">[Client A · Healthcare]</div>
+          <div class="meta">23 calls today · multi-practice intake</div>
+        </div>
+        <div class="status">Live</div>
+      </div>
+      <div class="mt-row">
+        <div class="brand-dot"></div>
+        <div>
+          <div class="name">[Client B · Retail]</div>
+          <div class="meta">47 calls today · inbound + outbound</div>
+        </div>
+        <div class="status">Live</div>
+      </div>
+      <div class="mt-row">
+        <div class="brand-dot"></div>
+        <div>
+          <div class="name">[Client C · Recovery]</div>
+          <div class="meta">8 calls today · outbound only</div>
+        </div>
+        <div class="status">Live</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHITE-LABEL MECHANICS · 3-col grid -->
+<section class="agc-mechanics">
+  <div class="agc-mechanics-inner">
+    <div class="sec-head">
+      <div class="eyebrow">White-label</div>
+      <h2>Re-brand every customer-facing surface.</h2>
+      <p>Logo, colors, voice persona, transcript styling, custom domain — every customer-facing surface under your client's brand.</p>
+    </div>
+    <div class="agc-mech-grid">
+      <div class="agc-mech-pillar">
+        <div class="num">01</div>
+        <h3>Brand surface</h3>
+        <p>Logo, colors, voice persona, agent name, transcript styling, call-summary email template — all under your client's brand.</p>
+      </div>
+      <div class="agc-mech-pillar">
+        <div class="num">02</div>
+        <h3>Custom domain</h3>
+        <p>Each client deployment runs on its own domain or subdomain. Customer-facing URLs reflect the client's brand, not yours.</p>
+      </div>
+      <div class="agc-mech-pillar">
+        <div class="num">03</div>
+        <h3>Operator console under brand</h3>
+        <p>The operator console you give your client team runs under your agency brand. Your name on the dashboard, not Trillet's.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MULTI-TENANT MANAGEMENT · TINT, multi-client operator console -->
+<section class="agc-mt">
+  <div class="agc-mt-inner">
+    <div>
+      <div class="eyebrow">Multi-tenant management</div>
+      <h2>Many clients. One operating layer.</h2>
+      <p style="margin-top: 16px;">Manage all client deployments from a single agency console. Reusable patterns across clients. Shared upgrades. Per-client account boundaries.</p>
+    </div>
+    <div class="op-console">
+      <div class="op-console-head">
+        <div class="title">Agency operations · multi-tenant</div>
+        <div class="live-pill"><span class="d"></span>4 clients</div>
+      </div>
+      <div class="op-row"><div><div class="client">[Client A · Healthcare]</div><div class="calls">23 calls today</div></div><div class="status verify">LIVE · INBOUND</div></div>
+      <div class="op-row"><div><div class="client">[Client B · Retail]</div><div class="calls">47 calls today</div></div><div class="status ground">LIVE · INBOUND + OUTBOUND</div></div>
+      <div class="op-row"><div><div class="client">[Client C · Recovery]</div><div class="calls">8 calls today</div></div><div class="status act">LIVE · OUTBOUND ONLY</div></div>
+      <div class="op-row"><div><div class="client">[Client D · MSP]</div><div class="calls">0 calls today</div></div><div class="status verify">DEPLOYING · DAY 2</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- DEPLOY SPEED · 4-step timeline -->
+<section class="agc-deploy">
+  <div class="agc-deploy-inner">
+    <div class="sec-head">
+      <div class="eyebrow">Deploy speed</div>
+      <h2>Days, not months.</h2>
+      <p>From new client to live calls in under a week.</p>
+    </div>
+    <div class="agc-timeline">
+      <div class="agc-step">
+        <div class="node">0</div>
+        <h3>Day 0 — Setup</h3>
+        <p>Provision the deployment, configure brand surface, point the custom domain.</p>
+      </div>
+      <div class="agc-step">
+        <div class="node">1</div>
+        <h3>Day 1 — Prompt + KB</h3>
+        <p>Bring in client's intake rules, FAQs, escalation paths, call routing.</p>
+      </div>
+      <div class="agc-step">
+        <div class="node">2</div>
+        <h3>Day 2 — Dial-in</h3>
+        <p>Connect telephony, test inbound + outbound, verify transfers and recordings.</p>
+      </div>
+      <div class="agc-step">
+        <div class="node">3+</div>
+        <h3>Day 3+ — Live</h3>
+        <p>Soft-launch overflow or after-hours; ramp to full call volume per comfort.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARGIN ECONOMICS · TINT, worked example -->
+<section class="agc-margin">
+  <div class="agc-margin-inner">
+    <div>
+      <div class="sec-head" style="text-align: left; margin-bottom: 32px;">
+        <div class="eyebrow">Margin economics</div>
+        <h2 style="text-align: left;">Built for agency P&amp;L.</h2>
+        <p style="text-align: left; margin: 16px 0 0 0;">Per-call cost transparency. Bulk-deployment economics. Markup latitude per client.</p>
+      </div>
+      <div class="agc-margin-card">
+        <h3>Example: Wireless retail client deployment</h3>
+        <div class="margin-row"><div class="label">Starter tier base</div><div class="value">$149/mo USD</div></div>
+        <div class="margin-row"><div class="label">Per-minute voice rate</div><div class="value">$0.12 USD/min</div></div>
+        <div class="margin-row"><div class="label">Average call duration</div><div class="value">3 min</div></div>
+        <div class="margin-row"><div class="label">Per-call platform cost</div><div class="value">~$0.36 USD</div></div>
+        <div class="margin-row"><div class="label">Agency-set client price <span style="color: var(--text-muted); font-weight: 400;">(your markup)</span></div><div class="value">$X / call</div></div>
+        <div class="margin-row total"><div class="label">Agency margin per call</div><div class="value">$X − $0.36</div></div>
+        <p style="font-size: 12px; color: var(--text-muted); margin: 18px 0 0 0; line-height: 1.5;">All values illustrative. See <a href="agency-pricing.html" style="color: var(--brand-primary);">/agency/pricing</a> for current rates and tier breakdown.</p>
+        <!-- Mockup note: displayed Studio $149 is gated on Ming backend fix; live page currently shows $99. -->
+
+      </div>
+    </div>
+    <div class="agc-tier-ref">
+      <h4>Tier reference</h4>
+      <ul>
+        <li><strong>Starter</strong>$149/mo · single client</li>
+        <li><strong>Agency</strong>$299/mo · multi-client</li>
+        <li><strong>Scale</strong>$497/mo · large agency</li>
+      </ul>
+      <a href="agency-pricing.html">Full pricing →</a>
+    </div>
+  </div>
+</section>
+
+<!-- REFERENCE OPERATORS -->
+<section class="agc-ref">
+  <div class="agc-ref-inner">
+    <div class="sec-head">
+      <div class="eyebrow">Agency operators</div>
+      <h2>Live agencies. Live deployments.</h2>
+      <p>Anonymized by category until logo permissions land.</p>
+    </div>
+    <div class="agc-ref-grid">
+      <div class="agc-ref-card">
+        <span class="pill">Live</span>
+        <h3>Lead-gen agency</h3>
+        <p>Operating across multiple client deployments. Voice-led inbound qualification + CRM sync, white-label per client.</p>
+      </div>
+      <div class="agc-ref-card">
+        <span class="pill">Live</span>
+        <h3>Vertical specialist (debt recovery)</h3>
+        <p>Multi-client outbound recovery agency. Live verification + payment-path routing across the agency's client base.</p>
+      </div>
+      <div class="agc-ref-card">
+        <span class="pill">Live</span>
+        <h3>MSP operator</h3>
+        <p>Client-facing voice for SMB MSP clients. White-label brand per client, multi-tenant operator console for the agency team.</p>
+      </div>
+    </div>
+    <div class="agc-ref-footer">
+      <a href="customers.html#agency">More agency operators →</a>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSE · TINT -->
+<section class="agc-close">
+  <div class="agc-close-inner">
+    <div class="agc-close-row">
+      <div>
+        <div class="eyebrow">Start your agency deployment</div>
+        <h2>One platform. Your brand. Many clients. Margin you set.</h2>
+        <p>Stand up your first client this week. Re-brand every surface. Manage all clients from one operator console. Pay per usage. Set your own client price.</p>
+      </div>
+      <div class="ctas">
+        <a href="agency-pricing.html" class="cta-primary">
+          Start an agency deployment
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </a>
+        <a href="#" class="cta-secondary">Talk to agency ops</a>
+      </div>
+    </div>
+    <div class="trust-strip">
+      <div class="trust-cell">
+        <div class="top"><div class="icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div class="name">Live agency operators</div></div>
+        <p class="desc">Across MSP / lead-gen / vertical specialists.</p>
+      </div>
+      <div class="trust-cell">
+        <div class="top"><div class="icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"/></svg></div><div class="name">White-label end-to-end</div></div>
+        <p class="desc">Brand surface, custom domain, operator console under client brand.</p>
+      </div>
+      <div class="trust-cell">
+        <div class="top"><div class="icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div><div class="name">Starter tier from $149/mo</div></div>
+        <p class="desc">7-day free trial. Per-minute voice on top of tier.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-mark">
+      <img src="assets/trillet-footer.svg" alt="Trillet">
+      <p>One voice operating layer. Many client deployments. Your brand on every call.</p>
+    </div>
+    <div class="footer-col"><h4>Platform</h4><ul><li><a href="platform.html">Overview</a></li><li><a href="enterprise.html">Enterprise</a></li><li><a href="agency.html">Agency</a></li><li><a href="agent.html">AI Agent</a></li><li><a href="agency-pricing.html">Pricing</a></li></ul></div>
+    <div class="footer-col"><h4>Trust</h4><ul><li><a href="trust.html">Compliance posture</a></li><li><a href="customers.html">Customers</a></li><li><a href="#">Sub-processors</a></li><li><a href="#">DPA</a></li></ul></div>
+    <div class="footer-col"><h4>Company</h4><ul><li><a href="#">About</a></li><li><a href="#">Careers</a></li><li><a href="#">Contact</a></li><li><a href="#">Privacy</a></li></ul></div>
+    <div class="footer-col"><h4>Resources</h4><ul><li><a href="https://docs.trillet.ai/v1/api-reference/introduction">Docs</a></li><li><a href="#">Changelog</a></li><li><a href="#">Blog</a></li><li><a href="#">Status</a></li></ul></div>
+  </div>
+  <div class="footer-bar">
+    <div>© 2026 Trillet. All rights reserved.</div>
+    <nav><a href="#">Privacy</a><a href="#">Terms</a><a href="trust.html">Security</a></nav>
+  </div>
+</footer>
+
+<div class="option-footer" style="background: #022f6a;">
+  <strong style="color: white;">📄 /agency PAGE MOCKUP</strong> · 7-section spine: Hero (multi-tenant dashboard card replaces orb) → White-label mechanics (3-col) → Multi-tenant management (TINT, multi-client operator console with client-name column) → Deploy speed (4-step Day 0/1/2/3+ timeline) → Margin economics (TINT, worked example with Studio $149/mo gated on Ming backend) → Reference operators (3-card anonymized) → Close.
+  <p style="margin-top: 8px;">[LOCKED per Ori]: Hero content per spec. Tier reference shows Starter/Agency/Scale per future architecture (HOLD until Bucket B1 resolved). Per-card metrics + reference operator metrics pending Ming per metric-ask draft. /whitelabel → /agency 301 redirect to be wired in next.config.js (Bucket G).</p>
+</div>
+
+</body>
+</html>

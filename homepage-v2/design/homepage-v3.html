@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Trillet · Call, documented.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;550;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  /* ═══════════════════════════════════════════════════════════════════
+   * TRILLET · HOMEPAGE v3
+   * System: "Call-as-document"
+   *   - One surface (cream-white), ink, one blue, one amber accent
+   *   - Hairline rules do the rhythm work, not shadows or fills
+   *   - Inter 550 display, sized large; JetBrains Mono for numerics + margin notes
+   *   - Every product artifact framed as a typeset document
+   * ═══════════════════════════════════════════════════════════════════ */
+
+  :root {
+    --paper:     #FAFAF7;   /* single surface */
+    --paper-rest:#F3F2EC;   /* subtle rest, used sparingly */
+    --ink:       #0E0F13;   /* near-black display ink */
+    --ink-2:     #2A2C34;   /* body */
+    --ink-3:     #5E6270;   /* meta / caption */
+    --rule:      #D9D6CC;   /* hairline */
+    --rule-2:    #BCB9AC;   /* stronger hairline */
+    --blue:      #0A3FFF;   /* considered brand blue */
+    --blue-deep: #0029B8;
+    --amber:     #B47A1A;   /* editorial accent, not bright */
+    --ok:        #1F7A4D;
+    --serif-num: 'Inter', system-ui, sans-serif; /* using Inter for numerals; tabular */
+    --sans:      'Inter', system-ui, sans-serif;
+    --mono:      'JetBrains Mono', ui-monospace, monospace;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0; padding: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    font-feature-settings: "ss01", "cv11";
+  }
+  a { color: inherit; text-decoration: none; }
+  ::selection { background: rgba(10,63,255,0.2); }
+
+  /* ─── GRID CONTAINER ─────────────────────────────────────────────── */
+  .wrap {
+    max-width: 1360px;
+    margin: 0 auto;
+    padding: 0 48px;
+  }
+
+  /* ─── HAIRLINE SYSTEM ────────────────────────────────────────────── */
+  .rule-top    { border-top: 1px solid var(--rule); }
+  .rule-bottom { border-bottom: 1px solid var(--rule); }
+  .rule-heavy  { border-top: 1px solid var(--ink); }
+
+  /* ─── NAV ────────────────────────────────────────────────────────── */
+  .nav {
+    position: sticky; top: 0; z-index: 40;
+    background: rgba(250,250,247,0.88);
+    backdrop-filter: saturate(1.2) blur(14px);
+    border-bottom: 1px solid var(--rule);
+  }
+  .nav-inner {
+    display: flex; align-items: center; justify-content: space-between;
+    height: 64px;
+    padding: 0 48px;
+  }
+  .nav-left  { display: flex; align-items: center; gap: 48px; }
+  .logo {
+    font-family: var(--sans);
+    font-weight: 600; font-size: 17px; letter-spacing: -0.02em;
+    color: var(--ink);
+    display: flex; align-items: center; gap: 2px;
+  }
+  .logo-glyph {
+    width: 20px; height: 20px; display: inline-block; margin-right: 8px;
+    position: relative;
+  }
+  .logo-glyph::before, .logo-glyph::after {
+    content: ''; position: absolute; background: var(--ink);
+  }
+  .logo-glyph::before { left: 0; top: 0; width: 2px; height: 100%; }
+  .logo-glyph::after  { left: 0; top: 9px; width: 100%; height: 2px; }
+  .nav-links { display: flex; gap: 32px; }
+  .nav-links a {
+    font-size: 13.5px; color: var(--ink-2); font-weight: 450;
+    padding: 4px 0;
+    position: relative;
+  }
+  .nav-links a:hover { color: var(--blue); }
+  .nav-right { display: flex; align-items: center; gap: 18px; font-size: 13.5px; color: var(--ink-2); }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 9px 16px;
+    border: 1px solid transparent;
+    font-size: 13.5px; font-weight: 500;
+    cursor: pointer;
+    transition: all 120ms ease;
+  }
+  .btn-primary { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+  .btn-primary:hover { background: var(--blue); border-color: var(--blue); }
+  .btn-ghost { background: transparent; color: var(--ink); border-color: var(--rule-2); }
+  .btn-ghost:hover { border-color: var(--ink); }
+
+  /* ─── DOCUMENT META STRIP (below nav) ────────────────────────────── */
+  .doc-meta {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.02em;
+    color: var(--ink-3);
+    border-bottom: 1px solid var(--rule);
+    background: var(--paper);
+  }
+  .doc-meta-inner {
+    max-width: 1360px; margin: 0 auto; padding: 8px 48px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .doc-meta span { display: inline-flex; gap: 6px; align-items: center; }
+  .doc-meta em { font-style: normal; color: var(--ink); font-weight: 500; }
+
+  /* ─── HERO ───────────────────────────────────────────────────────── */
+  .hero {
+    padding: 88px 0 96px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    gap: 80px;
+    align-items: start;
+  }
+
+  .hero-left { padding-top: 8px; }
+
+  /* Editorial eyebrow w/ figure no. */
+  .eyebrow {
+    display: flex; align-items: center; gap: 14px;
+    font-family: var(--mono);
+    font-size: 11.5px; letter-spacing: 0.06em;
+    color: var(--ink-3);
+    margin-bottom: 44px;
+    text-transform: uppercase;
+  }
+  .eyebrow-rule { flex: 0 0 36px; height: 1px; background: var(--rule-2); }
+  .eyebrow em { font-style: normal; color: var(--ink); font-weight: 500; }
+
+  .h1 {
+    margin: 0 0 32px;
+    font-family: var(--sans);
+    font-weight: 550;
+    font-size: clamp(52px, 7.2vw, 104px);
+    line-height: 0.97;
+    letter-spacing: -0.045em;
+    color: var(--ink);
+    text-wrap: balance;
+  }
+  .h1 i {
+    font-style: italic;
+    font-weight: 400;
+    color: var(--ink-3);
+  }
+
+  .lede {
+    margin: 0 0 40px;
+    max-width: 520px;
+    font-size: 18.5px;
+    line-height: 1.5;
+    color: var(--ink-2);
+  }
+  .lede strong { color: var(--ink); font-weight: 550; }
+
+  .hero-ctas {
+    display: flex; align-items: center; gap: 18px;
+  }
+  .btn-lg { padding: 13px 22px; font-size: 14px; }
+  .link-arrow {
+    font-size: 14px; color: var(--ink-2);
+    border-bottom: 1px solid var(--rule-2);
+    padding-bottom: 2px;
+  }
+  .link-arrow:hover { color: var(--blue); border-color: var(--blue); }
+
+  /* ─── HERO RIGHT: call-as-document ───────────────────────────────── */
+  .callsheet {
+    border: 1px solid var(--ink);
+    background: var(--paper);
+    padding: 0;
+    position: relative;
+  }
+  .callsheet-head {
+    border-bottom: 1px solid var(--ink);
+    padding: 18px 24px 16px;
+    display: flex; align-items: center; justify-content: space-between;
+    background: var(--paper);
+  }
+  .callsheet-head .title {
+    font-family: var(--sans); font-weight: 550; font-size: 14px; letter-spacing: -0.01em;
+    color: var(--ink);
+    display: flex; align-items: center; gap: 10px;
+  }
+  .callsheet-head .title em {
+    font-style: italic; font-weight: 400; color: var(--ink-3);
+    font-size: 13px;
+  }
+  .callsheet-head .meta {
+    font-family: var(--mono); font-size: 11px; color: var(--ink-3);
+    display: flex; gap: 16px;
+  }
+  .callsheet-head .meta em { font-style: normal; color: var(--ink); font-weight: 500; }
+  .callsheet-head .live {
+    font-family: var(--mono); font-size: 10.5px; font-weight: 600; letter-spacing: 0.12em;
+    color: var(--ok); text-transform: uppercase;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .callsheet-head .live::before {
+    content: ''; width: 7px; height: 7px; border-radius: 50%;
+    background: var(--ok); box-shadow: 0 0 0 3px rgba(31,122,77,0.18);
+    animation: livepulse 1.8s ease-in-out infinite;
+  }
+  @keyframes livepulse { 50% { opacity: 0.55; } }
+
+  /* Phase strip along top */
+  .callsheet-phases {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    border-bottom: 1px solid var(--rule);
+  }
+  .phase {
+    padding: 11px 16px 10px;
+    border-right: 1px solid var(--rule);
+    font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.1em;
+    color: var(--ink-3); text-transform: uppercase;
+    display: flex; align-items: center; gap: 8px;
+    position: relative;
+  }
+  .phase:last-child { border-right: none; }
+  .phase .n { font-weight: 700; color: var(--ink); }
+  .phase.done { color: var(--ink-2); }
+  .phase.done::after {
+    content: '✓'; margin-left: auto; color: var(--ok); font-family: var(--sans); font-size: 11px;
+  }
+  .phase.active {
+    background: var(--ink); color: var(--paper);
+  }
+  .phase.active .n { color: var(--paper); }
+  .phase.active::after {
+    content: ''; margin-left: auto;
+    width: 6px; height: 6px; border-radius: 50%; background: var(--paper);
+    animation: livepulse 1.8s ease-in-out infinite;
+  }
+
+  /* Document body — the call, typeset */
+  .callsheet-body {
+    padding: 0;
+  }
+  .entry {
+    display: grid;
+    grid-template-columns: 44px 70px 1fr;
+    border-bottom: 1px solid var(--rule);
+    font-size: 14px;
+  }
+  .entry:last-child { border-bottom: none; }
+  .entry .lineno {
+    padding: 14px 6px 14px 16px;
+    font-family: var(--mono); font-size: 10.5px; color: var(--ink-3);
+    text-align: right;
+    border-right: 1px solid var(--rule);
+    font-variant-numeric: tabular-nums;
+  }
+  .entry .ts {
+    padding: 14px 10px;
+    font-family: var(--mono); font-size: 11px; color: var(--ink-3);
+    font-variant-numeric: tabular-nums;
+    border-right: 1px solid var(--rule);
+  }
+  .entry .content {
+    padding: 14px 20px 14px 18px;
+  }
+  .entry .who {
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.12em;
+    color: var(--ink-3); text-transform: uppercase; margin-bottom: 4px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .entry .who em { font-style: normal; color: var(--ink); font-weight: 600; }
+  .entry .who .tag {
+    font-size: 9px; padding: 1px 6px; border: 1px solid var(--rule-2); color: var(--ink-3);
+    letter-spacing: 0.1em;
+  }
+  .entry .who .tag-blue { border-color: var(--blue); color: var(--blue); }
+  .entry .who .tag-ok { border-color: var(--ok); color: var(--ok); }
+  .entry .said {
+    font-size: 15px; line-height: 1.5; color: var(--ink);
+  }
+  .entry.agent .said { color: var(--ink); }
+  .entry.caller .said { color: var(--ink-2); font-style: italic; }
+  .entry.tool {
+    background: var(--paper-rest);
+  }
+  .entry.tool .said {
+    font-family: var(--mono); font-size: 12.5px; color: var(--ink-2);
+  }
+  .entry.tool .said em { font-style: normal; color: var(--blue); font-weight: 500; }
+  .entry.action {
+    background: rgba(10,63,255,0.04);
+  }
+  .entry.action .said {
+    font-family: var(--mono); font-size: 12.5px; color: var(--blue-deep);
+    font-weight: 500;
+  }
+
+  /* Callsheet footer — post-call artifacts */
+  .callsheet-foot {
+    border-top: 1px solid var(--ink);
+    padding: 16px 24px;
+    display: flex; align-items: center; justify-content: space-between;
+    background: var(--paper);
+  }
+  .callsheet-foot .stamp {
+    font-family: var(--mono); font-size: 10.5px; color: var(--ink-3);
+    letter-spacing: 0.06em;
+  }
+  .callsheet-foot .stamp em { font-style: normal; color: var(--ink); font-weight: 500; }
+  .callsheet-foot .artifacts {
+    display: flex; gap: 8px;
+  }
+  .artifact {
+    font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.04em;
+    color: var(--ink-2);
+    padding: 3px 8px; border: 1px solid var(--rule-2);
+    text-transform: lowercase;
+  }
+
+  /* ─── HERO READOUT STRIP (below the two columns) ─────────────────── */
+  .hero-readouts {
+    margin-top: 88px;
+    padding-top: 24px;
+    border-top: 1px solid var(--ink);
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+  }
+  .hero-readout {
+    padding: 18px 32px 4px 0;
+    border-right: 1px solid var(--rule);
+  }
+  .hero-readout:last-child { border-right: none; padding-right: 0; }
+  .hero-readout .lbl {
+    font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.1em;
+    color: var(--ink-3); text-transform: uppercase; margin-bottom: 10px;
+  }
+  .hero-readout .val {
+    font-size: 44px; font-weight: 550; letter-spacing: -0.035em;
+    color: var(--ink); font-variant-numeric: tabular-nums;
+    line-height: 1;
+  }
+  .hero-readout .val .u {
+    font-size: 16px; color: var(--ink-3); font-weight: 400; margin-left: 3px;
+  }
+  .hero-readout .sub {
+    font-family: var(--mono); font-size: 11px; color: var(--ink-3);
+    margin-top: 10px;
+  }
+
+  /* ─── SECTION — A CALL, DOCUMENTED. ──────────────────────────────── */
+  .sec-doc {
+    padding: 112px 0 112px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .sec-head {
+    display: grid; grid-template-columns: minmax(0, 0.42fr) minmax(0, 1fr);
+    gap: 72px; align-items: end;
+    margin-bottom: 72px;
+  }
+  .sec-kicker {
+    font-family: var(--mono); font-size: 11.5px; letter-spacing: 0.12em;
+    color: var(--ink-3); text-transform: uppercase;
+    padding: 8px 0 0; border-top: 2px solid var(--ink);
+    display: inline-block;
+    margin-bottom: 20px;
+  }
+  .sec-title {
+    margin: 0;
+    font-family: var(--sans); font-weight: 550;
+    font-size: clamp(36px, 4.4vw, 60px);
+    line-height: 1.02;
+    letter-spacing: -0.035em;
+    color: var(--ink);
+    text-wrap: balance;
+  }
+  .sec-title i { font-style: italic; font-weight: 400; color: var(--ink-3); }
+  .sec-lede {
+    font-size: 17px; color: var(--ink-2); line-height: 1.55;
+    max-width: 520px;
+  }
+  .sec-lede strong { color: var(--ink); font-weight: 550; }
+
+  /* The documented call: 4 rows, each a phase with margin notes */
+  .doc-phases {
+    border-top: 1px solid var(--ink);
+  }
+  .doc-phase {
+    display: grid;
+    grid-template-columns: 80px minmax(0, 0.9fr) minmax(0, 1.4fr) minmax(0, 0.9fr);
+    gap: 48px;
+    padding: 40px 0;
+    border-bottom: 1px solid var(--rule);
+    align-items: start;
+  }
+  .doc-phase:last-child { border-bottom: 1px solid var(--ink); }
+  .doc-phase-n {
+    font-family: var(--mono); font-size: 13px; color: var(--ink-3);
+    letter-spacing: 0.08em;
+    padding-top: 2px;
+  }
+  .doc-phase-n em { font-style: normal; color: var(--ink); font-weight: 700; }
+  .doc-phase-name {
+    font-family: var(--sans); font-weight: 550;
+    font-size: 26px; line-height: 1.1;
+    letter-spacing: -0.025em;
+    color: var(--ink);
+  }
+  .doc-phase-name i {
+    display: block;
+    font-style: italic; font-weight: 400; font-size: 12px;
+    color: var(--ink-3); letter-spacing: 0.14em; text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .doc-phase-body {
+    font-size: 15.5px; color: var(--ink-2); line-height: 1.55;
+  }
+  .doc-phase-body strong { color: var(--ink); font-weight: 550; }
+  .doc-phase-body em {
+    font-style: italic; color: var(--ink-3);
+  }
+  .doc-phase-margin {
+    font-family: var(--mono); font-size: 11.5px; line-height: 1.7;
+    color: var(--ink-2);
+    padding-left: 20px; border-left: 1px solid var(--rule-2);
+  }
+  .doc-phase-margin .mlbl {
+    display: block;
+    font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--ink-3); font-weight: 500; margin-bottom: 6px;
+    font-family: var(--mono);
+  }
+  .doc-phase-margin .line { display: block; font-variant-numeric: tabular-nums; }
+  .doc-phase-margin .line em { font-style: normal; color: var(--blue); font-weight: 500; }
+  .doc-phase-margin .line.ok em { color: var(--ok); }
+
+  /* ─── SECTION — GROUNDED IN YOUR SYSTEMS ─────────────────────────── */
+  .sec-grounded {
+    padding: 112px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .deployments {
+    border-top: 1px solid var(--ink);
+  }
+  .deployment {
+    display: grid;
+    grid-template-columns: 80px minmax(0, 1.2fr) minmax(0, 1.6fr) minmax(0, 1fr);
+    gap: 48px;
+    padding: 36px 0;
+    border-bottom: 1px solid var(--rule);
+    align-items: start;
+  }
+  .deployment:last-child { border-bottom: 1px solid var(--ink); }
+  .deployment-n {
+    font-family: var(--mono); font-size: 12px; color: var(--ink-3);
+    letter-spacing: 0.08em;
+    padding-top: 4px;
+  }
+  .deployment-kind {
+    font-family: var(--sans);
+  }
+  .deployment-kind .type {
+    font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--ink-3);
+    margin-bottom: 8px;
+  }
+  .deployment-kind .name {
+    font-size: 22px; font-weight: 550; letter-spacing: -0.02em;
+    color: var(--ink); line-height: 1.15;
+  }
+  .deployment-kind .name i { font-style: italic; font-weight: 400; color: var(--ink-3); }
+  .deployment-desc {
+    font-size: 15px; line-height: 1.55; color: var(--ink-2);
+  }
+  .deployment-desc strong { color: var(--ink); font-weight: 550; }
+  .deployment-metrics {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 14px 24px;
+    font-variant-numeric: tabular-nums;
+  }
+  .metric-mini .lbl {
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.12em;
+    color: var(--ink-3); text-transform: uppercase; margin-bottom: 4px;
+  }
+  .metric-mini .val {
+    font-size: 20px; font-weight: 550; letter-spacing: -0.02em; color: var(--ink);
+    line-height: 1.1;
+  }
+  .metric-mini .val .u {
+    font-size: 12px; color: var(--ink-3); font-weight: 400; margin-left: 2px;
+  }
+
+  /* systems bar */
+  .systems-bar {
+    margin-top: 56px;
+    padding: 24px 0;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    display: flex; flex-wrap: wrap; gap: 32px; align-items: center;
+  }
+  .systems-bar .label {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em;
+    color: var(--ink-3); text-transform: uppercase;
+    margin-right: 8px;
+  }
+  .systems-bar .sys {
+    font-family: var(--sans); font-size: 14.5px; font-weight: 500;
+    color: var(--ink);
+    padding: 4px 10px;
+    border: 1px solid var(--rule-2);
+  }
+
+  /* ─── RESPONSIVE ─────────────────────────────────────────────────── */
+  @media (max-width: 1080px) {
+    .hero-grid, .sec-head { grid-template-columns: 1fr; gap: 48px; }
+    .hero-readouts { grid-template-columns: repeat(2, 1fr); }
+    .hero-readout { padding: 18px 0; border-right: none; border-bottom: 1px solid var(--rule); }
+    .doc-phase, .deployment { grid-template-columns: 1fr; gap: 16px; }
+    .nav-links { display: none; }
+  }
+  @media (max-width: 640px) {
+    .wrap, .nav-inner, .doc-meta-inner { padding-left: 24px; padding-right: 24px; }
+    .h1 { font-size: 48px; }
+    .hero-readouts { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="nav-left">
+      <a class="logo" href="#"><span class="logo-glyph"></span>Trillet</a>
+      <div class="nav-links">
+        <a href="#">Platform</a>
+        <a href="#">Enterprise</a>
+        <a href="#">Agency</a>
+        <a href="#">Agents</a>
+        <a href="#">Docs</a>
+      </div>
+    </div>
+    <div class="nav-right">
+      <a href="#">Sign in</a>
+      <a href="#" class="btn btn-primary">Get started</a>
+    </div>
+  </div>
+</nav>
+
+<!-- DOCUMENT META STRIP -->
+<div class="doc-meta">
+  <div class="doc-meta-inner">
+    <span>Trillet <em>· The voice operating layer</em></span>
+    <span>ISSUE <em>2026.04</em> · v3 · SF</span>
+  </div>
+</div>
+
+<main>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <!-- LEFT -->
+      <div class="hero-left">
+        <div class="eyebrow">
+          <span class="eyebrow-rule"></span>
+          <span>Fig. <em>01</em> &nbsp;·&nbsp; A call, documented.</span>
+        </div>
+
+        <h1 class="h1">Every call, <i>on the record.</i></h1>
+
+        <p class="lede">
+          Trillet is the voice operating layer for enterprise teams. <strong>Agents verify the caller, act on your live systems, and leave a paper trail of every decision</strong> — so nothing happens off the books.
+        </p>
+
+        <div class="hero-ctas">
+          <a href="#" class="btn btn-primary btn-lg">Map your workflow →</a>
+          <a href="#" class="link-arrow">Read the call ↗</a>
+        </div>
+      </div>
+
+      <!-- RIGHT — CALLSHEET -->
+      <aside class="callsheet" aria-label="A live call, documented">
+        <div class="callsheet-head">
+          <div class="title">
+            Callsheet №&nbsp;44,812 <em>· inbound · Dr. Chen's office</em>
+          </div>
+          <div class="live">
+            <span>On air · 00:34</span>
+          </div>
+        </div>
+
+        <div class="callsheet-phases">
+          <div class="phase done"><span class="n">01</span> Verify</div>
+          <div class="phase done"><span class="n">02</span> Ground</div>
+          <div class="phase active"><span class="n">03</span> Act</div>
+          <div class="phase"><span class="n">04</span> Follow</div>
+        </div>
+
+        <div class="callsheet-body">
+          <div class="entry caller">
+            <div class="lineno">001</div>
+            <div class="ts">00:12</div>
+            <div class="content">
+              <div class="who">Caller <em>· Maya R.</em> <span class="tag">patient · 2023</span></div>
+              <div class="said">"Can I move my Thursday appointment to next week? Something came up at work."</div>
+            </div>
+          </div>
+
+          <div class="entry tool">
+            <div class="lineno">002</div>
+            <div class="ts">00:13</div>
+            <div class="content">
+              <div class="who">Ground <span class="tag tag-blue">EHR</span></div>
+              <div class="said"><em>ehr.patient.get</em>(id: 8102) → ok</div>
+            </div>
+          </div>
+
+          <div class="entry tool">
+            <div class="lineno">003</div>
+            <div class="ts">00:14</div>
+            <div class="content">
+              <div class="who">Ground <span class="tag tag-blue">Calendar</span></div>
+              <div class="said"><em>cal.availability</em>(provider: chen, window: next_week) → 2 slots</div>
+            </div>
+          </div>
+
+          <div class="entry agent">
+            <div class="lineno">004</div>
+            <div class="ts">00:18</div>
+            <div class="content">
+              <div class="who">Agent <em>· Trillet</em></div>
+              <div class="said">"I see your 2:30 with Dr. Chen on Thursday. Next Tuesday at 2:30 is open, or Wednesday at 10:00 — which works?"</div>
+            </div>
+          </div>
+
+          <div class="entry caller">
+            <div class="lineno">005</div>
+            <div class="ts">00:28</div>
+            <div class="content">
+              <div class="who">Caller</div>
+              <div class="said">"Tuesday works. Thanks."</div>
+            </div>
+          </div>
+
+          <div class="entry action">
+            <div class="lineno">006</div>
+            <div class="ts">00:32</div>
+            <div class="content">
+              <div class="who">Act <span class="tag tag-ok">policy ✓</span></div>
+              <div class="said">cal.move(appt: 44812, to: tue_14:30) · sms.confirm → sent</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="callsheet-foot">
+          <div class="stamp">Logged <em>· 00:34</em> · qa.rubric ✓ · reversible</div>
+          <div class="artifacts">
+            <span class="artifact">summary</span>
+            <span class="artifact">confirm</span>
+            <span class="artifact">audit</span>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <!-- READOUT STRIP -->
+    <div class="hero-readouts">
+      <div class="hero-readout">
+        <div class="lbl">Calls logged / week</div>
+        <div class="val">48,200<span class="u">avg</span></div>
+        <div class="sub">across customer deployments</div>
+      </div>
+      <div class="hero-readout">
+        <div class="lbl">First-call resolution</div>
+        <div class="val">87.4<span class="u">%</span></div>
+        <div class="sub">+3.1 vs. human baseline</div>
+      </div>
+      <div class="hero-readout">
+        <div class="lbl">P95 turn latency</div>
+        <div class="val">780<span class="u">ms</span></div>
+        <div class="sub">end-to-end, grounded</div>
+      </div>
+      <div class="hero-readout">
+        <div class="lbl">Reversible actions</div>
+        <div class="val">100<span class="u">%</span></div>
+        <div class="sub">policy-gated, logged</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- SECTION — A CALL, DOCUMENTED -->
+<section class="sec-doc">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <span class="sec-kicker">§ 01 &nbsp;·&nbsp; The spine</span>
+        <h2 class="sec-title">A call, <i>documented</i> from first ring to close.</h2>
+      </div>
+      <p class="sec-lede">
+        Every call runs the same four-phase spine, and every step leaves a record. <strong>The agent only says what it can prove</strong> — and only acts inside a policy your team wrote. The call ends when the work is done, not when the caller hangs up.
+      </p>
+    </div>
+
+    <div class="doc-phases">
+
+      <div class="doc-phase">
+        <div class="doc-phase-n">Phase <em>01</em></div>
+        <div class="doc-phase-name"><i>Verify</i>Know who's calling.</div>
+        <div class="doc-phase-body">
+          ANI lookup, DOB or PIN challenge, voice biometrics on the second call. Failed attempts route to a human or get escalated <strong>before any patient or customer data is shared</strong>. Identity is a precondition, not a feature.
+        </div>
+        <div class="doc-phase-margin">
+          <span class="mlbl">Log · phase 01</span>
+          <span class="line"><em>ani.lookup</em> → known</span>
+          <span class="line"><em>dob.match</em> → confirmed</span>
+          <span class="line ok"><em>session</em>: established</span>
+        </div>
+      </div>
+
+      <div class="doc-phase">
+        <div class="doc-phase-n">Phase <em>02</em></div>
+        <div class="doc-phase-name"><i>Ground</i>Pull real context.</div>
+        <div class="doc-phase-body">
+          Every turn is grounded against your systems of record — EHR, CRM, calendar, ticketing, POS, whatever holds the truth. <strong>The agent only says what it can prove</strong>. Hallucinations are a policy failure, not a model failure.
+        </div>
+        <div class="doc-phase-margin">
+          <span class="mlbl">Log · phase 02</span>
+          <span class="line"><em>ehr.patient.get</em>(8102)</span>
+          <span class="line"><em>cal.availability</em>(chen)</span>
+          <span class="line"><em>policy.intake</em>.lookup</span>
+        </div>
+      </div>
+
+      <div class="doc-phase">
+        <div class="doc-phase-n">Phase <em>03</em></div>
+        <div class="doc-phase-name"><i>Act</i>Do it, don't just talk.</div>
+        <div class="doc-phase-body">
+          The agent writes back to the same systems it read from — books, reschedules, refunds, opens tickets, triggers downstream workflows. <strong>Every action is reversible, logged, and policy-gated</strong>. The caller hangs up with their problem solved.
+        </div>
+        <div class="doc-phase-margin">
+          <span class="mlbl">Log · phase 03</span>
+          <span class="line"><em>cal.move</em>(44812, tue_14:30)</span>
+          <span class="line"><em>sms.confirm</em> → sent</span>
+          <span class="line ok"><em>policy.check</em> → ok</span>
+        </div>
+      </div>
+
+      <div class="doc-phase">
+        <div class="doc-phase-n">Phase <em>04</em></div>
+        <div class="doc-phase-name"><i>Follow</i>Close the loop.</div>
+        <div class="doc-phase-body">
+          Confirmations sent. Summary written to your CRM. Downstream workflows kicked off. Anything the QA rubric flagged goes to a human reviewer. <strong>The call ends when the work is done</strong>, not when the phone hangs up.
+        </div>
+        <div class="doc-phase-margin">
+          <span class="mlbl">Log · phase 04</span>
+          <span class="line"><em>summary.post</em>(hubspot)</span>
+          <span class="line"><em>email.confirm</em> → sent</span>
+          <span class="line ok"><em>qa.flagged</em> → reviewed</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- SECTION — GROUNDED IN YOUR SYSTEMS -->
+<section class="sec-grounded">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <span class="sec-kicker">§ 02 &nbsp;·&nbsp; In production</span>
+        <h2 class="sec-title">Grounded in the systems your team <i>already trusts.</i></h2>
+      </div>
+      <p class="sec-lede">
+        Trillet doesn't replace the systems of record you've already invested in — it runs on top of them. Below are three deployments, in production today, reading and writing against real enterprise stacks.
+      </p>
+    </div>
+
+    <div class="deployments">
+
+      <div class="deployment">
+        <div class="deployment-n">№ <em>01</em></div>
+        <div class="deployment-kind">
+          <div class="type">Healthcare · multi-site</div>
+          <div class="name">Regional clinic network <i>· 12 locations</i></div>
+        </div>
+        <div class="deployment-desc">
+          Inbound appointment management across 14 specialties. <strong>Grounded in Epic + Google Calendar + Twilio</strong>. Failed-verify calls route to a front-desk nurse within 3 seconds.
+        </div>
+        <div class="deployment-metrics">
+          <div class="metric-mini">
+            <div class="lbl">Calls / mo</div>
+            <div class="val">48k<span class="u"></span></div>
+          </div>
+          <div class="metric-mini">
+            <div class="lbl">FCR</div>
+            <div class="val">87<span class="u">%</span></div>
+          </div>
+          <div class="metric-mini">
+            <div class="lbl">P95 latency</div>
+            <div class="val">720<span class="u">ms</span></div>
+          </div>
+          <div class="metric-mini">
+            <div class="lbl">HITL rate</div>
+            <div class="val">4.2<span class="u">%</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="deployment">
+        <div class="deployment-n">№ <em>02</em></div>
+        <div class="deployment-kind">
+          <div class="type">Automotive · dealership group</div>
+          <div class="name">Service scheduling <i>· 40 dealers</i></div>
+        </div>
+        <div class="deployment-desc">
+          After-hours and overflow service calls, booked directly into each dealer's DMS. <strong>Grounded in CDK Global + Salesforce Service Cloud</strong>. Agents escalate on parts-unavailable, not on call complexity.
+        </div>
+        <div class="deployment-metrics">
+          <div class="metric-mini">
+            <div class="lbl">Calls / mo</div>
+            <div class="val">22k<span class="u"></span></div>
+          </div>
+          <div class="metric-mini">
+            <div class="lbl">Book rate</div>
+            <div class="val">71<span class="u">%</span></div>
+          </div>
+          <div class="metric-mini">
+            <div class="lbl">Avg handle</div>
+            <div class="val">2:14<span class="u"></span></div>
+          </div>
+          <div class="metric-mini">
+            <div class="lbl">CSAT</div>
+            <div class="val">4.6<span class="u">/5</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="deployment">
+        <div class="deployment-n">№ <em>03</em></div>
+        <div class="deployment-kind">
+          <div class="type">Field service · enterprise</div>
+          <div class="name">Technician dispatch <i>· national</i></div>
+        </div>
+        <div class="deployment-desc">
+          Inbound emergency and scheduled service dispatch, with live routing against technician GPS. <strong>Grounded in ServiceTitan + HubSpot + Slack</strong>. Policy gate stops any dispatch over $2k from auto-booking.
+        </div>
+        <div class="deployment-metrics">
+          <div class="metric-mini">
+            <div class="lbl">Calls / mo</div>
+            <div class="val">31k<span class="u"></span></div>
+          </div>
+          <div class="metric-mini">
+            <div class="lbl">Auto-dispatch</div>
+            <div class="val">64<span class="u">%</span></div>
+          </div>
+          <div class="metric-mini">
+            <div class="lbl">SLA hit</div>
+            <div class="val">99.1<span class="u">%</span></div>
+          </div>
+          <div class="metric-mini">
+            <div class="lbl">Policy blocks</div>
+            <div class="val">218<span class="u">/mo</span></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Systems-of-record bar -->
+    <div class="systems-bar">
+      <span class="label">Deployed against</span>
+      <span class="sys">Epic</span>
+      <span class="sys">Salesforce</span>
+      <span class="sys">HubSpot</span>
+      <span class="sys">ServiceTitan</span>
+      <span class="sys">CDK Global</span>
+      <span class="sys">Zendesk</span>
+      <span class="sys">Twilio</span>
+      <span class="sys">Slack</span>
+      <span class="sys">Google Cal</span>
+      <span class="sys">Outlook</span>
+    </div>
+  </div>
+</section>
+
+</main>
+
+</body>
+</html>

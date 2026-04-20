@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Motif options · Trillet homepage</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Urbanist:wght@500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap">
+<style>
+  :root {
+    --ink: #0A0F1E;
+    --ink-2: #2E3448;
+    --ink-3: #5E6678;
+    --ink-4: #8A91A3;
+    --rule-hair: #E8ECF3;
+    --rule-firm: #B8C1D4;
+    --surface: #FFFFFF;
+    --surface-rest: #F4F6FB;
+    --brand-primary: #0062E9;
+    --brand-highlight: #83E4FF;
+    --live: #10B981;
+    --bg-dark: #0A1630;
+    --t-snap: 160ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background: var(--surface);
+    color: var(--ink);
+    margin: 0;
+    padding: 64px 48px 120px;
+    font-size: 15px;
+    line-height: 1.55;
+  }
+  .page-title {
+    max-width: 880px;
+    margin: 0 auto 64px;
+    font-family: 'Urbanist', sans-serif;
+    font-size: 32px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+  .page-lede {
+    max-width: 880px;
+    margin: -48px auto 64px;
+    color: var(--ink-2);
+    font-size: 16px;
+  }
+
+  /* Option block */
+  .opt {
+    max-width: 880px;
+    margin: 0 auto 64px;
+    padding: 40px 44px 44px;
+    background: var(--surface);
+    border: 1px solid var(--rule-hair);
+    border-radius: 20px;
+    position: relative;
+  }
+  .opt-label {
+    position: absolute;
+    top: -12px;
+    left: 32px;
+    background: var(--surface);
+    padding: 0 12px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    color: var(--brand-primary);
+    text-transform: uppercase;
+  }
+  .opt-title {
+    font-family: 'Urbanist', sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    margin: 0 0 8px;
+  }
+  .opt-desc {
+    font-size: 14px;
+    color: var(--ink-2);
+    margin: 0 0 32px;
+    max-width: 640px;
+  }
+
+  /* Mock section rows — three stacked "section heads" */
+  .mock-section {
+    padding: 28px 0;
+    border-top: 1px solid var(--rule-hair);
+  }
+  .mock-section:first-of-type { border-top: none; padding-top: 0; }
+  .mock-section:last-of-type { padding-bottom: 0; }
+
+  /* Base eyebrow styling — shared */
+  .m-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+  .m-h2 {
+    font-family: 'Urbanist', sans-serif;
+    font-weight: 600;
+    font-size: 28px;
+    letter-spacing: -0.025em;
+    line-height: 1.1;
+    margin: 0;
+    color: var(--ink);
+  }
+
+  /* ═══ OPTION A · Breathing cyan dot ═══ */
+  .opt-a .m-eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--brand-highlight);
+    box-shadow: 0 0 10px rgba(131, 228, 255, 0.6),
+                0 0 0 3px rgba(131, 228, 255, 0.14);
+    animation: optA-breath 3s ease-in-out infinite;
+  }
+  @keyframes optA-breath {
+    0%, 100% { transform: scale(1); opacity: 0.85; }
+    50% { transform: scale(1.12); opacity: 1; }
+  }
+
+  /* ═══ OPTION B · Live-pulse green dot ═══ */
+  .opt-b .m-eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--live);
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.18);
+    position: relative;
+  }
+  .opt-b .m-eyebrow {
+    position: relative;
+  }
+  .opt-b .m-eyebrow::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--live);
+    opacity: 0.4;
+    transform: translateY(-50%);
+    animation: optB-pulse 2s ease-out infinite;
+    pointer-events: none;
+  }
+  @keyframes optB-pulse {
+    0% { transform: translateY(-50%) scale(1); opacity: 0.4; }
+    100% { transform: translateY(-50%) scale(3.4); opacity: 0; }
+  }
+
+  /* ═══ OPTION C · Mono ledger footer (per-section) ═══ */
+  .opt-c .mock-section {
+    position: relative;
+  }
+  .opt-c .m-ledger {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 16px;
+    padding-top: 14px;
+    border-top: 1px dashed var(--rule-hair);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    color: var(--ink-4);
+    text-transform: uppercase;
+  }
+  .opt-c .m-ledger .sep {
+    color: var(--rule-firm);
+  }
+  .opt-c .m-ledger .live-dot {
+    display: inline-block;
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--live);
+  }
+
+  /* ═══ OPTION D · Cyan slash ═══ */
+  .opt-d .m-eyebrow::before {
+    content: '/';
+    color: var(--brand-highlight);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0;
+    background: none;
+    width: auto; height: auto;
+    border-radius: 0;
+    box-shadow: none;
+    transform: skewX(-12deg);
+    display: inline-block;
+    margin-right: 0;
+  }
+
+  /* ═══ OPTION E · Orb aura wedge (restraint mode) ═══
+     A 24px horizontal cyan gradient bar, fading left-to-right.
+     Quieter than a dot; reads as "light source from the left." */
+  .opt-e .m-eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 28px; height: 2px;
+    border-radius: 2px;
+    background: linear-gradient(to right, var(--brand-highlight), transparent);
+    margin: 0;
+  }
+
+  /* ═══ OPTION F · Side indicator (4px cyan bar to the left of each H2) ═══ */
+  .opt-f .mock-section {
+    padding-left: 20px;
+    position: relative;
+  }
+  .opt-f .mock-section::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 32px;
+    bottom: 32px;
+    width: 2px;
+    background: var(--brand-highlight);
+    opacity: 0.4;
+    border-radius: 2px;
+  }
+  .opt-f .mock-section:first-of-type::before { top: 4px; }
+  .opt-f .mock-section:last-of-type::before { bottom: 4px; }
+
+</style>
+</head>
+<body>
+
+<h1 class="page-title">Recurring motif — 6 options</h1>
+<p class="page-lede">Each block shows three mock section heads (Proof / Deploy / Compliance) with the same motif applied. Scroll to feel how the repetition reads across multiple sections.</p>
+
+<!-- OPTION A · Breathing cyan dot -->
+<div class="opt opt-a">
+  <span class="opt-label">Option A</span>
+  <h2 class="opt-title">Breathing cyan dot</h2>
+  <p class="opt-desc">A small cyan dot, breathing on a 3s cycle, sits before each section's eyebrow label. Miniature version of the orb's presence — same brand logic.</p>
+  <div class="mock-section">
+    <div class="m-eyebrow">Production signal · § 01</div>
+    <h3 class="m-h2">Every call, shipped to your stack.</h3>
+  </div>
+  <div class="mock-section">
+    <div class="m-eyebrow">Deployment paths · § 02</div>
+    <h3 class="m-h2">Same layer. Different operating shape.</h3>
+  </div>
+  <div class="mock-section">
+    <div class="m-eyebrow">Compliance · § 04</div>
+    <h3 class="m-h2">Posture, before any contract.</h3>
+  </div>
+</div>
+
+<!-- OPTION B · Live-pulse green dot -->
+<div class="opt opt-b">
+  <span class="opt-label">Option B</span>
+  <h2 class="opt-title">Live-pulse green dot</h2>
+  <p class="opt-desc">A green dot pulsing with radar ripples. "This page is live production." Aligns with existing live-state indicators in Proof and Story.</p>
+  <div class="mock-section">
+    <div class="m-eyebrow">Production signal · § 01</div>
+    <h3 class="m-h2">Every call, shipped to your stack.</h3>
+  </div>
+  <div class="mock-section">
+    <div class="m-eyebrow">Deployment paths · § 02</div>
+    <h3 class="m-h2">Same layer. Different operating shape.</h3>
+  </div>
+  <div class="mock-section">
+    <div class="m-eyebrow">Compliance · § 04</div>
+    <h3 class="m-h2">Posture, before any contract.</h3>
+  </div>
+</div>
+
+<!-- OPTION C · Mono ledger footer -->
+<div class="opt opt-c">
+  <span class="opt-label">Option C</span>
+  <h2 class="opt-title">Mono ledger ribbon at each section's foot</h2>
+  <p class="opt-desc">A tiny monospace line at the end of every section, signed like a commit. Very Modal/developer-brand. Reinforces "this is a technical product."</p>
+  <div class="mock-section">
+    <div class="m-eyebrow">Production signal · § 01</div>
+    <h3 class="m-h2">Every call, shipped to your stack.</h3>
+    <div class="m-ledger">
+      <span class="live-dot"></span>
+      <span>§ 01 · production signal</span>
+      <span class="sep">·</span>
+      <span>4 metrics</span>
+      <span class="sep">·</span>
+      <span>live · evt_2026_04_17</span>
+    </div>
+  </div>
+  <div class="mock-section">
+    <div class="m-eyebrow">Deployment paths · § 02</div>
+    <h3 class="m-h2">Same layer. Different operating shape.</h3>
+    <div class="m-ledger">
+      <span class="live-dot"></span>
+      <span>§ 02 · deployment paths</span>
+      <span class="sep">·</span>
+      <span>3 shapes</span>
+      <span class="sep">·</span>
+      <span>updated 2026-04-17</span>
+    </div>
+  </div>
+  <div class="mock-section">
+    <div class="m-eyebrow">Compliance · § 04</div>
+    <h3 class="m-h2">Posture, before any contract.</h3>
+    <div class="m-ledger">
+      <span class="live-dot"></span>
+      <span>§ 04 · compliance</span>
+      <span class="sep">·</span>
+      <span>6 live · 3 in-flight</span>
+      <span class="sep">·</span>
+      <span>Sprinto · audit 2026-Q2</span>
+    </div>
+  </div>
+</div>
+
+<!-- OPTION D · Cyan slash -->
+<div class="opt opt-d">
+  <span class="opt-label">Option D</span>
+  <h2 class="opt-title">Cyan signature slash</h2>
+  <p class="opt-desc">A skewed cyan <code>/</code> precedes every eyebrow — a signature mark, like initials on a drawing. Minimal, quiet, distinctive.</p>
+  <div class="mock-section">
+    <div class="m-eyebrow">Production signal · § 01</div>
+    <h3 class="m-h2">Every call, shipped to your stack.</h3>
+  </div>
+  <div class="mock-section">
+    <div class="m-eyebrow">Deployment paths · § 02</div>
+    <h3 class="m-h2">Same layer. Different operating shape.</h3>
+  </div>
+  <div class="mock-section">
+    <div class="m-eyebrow">Compliance · § 04</div>
+    <h3 class="m-h2">Posture, before any contract.</h3>
+  </div>
+</div>
+
+<!-- OPTION E · Aura wedge -->
+<div class="opt opt-e">
+  <span class="opt-label">Option E</span>
+  <h2 class="opt-title">Aura wedge — horizontal cyan gradient</h2>
+  <p class="opt-desc">A 28px cyan gradient bar fading left-to-right, precedes each eyebrow. Suggests "light entering from the orb." Directional, atmospheric.</p>
+  <div class="mock-section">
+    <div class="m-eyebrow">Production signal · § 01</div>
+    <h3 class="m-h2">Every call, shipped to your stack.</h3>
+  </div>
+  <div class="mock-section">
+    <div class="m-eyebrow">Deployment paths · § 02</div>
+    <h3 class="m-h2">Same layer. Different operating shape.</h3>
+  </div>
+  <div class="mock-section">
+    <div class="m-eyebrow">Compliance · § 04</div>
+    <h3 class="m-h2">Posture, before any contract.</h3>
+  </div>
+</div>
+
+<!-- OPTION F · Side indicator -->
+<div class="opt opt-f">
+  <span class="opt-label">Option F</span>
+  <h2 class="opt-title">Thin cyan side bar</h2>
+  <p class="opt-desc">A 2px cyan rule runs vertically to the left of each section's content. Cumulative: the whole page gets a subtle cyan anchor on the left.</p>
+  <div class="mock-section">
+    <div class="m-eyebrow">Production signal · § 01</div>
+    <h3 class="m-h2">Every call, shipped to your stack.</h3>
+  </div>
+  <div class="mock-section">
+    <div class="m-eyebrow">Deployment paths · § 02</div>
+    <h3 class="m-h2">Same layer. Different operating shape.</h3>
+  </div>
+  <div class="mock-section">
+    <div class="m-eyebrow">Compliance · § 04</div>
+    <h3 class="m-h2">Posture, before any contract.</h3>
+  </div>
+</div>
+
+</body>
+</html>

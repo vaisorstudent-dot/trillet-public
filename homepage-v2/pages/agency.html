@@ -1,0 +1,1286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Agency · Trillet</title>
+<meta name="description" content="One platform. Many client deployments. Your brand on every call. Multi-tenant voice for agencies — white-label surface, operator console under your brand, client deployments live in days.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Urbanist:wght@300;400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link href="_shared.css" rel="stylesheet">
+
+<style>
+/* ═══════════════════════════════════════════════════════════════════════════
+   AGENCY PAGE · 2026-04-19 · re-aligned to homepage-v2-option-a-v2 idiom
+   Same vocabulary as Enterprise page: chapter eyebrows, rail+node numbered
+   flow, pill clusters, dark-panel-in-light close. Register is distinctly
+   agency — "days, not months" + multi-tenant rhythm — but the visual system
+   is shared with home + enterprise.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── Homepage section rhythm ── */
+.agc { --page-max: 1360px; --section-pad: 128px; }
+.agc section { padding: var(--section-pad) 32px; }
+.agc .inner { max-width: var(--page-max); margin: 0 auto; }
+
+/* ── Chapter eyebrow ── */
+.agc .eyebrow {
+  display: inline-flex; align-items: baseline; gap: 10px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--brand-primary);
+  margin-bottom: 22px;
+}
+.agc .eyebrow .chap {
+  color: var(--text-muted); font-weight: 500; letter-spacing: 0.14em;
+}
+.on-dark-panel .eyebrow { color: var(--brand-highlight); }
+.on-dark-panel .eyebrow .chap { color: rgba(255,255,255,0.40); }
+
+.agc h2.section-h {
+  font-family: 'Urbanist', sans-serif; font-weight: 600;
+  font-size: clamp(32px, 4vw, 52px);
+  letter-spacing: -0.025em; line-height: 1.05;
+  color: var(--text-primary); margin: 0 0 18px 0;
+  text-wrap: balance;
+}
+.on-dark-panel h2.section-h { color: var(--text-on-dark); }
+.agc p.section-lede {
+  font-size: 17px; line-height: 1.6;
+  color: var(--text-body); margin: 0; max-width: 640px;
+  text-wrap: pretty;
+}
+.on-dark-panel p.section-lede { color: var(--text-on-dark-body); }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   HERO — dark-panel-in-light + multi-tenant card (replaces orb, mirrors home)
+   Subtle shift vs enterprise hero: warmer cobalt accent hinting at agency brand.
+   ═══════════════════════════════════════════════════════════════════════════ */
+.agc-hero-wrap { padding: 32px 32px 0; background: #FFFFFF; }
+.agc-hero {
+  max-width: var(--page-max); margin: 0 auto;
+  background: var(--bg-dark);
+  border-radius: 28px;
+  padding: 88px 72px 80px;
+  position: relative; overflow: hidden;
+  display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 64px;
+  align-items: center; min-height: 580px;
+  box-shadow: 0 40px 80px rgba(2, 58, 132, 0.18);
+}
+.agc-hero::before {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse 55% 45% at 78% 18%, rgba(131, 228, 255, 0.22) 0%, transparent 55%),
+    radial-gradient(ellipse 45% 45% at 12% 88%, rgba(2, 58, 132, 0.55) 0%, transparent 55%),
+    radial-gradient(ellipse 30% 30% at 75% 75%, rgba(39, 163, 253, 0.20) 0%, transparent 60%);
+}
+.agc-hero::after {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background-image: radial-gradient(rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size: 32px 32px; opacity: 0.6;
+  mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 75%);
+}
+.agc-hero > * { position: relative; z-index: 1; }
+.agc-hero-left { display: flex; flex-direction: column; gap: 28px; }
+.agc-hero h1 {
+  font-family: 'Urbanist', sans-serif; font-weight: 600;
+  font-size: clamp(42px, 5.2vw, 64px);
+  letter-spacing: -0.025em; line-height: 1.02;
+  color: var(--text-on-dark); margin: 0;
+  text-wrap: balance;
+}
+.agc-hero h1 em {
+  font-style: normal;
+  background: linear-gradient(135deg, #83E4FF 0%, #27A3FD 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.agc-hero-lede {
+  font-size: clamp(16px, 1.3vw, 18px); line-height: 1.55;
+  color: var(--text-on-dark-body); margin: 0; max-width: 560px;
+}
+.agc-hero-pills { display: flex; flex-wrap: wrap; gap: 8px; }
+.agc-hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; }
+
+/* ── Multi-tenant card (right side of hero) ── */
+.mt-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.10);
+  border-radius: 18px;
+  padding: 24px;
+  backdrop-filter: blur(10px);
+}
+.mt-card-head {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 14px; padding-bottom: 16px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.mt-card-head .title {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.16em;
+  text-transform: uppercase; color: rgba(255,255,255,0.70);
+}
+.mt-card-head .live {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; font-weight: 700; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--brand-highlight);
+  padding: 4px 10px; border-radius: 999px;
+  background: rgba(131, 228, 255, 0.10);
+  border: 1px solid rgba(131, 228, 255, 0.25);
+}
+.mt-card-head .live::before {
+  content: ''; width: 5px; height: 5px; border-radius: 50%;
+  background: var(--status-live); box-shadow: 0 0 6px var(--status-live);
+}
+.mt-row {
+  padding: 14px 0; display: grid; grid-template-columns: 32px 1fr auto;
+  gap: 14px; align-items: center;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.mt-row:last-child { border-bottom: none; }
+.mt-row .brand-sq {
+  width: 32px; height: 32px; border-radius: 8px;
+  background: linear-gradient(135deg, var(--brand-secondary), var(--brand-highlight));
+  opacity: 0.72;
+}
+.mt-row:nth-of-type(2) .brand-sq { background: linear-gradient(135deg, #f59e0b, #fbbf24); }
+.mt-row:nth-of-type(3) .brand-sq { background: linear-gradient(135deg, #8b5cf6, #c084fc); }
+.mt-row .name {
+  font-size: 13.5px; font-weight: 600;
+  color: var(--text-on-dark); margin-bottom: 3px;
+}
+.mt-row .meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; color: rgba(255,255,255,0.55);
+  letter-spacing: 0.04em;
+}
+.mt-row .tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9.5px; font-weight: 700; letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 3px 9px; border-radius: 999px;
+  color: #6EE7B7;
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.28);
+  white-space: nowrap;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   § 01 PROOF — active agency deployments + logo strip
+   ═══════════════════════════════════════════════════════════════════════════ */
+.agc-proof { background: #FFFFFF; }
+.agc-proof-head-row {
+  display: grid; grid-template-columns: auto 1fr; gap: 48px;
+  align-items: baseline; margin-bottom: 72px;
+}
+.agc-proof-counter {
+  font-family: 'Urbanist', sans-serif; font-weight: 600;
+  font-size: clamp(64px, 8vw, 112px);
+  letter-spacing: -0.04em; line-height: 0.9;
+  color: var(--text-primary);
+  font-variant-numeric: tabular-nums;
+  background: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-dark, #023A84) 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.agc-proof-counter-label {
+  font-size: 15px; color: var(--text-body); line-height: 1.6;
+  max-width: 440px; padding-top: 12px;
+}
+.agc-proof-logos-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; font-weight: 700; letter-spacing: 0.22em;
+  text-transform: uppercase; color: var(--text-muted);
+  margin-bottom: 24px;
+}
+.agc-proof-logos-row {
+  display: grid; grid-template-columns: repeat(6, 1fr);
+  gap: 32px; align-items: center;
+}
+.agc-proof-logo-slot {
+  color: #64748B;
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0.75; transition: opacity 0.2s;
+}
+.agc-proof-logo-slot:hover { opacity: 1; color: var(--logo-accent, var(--text-primary)); }
+.agc-proof-logo { width: 100%; height: 24px; }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   § 02 WHITE-LABEL MECHANICS — rail+node flow (3 steps)
+   ═══════════════════════════════════════════════════════════════════════════ */
+.agc-wl { background: var(--bg-tint); }
+.agc-wl-inner { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 96px; }
+.agc-wl-head { position: sticky; top: 120px; align-self: start; }
+
+.agc-wl-flow { display: flex; flex-direction: column; }
+.agc-wstep {
+  display: grid; grid-template-columns: 32px 1fr; gap: 28px;
+  padding-bottom: 40px;
+}
+.agc-wstep:last-child { padding-bottom: 0; }
+.agc-wstep-rail {
+  display: flex; flex-direction: column; align-items: center;
+  position: relative;
+}
+.agc-wstep-rail::after {
+  content: ''; position: absolute; top: 20px; bottom: -40px;
+  left: 50%; width: 1px; transform: translateX(-50%);
+  background-image: linear-gradient(to bottom, rgba(0,98,233,0.30) 0, rgba(0,98,233,0.30) 4px, transparent 4px, transparent 8px);
+  background-size: 1px 8px;
+}
+.agc-wstep:last-child .agc-wstep-rail::after { display: none; }
+.agc-wstep-node {
+  width: 20px; height: 20px; border-radius: 50%;
+  background: var(--surface, #fff);
+  border: 2px solid var(--brand-primary);
+  display: flex; align-items: center; justify-content: center;
+  position: relative; z-index: 1;
+}
+.agc-wstep-node::after {
+  content: ''; width: 6px; height: 6px; border-radius: 50%;
+  background: var(--brand-primary);
+}
+.agc-wstep-body {
+  background: #FFFFFF;
+  border: 1px solid var(--border-light);
+  border-radius: 16px;
+  padding: 28px 32px;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.agc-wstep-body:hover {
+  border-color: rgba(131, 228, 255, 0.55);
+  transform: translateY(-1px);
+}
+.agc-wstep-body header {
+  display: flex; align-items: center; gap: 12px;
+  margin-bottom: 12px; flex-wrap: wrap;
+}
+.agc-wstep-body .num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.14em;
+  color: var(--text-muted);
+}
+.agc-wstep-body h3 {
+  font-family: 'Urbanist', sans-serif; font-weight: 600;
+  font-size: 22px; letter-spacing: -0.015em;
+  color: var(--text-primary); margin: 0;
+}
+.agc-wstep-body .tag {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; font-weight: 700; letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 4px 10px; border-radius: 999px;
+  background: rgba(16, 185, 129, 0.10); color: #047857;
+  border: 1px solid rgba(16, 185, 129, 0.22);
+}
+.agc-wstep-body p {
+  font-size: 14px; color: var(--text-body); line-height: 1.6;
+  margin: 0 0 16px 0;
+}
+.agc-wstep-chips {
+  display: flex; flex-wrap: wrap; gap: 6px;
+}
+.agc-wstep-chips span {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; font-weight: 500;
+  padding: 4px 10px; border-radius: 6px;
+  background: var(--bg-tint); color: var(--text-body);
+  border: 1px solid var(--border-light);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   § 03 DEPLOY TIMELINE — Day 0 / 1 / 2 / 3+ horizontal rail
+   Kept from original, upgraded to homepage vocab (chapter eyebrow, mono num)
+   ═══════════════════════════════════════════════════════════════════════════ */
+.agc-deploy { background: #FFFFFF; }
+.agc-deploy-head { margin-bottom: 64px; max-width: 720px; }
+.agc-timeline {
+  position: relative;
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  padding: 32px 0;
+}
+.agc-timeline::before {
+  content: ''; position: absolute;
+  top: 56px; left: 12.5%; right: 12.5%; height: 2px;
+  background-image: linear-gradient(to right, rgba(0,98,233,0.25) 0, rgba(0,98,233,0.25) 6px, transparent 6px, transparent 12px);
+  background-size: 12px 2px;
+}
+.agc-tstep {
+  text-align: center;
+  display: flex; flex-direction: column; align-items: center;
+  gap: 16px;
+}
+.agc-tstep .node {
+  width: 56px; height: 56px; border-radius: 50%;
+  background: white; border: 2px solid var(--brand-primary);
+  display: inline-flex; align-items: center; justify-content: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700; font-size: 16px;
+  color: var(--brand-primary);
+  position: relative; z-index: 1;
+  box-shadow: 0 0 0 6px white;
+}
+.agc-tstep .label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; font-weight: 700; letter-spacing: 0.18em;
+  color: var(--text-muted); text-transform: uppercase;
+}
+.agc-tstep h3 {
+  font-family: 'Urbanist', sans-serif; font-weight: 600;
+  font-size: 17px; color: var(--text-primary);
+  margin: 0;
+}
+.agc-tstep p {
+  font-size: 13px; color: var(--text-body); line-height: 1.55;
+  margin: 0; max-width: 220px;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   § 04 MULTI-TENANT CONSOLE LIVE — shared op-console, client-name rows
+   ═══════════════════════════════════════════════════════════════════════════ */
+.agc-oplive { background: var(--bg-tint); }
+.agc-oplive-inner {
+  display: grid; grid-template-columns: 0.9fr 1.1fr;
+  gap: 64px; align-items: center;
+}
+.agc-oplive .op-console {
+  background:
+    radial-gradient(ellipse 60% 50% at 80% 20%, rgba(131, 228, 255, 0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 60% at 15% 90%, rgba(39, 163, 253, 0.10) 0%, transparent 65%),
+    linear-gradient(135deg, #0F1E47 0%, #1A3068 100%);
+  border-color: rgba(131, 228, 255, 0.16);
+  box-shadow: 0 32px 80px rgba(2, 58, 132, 0.32), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+.agc-oplive .op-row {
+  grid-template-columns: 32px 1fr auto; gap: 16px;
+}
+.agc-oplive .op-row .cbrand {
+  width: 28px; height: 28px; border-radius: 7px;
+  background: linear-gradient(135deg, var(--brand-secondary), var(--brand-highlight));
+  opacity: 0.72;
+}
+.agc-oplive .op-row:nth-of-type(2) .cbrand { background: linear-gradient(135deg, #f59e0b, #fbbf24); }
+.agc-oplive .op-row:nth-of-type(3) .cbrand { background: linear-gradient(135deg, #8b5cf6, #c084fc); }
+.agc-oplive .op-row:nth-of-type(4) .cbrand { background: linear-gradient(135deg, #ec4899, #f472b6); }
+.agc-oplive .op-row .client-name {
+  font-size: 13px; font-weight: 600; color: var(--text-on-dark);
+}
+.agc-oplive .op-row .cmeta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; color: rgba(255,255,255,0.55);
+  margin-top: 2px; letter-spacing: 0.04em;
+}
+.agc-oplive .op-row .cstatus {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; font-weight: 700; letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.agc-oplive .op-row .cstatus.live { color: #6EE7B7; }
+.agc-oplive .op-row .cstatus.deploying { color: #fbbf24; }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   § 05 MARGIN — worked example card + tier reference
+   ═══════════════════════════════════════════════════════════════════════════ */
+.agc-margin { background: #FFFFFF; }
+.agc-margin-inner {
+  display: grid; grid-template-columns: 1.3fr 0.7fr;
+  gap: 48px; align-items: start;
+}
+.agc-margin-head { margin-bottom: 36px; max-width: 640px; }
+.agc-margin-card {
+  background: var(--bg-tint);
+  padding: 36px 40px;
+  border-radius: 20px;
+}
+.agc-margin-card h3 {
+  font-family: 'Urbanist', sans-serif; font-weight: 600;
+  font-size: 18px; color: var(--text-primary);
+  margin: 0 0 24px 0;
+  display: flex; align-items: baseline; gap: 12px;
+}
+.agc-margin-card h3 .industry {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--brand-primary); opacity: 0.8;
+}
+.margin-row {
+  display: grid; grid-template-columns: 1fr auto;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border-light);
+  font-size: 14px;
+}
+.margin-row:last-of-type { border-bottom: none; }
+.margin-row.subtle .label { color: var(--text-muted); }
+.margin-row.total {
+  font-weight: 700; color: var(--brand-primary);
+  border-top: 2px solid var(--brand-primary);
+  margin-top: 8px; padding-top: 16px; border-bottom: none;
+}
+.margin-row.total .value {
+  font-size: 18px; font-family: 'Urbanist', sans-serif;
+}
+.margin-row .label { color: var(--text-body); }
+.margin-row .value {
+  font-family: 'JetBrains Mono', monospace;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-primary);
+}
+.agc-margin-note {
+  font-size: 12px; color: var(--text-muted);
+  margin: 20px 0 0 0; line-height: 1.55;
+}
+.agc-margin-note a { color: var(--brand-primary); font-weight: 600; }
+
+.agc-tier-ref {
+  background: #FFFFFF;
+  border: 1px solid var(--border-light);
+  border-radius: 20px;
+  padding: 28px 28px 24px;
+  position: sticky; top: 120px;
+}
+.agc-tier-ref .tier-eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; font-weight: 700; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--text-muted);
+  margin-bottom: 18px;
+}
+.agc-tier-ref ul {
+  list-style: none; padding: 0; margin: 0;
+  display: flex; flex-direction: column; gap: 10px;
+}
+.agc-tier-ref ul li {
+  padding: 14px 16px;
+  background: var(--bg-tint);
+  border-radius: 10px;
+  display: grid; grid-template-columns: 1fr auto;
+  align-items: center; gap: 10px;
+}
+.agc-tier-ref ul li strong {
+  font-family: 'Urbanist', sans-serif; font-weight: 600;
+  font-size: 14px; color: var(--text-primary);
+  display: block; margin-bottom: 2px;
+}
+.agc-tier-ref ul li .scope {
+  font-size: 12px; color: var(--text-body);
+}
+.agc-tier-ref ul li .price {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px; font-weight: 700; color: var(--brand-primary);
+  text-align: right;
+}
+.agc-tier-ref a.all-link {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 14px; font-weight: 600; color: var(--brand-primary);
+  margin-top: 18px;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   § 06 REFERENCE OPERATORS — 3 cards
+   ═══════════════════════════════════════════════════════════════════════════ */
+.agc-ref { background: var(--bg-tint); }
+.agc-ref-head { margin-bottom: 56px; max-width: 720px; }
+.agc-ref-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--border-light);
+  border: 1px solid var(--border-light);
+  border-radius: 20px; overflow: hidden;
+}
+.agc-ref-card {
+  background: white; padding: 32px 32px 28px;
+  transition: background 0.2s;
+}
+.agc-ref-card:hover { background: #FBFCFE; }
+.agc-ref-card .tag {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; font-weight: 700; letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 4px 10px; border-radius: 999px;
+  background: rgba(16, 185, 129, 0.10); color: #047857;
+  border: 1px solid rgba(16, 185, 129, 0.22);
+  margin-bottom: 16px;
+}
+.agc-ref-card .tag::before {
+  content: ''; width: 5px; height: 5px; border-radius: 50%;
+  background: var(--status-live);
+}
+.agc-ref-card h3 {
+  font-family: 'Urbanist', sans-serif; font-weight: 600;
+  font-size: 19px; color: var(--text-primary);
+  margin: 0 0 10px 0;
+}
+.agc-ref-card p {
+  font-size: 14px; color: var(--text-body); line-height: 1.6;
+  margin: 0 0 20px 0;
+}
+.agc-ref-card .mini-stats {
+  display: flex; gap: 24px; padding-top: 14px;
+  border-top: 1px solid var(--border-light);
+  font-family: 'JetBrains Mono', monospace; font-size: 12px;
+}
+.agc-ref-card .mini-stats .stat { color: var(--text-body); }
+.agc-ref-card .mini-stats .stat strong {
+  color: var(--text-primary); font-weight: 700;
+  display: block; margin-bottom: 2px;
+  font-size: 15px; font-family: 'Urbanist', sans-serif;
+}
+.agc-ref-foot {
+  text-align: center; margin-top: 40px;
+}
+.agc-ref-foot a {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 14px; font-weight: 600; color: var(--brand-primary);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   § 07 CLOSE — dark-panel-in-light + 5-beat agency-kickoff strip
+   ═══════════════════════════════════════════════════════════════════════════ */
+.agc-close { background: #FFFFFF; padding-bottom: 32px !important; }
+.agc-close-panel {
+  max-width: var(--page-max); margin: 0 auto;
+  background: var(--bg-dark);
+  border-radius: 28px;
+  padding: 80px 72px 64px;
+  position: relative; overflow: hidden;
+  box-shadow: 0 40px 80px rgba(2, 58, 132, 0.18);
+}
+.agc-close-panel::before {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse 55% 45% at 22% 12%, rgba(131, 228, 255, 0.22) 0%, transparent 55%),
+    radial-gradient(ellipse 45% 45% at 88% 92%, rgba(2, 58, 132, 0.55) 0%, transparent 55%),
+    radial-gradient(ellipse 30% 30% at 25% 75%, rgba(39, 163, 253, 0.20) 0%, transparent 60%);
+}
+.agc-close-panel::after {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background-image: radial-gradient(rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size: 32px 32px; opacity: 0.6;
+  mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 75%);
+}
+.agc-close-panel > * { position: relative; z-index: 1; }
+.agc-close-row {
+  display: grid; grid-template-columns: 1.2fr 0.8fr;
+  gap: 56px; align-items: end; margin-bottom: 56px;
+}
+.agc-close-row h2 {
+  font-family: 'Urbanist', sans-serif; font-weight: 600;
+  font-size: clamp(32px, 4vw, 48px);
+  letter-spacing: -0.025em; line-height: 1.05;
+  color: var(--text-on-dark); margin: 14px 0 18px 0;
+  text-wrap: balance;
+}
+.agc-close-row p {
+  font-size: 16px; color: var(--text-on-dark-body);
+  line-height: 1.6; margin: 0; max-width: 560px;
+}
+.agc-close-row .ctas {
+  display: flex; flex-direction: column; gap: 12px; align-items: stretch;
+}
+.agc-close-agenda {
+  list-style: none; padding: 28px 0 0 0; margin: 0;
+  display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+.agc-close-agenda li {
+  display: flex; flex-direction: column; gap: 6px;
+  padding: 18px 0 0;
+}
+.agc-close-agenda li .num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; font-weight: 700; letter-spacing: 0.18em;
+  color: var(--brand-highlight);
+}
+.agc-close-agenda li .beat {
+  font-family: 'Urbanist', sans-serif; font-weight: 600;
+  font-size: 15px; color: var(--text-on-dark); line-height: 1.3;
+}
+.agc-close-agenda li .when {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; color: rgba(255,255,255,0.50);
+  letter-spacing: 0.08em;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .agc section { padding: 80px 24px; }
+  .agc-hero { grid-template-columns: 1fr; padding: 56px 32px; }
+  .agc-wl-inner { grid-template-columns: 1fr; gap: 48px; }
+  .agc-wl-head { position: static; }
+  .agc-timeline { grid-template-columns: repeat(2, 1fr); }
+  .agc-timeline::before { display: none; }
+  .agc-oplive-inner { grid-template-columns: 1fr; }
+  .agc-margin-inner { grid-template-columns: 1fr; }
+  .agc-tier-ref { position: static; }
+  .agc-ref-grid { grid-template-columns: 1fr; }
+  .agc-close-row { grid-template-columns: 1fr; align-items: start; }
+  .agc-close-row .ctas { align-items: flex-start; }
+  .agc-close-agenda { grid-template-columns: repeat(2, 1fr); }
+  .agc-proof-head-row { grid-template-columns: 1fr; gap: 20px; }
+  .agc-proof-logos-row { grid-template-columns: repeat(3, 1fr); gap: 20px; }
+}
+@media (max-width: 640px) {
+  .agc-hero { padding: 40px 24px; }
+  .agc-close-panel { padding: 48px 24px; }
+  .agc-timeline { grid-template-columns: 1fr; }
+  .agc-close-agenda { grid-template-columns: 1fr; }
+}
+
+/* =================================================================
+   DARK-MODE ALIGNMENT (2026-04-19) — match homepage-v2-option-a-v2
+   Agency page sections converted to the same ink + cyan-eyebrow +
+   hairline vocabulary the platform/enterprise/home use.
+   ================================================================= */
+:root {
+  --agc-ink: #0A0F1E;
+  --agc-ink-soft: #0E1527;
+  --agc-rule: rgba(255, 255, 255, 0.08);
+  --agc-rule-soft: rgba(255, 255, 255, 0.04);
+  --agc-text: #F5F6FA;
+  --agc-text-body: rgba(245, 246, 250, 0.78);
+  --agc-text-muted: rgba(245, 246, 250, 0.52);
+  --agc-chip-bg: rgba(255, 255, 255, 0.04);
+  --agc-chip-border: rgba(255, 255, 255, 0.10);
+  --agc-cyan: #83E4FF;
+}
+
+/* Backdrop */
+html, body { background: var(--agc-ink) !important; }
+main, main#main { background: var(--agc-ink) !important; }
+.agc-hero-wrap { background: var(--agc-ink) !important; }
+
+/* Section defaults — every agency section ink, hairline separators */
+.agc-proof, .agc-wl, .agc-deploy, .agc-oplive,
+.agc-margin, .agc-ref, .agc-close {
+  background: var(--agc-ink) !important;
+  border-top: 1px solid var(--agc-rule);
+  color: var(--agc-text);
+}
+
+/* Headings, ledes, eyebrows (scope to main) */
+main h1, main h2, main h3, main h4 { color: var(--agc-text) !important; }
+main p, main li { color: var(--agc-text-body); }
+main .eyebrow { color: var(--brand-primary, #0062E9) !important; }
+/* EYEBROW-GREEN-DOT (2026-04-19) — match homepage */
+.eyebrow::before {
+  background: var(--status-live, #10B981) !important;
+  box-shadow: 0 0 8px rgba(16,185,129,0.45), 0 0 0 3px rgba(16,185,129,0.08) !important;
+}
+main .eyebrow .chap { color: rgba(255,255,255,0.42) !important; }
+
+/* ----- PROOF ----------------------------------------------------- */
+.agc-proof-head-row *,
+.agc-proof-logos-label { color: var(--agc-text-body); }
+.agc-proof-logos-label { color: var(--agc-text-muted) !important; }
+.agc-proof-logo-slot, .agc-proof-logo {
+  background: var(--agc-chip-bg) !important;
+  border-color: var(--agc-chip-border) !important;
+  color: var(--agc-text-body) !important;
+}
+.agc-proof-counter {
+  background: linear-gradient(135deg, var(--agc-cyan) 0%, #4D9BFF 100%) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  color: transparent !important;
+}
+.agc-proof-counter-label { color: var(--agc-text-muted) !important; }
+
+/* ----- WHITE-LABEL (flow) --------------------------------------- */
+.agc-wl-head * { color: var(--agc-text-body); }
+.agc-wl-head h2 { color: var(--agc-text) !important; }
+.agc-wstep-body {
+  background: var(--agc-ink-soft) !important;
+  border: 1px solid var(--agc-rule) !important;
+  color: var(--agc-text-body) !important;
+}
+.agc-wstep-body * { color: inherit; }
+.agc-wstep-body h3, .agc-wstep-body h4, .agc-wstep-body strong {
+  color: var(--agc-text) !important;
+}
+.agc-wstep-body .num { color: var(--agc-cyan) !important; }
+.agc-wstep-node {
+  background: var(--agc-ink) !important;
+  border: 1px solid var(--agc-cyan) !important;
+  color: var(--agc-cyan) !important;
+}
+.agc-wstep-rail { background: var(--agc-rule) !important; }
+.agc-wstep-chips > * {
+  background: var(--agc-chip-bg) !important;
+  border: 1px solid var(--agc-chip-border) !important;
+  color: var(--agc-text-body) !important;
+}
+
+/* ----- DEPLOY (timeline) ---------------------------------------- */
+.agc-deploy-head *, .agc-deploy a { color: var(--agc-text-body); }
+.agc-deploy-head h2 { color: var(--agc-text) !important; }
+.agc-timeline { color: var(--agc-text-body); }
+.agc-tstep {
+  background: var(--agc-ink-soft) !important;
+  border: 1px solid var(--agc-rule) !important;
+  color: var(--agc-text-body) !important;
+}
+.agc-tstep * { color: inherit; }
+.agc-tstep h3, .agc-tstep h4, .agc-tstep strong { color: var(--agc-text) !important; }
+.agc-tstep .num, .agc-tstep .tstep-num { color: var(--agc-cyan) !important; }
+.agc-tstep .tag, .agc-tstep .live-tag {
+  background: rgba(16, 185, 129, 0.14) !important;
+  color: #6EE7B7 !important;
+  border: 1px solid rgba(16, 185, 129, 0.28);
+}
+
+/* ----- OPLIVE (console) ----------------------------------------- */
+.agc-oplive-inner * { color: var(--agc-text-body); }
+.agc-oplive-inner h2, .agc-oplive-inner h3, .agc-oplive-inner h4 { color: var(--agc-text) !important; }
+
+/* ----- MARGIN (pricing / calculator card) ----------------------- */
+.agc-margin-head *, .agc-margin-note { color: var(--agc-text-body); }
+.agc-margin-head h2 { color: var(--agc-text) !important; }
+.agc-margin-card {
+  background: var(--agc-ink-soft) !important;
+  border: 1px solid var(--agc-rule) !important;
+  color: var(--agc-text-body) !important;
+}
+.agc-margin-card * { color: inherit; }
+.agc-margin-card h3, .agc-margin-card h4, .agc-margin-card strong { color: var(--agc-text) !important; }
+.agc-margin-card .num, .agc-margin-card .price { color: var(--agc-cyan) !important; }
+.agc-tier-ref {
+  background: var(--agc-chip-bg) !important;
+  border: 1px solid var(--agc-chip-border) !important;
+  color: var(--agc-text-body) !important;
+}
+.agc-tier-ref * { color: inherit; }
+
+/* ----- REFERENCE (case studies / cards) ------------------------- */
+.agc-ref-head *, .agc-ref-foot * { color: var(--agc-text-body); }
+.agc-ref-head h2 { color: var(--agc-text) !important; }
+.agc-ref-card {
+  background: var(--agc-ink-soft) !important;
+  border: 1px solid var(--agc-rule) !important;
+  color: var(--agc-text-body) !important;
+}
+.agc-ref-card * { color: inherit; }
+.agc-ref-card h3, .agc-ref-card h4, .agc-ref-card strong { color: var(--agc-text) !important; }
+.agc-ref-card .stat { color: var(--agc-cyan) !important; }
+.agc-ref-card a { color: var(--agc-cyan) !important; }
+
+/* ----- CLOSE ----------------------------------------------------- */
+.agc-close * { color: var(--agc-text-body); }
+.agc-close h2, .agc-close h3, .agc-close h4 { color: var(--agc-text) !important; }
+.agc-close-panel {
+  background: var(--agc-ink-soft) !important;
+  border: 1px solid var(--agc-rule) !important;
+  color: var(--agc-text) !important;
+}
+.agc-close-panel * { color: inherit; }
+.agc-close-agenda, .agc-close-row {
+  border-color: var(--agc-rule) !important;
+}
+
+/* ----- NAV: force dark ------------------------------------------ */
+.site-nav {
+  background: rgba(11, 14, 23, 0.86) !important;
+  border-bottom: 1px solid var(--agc-rule) !important;
+  backdrop-filter: blur(12px);
+}
+.site-nav a { color: var(--agc-text-body) !important; }
+.site-nav a:hover { color: var(--agc-text) !important; }
+.site-nav a.cta {
+  background: #F5F6FA !important;
+  color: #06080F !important;
+}
+.site-nav a[style*="color: var(--brand-primary)"] {
+  color: var(--agc-cyan) !important;
+}
+
+/* ----- FOOTER — force dark -------------------------------------- */
+footer, .site-footer, [class*="footer"] {
+  background: var(--agc-ink) !important;
+  color: var(--agc-text-body) !important;
+  border-top: 1px solid var(--agc-rule) !important;
+}
+footer *, .site-footer *, [class*="footer"] * {
+  color: var(--agc-text-body);
+  border-color: var(--agc-rule);
+}
+footer a, .site-footer a, [class*="footer"] a {
+  color: var(--agc-text-body) !important;
+}
+footer a:hover, .site-footer a:hover {
+  color: var(--agc-cyan) !important;
+}
+footer h4, .site-footer h4 { color: var(--agc-text) !important; }
+</style>
+</head>
+<body class="agc">
+
+<a href="#main" class="skip-link">Skip to main content</a>
+
+<div class="preview-banner" style="background: #022f6a;">
+  <div class="label">📄 PAGE MOCKUP · /agency (rebuilt to homepage idiom · 2026-04-19)</div>
+  <div class="links">
+    <a href="index.html">All pages</a>
+    <a href="../homepage-v2-option-a-v2.html">/ home</a>
+    <a href="enterprise.html">/enterprise</a>
+    <a class="active" href="agency.html">/agency</a>
+    <a href="trust.html">/trust</a>
+    <a href="platform.html">/platform</a>
+    <a href="agency-pricing.html">/agency/pricing</a>
+    <a href="agent.html">/agent</a>
+  </div>
+</div>
+
+<header class="site-nav">
+  <a href="../homepage-v2-option-a-v2.html" class="wordmark"><img src="assets/trillet-logo.svg" alt="Trillet"></a>
+  <nav>
+    <a href="platform.html">Platform</a>
+    <a href="enterprise.html">Enterprise</a>
+    <a href="agency.html" style="color: var(--brand-primary); font-weight: 600;">Agency</a>
+    <a href="agent.html">AI Agent</a>
+    <a href="https://docs.trillet.ai/v1/api-reference/introduction">Docs</a>
+    <a href="#">Sign in</a>
+    <a href="#" class="cta">Get started</a>
+  </nav>
+</header>
+
+<main id="main">
+
+<!-- HERO -->
+<section class="agc-hero-wrap">
+  <div class="agc-hero on-dark-panel">
+    <div class="agc-hero-left">
+      <span class="status-pill on-dark">
+        <span class="dot-wrap"><span class="ping"></span><span class="core"></span></span>
+        Agency operating layer
+      </span>
+      <h1>Your brand on every call. <em>Many clients. One platform.</em></h1>
+      <p class="agc-hero-lede">Multi-tenant voice deployment for agencies. White-label the brand surface, keep the operating layer underneath, stand up new clients in days not months &mdash; and keep the margin latitude on every call.</p>
+      <div class="agc-hero-pills">
+        <span class="tri-pill on-dark"><span class="d"></span>White-label surface</span>
+        <span class="tri-pill on-dark"><span class="d"></span>Multi-tenant console</span>
+        <span class="tri-pill on-dark"><span class="d"></span>Deploy in days</span>
+      </div>
+      <div class="agc-hero-ctas">
+        <a href="agency-pricing.html" class="cta-primary on-dark">
+          Start an agency deployment
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </a>
+        <a href="#" class="cta-secondary on-dark">Talk to agency ops</a>
+      </div>
+    </div>
+    <div class="mt-card">
+      <div class="mt-card-head">
+        <div class="title">Live client deployments</div>
+        <div class="live">3 live</div>
+      </div>
+      <div class="mt-row">
+        <div class="brand-sq"></div>
+        <div>
+          <div class="name">[Client A · Healthcare]</div>
+          <div class="meta">23 calls today · multi-practice intake</div>
+        </div>
+        <div class="tag">Live</div>
+      </div>
+      <div class="mt-row">
+        <div class="brand-sq"></div>
+        <div>
+          <div class="name">[Client B · Wireless retail]</div>
+          <div class="meta">47 calls today · in + outbound</div>
+        </div>
+        <div class="tag">Live</div>
+      </div>
+      <div class="mt-row">
+        <div class="brand-sq"></div>
+        <div>
+          <div class="name">[Client C · Debt recovery]</div>
+          <div class="meta">8 calls today · outbound only</div>
+        </div>
+        <div class="tag">Live</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- § 01 PROOF -->
+<section class="agc-proof">
+  <div class="inner">
+    <div class="eyebrow">Agency signal <span class="chap">· § 01</span></div>
+    <div class="agc-proof-head-row">
+      <div class="agc-proof-counter">20+</div>
+      <div class="agc-proof-counter-label">Client deployments live under agency ownership &mdash; MSPs, vertical specialists, lead-gen operators, and multi-client performance shops.</div>
+    </div>
+    <div>
+      <div class="agc-proof-logos-label">Agency operators running Trillet</div>
+      <div class="agc-proof-logos-row">
+        <div class="agc-proof-logo-slot" style="--logo-accent: #023A84;">
+          <svg class="agc-proof-logo" viewBox="0 0 140 28" role="img" aria-label="Lumen Partners">
+            <g fill="currentColor">
+              <circle cx="10" cy="14" r="6" fill="none" stroke="currentColor" stroke-width="1.8"/>
+              <text x="22" y="19" font-family="Urbanist, sans-serif" font-size="13" font-weight="600" letter-spacing="-0.2">Lumen</text>
+              <text x="22" y="19" transform="translate(54 0)" font-family="Inter, sans-serif" font-size="11" font-weight="400" opacity="0.6">Partners</text>
+            </g>
+          </svg>
+        </div>
+        <div class="agc-proof-logo-slot" style="--logo-accent: #7C3AED;">
+          <svg class="agc-proof-logo" viewBox="0 0 140 28" role="img" aria-label="Axiom Growth">
+            <g fill="currentColor">
+              <path d="M4 6 L12 22 L20 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <text x="26" y="19" font-family="Inter, sans-serif" font-size="12" font-weight="600" letter-spacing="0.3">AXIOM</text>
+              <text x="26" y="19" transform="translate(58 0)" font-family="Inter, sans-serif" font-size="10" font-weight="400" letter-spacing="0.3" opacity="0.6">GROWTH</text>
+            </g>
+          </svg>
+        </div>
+        <div class="agc-proof-logo-slot" style="--logo-accent: #0F766E;">
+          <svg class="agc-proof-logo" viewBox="0 0 130 28" role="img" aria-label="Northbrook MSP">
+            <g fill="currentColor">
+              <path d="M4 22 L4 6 L14 22 L14 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              <text x="22" y="19" font-family="Urbanist, sans-serif" font-size="13" font-weight="600" letter-spacing="-0.3">Northbrook</text>
+              <text x="22" y="19" transform="translate(82 0)" font-family="Inter, sans-serif" font-size="10" font-weight="400" opacity="0.6">MSP</text>
+            </g>
+          </svg>
+        </div>
+        <div class="agc-proof-logo-slot" style="--logo-accent: #C2410C;">
+          <svg class="agc-proof-logo" viewBox="0 0 140 28" role="img" aria-label="Redline Collections">
+            <g fill="currentColor">
+              <path d="M4 14 L20 14" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
+              <circle cx="5" cy="14" r="3" fill="currentColor"/>
+              <text x="26" y="19" font-family="Urbanist, sans-serif" font-size="13" font-weight="700" letter-spacing="-0.2">Redline</text>
+              <text x="26" y="19" transform="translate(62 0)" font-family="Inter, sans-serif" font-size="10" font-weight="400" opacity="0.6">Collections</text>
+            </g>
+          </svg>
+        </div>
+        <div class="agc-proof-logo-slot" style="--logo-accent: #1E293B;">
+          <svg class="agc-proof-logo" viewBox="0 0 120 28" role="img" aria-label="Cadence Leads">
+            <g fill="currentColor">
+              <path d="M4 10 L8 18 L12 10 L16 18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              <text x="22" y="19" font-family="Inter, sans-serif" font-size="13" font-weight="600" letter-spacing="-0.2">Cadence</text>
+              <text x="22" y="19" transform="translate(70 0)" font-family="Inter, sans-serif" font-size="10" font-weight="400" opacity="0.6">Leads</text>
+            </g>
+          </svg>
+        </div>
+        <div class="agc-proof-logo-slot" style="--logo-accent: #B91C1C;">
+          <svg class="agc-proof-logo" viewBox="0 0 120 28" role="img" aria-label="Keystone Dial">
+            <g fill="currentColor">
+              <rect x="4" y="4" width="16" height="20" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/>
+              <circle cx="12" cy="20" r="1.5" fill="currentColor"/>
+              <text x="26" y="19" font-family="Urbanist, sans-serif" font-size="13" font-weight="600" letter-spacing="-0.2">Keystone</text>
+              <text x="26" y="19" transform="translate(74 0)" font-family="Inter, sans-serif" font-size="10" font-weight="400" opacity="0.6">Dial</text>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- § 02 WHITE-LABEL -->
+<section class="agc-wl">
+  <div class="inner agc-wl-inner">
+    <aside class="agc-wl-head">
+      <div class="eyebrow">White-label <span class="chap">· § 02</span></div>
+      <h2 class="section-h">Every surface, under your client's brand.</h2>
+      <p class="section-lede">The operating layer is shared. Everything a caller, operator, or admin sees &mdash; brand, voice, console, domain &mdash; runs under the client brand, not Trillet's, not yours.</p>
+    </aside>
+    <div class="agc-wl-flow">
+      <article class="agc-wstep">
+        <div class="agc-wstep-rail"><span class="agc-wstep-node"></span></div>
+        <div class="agc-wstep-body">
+          <header>
+            <span class="num">01</span>
+            <h3>Caller-facing brand</h3>
+            <span class="tag">Per client</span>
+          </header>
+          <p>Logo, colors, voice persona, agent name, transcript styling, and call-summary email template &mdash; all set per client. No Trillet chrome on the surfaces the caller sees.</p>
+          <div class="agc-wstep-chips">
+            <span>Voice persona</span>
+            <span>Agent name</span>
+            <span>Transcript theme</span>
+            <span>Summary email</span>
+          </div>
+        </div>
+      </article>
+      <article class="agc-wstep">
+        <div class="agc-wstep-rail"><span class="agc-wstep-node"></span></div>
+        <div class="agc-wstep-body">
+          <header>
+            <span class="num">02</span>
+            <h3>Custom domain</h3>
+            <span class="tag">Per client</span>
+          </header>
+          <p>Each client deployment runs on its own domain or subdomain. The URLs your client's team and your client's callers encounter reflect the client brand, not yours.</p>
+          <div class="agc-wstep-chips">
+            <span>voice.client.com</span>
+            <span>Your CNAMEs</span>
+            <span>SSL auto</span>
+          </div>
+        </div>
+      </article>
+      <article class="agc-wstep">
+        <div class="agc-wstep-rail"><span class="agc-wstep-node"></span></div>
+        <div class="agc-wstep-body">
+          <header>
+            <span class="num">03</span>
+            <h3>Operator console under agency brand</h3>
+            <span class="tag">Agency</span>
+          </header>
+          <p>The console your agency team uses to monitor all client deployments runs under your agency brand. Your name on the dashboard, not Trillet's. Clients see only their own tenant when you grant them access.</p>
+          <div class="agc-wstep-chips">
+            <span>Agency-branded</span>
+            <span>Per-tenant scoping</span>
+            <span>Role-based access</span>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- § 03 DEPLOY TIMELINE -->
+<section class="agc-deploy">
+  <div class="inner">
+    <div class="agc-deploy-head">
+      <div class="eyebrow">Deploy speed <span class="chap">· § 03</span></div>
+      <h2 class="section-h">Days, not months.</h2>
+      <p class="section-lede">From new client to live overflow in under a week. Reusable patterns across clients. Shared upgrades land for every tenant the next time you deploy.</p>
+    </div>
+    <div class="agc-timeline">
+      <div class="agc-tstep">
+        <div class="node">0</div>
+        <div class="label">Day 0</div>
+        <h3>Setup</h3>
+        <p>Provision the deployment, configure the brand surface, point the custom domain.</p>
+      </div>
+      <div class="agc-tstep">
+        <div class="node">1</div>
+        <div class="label">Day 1</div>
+        <h3>Prompt &amp; KB</h3>
+        <p>Bring in the client's intake rules, FAQs, escalation paths, call routing.</p>
+      </div>
+      <div class="agc-tstep">
+        <div class="node">2</div>
+        <div class="label">Day 2</div>
+        <h3>Dial-in</h3>
+        <p>Connect telephony, test inbound + outbound, verify transfers and recordings.</p>
+      </div>
+      <div class="agc-tstep">
+        <div class="node">3+</div>
+        <div class="label">Day 3+</div>
+        <h3>Live</h3>
+        <p>Soft-launch overflow or after-hours; ramp to full call volume at the client's pace.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- § 04 MULTI-TENANT CONSOLE LIVE -->
+<section class="agc-oplive">
+  <div class="inner agc-oplive-inner">
+    <div>
+      <div class="eyebrow">Multi-tenant management <span class="chap">· § 04</span></div>
+      <h2 class="section-h">Many clients. One operating layer.</h2>
+      <p class="section-lede">Manage every client deployment from a single agency console. Reusable patterns across tenants. Per-client account boundaries. Shared upgrades without a per-client re-deploy.</p>
+    </div>
+    <div class="op-console">
+      <div class="op-console-head">
+        <div class="title">Agency operations · multi-tenant</div>
+        <div class="live-pill"><span class="d"></span>4 tenants</div>
+      </div>
+      <div class="op-row">
+        <div class="cbrand"></div>
+        <div>
+          <div class="client-name">[Client A · Healthcare]</div>
+          <div class="cmeta">23 calls today · multi-practice intake</div>
+        </div>
+        <div class="cstatus live">Live · Inbound</div>
+      </div>
+      <div class="op-row">
+        <div class="cbrand"></div>
+        <div>
+          <div class="client-name">[Client B · Wireless retail]</div>
+          <div class="cmeta">47 calls today · in + outbound</div>
+        </div>
+        <div class="cstatus live">Live · In + Out</div>
+      </div>
+      <div class="op-row">
+        <div class="cbrand"></div>
+        <div>
+          <div class="client-name">[Client C · Debt recovery]</div>
+          <div class="cmeta">8 calls today · outbound only</div>
+        </div>
+        <div class="cstatus live">Live · Outbound</div>
+      </div>
+      <div class="op-row">
+        <div class="cbrand"></div>
+        <div>
+          <div class="client-name">[Client D · MSP]</div>
+          <div class="cmeta">0 calls today · day-2 of rollout</div>
+        </div>
+        <div class="cstatus deploying">Deploying · Day 2</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- § 05 MARGIN -->
+<section class="agc-margin">
+  <div class="inner">
+    <div class="agc-margin-head">
+      <div class="eyebrow">Margin economics <span class="chap">· § 05</span></div>
+      <h2 class="section-h">Built for agency P&amp;L.</h2>
+      <p class="section-lede">Per-call cost transparency. Bulk-deployment economics. Markup latitude you set per client.</p>
+    </div>
+    <div class="agc-margin-inner">
+      <div class="agc-margin-card">
+        <h3>Worked example <span class="industry">Wireless retail client</span></h3>
+        <div class="margin-row"><div class="label">Starter tier base</div><div class="value">$149 / mo USD</div></div>
+        <div class="margin-row"><div class="label">Per-minute voice rate</div><div class="value">$0.12 / min</div></div>
+        <div class="margin-row subtle"><div class="label">Average call duration</div><div class="value">3 min</div></div>
+        <div class="margin-row"><div class="label">Per-call platform cost</div><div class="value">~$0.36</div></div>
+        <div class="margin-row"><div class="label">Agency-set client price <span style="color: var(--text-muted); font-weight: 400;">(your markup)</span></div><div class="value">$X / call</div></div>
+        <div class="margin-row total"><div class="label">Agency margin per call</div><div class="value">$X − $0.36</div></div>
+        <p class="agc-margin-note">All values illustrative. See <a href="agency-pricing.html">/agency/pricing</a> for current rates and tier breakdown.</p>
+      </div>
+      <aside class="agc-tier-ref">
+        <div class="tier-eyebrow">Tier reference</div>
+        <ul>
+          <li>
+            <div><strong>Starter</strong><span class="scope">Single client</span></div>
+            <div class="price">$149 / mo</div>
+          </li>
+          <li>
+            <div><strong>Agency</strong><span class="scope">Multi-client</span></div>
+            <div class="price">$299 / mo</div>
+          </li>
+          <li>
+            <div><strong>Scale</strong><span class="scope">Large agency</span></div>
+            <div class="price">$497 / mo</div>
+          </li>
+        </ul>
+        <a class="all-link" href="agency-pricing.html">
+          Full pricing
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </a>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- § 06 REFERENCE OPERATORS -->
+<section class="agc-ref">
+  <div class="inner">
+    <div class="agc-ref-head">
+      <div class="eyebrow">Agency operators <span class="chap">· § 06</span></div>
+      <h2 class="section-h">Live agencies. Live deployments.</h2>
+      <p class="section-lede">Anonymized by category until logo permissions land. Operator names disclosed under engagement.</p>
+    </div>
+    <div class="agc-ref-grid">
+      <article class="agc-ref-card">
+        <span class="tag">Live</span>
+        <h3>Lead-gen agency</h3>
+        <p>Running voice-led inbound qualification + CRM sync across multiple client deployments. White-label brand and operator console per client.</p>
+        <div class="mini-stats">
+          <div class="stat"><strong>Multi-client</strong>Live deployments</div>
+          <div class="stat"><strong>Weekly</strong>Client adds</div>
+        </div>
+      </article>
+      <article class="agc-ref-card">
+        <span class="tag">Live</span>
+        <h3>Vertical specialist · debt recovery</h3>
+        <p>Multi-client outbound recovery operator. Live verification and payment-path routing across the agency's client base, one console for the ops team.</p>
+        <div class="mini-stats">
+          <div class="stat"><strong>10×</strong>Abandonment cut</div>
+          <div class="stat"><strong>$338K+</strong>Recovered (aggregate)</div>
+        </div>
+      </article>
+      <article class="agc-ref-card">
+        <span class="tag">Live</span>
+        <h3>MSP operator</h3>
+        <p>Voice services for SMB MSP clients. White-label brand per client. Multi-tenant operator console for the agency's support team. Standardized kit across clients.</p>
+        <div class="mini-stats">
+          <div class="stat"><strong>SMB</strong>Client base</div>
+          <div class="stat"><strong>Days</strong>Per-client deploy</div>
+        </div>
+      </article>
+    </div>
+    <div class="agc-ref-foot">
+      <a href="customers.html#agency">
+        More agency operators
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- § 07 CLOSE -->
+<section class="agc-close">
+  <div class="agc-close-panel on-dark-panel">
+    <div class="agc-close-row">
+      <div>
+        <div class="eyebrow">Your agency kickoff <span class="chap">· § 07</span></div>
+        <h2>Stand up your first client this week.</h2>
+        <p>Re-brand every surface. Manage all clients from one operator console. Pay per usage. Set your own client price. Ship in days, not months.</p>
+      </div>
+      <div class="ctas">
+        <a href="agency-pricing.html" class="cta-primary on-dark">
+          Start an agency deployment
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </a>
+        <a href="#" class="cta-secondary on-dark">Talk to agency ops</a>
+      </div>
+    </div>
+    <ol class="agc-close-agenda" aria-label="Your first client rollout">
+      <li>
+        <span class="num">01</span>
+        <span class="beat">Brand &amp; domain</span>
+        <span class="when">Day 0</span>
+      </li>
+      <li>
+        <span class="num">02</span>
+        <span class="beat">Prompt &amp; KB</span>
+        <span class="when">Day 1</span>
+      </li>
+      <li>
+        <span class="num">03</span>
+        <span class="beat">Telephony dial-in</span>
+        <span class="when">Day 2</span>
+      </li>
+      <li>
+        <span class="num">04</span>
+        <span class="beat">Soft launch</span>
+        <span class="when">Day 3</span>
+      </li>
+      <li>
+        <span class="num">05</span>
+        <span class="beat">Full volume</span>
+        <span class="when">Day 5+</span>
+      </li>
+    </ol>
+  </div>
+</section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-mark">
+      <img src="assets/trillet-footer.svg" alt="Trillet">
+      <p>One voice operating layer. Many client deployments. Your brand on every call.</p>
+    </div>
+    <div class="footer-col"><h4>Platform</h4><ul><li><a href="platform.html">Overview</a></li><li><a href="enterprise.html">Enterprise</a></li><li><a href="agency.html">Agency</a></li><li><a href="agent.html">AI Agent</a></li><li><a href="agency-pricing.html">Pricing</a></li></ul></div>
+    <div class="footer-col"><h4>Trust</h4><ul><li><a href="trust.html">Compliance posture</a></li><li><a href="customers.html">Customers</a></li><li><a href="#">Sub-processors</a></li><li><a href="#">DPA</a></li></ul></div>
+    <div class="footer-col"><h4>Company</h4><ul><li><a href="#">About</a></li><li><a href="#">Careers</a></li><li><a href="#">Contact</a></li><li><a href="#">Privacy</a></li></ul></div>
+    <div class="footer-col"><h4>Resources</h4><ul><li><a href="https://docs.trillet.ai/v1/api-reference/introduction">Docs</a></li><li><a href="#">Changelog</a></li><li><a href="#">Blog</a></li><li><a href="#">Status</a></li></ul></div>
+  </div>
+  <div class="footer-bar">
+    <div>© 2026 Trillet. All rights reserved.</div>
+    <nav><a href="#">Privacy</a><a href="#">Terms</a><a href="trust.html">Security</a></nav>
+  </div>
+</footer>
+
+</body>
+</html>

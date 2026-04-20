@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Agency card · 3 options</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Urbanist:wght@500;600;700&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+  :root {
+    --ink: #F5F6FA;
+    --ink-2: #C2C6D2;
+    --ink-3: #8A8FA0;
+    --rule-hair: rgba(255,255,255,0.08);
+    --surface: #0B0E17;
+    --bg-dark: #06080F;
+    --deploy-bg: #0E1320;
+    --brand-highlight: #83E4FF;
+    --brand-primary: #0062E9;
+    --t-snap: 160ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background: var(--surface);
+    color: var(--ink);
+    margin: 0;
+    padding: 64px 48px 96px;
+    font-size: 15px;
+    line-height: 1.55;
+    min-height: 100vh;
+  }
+  .page-head {
+    max-width: 1360px;
+    margin: 0 auto 48px;
+  }
+  .page-title {
+    font-family: 'Urbanist', sans-serif;
+    font-size: 32px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    margin: 0 0 8px;
+  }
+  .page-lede {
+    color: var(--ink-2);
+    max-width: 640px;
+    margin: 0;
+  }
+
+  /* One full row = the actual Deploy section layout (2-col: enterprise + agency). */
+  .row {
+    max-width: 1360px;
+    margin: 0 auto 64px;
+    padding: 40px;
+    background: var(--deploy-bg);
+    border-radius: 20px;
+    border: 1px solid var(--rule-hair);
+    position: relative;
+  }
+  .row-label {
+    position: absolute;
+    top: -12px;
+    left: 32px;
+    background: var(--surface);
+    padding: 0 12px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    color: var(--brand-highlight);
+    text-transform: uppercase;
+  }
+  .row-title {
+    font-family: 'Urbanist', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    margin: 0 0 6px;
+  }
+  .row-desc {
+    font-size: 13px;
+    color: var(--ink-2);
+    margin: 0 0 32px;
+    max-width: 720px;
+  }
+
+  /* Deploy grid — 2 columns, enterprise + agency side by side */
+  .deploy-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  .card {
+    border-radius: 14px;
+    padding: 36px;
+    min-height: 420px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    position: relative;
+    transition: transform var(--t-snap), border-color var(--t-snap);
+  }
+  .card-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0 0 6px;
+  }
+  .card-eyebrow .icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    border-radius: 5px;
+  }
+  .card h3 {
+    font-family: 'Urbanist', sans-serif;
+    font-size: 26px;
+    font-weight: 600;
+    letter-spacing: -0.025em;
+    line-height: 1.1;
+    margin: 0;
+  }
+  .card .body {
+    font-size: 15px;
+    line-height: 1.6;
+    margin: 0;
+  }
+  .card ul {
+    list-style: none;
+    padding: 0;
+    margin: 8px 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .card ul li {
+    font-size: 14px;
+    line-height: 1.5;
+    position: relative;
+    padding-left: 16px;
+  }
+  .card ul li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 8px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+  }
+  .card .ctas {
+    margin-top: auto;
+    padding-top: 14px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 11px 18px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background var(--t-snap);
+  }
+  .cta.primary { background: var(--brand-highlight); color: var(--bg-dark); }
+  .cta.secondary { background: transparent; border: 1px solid rgba(255,255,255,0.15); color: rgba(255,255,255,0.82); }
+
+  /* ─── Enterprise card is the same across all rows — our baseline ─── */
+  .enterprise {
+    background: #0B0E17;
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+  .enterprise .card-eyebrow { color: var(--brand-highlight); }
+  .enterprise .card-eyebrow .icon { background: rgba(131,228,255,0.14); }
+  .enterprise h3, .enterprise .body, .enterprise ul li { color: rgba(255,255,255,0.96); }
+  .enterprise .body { color: rgba(255,255,255,0.72); }
+  .enterprise ul li { color: rgba(255,255,255,0.8); }
+  .enterprise ul li::before { background: var(--brand-highlight); }
+
+  /* ═══ OPTION A · Dark-variant Agency — deep navy, in-family with Enterprise ═══ */
+  .agency-a {
+    background: #0D1726;
+    border: 1px solid rgba(131,228,255,0.18);
+    box-shadow: inset 0 1px 0 rgba(131,228,255,0.04);
+  }
+  .agency-a .card-eyebrow { color: #A0D4FF; }
+  .agency-a .card-eyebrow .icon { background: rgba(131,228,255,0.16); }
+  .agency-a h3 { color: #EAF6FF; }
+  .agency-a .body { color: rgba(234,246,255,0.78); }
+  .agency-a ul li { color: rgba(234,246,255,0.82); }
+  .agency-a ul li::before { background: var(--brand-highlight); }
+  .agency-a .cta.primary {
+    background: var(--brand-highlight);
+    color: #0B1220;
+  }
+
+  /* ═══ OPTION B · Muted sky blue — still blue but more intentional ═══ */
+  .agency-b {
+    background: #4A7A96;
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+  .agency-b .card-eyebrow { color: #CCE6F2; }
+  .agency-b .card-eyebrow .icon { background: rgba(255,255,255,0.18); color: #0B1F2A; }
+  .agency-b h3 { color: #F5F9FB; }
+  .agency-b .body { color: rgba(255,255,255,0.85); }
+  .agency-b ul li { color: rgba(255,255,255,0.9); }
+  .agency-b ul li::before { background: #F5F9FB; }
+  .agency-b .cta.primary {
+    background: #FFFFFF;
+    color: #1C3A4C;
+  }
+
+  /* ═══ OPTION C · Bright sky-blue pop — embrace contrast ═══ */
+  .agency-c {
+    background: #7DC3EA;
+    border: 1px solid rgba(10, 18, 32, 0.10);
+    box-shadow: 0 24px 56px rgba(125, 195, 234, 0.12);
+  }
+  .agency-c .card-eyebrow { color: #0B2540; }
+  .agency-c .card-eyebrow .icon { background: rgba(11, 37, 64, 0.14); color: #0B2540; }
+  .agency-c h3 { color: #0B1220; }
+  .agency-c .body { color: rgba(11, 18, 32, 0.78); }
+  .agency-c ul li { color: rgba(11, 18, 32, 0.84); }
+  .agency-c ul li::before { background: #0B2540; }
+  .agency-c .cta.primary {
+    background: #0B1220;
+    color: #FFFFFF;
+  }
+  .agency-c .cta.secondary { border-color: rgba(11, 18, 32, 0.22); color: rgba(11, 18, 32, 0.82); }
+
+  /* Shield & building icons (tiny) */
+  .ico svg { display: block; width: 12px; height: 12px; }
+
+</style>
+</head>
+<body>
+
+<div class="page-head">
+  <h1 class="page-title">Agency card — 3 options, real scale</h1>
+  <p class="page-lede">Enterprise + Agency cards in the actual Deploy section layout, against the dark palette. Scroll through the three rows to feel which pairing reads strongest.</p>
+</div>
+
+<!-- OPTION A -->
+<div class="row">
+  <span class="row-label">Option A</span>
+  <h2 class="row-title">Dark-variant agency — in-family with Enterprise</h2>
+  <p class="row-desc">Deep navy with cyan accents. Sits quietly alongside Enterprise. Both cards look like siblings; agency is distinguished by subtle cyan treatment, not by color pop. Reads as "considered system."</p>
+  <div class="deploy-grid">
+    <div class="card enterprise">
+      <div class="card-eyebrow"><span class="icon"><span class="ico"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 1l4 2v3c0 2.5-1.8 4.5-4 5-2.2-.5-4-2.5-4-5V3l4-2z"/></svg></span></span> Enterprise</div>
+      <h3>For regulated, controlled, system-bound environments.</h3>
+      <p class="body">When the call surface touches sensitive systems, strict operating boundaries, identity requirements.</p>
+      <ul>
+        <li>On-premise Docker, private-cloud, or managed enterprise deployment</li>
+        <li>Configurable data residency by geography</li>
+        <li>Audited identity + access + deployment-boundary controls</li>
+      </ul>
+      <div class="ctas">
+        <a href="#" class="cta primary">Review enterprise fit →</a>
+        <a href="#" class="cta secondary">Map your enterprise deployment</a>
+      </div>
+    </div>
+    <div class="card agency-a">
+      <div class="card-eyebrow"><span class="icon"><span class="ico"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="1" y="1" width="4" height="10"/><rect x="7" y="1" width="4" height="10"/></svg></span></span> Agency</div>
+      <h3>Your brand on every call. Many clients, one platform.</h3>
+      <p class="body">White-label the brand surface, keep the operating layer underneath. Deploy clients in days not months.</p>
+      <ul>
+        <li>White-label brand + custom domain per client</li>
+        <li>Multi-tenant operator console</li>
+        <li>Per-client margin economics</li>
+        <li>Deploy new clients in days, not months</li>
+      </ul>
+      <div class="ctas">
+        <a href="#" class="cta primary">Explore agency deployment →</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- OPTION B -->
+<div class="row">
+  <span class="row-label">Option B</span>
+  <h2 class="row-title">Muted sky blue — intentional, not shouty</h2>
+  <p class="row-desc">Kept blue-toned but desaturated and darkened to #4A7A96 — reads as "the blue card" without being a pop. Sits comfortably next to Enterprise without fighting the dark palette. White CTA for precise hierarchy.</p>
+  <div class="deploy-grid">
+    <div class="card enterprise">
+      <div class="card-eyebrow"><span class="icon"><span class="ico"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 1l4 2v3c0 2.5-1.8 4.5-4 5-2.2-.5-4-2.5-4-5V3l4-2z"/></svg></span></span> Enterprise</div>
+      <h3>For regulated, controlled, system-bound environments.</h3>
+      <p class="body">When the call surface touches sensitive systems, strict operating boundaries, identity requirements.</p>
+      <ul>
+        <li>On-premise Docker, private-cloud, or managed enterprise deployment</li>
+        <li>Configurable data residency by geography</li>
+        <li>Audited identity + access + deployment-boundary controls</li>
+      </ul>
+      <div class="ctas">
+        <a href="#" class="cta primary">Review enterprise fit →</a>
+        <a href="#" class="cta secondary">Map your enterprise deployment</a>
+      </div>
+    </div>
+    <div class="card agency-b">
+      <div class="card-eyebrow"><span class="icon"><span class="ico"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="1" y="1" width="4" height="10"/><rect x="7" y="1" width="4" height="10"/></svg></span></span> Agency</div>
+      <h3>Your brand on every call. Many clients, one platform.</h3>
+      <p class="body">White-label the brand surface, keep the operating layer underneath. Deploy clients in days not months.</p>
+      <ul>
+        <li>White-label brand + custom domain per client</li>
+        <li>Multi-tenant operator console</li>
+        <li>Per-client margin economics</li>
+        <li>Deploy new clients in days, not months</li>
+      </ul>
+      <div class="ctas">
+        <a href="#" class="cta primary">Explore agency deployment →</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- OPTION C -->
+<div class="row">
+  <span class="row-label">Option C</span>
+  <h2 class="row-title">Embrace the pop — sky-blue stays, own it</h2>
+  <p class="row-desc">The current design. Bright sky blue #7DC3EA, dark ink. Commits to being the one bright card on the page. Black CTA + subtle shadow anchor it. If the dark page has one bright card, it should feel deliberate — not accidental.</p>
+  <div class="deploy-grid">
+    <div class="card enterprise">
+      <div class="card-eyebrow"><span class="icon"><span class="ico"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 1l4 2v3c0 2.5-1.8 4.5-4 5-2.2-.5-4-2.5-4-5V3l4-2z"/></svg></span></span> Enterprise</div>
+      <h3>For regulated, controlled, system-bound environments.</h3>
+      <p class="body">When the call surface touches sensitive systems, strict operating boundaries, identity requirements.</p>
+      <ul>
+        <li>On-premise Docker, private-cloud, or managed enterprise deployment</li>
+        <li>Configurable data residency by geography</li>
+        <li>Audited identity + access + deployment-boundary controls</li>
+      </ul>
+      <div class="ctas">
+        <a href="#" class="cta primary">Review enterprise fit →</a>
+        <a href="#" class="cta secondary">Map your enterprise deployment</a>
+      </div>
+    </div>
+    <div class="card agency-c">
+      <div class="card-eyebrow"><span class="icon"><span class="ico"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="1" y="1" width="4" height="10"/><rect x="7" y="1" width="4" height="10"/></svg></span></span> Agency</div>
+      <h3>Your brand on every call. Many clients, one platform.</h3>
+      <p class="body">White-label the brand surface, keep the operating layer underneath. Deploy clients in days not months.</p>
+      <ul>
+        <li>White-label brand + custom domain per client</li>
+        <li>Multi-tenant operator console</li>
+        <li>Per-client margin economics</li>
+        <li>Deploy new clients in days, not months</li>
+      </ul>
+      <div class="ctas">
+        <a href="#" class="cta primary">Explore agency deployment →</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

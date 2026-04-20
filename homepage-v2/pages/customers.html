@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>/customers · Trillet wireframe mockup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Urbanist:wght@300;400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link href="_shared.css" rel="stylesheet">
+<style>
+  /* CUSTOMERS-specific — proof page convention, no dark hero */
+
+  /* Hero (Light, large headline metric) */
+  .cs-hero { padding: 80px 32px 48px; background: white; }
+  .cs-hero-inner {
+    max-width: 920px; margin: 0 auto; text-align: center;
+  }
+  .cs-hero h1 {
+    font-family: 'Urbanist', sans-serif; font-weight: 600;
+    font-size: clamp(40px, 5vw, 56px);
+    letter-spacing: -0.025em; line-height: 1.05;
+    color: var(--text-primary); margin: 0 0 18px 0;
+  }
+  .cs-hero .l2 {
+    font-size: 17px; color: var(--text-body); line-height: 1.6;
+    max-width: 640px; margin: 0 auto 40px;
+  }
+  .cs-hero .metric-display {
+    font-family: 'JetBrains Mono', monospace; font-weight: 700;
+    font-size: clamp(56px, 9vw, 96px);
+    color: var(--brand-primary); line-height: 1;
+    letter-spacing: -0.04em;
+    margin: 8px 0;
+    background: linear-gradient(135deg, var(--brand-primary), var(--brand-secondary));
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .cs-hero .metric-label {
+    font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 700;
+    letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--text-muted);
+  }
+  .cs-hero .metric-source {
+    font-size: 12px; color: var(--text-muted); margin-top: 8px; font-style: italic;
+  }
+
+  /* Filter / sort */
+  .cs-filter { padding: 0 32px 32px; background: white; }
+  .cs-filter-inner {
+    max-width: 1160px; margin: 0 auto;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 16px;
+    padding: 20px 24px;
+    background: var(--bg-tint);
+    border-radius: 12px;
+  }
+  .filter-chips {
+    display: flex; gap: 8px; flex-wrap: wrap;
+  }
+  .filter-chip {
+    padding: 7px 14px;
+    font-size: 13px; font-weight: 500;
+    background: white;
+    border: 1px solid var(--border-light);
+    border-radius: 999px;
+    color: var(--text-body);
+    cursor: pointer;
+  }
+  .filter-chip.active {
+    background: var(--brand-primary); color: white;
+    border-color: var(--brand-primary);
+  }
+  .sort-control {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 13px; color: var(--text-body);
+  }
+  .sort-control select {
+    padding: 6px 10px;
+    border: 1px solid var(--border-light);
+    border-radius: 6px;
+    background: white;
+    font-size: 13px;
+  }
+
+  /* Customer card grid (TINT) */
+  .cs-grid { padding: 64px 32px; background: var(--bg-tint); }
+  .cs-grid-inner { max-width: 1160px; margin: 0 auto; }
+  .customer-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+  }
+  .customer-card {
+    background: white;
+    border-radius: 14px;
+    padding: 28px;
+    display: flex; flex-direction: column; gap: 14px;
+    transition: box-shadow 0.15s, transform 0.15s;
+  }
+  .customer-card:hover {
+    box-shadow: 0 12px 32px rgba(2, 58, 132, 0.08);
+    transform: translateY(-2px);
+  }
+  .customer-card .top {
+    display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+  }
+  .customer-card .pill {
+    display: inline-flex; align-items: center; gap: 4px;
+    font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    padding: 3px 9px; border-radius: 999px;
+    background: rgba(16, 185, 129, 0.12); color: #047857;
+    border: 1px solid rgba(16, 185, 129, 0.25);
+  }
+  .customer-card .cat-tag {
+    font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    padding: 3px 9px; border-radius: 999px;
+    background: var(--bg-tint); color: var(--brand-primary);
+    border: 1px solid rgba(0, 98, 233, 0.25);
+  }
+  .customer-card .use-case {
+    font-family: 'Urbanist', sans-serif; font-weight: 600;
+    font-size: 17px; color: var(--text-primary); margin: 4px 0 0 0;
+  }
+  .customer-card .key-metric {
+    font-family: 'JetBrains Mono', monospace; font-weight: 700;
+    font-size: 24px; color: var(--brand-primary);
+    letter-spacing: -0.02em;
+  }
+  .customer-card .metric-label {
+    font-size: 11px; color: var(--text-muted);
+    letter-spacing: 0.12em; text-transform: uppercase;
+    margin-top: -8px;
+  }
+  .customer-card .outcome {
+    font-size: 13px; color: var(--text-body); line-height: 1.55;
+    margin: 4px 0 0 0;
+  }
+  .customer-card .view-link {
+    font-size: 13px; font-weight: 600; color: var(--brand-primary);
+    margin-top: auto; padding-top: 8px;
+  }
+
+  /* Featured deployment */
+  .cs-featured { padding: 96px 32px; background: white; }
+  .cs-featured-inner { max-width: 1160px; margin: 0 auto; }
+  .cs-featured-eyebrow {
+    text-align: center;
+    font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 700;
+    letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--brand-primary); margin-bottom: 16px;
+  }
+  .featured-card {
+    background: linear-gradient(135deg, white 0%, var(--bg-tint) 100%);
+    border: 1px solid var(--border-light);
+    border-radius: 20px;
+    padding: 48px;
+    display: grid; grid-template-columns: 1.6fr 1fr; gap: 48px; align-items: center;
+  }
+  .featured-card .featured-content {
+    display: flex; flex-direction: column; gap: 16px;
+  }
+  .featured-card .featured-top {
+    display: flex; align-items: center; gap: 8px;
+  }
+  .featured-card h2 {
+    font-family: 'Urbanist', sans-serif; font-weight: 600;
+    font-size: clamp(26px, 3vw, 34px);
+    color: var(--text-primary); margin: 0;
+  }
+  .featured-card .narrative {
+    font-size: 15px; color: var(--text-body); line-height: 1.65; margin: 0;
+  }
+  .featured-card .talk-link {
+    font-size: 14px; font-weight: 600; color: var(--brand-primary);
+    margin-top: 8px;
+  }
+  .featured-metrics {
+    display: flex; flex-direction: column; gap: 16px;
+  }
+  .featured-metric {
+    background: white;
+    border: 1px solid var(--border-light);
+    border-radius: 12px;
+    padding: 20px 24px;
+  }
+  .featured-metric .num {
+    font-family: 'JetBrains Mono', monospace; font-weight: 700;
+    font-size: 32px; color: var(--brand-primary); line-height: 1;
+    letter-spacing: -0.02em;
+  }
+  .featured-metric .label {
+    font-size: 12px; color: var(--text-muted);
+    letter-spacing: 0.12em; text-transform: uppercase;
+    margin-top: 6px;
+  }
+
+  /* Logo strip · CONDITIONAL (only renders if 4+ logos have permission) */
+  .cs-logos { padding: 64px 32px; background: white; }
+  .cs-logos-inner { max-width: 1160px; margin: 0 auto; text-align: center; }
+  .cs-logos h3 {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 700;
+    letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--text-muted); margin: 0 0 32px 0;
+  }
+  .logos-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px;
+    align-items: center;
+  }
+  .logo-placeholder {
+    aspect-ratio: 3 / 1;
+    background: var(--bg-tint);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: var(--text-muted); font-style: italic;
+  }
+  .conditional-note {
+    margin-top: 32px;
+    padding: 14px 20px;
+    background: rgba(245, 158, 11, 0.08);
+    border-left: 3px solid #F59E0B;
+    border-radius: 6px;
+    font-size: 13px; color: #78350F; text-align: left; line-height: 1.6;
+  }
+
+  /* Close (TINT) */
+  .cs-close { padding: 96px 32px; background: var(--bg-tint); }
+  .cs-close-inner { max-width: 720px; margin: 0 auto; text-align: center; }
+  .cs-close h2 {
+    font-family: 'Urbanist', sans-serif; font-weight: 600;
+    font-size: clamp(32px, 4vw, 44px);
+    color: var(--text-primary); margin: 0 0 16px 0;
+  }
+  .cs-close p {
+    font-size: 16px; color: var(--text-body); line-height: 1.65;
+    margin: 0 0 28px 0;
+  }
+  .cs-close .ctas {
+    display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
+    margin-bottom: 32px;
+  }
+  .reference-ask {
+    padding: 20px 24px;
+    background: white;
+    border: 1px dashed var(--border-light);
+    border-radius: 12px;
+    font-size: 14px; color: var(--text-body);
+  }
+  .reference-ask em {
+    color: var(--text-muted); font-size: 12px;
+    display: block; margin-top: 6px;
+  }
+  .reference-ask a {
+    color: var(--brand-primary); font-weight: 600; margin-left: 6px;
+  }
+
+  @media (max-width: 1024px) {
+    .customer-grid { grid-template-columns: 1fr 1fr; }
+    .featured-card { grid-template-columns: 1fr; }
+    .logos-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 640px) {
+    .customer-grid { grid-template-columns: 1fr; }
+    .cs-hero .metric-display { font-size: 56px; }
+  }
+</style>
+</head>
+<body>
+
+<a href="#main" class="skip-link">Skip to main content</a>
+
+<div class="preview-banner" style="background: #022f6a;">
+  <div class="label">📄 PAGE MOCKUP · /customers (priority 6, NEW BUILD)</div>
+  <div class="links">
+    <a href="index.html">All pages</a>
+    <a href="../homepage-v2-option-a-v2.html">/ home</a>
+    <a href="enterprise.html">/enterprise</a>
+    <a href="agency.html">/agency</a>
+    <a href="trust.html">/trust</a>
+    <a href="platform.html">/platform</a>
+    <a href="agency-pricing.html">/agency/pricing</a>
+    <a class="active" href="customers.html">/customers</a>
+  </div>
+</div>
+
+<header class="site-nav">
+  <a href="../homepage-v2-option-a-v2.html" class="wordmark"><img src="assets/trillet-logo.svg" alt="Trillet"></a>
+  <nav>
+    <a href="platform.html">Platform</a>
+    <a href="enterprise.html">Enterprise</a>
+    <a href="agency.html">Agency</a>
+    <a href="agent.html">AI Agent</a>
+    <a href="https://docs.trillet.ai/v1/api-reference/introduction">Docs</a>
+    <a href="#">Sign in</a>
+    <a href="#" class="cta">Get started</a>
+  </nav>
+</header>
+
+<main id="main">
+
+<!-- HERO · LIGHT, large headline metric -->
+<section class="cs-hero">
+  <div class="cs-hero-inner">
+    <h1>Live deployments. Real outcomes.</h1>
+    <p class="l2">Voice deployments live across regulated industries and agency-led multi-client environments.</p>
+    <div class="metric-display">1.4M+</div>
+    <div class="metric-label">Calls handled across customer deployments</div>
+  </div>
+</section>
+
+<!-- FILTER + SORT -->
+<section class="cs-filter">
+  <div class="cs-filter-inner">
+    <div class="filter-chips">
+      <button class="filter-chip active">All</button>
+      <button class="filter-chip">Enterprise</button>
+      <button class="filter-chip">Agency</button>
+      <button class="filter-chip">Financial services</button>
+      <button class="filter-chip">Healthcare</button>
+      <button class="filter-chip">Telco / Wireless</button>
+      <button class="filter-chip">Debt recovery</button>
+      <button class="filter-chip">Other</button>
+    </div>
+    <div class="sort-control">
+      <span>Sort:</span>
+      <select>
+        <option>Most recent</option>
+        <option>Largest deployment</option>
+        <option>Industry alphabetical</option>
+      </select>
+    </div>
+  </div>
+</section>
+
+<!-- CUSTOMER CARD GRID · 7 cards anonymized-by-use-case -->
+<section class="cs-grid">
+  <div class="cs-grid-inner">
+    <div class="customer-grid">
+
+      <div class="customer-card">
+        <div class="top">
+          <span class="pill">Live</span>
+          <span class="cat-tag">Enterprise</span>
+        </div>
+        <div class="use-case">Debt recovery · Overflow hours</div>
+        <div class="key-metric">$338K+</div>
+        <div class="metric-label">Recovered (anonymized aggregate)</div>
+        <p class="outcome">Recovery volume during overflow hours. 10× reduction in abandonment. Real-time verification before any payment path.</p>
+        <a href="#" class="view-link">Read more ↓</a>
+      </div>
+
+      <div class="customer-card">
+        <div class="top">
+          <span class="pill">Live</span>
+          <span class="cat-tag">Enterprise</span>
+        </div>
+        <div class="use-case">Healthcare intake · Multi-practice</div>
+        <div class="key-metric">—</div>
+        <div class="metric-label">Practices live</div>
+        <p class="outcome">Patient context captured during the call, carried into booking, triage, and follow-up. Intake rules per practice.</p>
+        <a href="#" class="view-link">Read more ↓</a>
+      </div>
+
+      <div class="customer-card">
+        <div class="top">
+          <span class="pill">Live</span>
+          <span class="cat-tag">Enterprise</span>
+        </div>
+        <div class="use-case">Wireless retail · After-hours overflow</div>
+        <div class="key-metric">—</div>
+        <div class="metric-label">Calls/day handled</div>
+        <p class="outcome">After-hours and overflow call volume handled with live plan data and store routing. Verizon TCC precedent for the on-premise Docker deployment shape.</p>
+        <a href="#" class="view-link">Read more ↓</a>
+      </div>
+
+      <div class="customer-card">
+        <div class="top">
+          <span class="pill">Live</span>
+          <span class="cat-tag">Enterprise</span>
+        </div>
+        <div class="use-case">Financial services · Identity-first inbound</div>
+        <div class="key-metric">—</div>
+        <div class="metric-label">Verifications/day</div>
+        <p class="outcome">Live identity verification before any account-touching action. Compliance-cleared deployment.</p>
+        <a href="#" class="view-link">Read more ↓</a>
+      </div>
+
+      <div class="customer-card">
+        <div class="top">
+          <span class="pill">Live</span>
+          <span class="cat-tag">Agency</span>
+        </div>
+        <div class="use-case">Lead-gen agency · Multi-client inbound</div>
+        <div class="key-metric">—</div>
+        <div class="metric-label">Client deployments</div>
+        <p class="outcome">Multi-client inbound qualification + CRM sync. Agency operating across multiple deployments with white-label branding.</p>
+        <a href="#" class="view-link">Read more ↓</a>
+      </div>
+
+      <div class="customer-card">
+        <div class="top">
+          <span class="pill">Live</span>
+          <span class="cat-tag">Agency</span>
+        </div>
+        <div class="use-case">Vertical specialist · Debt recovery agency</div>
+        <div class="key-metric">—</div>
+        <div class="metric-label">Clients</div>
+        <p class="outcome">Multi-client outbound recovery agency. Live verification + payment-path routing.</p>
+        <a href="#" class="view-link">Read more ↓</a>
+      </div>
+
+      <div class="customer-card">
+        <div class="top">
+          <span class="pill">Live</span>
+          <span class="cat-tag">Agency</span>
+        </div>
+        <div class="use-case">MSP operator · SMB white-label</div>
+        <div class="key-metric">—</div>
+        <div class="metric-label">SMB clients</div>
+        <p class="outcome">Client-facing voice for SMB MSP clients. White-label brand per client.</p>
+        <a href="#" class="view-link">Read more ↓</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED DEPLOYMENT · Verizon TCC if permission, else debt recovery -->
+<section class="cs-featured">
+  <div class="cs-featured-inner">
+    <div class="cs-featured-eyebrow">Featured deployment</div>
+    <div class="featured-card">
+      <div class="featured-content">
+        <div class="featured-top">
+          <span class="cat-tag" style="font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; padding: 3px 9px; border-radius: 999px; background: var(--bg-tint); color: var(--brand-primary); border: 1px solid rgba(0, 98, 233, 0.25);">Enterprise</span>
+          <span class="pill" style="display: inline-flex; align-items: center; gap: 4px; font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; padding: 3px 9px; border-radius: 999px; background: rgba(16, 185, 129, 0.12); color: #047857; border: 1px solid rgba(16, 185, 129, 0.25);">Live</span>
+        </div>
+        <h2>Debt recovery · Overflow hours · $338K+ recovered.</h2>
+        <p class="narrative">High-volume debt recovery operation needed coverage during overflow hours when human agents were unavailable. Trillet deployed as the after-hours recovery layer — live identity verification before any payment path, real-time CRM updates, escalation routing for hot intent.</p>
+        <p class="narrative">Result: $338K+ recovered through Trillet alone (anonymized aggregate). 10× reduction in abandonment vs IVR baseline. Real-time verification before any payment-touching action.</p>
+        <a href="#" class="talk-link">Talk to a deployment like this →</a>
+      </div>
+      <div class="featured-metrics">
+        <div class="featured-metric">
+          <div class="num">$338K+</div>
+          <div class="label">Recovered (aggregate)</div>
+        </div>
+        <div class="featured-metric">
+          <div class="num">10×</div>
+          <div class="label">Abandonment reduction</div>
+        </div>
+        <div class="featured-metric">
+          <div class="num">100%</div>
+          <div class="label">Verified before payment</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOGO STRIP · CONDITIONAL (skip if 0-3 logos) -->
+<section class="cs-logos">
+  <div class="cs-logos-inner">
+    <h3>Brands deployed on Trillet</h3>
+    <div class="logos-grid">
+      <div class="logo-placeholder">[Logo 1]</div>
+      <div class="logo-placeholder">[Logo 2]</div>
+      <div class="logo-placeholder">[Logo 3]</div>
+      <div class="logo-placeholder">[Logo 4]</div>
+    </div>
+    <!-- CONDITIONAL RENDERING (mockup-only note, not for production):
+         This entire <section class="cs-logos"> block renders ONLY when 4+
+         customer logos have written display permission (Bucket E partner
+         brief 7.3). If 0–3 logos available, the section is omitted from
+         the React component output entirely — no placeholders. -->
+
+  </div>
+</section>
+
+<!-- CLOSE -->
+<section class="cs-close">
+  <div class="cs-close-inner">
+    <h2>Map your deployment.</h2>
+    <p>Live deployments across enterprise + agency motions. Real outcomes, real call volume, real production. Talk to us about the deployment shape that fits your environment.</p>
+    <div class="ctas">
+      <a href="#" class="cta-primary">Map your deployment →
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </a>
+      <a href="trust.html" class="cta-secondary">Read trust posture</a>
+    </div>
+    <div class="reference-ask">
+      Want a customer reference call? <a href="#">Request a reference →</a>
+      <em>For active enterprise evaluations.</em>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-mark">
+      <img src="assets/trillet-footer.svg" alt="Trillet">
+      <p>Live deployments across regulated industries and agency-led multi-client environments. Real production, real outcomes.</p>
+    </div>
+    <div class="footer-col"><h4>Platform</h4><ul><li><a href="platform.html">Overview</a></li><li><a href="enterprise.html">Enterprise</a></li><li><a href="agency.html">Agency</a></li><li><a href="agent.html">AI Agent</a></li><li><a href="agency-pricing.html">Pricing</a></li></ul></div>
+    <div class="footer-col"><h4>Trust</h4><ul><li><a href="trust.html">Compliance posture</a></li><li><a href="customers.html">Customers</a></li><li><a href="#">Sub-processors</a></li><li><a href="#">DPA</a></li></ul></div>
+    <div class="footer-col"><h4>Company</h4><ul><li><a href="#">About</a></li><li><a href="#">Careers</a></li><li><a href="#">Contact</a></li><li><a href="#">Privacy</a></li></ul></div>
+    <div class="footer-col"><h4>Resources</h4><ul><li><a href="https://docs.trillet.ai/v1/api-reference/introduction">Docs</a></li><li><a href="#">Changelog</a></li><li><a href="#">Blog</a></li><li><a href="#">Status</a></li></ul></div>
+  </div>
+  <div class="footer-bar">
+    <div>© 2026 Trillet. All rights reserved.</div>
+    <nav><a href="#">Privacy</a><a href="#">Terms</a><a href="trust.html">Security</a></nav>
+  </div>
+</footer>
+
+<div class="option-footer" style="background: #022f6a;">
+  <strong style="color: white;">📄 /customers PAGE MOCKUP · NEW BUILD</strong> · 6-section spine: Hero (LIGHT, NO dark panel — proof page convention, 1.4M+ headline metric per Ori B4) → Filter + sort (chip row + sort dropdown) → Customer card grid (TINT, 7 cards anonymized-by-use-case with metric placeholders pending Ming) → Featured deployment (Light, debt recovery $338K+ as publish-default per Ori C9, Verizon TCC swap-in if permission lands) → Logo strip (Light, CONDITIONAL — only renders when 4+ logos have permission per Bucket E) → Close (TINT, soft-gated reference-call ask per Ori C11).
+  <p style="margin-top: 8px;">[LOCKED per Ori]: Hero metric 1.4M+ (B4, source-pending). Featured deployment debt-recovery-publish-default with Verizon swap-in (C9). Inline expand for card click (C10). Reference-call soft-gated (C11). Per-card metrics pending Ming per metric-ask draft. Logo strip rendering gated on Bucket E.</p>
+</div>
+
+</body>
+</html>

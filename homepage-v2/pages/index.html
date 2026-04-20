@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Page mockups index · Trillet rebuild</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Urbanist:wght@300;400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link href="_shared.css" rel="stylesheet">
+<style>
+  body { padding: 40px 32px; max-width: 1240px; margin: 0 auto; }
+  .index-hero { padding-bottom: 32px; border-bottom: 1px solid var(--border-light); margin-bottom: 48px; }
+  .index-hero h1 {
+    font-family: 'Urbanist', sans-serif; font-weight: 600;
+    font-size: clamp(36px, 4vw, 48px);
+    color: var(--text-primary); margin: 0 0 12px 0;
+  }
+  .index-hero p {
+    font-size: 16px; color: var(--text-body); line-height: 1.6; margin: 0; max-width: 720px;
+  }
+  .index-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px;
+  }
+  .index-card {
+    padding: 28px;
+    background: white;
+    border: 1px solid var(--border-light);
+    border-radius: 14px;
+    transition: box-shadow 0.15s, transform 0.15s;
+    text-decoration: none; color: inherit;
+    display: flex; flex-direction: column; gap: 12px;
+  }
+  .index-card:hover {
+    box-shadow: 0 12px 32px rgba(2, 58, 132, 0.10);
+    transform: translateY(-2px);
+  }
+  .index-card.priority-1 { border-left: 4px solid #DC2626; }
+  .index-card.priority-2 { border-left: 4px solid #F59E0B; }
+  .index-card.priority-3 { border-left: 4px solid #10B981; }
+  .index-card.priority-4 { border-left: 4px solid #0062E9; }
+  .index-card.priority-5 { border-left: 4px solid #94A3B8; }
+  .index-card.priority-6 { border-left: 4px solid #8B5CF6; }
+  .index-card.home { border-left: 4px solid #023A84; background: linear-gradient(135deg, white 0%, #F7FAFF 100%); }
+  .card-top {
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  }
+  .card-path {
+    font-family: 'JetBrains Mono', monospace; font-weight: 700;
+    font-size: 18px; color: var(--brand-primary);
+    letter-spacing: -0.01em;
+  }
+  .card-priority {
+    font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--text-muted);
+  }
+  .card-title {
+    font-family: 'Urbanist', sans-serif; font-weight: 600;
+    font-size: 18px; color: var(--text-primary); margin: 0;
+  }
+  .card-desc {
+    font-size: 14px; color: var(--text-body); line-height: 1.55; margin: 0;
+  }
+  .card-meta {
+    display: flex; gap: 8px; flex-wrap: wrap; margin-top: 6px;
+  }
+  .meta-pill {
+    font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 600;
+    letter-spacing: 0.10em;
+    padding: 3px 8px; border-radius: 999px;
+    background: var(--bg-tint); color: var(--brand-primary);
+  }
+  .meta-pill.warn {
+    background: rgba(245, 158, 11, 0.12); color: #B45309;
+  }
+  .meta-pill.new {
+    background: rgba(16, 185, 129, 0.12); color: #047857;
+  }
+  .meta-pill.hold {
+    background: rgba(220, 38, 38, 0.10); color: #991B1B;
+  }
+  .reading-order {
+    margin-top: 56px; padding: 28px;
+    background: var(--bg-tint);
+    border-radius: 14px;
+  }
+  .reading-order h2 {
+    font-family: 'Urbanist', sans-serif; font-weight: 600;
+    font-size: 22px; color: var(--text-primary); margin: 0 0 16px 0;
+  }
+  .reading-order ol {
+    margin: 0; padding-left: 24px; color: var(--text-body);
+    display: flex; flex-direction: column; gap: 8px; font-size: 14px; line-height: 1.6;
+  }
+  .reading-order ol code {
+    font-family: 'JetBrains Mono', monospace; background: white;
+    padding: 2px 6px; border-radius: 4px; font-size: 12px;
+    color: var(--brand-primary); font-weight: 600;
+  }
+  .legend {
+    margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--border-light);
+    display: flex; gap: 20px; flex-wrap: wrap; font-size: 12px; color: var(--text-body);
+  }
+  .legend-item {
+    display: flex; align-items: center; gap: 6px;
+  }
+  .legend-bar {
+    width: 4px; height: 16px; border-radius: 2px;
+  }
+
+  @media (max-width: 768px) {
+    .index-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="index-hero">
+  <h1>Page mockups · Trillet site rebuild</h1>
+  <p>Static HTML mockups for all 7 pages of the new Trillet site IA (per <code>artifacts/2026-04-16-information-architecture-spec.md</code>). Built in IA priority order. Each mockup links to <code>_shared.css</code> for visual consistency with the locked homepage baseline.</p>
+</div>
+
+<div class="index-grid">
+
+  <a href="../homepage-v2-option-a-v2.html" class="index-card home">
+    <div class="card-top">
+      <div class="card-path">/</div>
+      <div class="card-priority">Homepage · LOCKED BASELINE</div>
+    </div>
+    <h3 class="card-title">The voice operating layer.</h3>
+    <p class="card-desc">Locked Strategy-B baseline. Dark navy hero panel + voice-agent orb + Urbanist 600 H1 + 4-pillar platform section + trust strip. Visual contract for HomeHero implementation.</p>
+    <div class="card-meta">
+      <span class="meta-pill">Signed off</span>
+      <span class="meta-pill">Visual contract</span>
+    </div>
+  </a>
+
+  <a href="enterprise.html" class="index-card priority-1">
+    <div class="card-top">
+      <div class="card-path">/enterprise</div>
+      <div class="card-priority">Priority 1</div>
+    </div>
+    <h3 class="card-title">Voice infrastructure for the controls your environment requires.</h3>
+    <p class="card-desc">8-section spine ~530vh. Discharges evt_015 compliance landmines. Serves Bank of T directly. Dark navy panel + deployment-mode card replaces orb. 3 status bands for compliance honesty (Live / In active build / Not yet asserted).</p>
+    <div class="card-meta">
+      <span class="meta-pill">Discharges evt_015</span>
+      <span class="meta-pill">BoT primary</span>
+    </div>
+  </a>
+
+  <a href="agency.html" class="index-card priority-2">
+    <div class="card-top">
+      <div class="card-path">/agency</div>
+      <div class="card-priority">Priority 2</div>
+    </div>
+    <h3 class="card-title">One platform. Many client deployments. Your brand on every call.</h3>
+    <p class="card-desc">7-section spine ~450vh. Renamed from /whitelabel with 301. Multi-tenant dashboard card replaces orb. White-label mechanics + multi-tenant operator console + deploy speed timeline + margin worked example.</p>
+    <div class="card-meta">
+      <span class="meta-pill">301 from /whitelabel</span>
+      <span class="meta-pill">Multi-tenant</span>
+    </div>
+  </a>
+
+  <a href="trust.html" class="index-card priority-3">
+    <div class="card-top">
+      <div class="card-path">/trust</div>
+      <div class="card-priority">Priority 3</div>
+    </div>
+    <h3 class="card-title">Compliance posture.</h3>
+    <p class="card-desc">7-section spine ~430vh. NEW BUILD. Document-coded register departure: NO dark hero panel, NO operator console, restrained motion. Compliance ledger 3 sub-sections grouped by status. Sub-processor table. Print-CSS PDF download.</p>
+    <div class="card-meta">
+      <span class="meta-pill new">New build</span>
+      <span class="meta-pill">Document-coded</span>
+    </div>
+  </a>
+
+  <a href="platform.html" class="index-card priority-4">
+    <div class="card-top">
+      <div class="card-path">/platform</div>
+      <div class="card-priority">Priority 4</div>
+    </div>
+    <h3 class="card-title">Four jobs. One operating layer. Every call.</h3>
+    <p class="card-desc">8-section spine ~590vh DEEPEST. Verify section gets ~100vh because identity is buyer's #1 question. 4 stacked layer chips replace architecture-mini in hero. Stylized verify operator panel showing 4-step identity check with *** for codes.</p>
+    <div class="card-meta">
+      <span class="meta-pill">Deepest page</span>
+      <span class="meta-pill">Verify-heaviest</span>
+    </div>
+  </a>
+
+  <a href="agency-pricing.html" class="index-card priority-5">
+    <div class="card-top">
+      <div class="card-path">/agency/pricing</div>
+      <div class="card-priority">Priority 5 · HOLD</div>
+    </div>
+    <h3 class="card-title">Pricing built for agency P&L.</h3>
+    <p class="card-desc">7-section spine ~420vh. HOLD per Ori — tier names + entry price unresolved (Bucket B1, 3-way Ori+Ming+Laurence call needed). 3 tiers Starter $149 / Agency $299 / Scale $497 (directional). 7-day free trial confirmed.</p>
+    <div class="card-meta">
+      <span class="meta-pill hold">HOLD on Bucket B1</span>
+      <span class="meta-pill warn">SaaS gate UNRESOLVED</span>
+    </div>
+  </a>
+
+  <a href="customers.html" class="index-card priority-6">
+    <div class="card-top">
+      <div class="card-path">/customers</div>
+      <div class="card-priority">Priority 6</div>
+    </div>
+    <h3 class="card-title">Live deployments. Real outcomes.</h3>
+    <p class="card-desc">6-section spine ~380vh. NEW BUILD. 1.4M+ lifetime calls hero metric (per Ori, source-pending). 7-card grid anonymized-by-use-case with metric placeholders pending Ming. Featured: debt recovery $338K+ as publish-default with Verizon swap-in. Logo strip conditional on 4+ permissions.</p>
+    <div class="card-meta">
+      <span class="meta-pill new">New build</span>
+      <span class="meta-pill">Metrics pending Ming</span>
+    </div>
+  </a>
+
+</div>
+
+<div class="reading-order">
+  <h2>Suggested review order</h2>
+  <ol>
+    <li><code>/</code> (homepage locked-baseline) — refresh on the visual contract everything else inherits.</li>
+    <li><code>/enterprise</code> — priority 1, BoT primary, discharges compliance landmines.</li>
+    <li><code>/agency</code> — half the downstream story, validates the "parents both" framing.</li>
+    <li><code>/trust</code> — register departure check (does document-coded read right?).</li>
+    <li><code>/platform</code> — depth check (does Verify section get the heaviest treatment?).</li>
+    <li><code>/customers</code> — proof check (does anonymized-by-use-case + metrics-pending read thin?).</li>
+    <li><code>/agency/pricing</code> — review last (HOLD); judge tier comparison + matrix structure.</li>
+  </ol>
+  <p style="font-size: 13px; color: var(--text-muted); margin: 16px 0 0 0; line-height: 1.5;">
+    <strong>What to look for:</strong> register continuity across pages (do they read as one site?), per-page distinctiveness (does /trust feel different enough to signal "document not pitch"? does /platform feel deepest?), placeholder copy that needs partner sign-off (compliance, pricing, metrics, logos), and visual decisions that need design pass (audit-flow diagrams, multi-tenant card details).
+  </p>
+</div>
+
+<div class="legend">
+  <div class="legend-item"><div class="legend-bar" style="background: #023A84;"></div>Homepage (locked baseline)</div>
+  <div class="legend-item"><div class="legend-bar" style="background: #DC2626;"></div>Priority 1 (BoT blocker)</div>
+  <div class="legend-item"><div class="legend-bar" style="background: #F59E0B;"></div>Priority 2 (positioning)</div>
+  <div class="legend-item"><div class="legend-bar" style="background: #10B981;"></div>Priority 3 (compliance substrate)</div>
+  <div class="legend-item"><div class="legend-bar" style="background: #0062E9;"></div>Priority 4 (depth backing)</div>
+  <div class="legend-item"><div class="legend-bar" style="background: #94A3B8;"></div>Priority 5 (HOLD)</div>
+  <div class="legend-item"><div class="legend-bar" style="background: #8B5CF6;"></div>Priority 6 (proof)</div>
+</div>
+
+</body>
+</html>

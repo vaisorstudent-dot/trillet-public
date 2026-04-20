@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Tonal continuity · 3 approaches</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Urbanist:wght@500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap">
+<style>
+  :root {
+    --ink: #0A0F1E;
+    --ink-2: #2E3448;
+    --ink-3: #5E6678;
+    --rule-hair: #E8ECF3;
+    --surface: #FFFFFF;
+    --surface-rest: #F4F6FB;
+    --brand-primary: #0062E9;
+    --brand-highlight: #83E4FF;
+    --bg-dark: #0A1630;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background: var(--surface-rest);
+    color: var(--ink);
+    margin: 0;
+    padding: 40px 24px 80px;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .page-title {
+    max-width: 1100px;
+    margin: 0 auto 48px;
+    font-family: 'Urbanist', sans-serif;
+    font-size: 26px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+
+  /* Each column = one approach, 3 columns side-by-side */
+  .approaches {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  .approach {
+    background: white;
+    border: 1px solid var(--rule-hair);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+  .approach-head {
+    padding: 20px 24px 16px;
+    border-bottom: 1px solid var(--rule-hair);
+  }
+  .approach-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--brand-primary);
+    margin-bottom: 6px;
+  }
+  .approach-title {
+    font-family: 'Urbanist', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    margin: 0 0 6px;
+  }
+  .approach-desc {
+    font-size: 12px;
+    color: var(--ink-2);
+    margin: 0;
+  }
+
+  /* Mini-page: scaled-down homepage preview */
+  .mini {
+    position: relative;
+  }
+  .mini-section {
+    padding: 26px 20px;
+    position: relative;
+    min-height: 110px;
+  }
+  .mini-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+  .mini-eyebrow::before {
+    content: '';
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--brand-highlight);
+    box-shadow: 0 0 6px rgba(131,228,255,0.5);
+  }
+  .mini-h {
+    font-family: 'Urbanist', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    margin: 0 0 4px;
+  }
+  .mini-p {
+    font-size: 11px;
+    color: var(--ink-2);
+    margin: 0;
+    max-width: 240px;
+  }
+  /* Hero is dark */
+  .mini-hero {
+    background: var(--bg-dark);
+    padding: 32px 20px;
+    color: white;
+    position: relative;
+  }
+  .mini-hero::after {
+    content: '';
+    position: absolute;
+    right: 24px; top: 50%;
+    transform: translateY(-50%);
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #83e4ff 0%, #27a3fd 55%, transparent 80%);
+    opacity: 0.9;
+  }
+  .mini-hero .mini-eyebrow { color: rgba(255,255,255,0.7); }
+  .mini-hero .mini-h { color: white; }
+  .mini-hero .mini-p { color: rgba(255,255,255,0.7); }
+
+  /* ═══ APPROACH 1 · CURRENT (baseline) — for reference ═══ */
+  .a-current .mini-section {
+    border-top: 1px solid var(--rule-hair);
+    background: white;
+  }
+  .a-current .mini-hero { border: none; }
+
+  /* ═══ APPROACH A · WATERCOLOR MELT ═══
+     Each section fades at top and bottom. No hairlines. Sections melt into each other. */
+  .a-melt .mini-section {
+    background: white;
+    border: none;
+    position: relative;
+  }
+  .a-melt .mini-section + .mini-section {
+    margin-top: -30px;
+  }
+  .a-melt .mini-section::before {
+    content: '';
+    position: absolute;
+    left: 0; right: 0;
+    top: 0; height: 60px;
+    background: linear-gradient(to bottom, var(--surface-rest) 0%, rgba(244,246,251,0) 100%);
+    pointer-events: none;
+  }
+  .a-melt .mini-section::after {
+    content: '';
+    position: absolute;
+    left: 0; right: 0;
+    bottom: 0; height: 60px;
+    background: linear-gradient(to top, var(--surface-rest) 0%, rgba(244,246,251,0) 100%);
+    pointer-events: none;
+  }
+  /* alt-section: lightly tinted */
+  .a-melt .mini-section:nth-child(even) {
+    background: var(--surface-rest);
+  }
+  .a-melt .mini-section:nth-child(even)::before,
+  .a-melt .mini-section:nth-child(even)::after {
+    background: linear-gradient(to bottom, white 0%, rgba(255,255,255,0) 100%);
+  }
+  .a-melt .mini-section:nth-child(even)::after {
+    background: linear-gradient(to top, white 0%, rgba(255,255,255,0) 100%);
+  }
+  .a-melt .mini-hero::after {
+    /* fade hero bottom into next section */
+    content: '';
+    position: absolute;
+    left: 0; right: 0; bottom: -30px;
+    height: 60px;
+    background: linear-gradient(to bottom, rgba(10,22,48,0.4), transparent);
+    pointer-events: none;
+    z-index: 2;
+    width: auto;
+    border-radius: 0;
+    transform: none;
+    top: auto;
+  }
+
+  /* ═══ APPROACH B · TARGETED CYAN BLEEDS ═══
+     Crisp hairlines stay. Two specific atmospheric moments. */
+  .a-bleed .mini-section {
+    border-top: 1px solid var(--rule-hair);
+    background: white;
+    overflow: hidden;
+  }
+  .a-bleed .mini-hero { border: none; }
+
+  /* Bleed 1: cyan rising from Proof's top (the section right after hero) */
+  .a-bleed .mini-section.proof::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 80px;
+    background: radial-gradient(ellipse 60% 100% at 75% 0%, rgba(131, 228, 255, 0.14), transparent 70%);
+    pointer-events: none;
+  }
+  /* Bleed 2: navy-cyan wash between Story bottom and Compliance top */
+  .a-bleed .mini-section.compliance::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 60px;
+    background: linear-gradient(to bottom, rgba(2, 58, 132, 0.04), transparent 90%);
+    pointer-events: none;
+  }
+
+  /* ═══ APPROACH C · UNIFIED PAGE ATMOSPHERE ═══
+     Single page-wide atmospheric layer with 2 soft cyan pools. */
+  .a-atmos {
+    position: relative;
+    overflow: hidden;
+  }
+  .a-atmos::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(ellipse 40% 25% at 85% 15%, rgba(131,228,255,0.10), transparent 60%),
+      radial-gradient(ellipse 35% 20% at 15% 55%, rgba(131,228,255,0.06), transparent 60%),
+      radial-gradient(ellipse 50% 25% at 70% 90%, rgba(2,58,132,0.04), transparent 60%);
+    z-index: 1;
+  }
+  .a-atmos .mini-section {
+    border-top: 1px solid rgba(232,236,243,0.7);
+    background: transparent;
+    position: relative;
+    z-index: 2;
+  }
+  .a-atmos .mini-hero { border: none; z-index: 2; position: relative; }
+
+</style>
+</head>
+<body>
+
+<h1 class="page-title">Tonal continuity — 3 approaches + baseline</h1>
+
+<div class="approaches">
+
+  <!-- BASELINE · current state -->
+  <div class="approach">
+    <div class="approach-head">
+      <div class="approach-label">Baseline</div>
+      <h3 class="approach-title">Current state</h3>
+      <p class="approach-desc">Hard 1px hairlines on white between every section. Sections are sealed rooms.</p>
+    </div>
+    <div class="mini a-current">
+      <div class="mini-section mini-hero">
+        <div class="mini-eyebrow">Hero · live</div>
+        <h4 class="mini-h">The voice operating layer.</h4>
+        <p class="mini-p">Voice agents that verify, ground, act.</p>
+      </div>
+      <div class="mini-section proof">
+        <div class="mini-eyebrow">Production signal · § 01</div>
+        <h4 class="mini-h">Every call, shipped to your stack.</h4>
+        <p class="mini-p">1.4M+ sessions across deployments.</p>
+      </div>
+      <div class="mini-section deploy">
+        <div class="mini-eyebrow">Deployment paths · § 02</div>
+        <h4 class="mini-h">Same layer. Different shape.</h4>
+      </div>
+      <div class="mini-section story">
+        <div class="mini-eyebrow">One call · § 03</div>
+        <h4 class="mini-h">Watch a call go the distance.</h4>
+      </div>
+      <div class="mini-section compliance">
+        <div class="mini-eyebrow">Compliance · § 04</div>
+        <h4 class="mini-h">Posture before any contract.</h4>
+      </div>
+      <div class="mini-section close" style="background: var(--bg-dark); color: white; margin: 20px; border-radius: 14px;">
+        <div class="mini-eyebrow" style="color: rgba(255,255,255,0.72);">Working session · § 05</div>
+        <h4 class="mini-h" style="color: white;">Start with one session.</h4>
+      </div>
+    </div>
+  </div>
+
+  <!-- APPROACH A · WATERCOLOR MELT -->
+  <div class="approach">
+    <div class="approach-head">
+      <div class="approach-label">Approach A</div>
+      <h3 class="approach-title">Watercolor melt</h3>
+      <p class="approach-desc">Sections fade into each other at top and bottom. No hairlines. Alternates white and soft tint. Organic.</p>
+    </div>
+    <div class="mini a-melt">
+      <div class="mini-section mini-hero">
+        <div class="mini-eyebrow">Hero · live</div>
+        <h4 class="mini-h">The voice operating layer.</h4>
+        <p class="mini-p">Voice agents that verify, ground, act.</p>
+      </div>
+      <div class="mini-section proof">
+        <div class="mini-eyebrow">Production signal · § 01</div>
+        <h4 class="mini-h">Every call, shipped to your stack.</h4>
+        <p class="mini-p">1.4M+ sessions across deployments.</p>
+      </div>
+      <div class="mini-section deploy">
+        <div class="mini-eyebrow">Deployment paths · § 02</div>
+        <h4 class="mini-h">Same layer. Different shape.</h4>
+      </div>
+      <div class="mini-section story">
+        <div class="mini-eyebrow">One call · § 03</div>
+        <h4 class="mini-h">Watch a call go the distance.</h4>
+      </div>
+      <div class="mini-section compliance">
+        <div class="mini-eyebrow">Compliance · § 04</div>
+        <h4 class="mini-h">Posture before any contract.</h4>
+      </div>
+      <div class="mini-section close" style="background: var(--bg-dark); color: white; margin: 20px; border-radius: 14px;">
+        <div class="mini-eyebrow" style="color: rgba(255,255,255,0.72);">Working session · § 05</div>
+        <h4 class="mini-h" style="color: white;">Start with one session.</h4>
+      </div>
+    </div>
+  </div>
+
+  <!-- APPROACH B · TARGETED CYAN BLEEDS -->
+  <div class="approach">
+    <div class="approach-head">
+      <div class="approach-label">Approach B</div>
+      <h3 class="approach-title">Targeted cyan bleeds</h3>
+      <p class="approach-desc">Crisp hairlines stay. Two atmospheric moments: cyan rising into Proof (hero echo), subtle navy wash entering Compliance.</p>
+    </div>
+    <div class="mini a-bleed">
+      <div class="mini-section mini-hero">
+        <div class="mini-eyebrow">Hero · live</div>
+        <h4 class="mini-h">The voice operating layer.</h4>
+        <p class="mini-p">Voice agents that verify, ground, act.</p>
+      </div>
+      <div class="mini-section proof">
+        <div class="mini-eyebrow">Production signal · § 01</div>
+        <h4 class="mini-h">Every call, shipped to your stack.</h4>
+        <p class="mini-p">1.4M+ sessions across deployments.</p>
+      </div>
+      <div class="mini-section deploy">
+        <div class="mini-eyebrow">Deployment paths · § 02</div>
+        <h4 class="mini-h">Same layer. Different shape.</h4>
+      </div>
+      <div class="mini-section story">
+        <div class="mini-eyebrow">One call · § 03</div>
+        <h4 class="mini-h">Watch a call go the distance.</h4>
+      </div>
+      <div class="mini-section compliance">
+        <div class="mini-eyebrow">Compliance · § 04</div>
+        <h4 class="mini-h">Posture before any contract.</h4>
+      </div>
+      <div class="mini-section close" style="background: var(--bg-dark); color: white; margin: 20px; border-radius: 14px;">
+        <div class="mini-eyebrow" style="color: rgba(255,255,255,0.72);">Working session · § 05</div>
+        <h4 class="mini-h" style="color: white;">Start with one session.</h4>
+      </div>
+    </div>
+  </div>
+
+  <!-- APPROACH C · UNIFIED PAGE ATMOSPHERE -->
+  <div class="approach">
+    <div class="approach-head">
+      <div class="approach-label">Approach C</div>
+      <h3 class="approach-title">Unified page atmosphere</h3>
+      <p class="approach-desc">One page-wide atmospheric layer with 2 soft cyan pools. Hairlines soften. Doesn't care about section boundaries.</p>
+    </div>
+    <div class="mini a-atmos">
+      <div class="mini-section mini-hero">
+        <div class="mini-eyebrow">Hero · live</div>
+        <h4 class="mini-h">The voice operating layer.</h4>
+        <p class="mini-p">Voice agents that verify, ground, act.</p>
+      </div>
+      <div class="mini-section proof">
+        <div class="mini-eyebrow">Production signal · § 01</div>
+        <h4 class="mini-h">Every call, shipped to your stack.</h4>
+        <p class="mini-p">1.4M+ sessions across deployments.</p>
+      </div>
+      <div class="mini-section deploy">
+        <div class="mini-eyebrow">Deployment paths · § 02</div>
+        <h4 class="mini-h">Same layer. Different shape.</h4>
+      </div>
+      <div class="mini-section story">
+        <div class="mini-eyebrow">One call · § 03</div>
+        <h4 class="mini-h">Watch a call go the distance.</h4>
+      </div>
+      <div class="mini-section compliance">
+        <div class="mini-eyebrow">Compliance · § 04</div>
+        <h4 class="mini-h">Posture before any contract.</h4>
+      </div>
+      <div class="mini-section close" style="background: var(--bg-dark); color: white; margin: 20px; border-radius: 14px; z-index: 3;">
+        <div class="mini-eyebrow" style="color: rgba(255,255,255,0.72);">Working session · § 05</div>
+        <h4 class="mini-h" style="color: white;">Start with one session.</h4>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

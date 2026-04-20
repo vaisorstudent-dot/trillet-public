@@ -1,0 +1,1356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Enterprise · Trillet</title>
+<meta name="description" content="Voice infrastructure for regulated, controlled, system-bound environments. On-premise Docker, private cloud, or managed enterprise. Live today across financial, healthcare, telco, and debt-recovery deployments.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Urbanist:wght@300;400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link href="_shared.css" rel="stylesheet">
+
+<style>
+/* ═══════════════════════════════════════════════════════════════════════════
+   ENTERPRISE PAGE · 2026-04-19 re-alignment to homepage-v2-option-a-v2 idiom
+
+   What changed: the page now uses the HOMEPAGE section vocabulary —
+   chapter eyebrows (§ 01…), rail+node numbered flows, pill clusters for
+   compliance (not status bands), dark-panel-in-light close with a
+   working-session agenda strip. Section rhythm matches home: 128px pad,
+   1360px page-max, Urbanist 600 h2 clamp(32px, 4vw, 52px).
+
+   _shared.css still provides nav/footer/cta/op-console/tri-pill. Enterprise
+   sections below use lb-ent-* prefix to avoid collision.
+   ═════════════════════════════════════════════════════════════════════════ */
+
+/* ── Homepage section rhythm ── */
+.ent { --page-max: 1360px; --section-pad: 128px; }
+.ent section { padding: var(--section-pad) 32px; }
+.ent .inner { max-width: var(--page-max); margin: 0 auto; }
+
+/* ── Chapter eyebrow (homepage idiom) ── */
+.ent .eyebrow {
+  display: inline-flex; align-items: baseline; gap: 10px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--brand-primary);
+  margin-bottom: 22px;
+}
+.ent .eyebrow .chap {
+  color: var(--text-muted);
+  font-weight: 500; letter-spacing: 0.14em;
+}
+.on-dark-panel .eyebrow { color: var(--brand-highlight); }
+.on-dark-panel .eyebrow .chap { color: rgba(255,255,255,0.40); }
+
+/* ── Section headers ── */
+.ent h2.section-h {
+  font-family: 'Urbanist', sans-serif; font-weight: 600;
+  font-size: clamp(32px, 4vw, 52px);
+  letter-spacing: -0.025em; line-height: 1.05;
+  color: var(--text-primary); margin: 0 0 18px 0;
+  text-wrap: balance;
+}
+.on-dark-panel h2.section-h { color: var(--text-on-dark); }
+.ent p.section-lede {
+  font-size: 17px; line-height: 1.6;
+  color: var(--text-body); margin: 0; max-width: 640px;
+  text-wrap: pretty;
+}
+.on-dark-panel p.section-lede { color: var(--text-on-dark-body); }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   HERO · mirrors homepage lb-hero-wrap: dark panel inside white canvas,
+   radial halo, centered-or-left h1, live status pill, deployment card on
+   the right instead of the homepage's orb (appropriate for enterprise)
+   ═══════════════════════════════════════════════════════════════════════════ */
+.ent-hero-wrap { padding: 32px 32px 0; background: #FFFFFF; }
+.ent-hero {
+  max-width: var(--page-max); margin: 0 auto;
+  background: var(--bg-dark);
+  border-radius: 28px;
+  padding: 88px 72px 80px;
+  position: relative; overflow: hidden;
+  display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 64px;
+  align-items: center; min-height: 580px;
+  box-shadow: 0 40px 80px rgba(2, 58, 132, 0.18);
+}
+.ent-hero::before {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse 55% 45% at 78% 18%, rgba(131, 228, 255, 0.22) 0%, transparent 55%),
+    radial-gradient(ellipse 45% 45% at 12% 88%, rgba(2, 58, 132, 0.55) 0%, transparent 55%),
+    radial-gradient(ellipse 30% 30% at 75% 75%, rgba(39, 163, 253, 0.20) 0%, transparent 60%);
+}
+.ent-hero::after {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background-image: radial-gradient(rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size: 32px 32px; opacity: 0.6;
+  mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 75%);
+}
+.ent-hero > * { position: relative; z-index: 1; }
+.ent-hero-left { display: flex; flex-direction: column; gap: 28px; }
+.ent-hero h1 {
+  font-family: 'Urbanist', sans-serif; font-weight: 600;
+  font-size: clamp(42px, 5.2vw, 68px);
+  letter-spacing: -0.025em; line-height: 1.0;
+  color: var(--text-on-dark); margin: 0;
+  text-wrap: balance;
+}
+.ent-hero h1 em {
+  font-style: normal;
+  background: linear-gradient(135deg, #83E4FF 0%, #27A3FD 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.ent-hero-lede {
+  font-size: clamp(16px, 1.3vw, 18px); line-height: 1.55;
+  color: var(--text-on-dark-body); margin: 0; max-width: 560px;
+}
+.ent-hero-pills { display: flex; flex-wrap: wrap; gap: 8px; }
+.ent-hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; }
+
+/* ── Deployment card (right side of hero) ── */
+.deploy-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.10);
+  border-radius: 18px;
+  padding: 24px;
+  backdrop-filter: blur(10px);
+}
+.deploy-card-head {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 18px; padding-bottom: 16px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.deploy-card-head .title {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.16em;
+  text-transform: uppercase; color: rgba(255,255,255,0.70);
+}
+.deploy-card-head .live {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; font-weight: 700; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--brand-highlight);
+  padding: 4px 10px; border-radius: 999px;
+  background: rgba(131, 228, 255, 0.10);
+  border: 1px solid rgba(131, 228, 255, 0.25);
+}
+.deploy-card-head .live::before {
+  content: ''; width: 5px; height: 5px; border-radius: 50%;
+  background: var(--status-live); box-shadow: 0 0 6px var(--status-live);
+}
+.deploy-row {
+  padding: 14px 0; display: grid; grid-template-columns: 1fr auto;
+  gap: 12px; align-items: start;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.deploy-row:last-child { border-bottom: none; }
+.deploy-row .name {
+  font-size: 14px; font-weight: 600;
+  color: var(--text-on-dark); margin-bottom: 4px;
+}
+.deploy-row .desc {
+  font-size: 12px; color: rgba(255,255,255,0.62);
+  line-height: 1.5;
+}
+.deploy-row .tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9.5px; font-weight: 700; letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 3px 9px; border-radius: 999px;
+  color: #6EE7B7;
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.28);
+  white-space: nowrap;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   § 01 PROOF — mirrors home lb-proof: counter + label + logo strip
+   ═══════════════════════════════════════════════════════════════════════════ */
+.ent-proof { background: #FFFFFF; }
+.ent-proof-head-row {
+  display: grid; grid-template-columns: auto 1fr; gap: 48px;
+  align-items: baseline; margin-bottom: 72px;
+}
+.ent-proof-counter {
+  font-family: 'Urbanist', sans-serif; font-weight: 600;
+  font-size: clamp(64px, 8vw, 112px);
+  letter-spacing: -0.04em; line-height: 0.9;
+  color: var(--text-primary);
+  font-variant-numeric: tabular-nums;
+  background: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-dark, #023A84) 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.ent-proof-counter-label {
+  font-size: 15px; color: var(--text-body); line-height: 1.6;
+  max-width: 440px; padding-top: 12px;
+}
+.ent-proof-logos-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; font-weight: 700; letter-spacing: 0.22em;
+  text-transform: uppercase; color: var(--text-muted);
+  margin-bottom: 24px;
+}
+.ent-proof-logos-row {
+  display: grid; grid-template-columns: repeat(6, 1fr);
+  gap: 32px; align-items: center;
+}
+.ent-proof-logo-slot {
+  color: #64748B;
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0.75; transition: opacity 0.2s;
+}
+.ent-proof-logo-slot:hover { opacity: 1; color: var(--logo-accent, var(--text-primary)); }
+.ent-proof-logo { width: 100%; height: 24px; }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   § 02 DEPLOYMENT SHAPES — rail+node numbered flow idiom from home .lb-fjstep
+   ═══════════════════════════════════════════════════════════════════════════ */
+.ent-deploy { background: var(--bg-tint); }
+.ent-deploy-inner { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 96px; }
+.ent-deploy-head { position: sticky; top: 120px; align-self: start; }
+.ent-deploy-cta {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 14px; font-weight: 600; color: var(--brand-primary);
+  margin-top: 20px;
+}
+
+.ent-deploy-flow { display: flex; flex-direction: column; }
+.ent-dstep {
+  display: grid; grid-template-columns: 32px 1fr; gap: 28px;
+  padding-bottom: 40px;
+}
+.ent-dstep:last-child { padding-bottom: 0; }
+.ent-dstep-rail {
+  display: flex; flex-direction: column; align-items: center;
+  position: relative;
+}
+.ent-dstep-rail::after {
+  content: ''; position: absolute; top: 20px; bottom: -40px;
+  left: 50%; width: 1px; transform: translateX(-50%);
+  background-image: linear-gradient(to bottom, rgba(0,98,233,0.30) 0, rgba(0,98,233,0.30) 4px, transparent 4px, transparent 8px);
+  background-size: 1px 8px;
+}
+.ent-dstep:last-child .ent-dstep-rail::after { display: none; }
+.ent-dstep-node {
+  width: 20px; height: 20px; border-radius: 50%;
+  background: var(--surface, #fff);
+  border: 2px solid var(--brand-primary);
+  display: flex; align-items: center; justify-content: center;
+  position: relative; z-index: 1;
+}
+.ent-dstep-node::after {
+  content: ''; width: 6px; height: 6px; border-radius: 50%;
+  background: var(--brand-primary);
+}
+.ent-dstep-body {
+  background: #FFFFFF;
+  border: 1px solid var(--border-light);
+  border-radius: 16px;
+  padding: 28px 32px;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.ent-dstep-body:hover {
+  border-color: rgba(131, 228, 255, 0.55);
+  transform: translateY(-1px);
+}
+.ent-dstep-body header {
+  display: flex; align-items: center; gap: 12px;
+  margin-bottom: 12px; flex-wrap: wrap;
+}
+.ent-dstep-body .num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.14em;
+  color: var(--text-muted);
+}
+.ent-dstep-body h3 {
+  font-family: 'Urbanist', sans-serif; font-weight: 600;
+  font-size: 22px; letter-spacing: -0.015em;
+  color: var(--text-primary); margin: 0;
+}
+.ent-dstep-body .tag {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; font-weight: 700; letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 4px 10px; border-radius: 999px;
+  background: rgba(16, 185, 129, 0.10); color: #047857;
+  border: 1px solid rgba(16, 185, 129, 0.22);
+}
+.ent-dstep-body .tag::before {
+  content: ''; width: 5px; height: 5px; border-radius: 50%;
+  background: var(--status-live);
+}
+.ent-dstep-body p {
+  font-size: 14px; color: var(--text-body); line-height: 1.6;
+  margin: 0 0 16px 0;
+}
+.ent-dstep-vignette {
+  background: var(--bg-tint);
+  border: 1px solid var(--border-light);
+  border-radius: 10px;
+  padding: 14px 18px;
+  display: flex; flex-direction: column; gap: 8px;
+}
+.ent-dstep-vignette .row {
+  display: grid; grid-template-columns: 96px 1fr;
+  gap: 14px; align-items: baseline;
+  font-family: 'JetBrains Mono', monospace; font-size: 11.5px;
+}
+.ent-dstep-vignette .k { color: var(--text-muted); letter-spacing: 0.06em; text-transform: uppercase; font-size: 10px; }
+.ent-dstep-vignette .v { color: var(--text-primary); }
+.ent-dstep-vignette .v.mono { font-variant-numeric: tabular-nums; }
+.ent-dstep-body a.eng-link {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 13px; font-weight: 600; color: var(--brand-primary);
+  margin-top: 12px;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   § 03 INTEGRATION DEPTH — 4-col vertical rail pattern (lede-anchored)
+   ═══════════════════════════════════════════════════════════════════════════ */
+.ent-int { background: #FFFFFF; }
+.ent-int-head { text-align: left; margin-bottom: 64px; max-width: 720px; }
+.ent-int-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px;
+}
+.ent-int-col {
+  padding-left: 22px;
+  border-left: 2px solid rgba(0, 98, 233, 0.22);
+}
+.ent-int-col .icon {
+  width: 32px; height: 32px; margin-bottom: 14px;
+  color: var(--brand-primary);
+}
+.ent-int-col h3 {
+  font-family: 'Urbanist', sans-serif; font-weight: 600;
+  font-size: 18px; color: var(--text-primary);
+  margin: 0 0 10px 0;
+}
+.ent-int-col p {
+  font-size: 13.5px; color: var(--text-body); line-height: 1.55;
+  margin: 0 0 16px 0;
+}
+.ent-int-col .vendors {
+  display: flex; flex-direction: column; gap: 6px;
+}
+.ent-int-col .vendors span {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px; color: var(--text-body); opacity: 0.85;
+}
+.ent-int-col .vendors span::before {
+  content: '· '; color: var(--brand-secondary); font-weight: 700; margin-right: 2px;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   § 04 COMPLIANCE — pill-clusters idiom from homepage lb-compliance
+   ═══════════════════════════════════════════════════════════════════════════ */
+.ent-compliance { background: var(--bg-tint); }
+.ent-compliance-head { margin-bottom: 56px; max-width: 720px; }
+
+.ent-cluster { margin-bottom: 40px; }
+.ent-cluster-label {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--text-muted);
+  margin-bottom: 18px;
+}
+.ent-cluster-label::before {
+  content: ''; width: 6px; height: 6px; border-radius: 50%;
+}
+.ent-cluster.live .ent-cluster-label::before { background: #10B981; box-shadow: 0 0 6px rgba(16,185,129,0.6); }
+.ent-cluster.flight .ent-cluster-label::before { background: #F59E0B; box-shadow: 0 0 6px rgba(245,158,11,0.6); }
+.ent-cluster.notyet .ent-cluster-label::before { background: #94A3B8; }
+
+.ent-pills {
+  display: flex; flex-wrap: wrap; gap: 10px;
+}
+.ent-pill {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 10px 16px; border-radius: 999px;
+  font-size: 13px; font-weight: 500;
+  background: white; color: var(--text-primary);
+  border: 1px solid var(--border-light);
+  transition: border-color 0.15s, transform 0.15s;
+}
+.ent-pill:hover { border-color: rgba(131,228,255,0.55); transform: translateY(-1px); }
+.ent-pill::before {
+  content: ''; width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0;
+}
+.ent-pill.live::before { background: #10B981; box-shadow: 0 0 6px rgba(16,185,129,0.5); }
+.ent-pill.flight::before { background: #F59E0B; box-shadow: 0 0 6px rgba(245,158,11,0.5); }
+.ent-pill.notyet::before { background: #94A3B8; }
+.ent-pill em {
+  font-style: normal;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--text-muted);
+  padding-left: 10px; margin-left: 10px;
+  border-left: 1px solid var(--border-light);
+}
+.ent-compliance-foot {
+  display: flex; justify-content: space-between; align-items: baseline;
+  gap: 32px; padding-top: 32px; margin-top: 24px;
+  border-top: 1px solid var(--border-light);
+  flex-wrap: wrap;
+}
+.ent-compliance-subprocessors {
+  display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap;
+}
+.ent-compliance-subprocessors .label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--text-muted);
+}
+.ent-compliance-subprocessors .list {
+  display: flex; gap: 14px; flex-wrap: wrap;
+}
+.ent-compliance-subprocessors .list span {
+  font-size: 13px; color: var(--text-body);
+}
+.ent-compliance-actions {
+  display: flex; gap: 20px; align-items: center; flex-wrap: wrap;
+}
+.ent-compliance-actions a {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 14px; font-weight: 600; color: var(--brand-primary);
+}
+.ent-compliance-actions a.muted {
+  color: var(--text-body); font-weight: 500;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   § 05 OPERATOR CONSOLE LIVE — uses shared op-console from _shared.css
+   ═══════════════════════════════════════════════════════════════════════════ */
+.ent-oplive { background: #FFFFFF; }
+.ent-oplive-inner { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 64px; align-items: center; }
+.ent-oplive h2.section-h { margin-bottom: 20px; }
+.ent-oplive .op-console {
+  background:
+    radial-gradient(ellipse 60% 50% at 80% 20%, rgba(131, 228, 255, 0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 60% at 15% 90%, rgba(39, 163, 253, 0.10) 0%, transparent 65%),
+    linear-gradient(135deg, #0F1E47 0%, #1A3068 100%);
+  border-color: rgba(131, 228, 255, 0.16);
+  box-shadow: 0 32px 80px rgba(2, 58, 132, 0.32), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   § 06 INDUSTRY DEPLOYMENTS — 4 cards aligned to the 4 homepage verticals
+   ═══════════════════════════════════════════════════════════════════════════ */
+.ent-industries { background: var(--bg-tint); }
+.ent-industries-head { margin-bottom: 56px; max-width: 720px; }
+.ent-industries-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px;
+  background: var(--border-light);
+  border: 1px solid var(--border-light);
+  border-radius: 20px; overflow: hidden;
+}
+.ent-ind-card {
+  background: white; padding: 36px 36px 32px;
+  transition: background 0.2s;
+}
+.ent-ind-card:hover { background: #FBFCFE; }
+.ent-ind-card .top {
+  display: flex; align-items: center; gap: 12px;
+  margin-bottom: 16px;
+}
+.ent-ind-card .top .icon {
+  width: 40px; height: 40px; border-radius: 10px;
+  background: rgba(0, 98, 233, 0.08); color: var(--brand-primary);
+  display: flex; align-items: center; justify-content: center;
+}
+.ent-ind-card .top .name {
+  font-family: 'Urbanist', sans-serif; font-weight: 600;
+  font-size: 18px; color: var(--text-primary);
+}
+.ent-ind-card .top .live-tag {
+  margin-left: auto;
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; font-weight: 700; letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 4px 10px; border-radius: 999px;
+  background: rgba(16, 185, 129, 0.10); color: #047857;
+  border: 1px solid rgba(16, 185, 129, 0.22);
+}
+.ent-ind-card .top .live-tag::before {
+  content: ''; width: 5px; height: 5px; border-radius: 50%;
+  background: var(--status-live);
+}
+.ent-ind-card .desc {
+  font-size: 14px; color: var(--text-body); line-height: 1.6;
+  margin: 0 0 16px 0;
+}
+.ent-ind-card .mini-stats {
+  display: flex; gap: 24px; padding-top: 14px;
+  border-top: 1px solid var(--border-light);
+  font-family: 'JetBrains Mono', monospace; font-size: 12px;
+}
+.ent-ind-card .mini-stats .stat {
+  color: var(--text-body); letter-spacing: 0.06em;
+}
+.ent-ind-card .mini-stats .stat strong {
+  color: var(--text-primary); font-weight: 700;
+  display: block; margin-bottom: 2px;
+  font-size: 15px; font-family: 'Urbanist', sans-serif;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   § 07 CLOSE — dark-panel-in-light bookend (homepage signature) +
+   working-session agenda strip (homepage lb-close-agenda pattern)
+   ═══════════════════════════════════════════════════════════════════════════ */
+.ent-close { background: #FFFFFF; padding-bottom: 32px !important; }
+.ent-close-panel {
+  max-width: var(--page-max); margin: 0 auto;
+  background: var(--bg-dark);
+  border-radius: 28px;
+  padding: 80px 72px 64px;
+  position: relative; overflow: hidden;
+  box-shadow: 0 40px 80px rgba(2, 58, 132, 0.18);
+}
+.ent-close-panel::before {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse 55% 45% at 22% 12%, rgba(131, 228, 255, 0.22) 0%, transparent 55%),
+    radial-gradient(ellipse 45% 45% at 88% 92%, rgba(2, 58, 132, 0.55) 0%, transparent 55%),
+    radial-gradient(ellipse 30% 30% at 25% 75%, rgba(39, 163, 253, 0.20) 0%, transparent 60%);
+}
+.ent-close-panel::after {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background-image: radial-gradient(rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size: 32px 32px; opacity: 0.6;
+  mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 75%);
+}
+.ent-close-panel > * { position: relative; z-index: 1; }
+.ent-close-row {
+  display: grid; grid-template-columns: 1.2fr 0.8fr;
+  gap: 56px; align-items: end; margin-bottom: 56px;
+}
+.ent-close-row h2 {
+  font-family: 'Urbanist', sans-serif; font-weight: 600;
+  font-size: clamp(32px, 4vw, 48px);
+  letter-spacing: -0.025em; line-height: 1.05;
+  color: var(--text-on-dark); margin: 14px 0 18px 0;
+  text-wrap: balance;
+}
+.ent-close-row p {
+  font-size: 16px; color: var(--text-on-dark-body);
+  line-height: 1.6; margin: 0; max-width: 560px;
+}
+.ent-close-row .ctas {
+  display: flex; flex-direction: column; gap: 12px; align-items: stretch;
+}
+
+/* Working-session agenda strip */
+.ent-close-agenda {
+  list-style: none; padding: 28px 0 0 0; margin: 0;
+  display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  counter-reset: agenda;
+}
+.ent-close-agenda li {
+  display: flex; flex-direction: column; gap: 6px;
+  padding: 18px 0 0;
+  position: relative;
+}
+.ent-close-agenda li .num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; font-weight: 700; letter-spacing: 0.18em;
+  color: var(--brand-highlight);
+}
+.ent-close-agenda li .beat {
+  font-family: 'Urbanist', sans-serif; font-weight: 600;
+  font-size: 15px; color: var(--text-on-dark); line-height: 1.3;
+}
+.ent-close-agenda li .min {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; color: rgba(255,255,255,0.50);
+  letter-spacing: 0.08em;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Responsive
+   ═══════════════════════════════════════════════════════════════════════════ */
+@media (max-width: 1024px) {
+  .ent section { padding: 80px 24px; }
+  .ent-hero { grid-template-columns: 1fr; padding: 56px 32px; }
+  .ent-deploy-inner { grid-template-columns: 1fr; gap: 48px; }
+  .ent-deploy-head { position: static; }
+  .ent-int-grid { grid-template-columns: repeat(2, 1fr); }
+  .ent-industries-grid { grid-template-columns: 1fr; }
+  .ent-oplive-inner { grid-template-columns: 1fr; }
+  .ent-close-row { grid-template-columns: 1fr; align-items: start; }
+  .ent-close-row .ctas { align-items: flex-start; }
+  .ent-close-agenda { grid-template-columns: repeat(2, 1fr); }
+  .ent-proof-head-row { grid-template-columns: 1fr; gap: 20px; }
+  .ent-proof-logos-row { grid-template-columns: repeat(3, 1fr); gap: 20px; }
+}
+@media (max-width: 640px) {
+  .ent-hero { padding: 40px 24px; }
+  .ent-close-panel { padding: 48px 24px; }
+  .ent-int-grid { grid-template-columns: 1fr; }
+  .ent-close-agenda { grid-template-columns: 1fr; }
+}
+
+/* =================================================================
+   DARK-MODE ALIGNMENT (2026-04-19) — match homepage-v2-option-a-v2
+   Enterprise page sections converted to the same ink + cyan-eyebrow
+   + hairline vocabulary the platform/home use.
+   ================================================================= */
+:root {
+  --ent-ink: #0A0F1E;
+  --ent-ink-soft: #0E1527;
+  --ent-ink-softer: rgba(255, 255, 255, 0.02);
+  --ent-rule: rgba(255, 255, 255, 0.08);
+  --ent-rule-soft: rgba(255, 255, 255, 0.04);
+  --ent-text: #F5F6FA;
+  --ent-text-body: rgba(245, 246, 250, 0.78);
+  --ent-text-muted: rgba(245, 246, 250, 0.52);
+  --ent-chip-bg: rgba(255, 255, 255, 0.04);
+  --ent-chip-border: rgba(255, 255, 255, 0.10);
+  --ent-cyan: #83E4FF;
+}
+
+/* Backdrop + hero-wrap gutter */
+html, body { background: var(--ent-ink) !important; }
+main, main#main { background: var(--ent-ink) !important; }
+.ent-hero-wrap { background: var(--ent-ink) !important; }
+
+/* Section defaults — every ent-section ink, hairline separators */
+.ent-proof, .ent-deploy, .ent-int, .ent-compliance,
+.ent-oplive, .ent-industries, .ent-close {
+  background: var(--ent-ink) !important;
+  border-top: 1px solid var(--ent-rule);
+  color: var(--ent-text);
+}
+
+/* Headings, ledes, eyebrows */
+.ent section h2, .ent section h3, .ent section h4 { color: var(--ent-text) !important; }
+.ent section p, .ent section li { color: var(--ent-text-body); }
+.ent .eyebrow { color: var(--brand-primary, #0062E9) !important; }
+/* EYEBROW-GREEN-DOT (2026-04-19) — match homepage */
+.eyebrow::before {
+  background: var(--status-live, #10B981) !important;
+  box-shadow: 0 0 8px rgba(16,185,129,0.45), 0 0 0 3px rgba(16,185,129,0.08) !important;
+}
+.ent .eyebrow .chap { color: rgba(255,255,255,0.42) !important; }
+.ent h2.section-h { color: var(--ent-text) !important; }
+.ent p.section-lede { color: var(--ent-text-body) !important; }
+
+/* ----- PROOF ----------------------------------------------------- */
+.ent-proof-head-row *,
+.ent-proof-logos-label { color: var(--ent-text-body); }
+.ent-proof-logos-label { color: var(--ent-text-muted) !important; }
+.ent-proof-logo-slot, .ent-proof-logo {
+  background: var(--ent-chip-bg) !important;
+  border-color: var(--ent-chip-border) !important;
+  color: var(--ent-text-body) !important;
+}
+.ent-proof-counter {
+  background: linear-gradient(135deg, var(--ent-cyan) 0%, #4D9BFF 100%) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  color: transparent !important;
+}
+.ent-proof-counter-label { color: var(--ent-text-muted) !important; }
+
+/* ----- DEPLOY (numbered flow) ----------------------------------- */
+.ent-deploy-head *, .ent-deploy-cta { color: var(--ent-text-body); }
+.ent-dstep-body {
+  background: var(--ent-ink-soft) !important;
+  border: 1px solid var(--ent-rule) !important;
+  color: var(--ent-text-body) !important;
+}
+.ent-dstep-body * { color: inherit; }
+.ent-dstep-body h3, .ent-dstep-body h4, .ent-dstep-body strong {
+  color: var(--ent-text) !important;
+}
+.ent-dstep-body .num { color: var(--ent-cyan) !important; }
+.ent-dstep-body header .tag,
+.ent-dstep-body .tag {
+  background: rgba(16, 185, 129, 0.14) !important;
+  color: #6EE7B7 !important;
+  border: 1px solid rgba(16, 185, 129, 0.28);
+}
+.ent-dstep-body .eng-link,
+.ent-dstep-body a { color: var(--ent-cyan) !important; }
+.ent-dstep-node {
+  background: var(--ent-ink) !important;
+  border: 1px solid var(--ent-cyan) !important;
+  color: var(--ent-cyan) !important;
+}
+.ent-dstep-vignette {
+  background: var(--ent-ink-soft) !important;
+  border: 1px solid var(--ent-rule) !important;
+  color: var(--ent-text-body) !important;
+}
+.ent-dstep-vignette * { color: inherit; }
+.ent-dstep-vignette h4, .ent-dstep-vignette strong { color: var(--ent-text) !important; }
+.ent-dstep-vignette .k { color: var(--ent-text-muted) !important; }
+.ent-dstep-vignette .v { color: var(--ent-text) !important; }
+.ent-dstep-vignette .v.mono { color: var(--ent-cyan) !important; }
+.ent-dstep-rail { background: var(--ent-rule) !important; }
+.ent-dstep .eng-link,
+.ent-deploy a[class*="link"] { color: var(--ent-cyan) !important; }
+
+/* ----- INTEGRATIONS --------------------------------------------- */
+.ent-int-head * { color: var(--ent-text-body); }
+.ent-int-col {
+  background: var(--ent-ink-soft) !important;
+  border: 1px solid var(--ent-rule) !important;
+  color: var(--ent-text-body) !important;
+}
+.ent-int-col * { color: inherit; }
+.ent-int-col h3, .ent-int-col h4, .ent-int-col strong { color: var(--ent-text) !important; }
+
+/* ----- COMPLIANCE ----------------------------------------------- */
+.ent-compliance-head *,
+.ent-compliance-foot *,
+.ent-compliance-actions * { color: var(--ent-text-body); }
+.ent-cluster { background: transparent !important; }
+.ent-cluster-label { color: var(--ent-text-muted) !important; }
+.ent-pill {
+  background: var(--ent-chip-bg) !important;
+  border: 1px solid var(--ent-chip-border) !important;
+  color: var(--ent-text-body) !important;
+}
+.ent-pill:hover {
+  border-color: rgba(131, 228, 255, 0.4) !important;
+  color: var(--ent-text) !important;
+}
+.ent-compliance-subprocessors {
+  background: var(--ent-ink-soft) !important;
+  border: 1px solid var(--ent-rule) !important;
+  color: var(--ent-text-body) !important;
+}
+.ent-compliance-subprocessors * { color: inherit; }
+.ent-compliance-subprocessors h3, .ent-compliance-subprocessors h4 { color: var(--ent-text) !important; }
+
+/* ----- OP LIVE (op-console) ------------------------------------- */
+.ent-oplive-inner * { color: var(--ent-text-body); }
+.ent-oplive-inner h2, .ent-oplive-inner h3, .ent-oplive-inner h4 { color: var(--ent-text) !important; }
+
+/* ----- INDUSTRIES ------------------------------------------------ */
+.ent-industries-head * { color: var(--ent-text-body); }
+.ent-industries-grid {
+  background: var(--ent-rule) !important;
+  border: 1px solid var(--ent-rule) !important;
+}
+.ent-ind-card {
+  background: var(--ent-ink-soft) !important;
+  color: var(--ent-text-body) !important;
+}
+.ent-ind-card * { color: inherit; }
+.ent-ind-card h3, .ent-ind-card h4, .ent-ind-card strong { color: var(--ent-text) !important; }
+.ent-ind-card .name { color: var(--ent-text) !important; font-weight: 600; }
+.ent-ind-card .desc { color: var(--ent-text-body) !important; }
+.ent-ind-card .stat { color: var(--ent-text-muted) !important; }
+.ent-ind-card .stat strong { color: var(--ent-text) !important; }
+.ent-ind-card .top { color: var(--ent-text-body) !important; }
+.ent-ind-card .live-tag {
+  background: rgba(16, 185, 129, 0.14) !important;
+  color: #6EE7B7 !important;
+  border: 1px solid rgba(16, 185, 129, 0.28);
+}
+.ent-ind-card .icon {
+  background: rgba(131, 228, 255, 0.10) !important;
+  color: var(--ent-cyan) !important;
+}
+
+/* ----- CLOSE ----------------------------------------------------- */
+.ent-close * { color: var(--ent-text-body); }
+.ent-close h2, .ent-close h3, .ent-close h4 { color: var(--ent-text) !important; }
+.ent-close-panel {
+  background: var(--ent-ink-soft) !important;
+  border: 1px solid var(--ent-rule) !important;
+  color: var(--ent-text) !important;
+}
+.ent-close-panel * { color: inherit; }
+.ent-close-agenda, .ent-close-row {
+  border-color: var(--ent-rule) !important;
+}
+
+/* ----- NAV: force dark (shared.css defaults to light) ----------- */
+.site-nav {
+  background: rgba(11, 14, 23, 0.86) !important;
+  border-bottom: 1px solid var(--ent-rule) !important;
+  backdrop-filter: blur(12px);
+}
+.site-nav a { color: var(--ent-text-body) !important; }
+.site-nav a:hover { color: var(--ent-text) !important; }
+.site-nav a.cta {
+  background: #F5F6FA !important;
+  color: #06080F !important;
+}
+.site-nav a[style*="color: var(--brand-primary)"] {
+  color: var(--ent-cyan) !important;
+}
+.site-nav .wordmark img { filter: brightness(0) invert(1); }
+
+/* Nav logo — use the dark-bg variant (white wordmark + colored flame) */
+.site-nav .wordmark img {
+  filter: none;
+  content: url('assets/trillet-logo-dark.svg');
+}
+
+/* ----- FOOTER — force dark -------------------------------------- */
+footer, .site-footer, [class*="footer"] {
+  background: var(--ent-ink) !important;
+  color: var(--ent-text-body) !important;
+  border-top: 1px solid var(--ent-rule) !important;
+}
+footer *, .site-footer *, [class*="footer"] * {
+  color: var(--ent-text-body);
+  border-color: var(--ent-rule);
+}
+footer a, .site-footer a, [class*="footer"] a {
+  color: var(--ent-text-body) !important;
+}
+footer a:hover, .site-footer a:hover {
+  color: var(--ent-cyan) !important;
+}
+footer h4, .site-footer h4 { color: var(--ent-text) !important; }
+</style>
+</head>
+<body class="ent">
+
+<a href="#main" class="skip-link">Skip to main content</a>
+
+<div class="preview-banner" style="background: #022f6a;">
+  <div class="label">📄 PAGE MOCKUP · /enterprise (rebuilt to homepage idiom · 2026-04-19)</div>
+  <div class="links">
+    <a href="index.html">All pages</a>
+    <a href="../homepage-v2-option-a-v2.html">/ home</a>
+    <a class="active" href="enterprise.html">/enterprise</a>
+    <a href="agency.html">/agency</a>
+    <a href="trust.html">/trust</a>
+    <a href="platform.html">/platform</a>
+    <a href="agent.html">/agent</a>
+  </div>
+</div>
+
+<header class="site-nav">
+  <a href="../homepage-v2-option-a-v2.html" class="wordmark"><img src="assets/trillet-logo.svg" alt="Trillet"></a>
+  <nav>
+    <a href="platform.html">Platform</a>
+    <a href="enterprise.html" style="color: var(--brand-primary); font-weight: 600;">Enterprise</a>
+    <a href="agency.html">Agency</a>
+    <a href="agent.html">AI Agent</a>
+    <a href="https://docs.trillet.ai/v1/api-reference/introduction">Docs</a>
+    <a href="#">Sign in</a>
+    <a href="#" class="cta">Get started</a>
+  </nav>
+</header>
+
+<main id="main">
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     HERO · dark-panel-in-light, echoing homepage lb-hero-wrap idiom
+     ═══════════════════════════════════════════════════════════════════════ -->
+<section class="ent-hero-wrap">
+  <div class="ent-hero on-dark-panel">
+    <div class="ent-hero-left">
+      <span class="status-pill on-dark">
+        <span class="dot-wrap"><span class="ping"></span><span class="core"></span></span>
+        Enterprise deployment
+      </span>
+      <h1>Voice infrastructure, built for <em>your environment</em>.</h1>
+      <p class="ent-hero-lede">On-premise Docker, private cloud, or managed enterprise. Voice agents that verify the caller, run on your live business systems, and take authorized action &mdash; inside the operating boundary your security review requires.</p>
+      <div class="ent-hero-pills">
+        <span class="tri-pill on-dark"><span class="d"></span>On-premise Docker</span>
+        <span class="tri-pill on-dark"><span class="d"></span>Private cloud</span>
+        <span class="tri-pill on-dark"><span class="d"></span>Managed enterprise</span>
+      </div>
+      <div class="ent-hero-ctas">
+        <a href="#" class="cta-primary on-dark">
+          Map your enterprise deployment
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </a>
+        <a href="trust.html" class="cta-secondary on-dark">Read trust posture</a>
+      </div>
+    </div>
+    <div class="deploy-card">
+      <div class="deploy-card-head">
+        <div class="title">Deployment shapes</div>
+        <div class="live">All live</div>
+      </div>
+      <div class="deploy-row">
+        <div>
+          <div class="name">On-premise Docker</div>
+          <div class="desc">Runs inside your environment. Voice + storage stay within your infrastructure. Verizon TCC precedent.</div>
+        </div>
+        <div class="tag">Live</div>
+      </div>
+      <div class="deploy-row">
+        <div>
+          <div class="name">Private cloud</div>
+          <div class="desc">Dedicated tenant in your AWS, GCP, or Azure account. You own the compute boundary.</div>
+        </div>
+        <div class="tag">Live</div>
+      </div>
+      <div class="deploy-row">
+        <div>
+          <div class="name">Managed enterprise</div>
+          <div class="desc">Trillet-managed. Configurable residency. Single-tenant isolation. SLA under contract.</div>
+        </div>
+        <div class="tag">Live</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     § 01 · PROOF — mirrors homepage lb-proof: counter + logo strip
+     ═══════════════════════════════════════════════════════════════════════ -->
+<section class="ent-proof">
+  <div class="inner">
+    <div class="eyebrow">Production signal <span class="chap">· § 01</span></div>
+    <div class="ent-proof-head-row">
+      <div class="ent-proof-counter">1.4M+</div>
+      <div class="ent-proof-counter-label">Calls handled across live enterprise deployments — regulated financial services, healthcare intake, telco overflow, and debt-recovery operations.</div>
+    </div>
+    <div>
+      <div class="ent-proof-logos-label">In production with</div>
+      <div class="ent-proof-logos-row">
+        <div class="ent-proof-logo-slot" style="--logo-accent: #023A84;">
+          <svg class="ent-proof-logo" viewBox="0 0 140 28" role="img" aria-label="Meridian Financial">
+            <g fill="currentColor">
+              <path d="M4 6 L4 22 L7 22 L7 11 L11 22 L13 22 L17 11 L17 22 L20 22 L20 6 L16 6 L12 17 L8 6 Z"/>
+              <text x="26" y="19" font-family="Inter, sans-serif" font-size="12" font-weight="600" letter-spacing="0.3">MERIDIAN</text>
+              <text x="26" y="19" transform="translate(74 0)" font-family="Inter, sans-serif" font-size="10" font-weight="400" letter-spacing="0.4" opacity="0.6">FINANCIAL</text>
+            </g>
+          </svg>
+        </div>
+        <div class="ent-proof-logo-slot" style="--logo-accent: #0F766E;">
+          <svg class="ent-proof-logo" viewBox="0 0 130 28" role="img" aria-label="Caldwell Health">
+            <g fill="currentColor">
+              <circle cx="10" cy="14" r="6" fill="none" stroke="currentColor" stroke-width="1.8"/>
+              <path d="M10 10 L10 18 M6 14 L14 14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+              <text x="22" y="19" font-family="Inter, sans-serif" font-size="13" font-weight="600" letter-spacing="-0.2">Caldwell</text>
+              <text x="22" y="19" transform="translate(58 0)" font-family="Inter, sans-serif" font-size="11" font-weight="400" opacity="0.6">Health</text>
+            </g>
+          </svg>
+        </div>
+        <div class="ent-proof-logo-slot" style="--logo-accent: #C2410C;">
+          <svg class="ent-proof-logo" viewBox="0 0 140 28" role="img" aria-label="Northwind Mobile">
+            <g fill="currentColor">
+              <path d="M4 18 L4 10 L14 10 L14 18 M9 10 L9 6 M4 22 L14 22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+              <text x="22" y="19" font-family="Urbanist, sans-serif" font-size="13" font-weight="700" letter-spacing="-0.3">NORTHWIND</text>
+            </g>
+          </svg>
+        </div>
+        <div class="ent-proof-logo-slot" style="--logo-accent: #1E293B;">
+          <svg class="ent-proof-logo" viewBox="0 0 130 28" role="img" aria-label="Ashgate Capital">
+            <g fill="currentColor">
+              <rect x="4" y="8" width="14" height="14" rx="1" fill="none" stroke="currentColor" stroke-width="1.6"/>
+              <path d="M7 12 L15 12 M7 15 L12 15 M7 18 L15 18" stroke="currentColor" stroke-width="1.2"/>
+              <text x="24" y="19" font-family="Inter, sans-serif" font-size="12" font-weight="600" letter-spacing="0.4">ASHGATE</text>
+              <text x="24" y="19" transform="translate(62 0)" font-family="Inter, sans-serif" font-size="10" font-weight="400" letter-spacing="0.3" opacity="0.6">CAPITAL</text>
+            </g>
+          </svg>
+        </div>
+        <div class="ent-proof-logo-slot" style="--logo-accent: #7C3AED;">
+          <svg class="ent-proof-logo" viewBox="0 0 120 28" role="img" aria-label="Vireo Clinics">
+            <g fill="currentColor">
+              <path d="M4 8 L10 22 L16 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <text x="22" y="19" font-family="Urbanist, sans-serif" font-size="13" font-weight="600" letter-spacing="-0.2">Vireo</text>
+              <text x="22" y="19" transform="translate(42 0)" font-family="Inter, sans-serif" font-size="11" font-weight="400" opacity="0.6">Clinics</text>
+            </g>
+          </svg>
+        </div>
+        <div class="ent-proof-logo-slot" style="--logo-accent: #B91C1C;">
+          <svg class="ent-proof-logo" viewBox="0 0 140 28" role="img" aria-label="Stellaris Auto">
+            <g fill="currentColor">
+              <path d="M10 6 L12 11 L17 12 L13 15 L14 20 L10 17 L6 20 L7 15 L3 12 L8 11 Z" fill="currentColor"/>
+              <text x="24" y="19" font-family="Inter, sans-serif" font-size="12" font-weight="600" letter-spacing="0.2">STELLARIS</text>
+              <text x="24" y="19" transform="translate(72 0)" font-family="Inter, sans-serif" font-size="10" font-weight="400" letter-spacing="0.3" opacity="0.6">AUTO</text>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     § 02 · DEPLOYMENT SHAPES — rail+node numbered flow idiom from home
+     ═══════════════════════════════════════════════════════════════════════ -->
+<section class="ent-deploy">
+  <div class="inner ent-deploy-inner">
+    <aside class="ent-deploy-head">
+      <div class="eyebrow">Deployment shapes <span class="chap">· § 02</span></div>
+      <h2 class="section-h">Three shapes.<br>All live today.</h2>
+      <p class="section-lede">Pick the deployment shape that fits your environment. Every shape is in production today &mdash; across regulated finance, healthcare intake, wireless retail, and recovery operations.</p>
+      <a href="#" class="ent-deploy-cta">
+        Talk to engineering
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </a>
+    </aside>
+    <div class="ent-deploy-flow">
+      <article class="ent-dstep">
+        <div class="ent-dstep-rail"><span class="ent-dstep-node"></span></div>
+        <div class="ent-dstep-body">
+          <header>
+            <span class="num">01</span>
+            <h3>On-premise Docker</h3>
+            <span class="tag">Live · Verizon TCC precedent</span>
+          </header>
+          <p>Runs inside your environment. Voice processing and storage stay within your infrastructure. No external data egress required. Deployed for carriers, financial services, and regulated environments that cannot accept a SaaS boundary.</p>
+          <div class="ent-dstep-vignette">
+            <div class="row"><span class="k">runtime</span><span class="v">Docker · your Kubernetes or VM fleet</span></div>
+            <div class="row"><span class="k">boundary</span><span class="v">stays inside your VPC / DC</span></div>
+            <div class="row"><span class="k">egress</span><span class="v mono">none required</span></div>
+          </div>
+          <a href="#" class="eng-link">Review the Docker deployment spec <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+        </div>
+      </article>
+      <article class="ent-dstep">
+        <div class="ent-dstep-rail"><span class="ent-dstep-node"></span></div>
+        <div class="ent-dstep-body">
+          <header>
+            <span class="num">02</span>
+            <h3>Private cloud</h3>
+            <span class="tag">Live</span>
+          </header>
+          <p>Dedicated tenant in your AWS, GCP, or Azure account. You own the compute and storage boundary. Configurable VPC peering and IAM integration. No shared-tenant surface area.</p>
+          <div class="ent-dstep-vignette">
+            <div class="row"><span class="k">providers</span><span class="v">AWS · GCP · Azure</span></div>
+            <div class="row"><span class="k">tenancy</span><span class="v">single-tenant · your account</span></div>
+            <div class="row"><span class="k">iam</span><span class="v mono">Okta · Azure AD · custom SSO</span></div>
+          </div>
+          <a href="#" class="eng-link">Talk to engineering <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+        </div>
+      </article>
+      <article class="ent-dstep">
+        <div class="ent-dstep-rail"><span class="ent-dstep-node"></span></div>
+        <div class="ent-dstep-body">
+          <header>
+            <span class="num">03</span>
+            <h3>Managed enterprise</h3>
+            <span class="tag">Live</span>
+          </header>
+          <p>Trillet-managed deployment with configurable data residency by geography. Single-tenant isolation per agreement. SLA under enterprise contract. Most common shape for mid-market enterprise rollouts that want the controls without running the infrastructure.</p>
+          <div class="ent-dstep-vignette">
+            <div class="row"><span class="k">operator</span><span class="v">Trillet-managed</span></div>
+            <div class="row"><span class="k">residency</span><span class="v">configurable by geography</span></div>
+            <div class="row"><span class="k">sla</span><span class="v mono">99.99% · under contract</span></div>
+          </div>
+          <a href="#" class="eng-link">Book a scoping call <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     § 03 · INTEGRATION DEPTH — 4-col rail pattern
+     ═══════════════════════════════════════════════════════════════════════ -->
+<section class="ent-int">
+  <div class="inner">
+    <div class="ent-int-head">
+      <div class="eyebrow">Integration depth <span class="chap">· § 03</span></div>
+      <h2 class="section-h">Plugs into the stack you already run.</h2>
+      <p class="section-lede">The agent reads from and writes to your live systems during the call. Not stale exports. Not a parallel dataset. Your CRM, your identity layer, your calendar, your telephony.</p>
+    </div>
+    <div class="ent-int-grid">
+      <div class="ent-int-col">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        <h3>CRM</h3>
+        <p>Live reads and writes against your CRM during the call. Account history, case notes, pipeline state &mdash; live, not cached.</p>
+        <div class="vendors">
+          <span>Salesforce</span>
+          <span>HubSpot</span>
+          <span>Zoho</span>
+          <span>Pipedrive</span>
+        </div>
+      </div>
+      <div class="ent-int-col">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+        <h3>Identity</h3>
+        <p>Caller verification against your identity provider before any account-touching action. 2FA, knowledge-based, or your own auth.</p>
+        <div class="vendors">
+          <span>Okta</span>
+          <span>Auth0</span>
+          <span>Azure AD</span>
+          <span>Custom SSO</span>
+        </div>
+      </div>
+      <div class="ent-int-col">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        <h3>Calendar</h3>
+        <p>Live availability during the call. Booking written before the call ends. Write-through to the rep's actual calendar.</p>
+        <div class="vendors">
+          <span>Google Calendar</span>
+          <span>Outlook</span>
+          <span>Cal.com</span>
+          <span>Custom APIs</span>
+        </div>
+      </div>
+      <div class="ent-int-col">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        <h3>Telephony</h3>
+        <p>Inbound and outbound on your existing carrier setup. BYO SIP trunk supported. No number re-provisioning required.</p>
+        <div class="vendors">
+          <span>Twilio</span>
+          <span>Telnyx</span>
+          <span>SignalWire</span>
+          <span>BYO SIP</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     § 04 · COMPLIANCE — pill clusters (mirrors homepage lb-compliance)
+     ═══════════════════════════════════════════════════════════════════════ -->
+<section class="ent-compliance">
+  <div class="inner">
+    <div class="ent-compliance-head">
+      <div class="eyebrow">Compliance posture <span class="chap">· § 04</span></div>
+      <h2 class="section-h">What is true today. What is in flight. What we do not yet assert.</h2>
+      <p class="section-lede">We tell you the same thing in due-diligence as we tell you on this page. Every control below is either live, in active audit, or openly not-yet-asserted. Nothing is aspirational.</p>
+    </div>
+
+    <div class="ent-cluster live">
+      <div class="ent-cluster-label">Live today</div>
+      <div class="ent-pills">
+        <span class="ent-pill live">HIPAA · BAA available</span>
+        <span class="ent-pill live">On-premise Docker <em>Verizon TCC</em></span>
+        <span class="ent-pill live">Private-cloud tenancy</span>
+        <span class="ent-pill live">Configurable residency</span>
+        <span class="ent-pill live">Encryption in transit + at rest</span>
+        <span class="ent-pill live">Automated PII redaction</span>
+        <span class="ent-pill live">Full audit log · 90-day retention</span>
+        <span class="ent-pill live">Human-in-the-loop escalation</span>
+        <span class="ent-pill live">99.99% stability SLA</span>
+      </div>
+    </div>
+
+    <div class="ent-cluster flight">
+      <div class="ent-cluster-label">In active audit</div>
+      <div class="ent-pills">
+        <span class="ent-pill flight">ISO 27001 <em>Sprinto · target mid-May '26</em></span>
+        <span class="ent-pill flight">SOC 2 Type II <em>target Aug–Oct '26 · NDA on request</em></span>
+      </div>
+    </div>
+
+    <div class="ent-cluster notyet">
+      <div class="ent-cluster-label">Not currently asserted</div>
+      <div class="ent-pills">
+        <span class="ent-pill notyet">Third-party penetration testing <em>coordinated under engagement</em></span>
+        <span class="ent-pill notyet">APRA CPS 234 / IRAP alignment <em>roadmap dependent</em></span>
+      </div>
+    </div>
+
+    <div class="ent-compliance-foot">
+      <div class="ent-compliance-subprocessors">
+        <span class="label">Built on</span>
+        <div class="list">
+          <span>Google (Gemini)</span>
+          <span>ElevenLabs</span>
+          <span>Twilio</span>
+          <span>Stripe</span>
+          <span>Sprinto</span>
+        </div>
+      </div>
+      <div class="ent-compliance-actions">
+        <a href="trust.html" class="muted">Read the full posture →</a>
+        <a href="https://certification.trillet.ai">
+          View live security posture
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     § 05 · OPERATOR CONSOLE LIVE — shared op-console on tinted canvas
+     ═══════════════════════════════════════════════════════════════════════ -->
+<section class="ent-oplive">
+  <div class="inner ent-oplive-inner">
+    <div>
+      <div class="eyebrow">The operating layer, live <span class="chap">· § 05</span></div>
+      <h2 class="section-h">Every enterprise call, on your business systems.</h2>
+      <p class="section-lede">Real production calls flowing through verify → ground → act in real time on the systems your environment already runs. Calls from live deployments are labeled as such. Opportunities in evaluation stay clearly marked.</p>
+    </div>
+    <div class="op-console">
+      <div class="op-console-head">
+        <div class="title">Operations console · enterprise</div>
+        <div class="live-pill"><span class="d"></span>On air</div>
+      </div>
+      <div class="op-row">
+        <div>
+          <div class="phone">+1 (XXX) XXX · 0482</div>
+          <div class="meta">Inbound · retail banking · <span class="status verify">VERIFYING</span></div>
+        </div>
+        <div class="duration">0:34</div>
+      </div>
+      <div class="op-row">
+        <div>
+          <div class="phone">+1 (XXX) XXX · 7710</div>
+          <div class="meta">Inbound · healthcare intake · <span class="status ground">GROUNDED · CRM + IDENTITY</span></div>
+        </div>
+        <div class="duration">1:12</div>
+      </div>
+      <div class="op-row">
+        <div>
+          <div class="phone">+44 20 XXXX · 0231</div>
+          <div class="meta">Outbound · wireless retail · <span class="status act">ACT · TICKET CREATED</span></div>
+        </div>
+        <div class="duration">0:09</div>
+      </div>
+      <div class="op-row">
+        <div>
+          <div class="phone">+1 (XXX) XXX · 6048</div>
+          <div class="meta">Inbound · debt recovery · <span class="status act">FOLLOW-THROUGH · ESCALATED</span></div>
+        </div>
+        <div class="duration">2:43</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     § 06 · INDUSTRY DEPLOYMENTS
+     ═══════════════════════════════════════════════════════════════════════ -->
+<section class="ent-industries">
+  <div class="inner">
+    <div class="ent-industries-head">
+      <div class="eyebrow">Industry deployments <span class="chap">· § 06</span></div>
+      <h2 class="section-h">Live across regulated environments.</h2>
+      <p class="section-lede">Production deployments by use-case. Customer names disclosed under engagement.</p>
+    </div>
+    <div class="ent-industries-grid">
+      <article class="ent-ind-card" id="financial-services">
+        <div class="top">
+          <div class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+          <div class="name">Financial services</div>
+          <span class="live-tag">Live</span>
+        </div>
+        <p class="desc">After-hours and overflow inbound for retail banking. Live identity verification before any account-touching action. Compliance-cleared deployment. Agents write case notes and escalation flags back into the CRM during the call.</p>
+        <div class="mini-stats">
+          <div class="stat"><strong>24/7</strong>Overflow coverage</div>
+          <div class="stat"><strong>180ms</strong>2FA median</div>
+        </div>
+      </article>
+      <article class="ent-ind-card" id="healthcare">
+        <div class="top">
+          <div class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+          <div class="name">Healthcare intake</div>
+          <span class="live-tag">Live</span>
+        </div>
+        <p class="desc">Patient context captured during the call, carried into booking, triage, and follow-up. Intake rules per practice. Deployed across multiple practices &mdash; BAA on file.</p>
+        <div class="mini-stats">
+          <div class="stat"><strong>HIPAA</strong>BAA executed</div>
+          <div class="stat"><strong>Multi-practice</strong>Configurable intake</div>
+        </div>
+      </article>
+      <article class="ent-ind-card" id="telco">
+        <div class="top">
+          <div class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><path d="M12 18h.01"/></svg></div>
+          <div class="name">Telco · wireless retail</div>
+          <span class="live-tag">Live</span>
+        </div>
+        <p class="desc">After-hours and overflow call volume handled with live plan data and store routing. Verizon TCC precedent for the on-premise Docker deployment shape. No external data egress.</p>
+        <div class="mini-stats">
+          <div class="stat"><strong>On-prem</strong>Docker runtime</div>
+          <div class="stat"><strong>BYO SIP</strong>Existing carriers</div>
+        </div>
+      </article>
+      <article class="ent-ind-card" id="debt-recovery">
+        <div class="top">
+          <div class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div>
+          <div class="name">Debt recovery</div>
+          <span class="live-tag">Live</span>
+        </div>
+        <p class="desc">Recovery volume during overflow hours. 10× reduction in abandonment vs. the prior IVR. Real-time verification before any payment path. Recovery totals aggregate to an anonymized $338K+ across deployments.</p>
+        <div class="mini-stats">
+          <div class="stat"><strong>10×</strong>Abandonment cut</div>
+          <div class="stat"><strong>$338K+</strong>Recovered (aggregate)</div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     § 07 · CLOSE — dark-panel-in-light + working-session agenda strip
+     (mirrors homepage lb-close)
+     ═══════════════════════════════════════════════════════════════════════ -->
+<section class="ent-close">
+  <div class="ent-close-panel on-dark-panel">
+    <div class="ent-close-row">
+      <div>
+        <div class="eyebrow">Working session <span class="chap">· § 07</span></div>
+        <h2>Start with one working session.</h2>
+        <p>Ninety minutes with Trillet engineering. You leave with a deployment shape, integration scope, and a written proposal for what ships first.</p>
+      </div>
+      <div class="ctas">
+        <a href="#" class="cta-primary on-dark">
+          Book the working session
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </a>
+        <a href="trust.html" class="cta-secondary on-dark">Read trust posture</a>
+      </div>
+    </div>
+
+    <ol class="ent-close-agenda" aria-label="Working session agenda">
+      <li>
+        <span class="num">01</span>
+        <span class="beat">Call paths</span>
+        <span class="min">~15 min</span>
+      </li>
+      <li>
+        <span class="num">02</span>
+        <span class="beat">Identity &amp; verification</span>
+        <span class="min">~15 min</span>
+      </li>
+      <li>
+        <span class="num">03</span>
+        <span class="beat">System integrations</span>
+        <span class="min">~20 min</span>
+      </li>
+      <li>
+        <span class="num">04</span>
+        <span class="beat">Residency &amp; posture</span>
+        <span class="min">~15 min</span>
+      </li>
+      <li>
+        <span class="num">05</span>
+        <span class="beat">Deployment shape</span>
+        <span class="min">~20 min</span>
+      </li>
+    </ol>
+  </div>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-mark">
+      <img src="assets/trillet-footer.svg" alt="Trillet">
+      <p>Voice infrastructure for environments with real controls &mdash; on-premise, private cloud, or managed enterprise.</p>
+    </div>
+    <div class="footer-col"><h4>Platform</h4><ul><li><a href="platform.html">Overview</a></li><li><a href="enterprise.html">Enterprise</a></li><li><a href="agency.html">Agency</a></li><li><a href="agent.html">AI Agent</a></li><li><a href="agency-pricing.html">Pricing</a></li></ul></div>
+    <div class="footer-col"><h4>Trust</h4><ul><li><a href="trust.html">Compliance posture</a></li><li><a href="#">Sub-processors</a></li><li><a href="#">DPA</a></li></ul></div>
+    <div class="footer-col"><h4>Company</h4><ul><li><a href="#">About</a></li><li><a href="#">Careers</a></li><li><a href="#">Contact</a></li><li><a href="#">Privacy</a></li></ul></div>
+    <div class="footer-col"><h4>Resources</h4><ul><li><a href="https://docs.trillet.ai/v1/api-reference/introduction">Docs</a></li><li><a href="#">Changelog</a></li><li><a href="#">Blog</a></li><li><a href="#">Status</a></li></ul></div>
+  </div>
+  <div class="footer-bar">
+    <div>© 2026 Trillet. All rights reserved.</div>
+    <nav><a href="#">Privacy</a><a href="#">Terms</a><a href="trust.html">Security</a></nav>
+  </div>
+</footer>
+
+</body>
+</html>

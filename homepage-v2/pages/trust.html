@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>/trust · Trillet wireframe mockup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Urbanist:wght@300;400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link href="_shared.css" rel="stylesheet">
+<style>
+  /* TRUST-specific styles — DOCUMENT-CODED REGISTER DEPARTURE */
+  /* No dark hero panel. No operator console. Quieter motion. Compliance-ledger feel. */
+
+  /* Hero (Light, narrow column) */
+  .trust-hero { padding: 80px 32px 64px; background: white; }
+  .trust-hero-inner {
+    max-width: 720px; margin: 0 auto; text-align: center;
+  }
+  .trust-hero .date-pill {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 600;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--text-muted);
+    padding: 6px 14px; border-radius: 999px;
+    border: 1px solid var(--border-light);
+    margin-bottom: 24px;
+  }
+  .trust-hero h1 {
+    font-family: 'Urbanist', sans-serif; font-weight: 600;
+    font-size: clamp(40px, 5vw, 56px);
+    letter-spacing: -0.025em; line-height: 1.05;
+    color: var(--text-primary); margin: 0 0 20px 0;
+  }
+  .trust-hero p {
+    font-size: 17px; color: var(--text-body); line-height: 1.6;
+    margin: 0 0 24px 0;
+  }
+  .trust-hero .pdf-link {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 14px; font-weight: 600; color: var(--brand-primary);
+  }
+
+  /* Compliance ledger (3 status sub-sections) */
+  .trust-ledger { padding: 64px 32px; background: white; }
+  .trust-ledger-inner { max-width: 920px; margin: 0 auto; }
+  .ledger-band {
+    margin-top: 56px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border-light);
+  }
+  .ledger-band:first-child {
+    margin-top: 0; padding-top: 0; border-top: none;
+  }
+  .ledger-band-header {
+    display: flex; align-items: center; gap: 14px; margin-bottom: 28px;
+  }
+  .ledger-band-header .stripe { width: 4px; height: 32px; border-radius: 2px; }
+  .ledger-band-header .stripe.live { background: #10B981; }
+  .ledger-band-header .stripe.flight { background: #F59E0B; }
+  .ledger-band-header .stripe.notassert { background: #94A3B8; }
+  .ledger-band-header h2 {
+    font-family: 'Urbanist', sans-serif; font-weight: 600;
+    font-size: 26px; color: var(--text-primary); margin: 0;
+  }
+  .ledger-cards {
+    display: grid; grid-template-columns: 1fr; gap: 20px;
+  }
+  .ledger-card {
+    padding: 20px 24px;
+    border: 1px solid var(--border-light);
+    border-radius: 10px;
+    background: white;
+    display: grid; grid-template-columns: 180px 1fr; gap: 24px; align-items: start;
+  }
+  .ledger-card .item-name {
+    font-family: 'Urbanist', sans-serif; font-weight: 600;
+    font-size: 16px; color: var(--text-primary);
+  }
+  .ledger-card .item-desc {
+    font-size: 14px; color: var(--text-body); line-height: 1.6;
+  }
+
+  /* Sub-processor table */
+  .trust-sub { padding: 80px 32px; background: white; }
+  .trust-sub-inner { max-width: 920px; margin: 0 auto; }
+  .trust-sub h2 {
+    font-family: 'Urbanist', sans-serif; font-weight: 600;
+    font-size: clamp(28px, 3.5vw, 38px);
+    color: var(--text-primary); margin: 0 0 12px 0;
+  }
+  .trust-sub .eyebrow {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 700;
+    letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--text-muted); margin-bottom: 12px;
+  }
+  .trust-sub > .trust-sub-inner > p {
+    font-size: 15px; color: var(--text-body); line-height: 1.6; margin: 0 0 32px 0;
+  }
+  .sub-table {
+    width: 100%; border-collapse: collapse;
+    font-size: 14px;
+  }
+  .sub-table th {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 700;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--text-muted); text-align: left;
+    padding: 14px 12px;
+    border-bottom: 2px solid var(--border-light);
+  }
+  .sub-table td {
+    padding: 16px 12px;
+    border-bottom: 1px solid var(--border-light);
+    color: var(--text-body);
+    vertical-align: top;
+  }
+  .sub-table tr:last-child td { border-bottom: none; }
+  .sub-table .vendor { font-weight: 600; color: var(--text-primary); }
+  .sub-table a {
+    color: var(--brand-primary); text-decoration: underline; font-weight: 500;
+  }
+  .sub-disclaimer {
+    margin-top: 24px;
+    padding: 16px 20px;
+    background: var(--bg-tint);
+    border-radius: 8px;
+    font-size: 13px; color: var(--text-body); line-height: 1.55;
+  }
+
+  /* Deployment + residency (TINT) */
+  .trust-deploy { padding: 80px 32px; background: var(--bg-tint); }
+  .trust-deploy-inner { max-width: 1160px; margin: 0 auto; }
+  .trust-deploy h2 {
+    font-family: 'Urbanist', sans-serif; font-weight: 600;
+    font-size: clamp(28px, 3.5vw, 38px);
+    color: var(--text-primary); margin: 0 0 12px 0;
+  }
+  .trust-deploy .eyebrow {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 700;
+    letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--text-muted); margin-bottom: 12px;
+  }
+  .trust-deploy-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 32px;
+  }
+  .trust-deploy-card {
+    padding: 24px;
+    background: white;
+    border: 1px solid var(--border-light);
+    border-radius: 12px;
+  }
+  .trust-deploy-card h3 {
+    font-family: 'Urbanist', sans-serif; font-weight: 600;
+    font-size: 17px; color: var(--text-primary); margin: 0 0 8px 0;
+  }
+  .trust-deploy-card p {
+    font-size: 13px; color: var(--text-body); line-height: 1.6; margin: 0;
+  }
+
+  /* Audit + observability */
+  .trust-audit { padding: 80px 32px; background: white; }
+  .trust-audit-inner {
+    max-width: 1160px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start;
+  }
+  .trust-audit h2 {
+    font-family: 'Urbanist', sans-serif; font-weight: 600;
+    font-size: clamp(28px, 3.5vw, 38px);
+    color: var(--text-primary); margin: 0 0 16px 0;
+  }
+  .trust-audit .eyebrow {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 700;
+    letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--text-muted); margin-bottom: 12px;
+  }
+  .trust-audit ul {
+    list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 14px;
+  }
+  .trust-audit ul li {
+    font-size: 15px; color: var(--text-body); line-height: 1.6;
+    padding-left: 20px; position: relative;
+  }
+  .trust-audit ul li::before {
+    content: ''; position: absolute; left: 0; top: 9px;
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--brand-secondary);
+  }
+  .trust-audit-diagram {
+    aspect-ratio: 1.2 / 1;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #ECF1FD 0%, #DCE7FB 100%);
+    border: 1px solid var(--border-light);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--text-muted); font-size: 13px; font-style: italic;
+  }
+
+  /* Security incident posture */
+  .trust-incident { padding: 80px 32px; background: white; }
+  .trust-incident-inner { max-width: 920px; margin: 0 auto; }
+  .trust-incident h2 {
+    font-family: 'Urbanist', sans-serif; font-weight: 600;
+    font-size: clamp(28px, 3.5vw, 38px);
+    color: var(--text-primary); margin: 0 0 16px 0;
+  }
+  .trust-incident .eyebrow {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 700;
+    letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--text-muted); margin-bottom: 12px;
+  }
+  .trust-incident p {
+    font-size: 15px; color: var(--text-body); line-height: 1.65; margin: 0 0 32px 0;
+  }
+  .incident-steps {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+  }
+  .incident-step {
+    padding: 24px;
+    background: white;
+    border: 1px solid var(--border-light);
+    border-radius: 10px;
+  }
+  .incident-step .num {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 700;
+    letter-spacing: 0.16em; color: var(--brand-primary); margin-bottom: 8px;
+  }
+  .incident-step h3 {
+    font-family: 'Urbanist', sans-serif; font-weight: 600;
+    font-size: 16px; color: var(--text-primary); margin: 0 0 6px 0;
+  }
+  .incident-step p {
+    font-size: 13px; color: var(--text-body); line-height: 1.55; margin: 0;
+  }
+
+  /* Contact */
+  .trust-contact { padding: 64px 32px 96px; background: white; }
+  .trust-contact-inner {
+    max-width: 720px; margin: 0 auto;
+    background: var(--bg-tint);
+    border-radius: 16px;
+    padding: 40px;
+    text-align: center;
+  }
+  .trust-contact h2 {
+    font-family: 'Urbanist', sans-serif; font-weight: 600;
+    font-size: 28px; color: var(--text-primary); margin: 0 0 24px 0;
+  }
+  .contact-rows {
+    display: flex; flex-direction: column; gap: 12px; align-items: center;
+    margin-top: 24px;
+  }
+  .contact-row {
+    font-size: 14px; color: var(--text-body);
+  }
+  .contact-row strong {
+    font-family: 'JetBrains Mono', monospace; font-weight: 700;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    font-size: 11px; color: var(--text-muted);
+    display: inline-block; margin-right: 14px;
+  }
+  .contact-row a {
+    color: var(--brand-primary); font-weight: 600;
+  }
+
+  @media (max-width: 1024px) {
+    .ledger-card { grid-template-columns: 1fr; gap: 8px; }
+    .trust-deploy-grid { grid-template-columns: 1fr; }
+    .trust-audit-inner { grid-template-columns: 1fr; }
+    .incident-steps { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<a href="#main" class="skip-link">Skip to main content</a>
+
+<div class="preview-banner" style="background: #022f6a;">
+  <div class="label">📄 PAGE MOCKUP · /trust (priority 3, NEW BUILD, document-coded)</div>
+  <div class="links">
+    <a href="index.html">All pages</a>
+    <a href="../homepage-v2-option-a-v2.html">/ home</a>
+    <a href="enterprise.html">/enterprise</a>
+    <a href="agency.html">/agency</a>
+    <a class="active" href="trust.html">/trust</a>
+    <a href="platform.html">/platform</a>
+    <a href="agency-pricing.html">/agency/pricing</a>
+    <a href="customers.html">/customers</a>
+  </div>
+</div>
+
+<header class="site-nav">
+  <a href="../homepage-v2-option-a-v2.html" class="wordmark"><img src="assets/trillet-logo.svg" alt="Trillet"></a>
+  <nav>
+    <a href="platform.html">Platform</a>
+    <a href="enterprise.html">Enterprise</a>
+    <a href="agency.html">Agency</a>
+    <a href="agent.html">AI Agent</a>
+    <a href="https://docs.trillet.ai/v1/api-reference/introduction">Docs</a>
+    <a href="#">Sign in</a>
+    <a href="#" class="cta">Get started</a>
+  </nav>
+</header>
+
+<main id="main">
+
+<!-- HERO · LIGHT, narrow column, document-coded register departure -->
+<section class="trust-hero">
+  <div class="trust-hero-inner">
+    <div class="date-pill">Last updated · 2026-04-16</div>
+    <h1>Compliance posture.</h1>
+    <p>What is live today, what is in active build, and what we do not yet assert. Same posture in due-diligence as on this page.</p>
+    <a href="javascript:window.print()" class="pdf-link">
+      Download as PDF
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+    </a>
+  </div>
+</section>
+
+<!-- COMPLIANCE LEDGER · 3 status sub-sections -->
+<section class="trust-ledger">
+  <div class="trust-ledger-inner">
+
+    <div class="ledger-band">
+      <div class="ledger-band-header">
+        <div class="stripe live"></div>
+        <h2>Live today</h2>
+      </div>
+      <div class="ledger-cards">
+        <div class="ledger-card">
+          <div class="item-name">On-premise Docker deployment</div>
+          <div class="item-desc">Trillet deploys inside your environment via Docker. The voice agent processes and stores data within your own infrastructure. Verizon TCC precedent.</div>
+        </div>
+        <div class="ledger-card">
+          <div class="item-name">Private-cloud deployment</div>
+          <div class="item-desc">Dedicated tenant in your AWS / GCP / Azure account. You own the compute boundary. Configurable VPC + IAM integration.</div>
+        </div>
+        <div class="ledger-card">
+          <div class="item-name">Configurable data residency</div>
+          <div class="item-desc">Data stays in the geography your environment requires. Deployment-time configuration, not a per-call decision.</div>
+        </div>
+        <div class="ledger-card">
+          <div class="item-name">Encryption in transit and at rest</div>
+          <div class="item-desc">Standard cipher suites end-to-end. Key management options per deployment.</div>
+        </div>
+        <div class="ledger-card">
+          <div class="item-name">Audit trail and observability</div>
+          <div class="item-desc">Every call recorded, transcribed, scored, and logged to your retention policy. Searchable audit log with role-scoped access.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ledger-band">
+      <div class="ledger-band-header">
+        <div class="stripe flight"></div>
+        <h2>In active build</h2>
+      </div>
+      <div class="ledger-cards">
+        <div class="ledger-card">
+          <div class="item-name">ISO 27001</div>
+          <div class="item-desc">Sprinto kickoff April 15, 2026 (confirmed via Sprinto task-assignment email Apr 16). Target completion mid-May 2026 (4-5 weeks from kickoff). Documentation pre-mapped for day-1 coverage. <em>Canonical owner: <code>trillet/compliance/state.v3.md</code> evt_004.</em></div>
+        </div>
+        <div class="ledger-card">
+          <div class="item-name">SOC 2 Type II</div>
+          <div class="item-desc">Active engagement via Sprinto, target completion Aug–Oct 2026 (4-6 months from Apr 15 kickoff). Available under NDA on request before completion. <em>Canonical owner: <code>trillet/compliance/state.v3.md</code> evt_004.</em></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ledger-band">
+      <div class="ledger-band-header">
+        <div class="stripe notassert"></div>
+        <h2>Not currently asserted</h2>
+      </div>
+      <div class="ledger-cards">
+        <div class="ledger-card">
+          <div class="item-name">Independent penetration testing as a standing report</div>
+          <div class="item-desc">Not currently asserted as a standing third-party report. Coordinated as part of an enterprise engagement with your selected assessor on request.</div>
+        </div>
+        <div class="ledger-card">
+          <div class="item-name">Financially-guaranteed 99.99% Uptime SLA</div>
+          <div class="item-desc">No financially-guaranteed SLA on custom-agent deployments. Enterprise-tier SLA available under contract on request, scope per engagement.</div>
+        </div>
+        <div class="ledger-card">
+          <div class="item-name">APRA CPS 234 / IRAP alignment</div>
+          <div class="item-desc">Not currently asserted. Roadmap dependent on enterprise engagements that require it.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SUB-PROCESSOR TABLE -->
+<section class="trust-sub">
+  <div class="trust-sub-inner">
+    <div class="eyebrow">Sub-processors</div>
+    <h2>Third parties in the call path.</h2>
+    <p>Each sub-processor under written agreement. Per-customer DPA available on engagement.</p>
+    <table class="sub-table">
+      <thead>
+        <tr>
+          <th>Vendor</th>
+          <th>Category</th>
+          <th>Region</th>
+          <th>DPA</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td class="vendor">ElevenLabs</td><td>Voice synthesis</td><td>US / EU</td><td><a href="#">DPA →</a></td></tr>
+        <tr><td class="vendor">OpenAI</td><td>LLM</td><td>US</td><td><a href="#">DPA →</a></td></tr>
+        <tr><td class="vendor">Anthropic</td><td>LLM</td><td>US</td><td><a href="#">DPA →</a></td></tr>
+        <tr><td class="vendor">Deepgram</td><td>STT</td><td>US</td><td><a href="#">DPA →</a></td></tr>
+        <tr><td class="vendor">Twilio (and others per deployment)</td><td>Telephony</td><td>Per region</td><td><a href="#">DPA →</a></td></tr>
+        <tr><td class="vendor">AWS</td><td>Hosting</td><td>Per region</td><td><a href="#">DPA →</a></td></tr>
+        <tr><td class="vendor">Datadog</td><td>Observability</td><td>US</td><td><a href="#">DPA →</a></td></tr>
+      </tbody>
+    </table>
+    <div class="sub-disclaimer">
+      Per-deployment configuration may add or remove sub-processors per agreement. Customers receive the current list as part of the DPA on engagement.
+    </div>
+  </div>
+</section>
+
+<!-- DEPLOYMENT + RESIDENCY (TINT) -->
+<section class="trust-deploy">
+  <div class="trust-deploy-inner">
+    <div class="eyebrow">Deployment + data residency</div>
+    <h2>Where the data lives.</h2>
+    <div class="trust-deploy-grid">
+      <div class="trust-deploy-card">
+        <h3>On-premise Docker</h3>
+        <p>Data stays inside your infrastructure. No external egress required. You control retention, access, audit.</p>
+      </div>
+      <div class="trust-deploy-card">
+        <h3>Private cloud (your account)</h3>
+        <p>Dedicated tenant in your AWS / GCP / Azure account. You own the compute + storage boundary. Trillet-managed deployment, customer-owned infrastructure.</p>
+      </div>
+      <div class="trust-deploy-card">
+        <h3>Managed enterprise (Trillet-hosted)</h3>
+        <p>Trillet-managed deployment with configurable data residency by geography. US / EU / UK / AU / regional configurable per region.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AUDIT + OBSERVABILITY -->
+<section class="trust-audit">
+  <div class="trust-audit-inner">
+    <div>
+      <div class="eyebrow">Audit + observability</div>
+      <h2>Every call. Auditable.</h2>
+      <ul>
+        <li>Per-call recording, transcript, scoring, and structured event log.</li>
+        <li>Retention configurable per deployment per regulatory requirement.</li>
+        <li>Role-scoped access to audit logs (admin / supervisor / agent / auditor roles).</li>
+        <li>Independent audit access available on engagement — coordinate with your selected third-party assessor.</li>
+      </ul>
+    </div>
+    <div class="trust-audit-diagram">
+      <!-- Production: shared audit-flow diagram with /enterprise (pending design pass) -->
+      [Audit-flow diagram]
+    </div>
+  </div>
+</section>
+
+<!-- SECURITY INCIDENT POSTURE -->
+<section class="trust-incident">
+  <div class="trust-incident-inner">
+    <div class="eyebrow">Security incidents</div>
+    <h2>Incident response posture.</h2>
+    <p>We do not currently assert a financially-guaranteed uptime SLA on custom-agent deployments. Enterprise-tier SLA available under contract on request, scope per engagement. Security incident response process below applies to all deployments.</p>
+    <div class="incident-steps">
+      <div class="incident-step">
+        <div class="num">01 · Detection</div>
+        <h3>Continuous observability</h3>
+        <p>Continuous metrics across the call path. Alerting on call-failure thresholds, latency anomalies, sub-processor errors.</p>
+      </div>
+      <div class="incident-step">
+        <div class="num">02 · Notification</div>
+        <h3>Customer notification</h3>
+        <p>Customer notification per agreement (timeline configurable per deployment per regulatory requirement). Default: same-business-day on customer-impacting incidents.</p>
+      </div>
+      <div class="incident-step">
+        <div class="num">03 · Resolution</div>
+        <h3>Resolution + post-mortem</h3>
+        <p>Resolution per severity. Post-mortem written and shared with customer for any P1 incident. Process improvements tracked.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="trust-contact">
+  <div class="trust-contact-inner">
+    <h2>Security + compliance contact.</h2>
+    <div class="contact-rows">
+      <div class="contact-row"><strong>General security</strong><a href="mailto:security@trillet.ai">security@trillet.ai</a></div>
+      <div class="contact-row"><strong>Data Protection / DPO</strong><a href="mailto:dpo@trillet.ai">dpo@trillet.ai</a></div>
+      <div class="contact-row"><strong>Responsible disclosure</strong><a href="mailto:security@trillet.ai">security@trillet.ai</a> + <a href="#">disclosure policy</a></div>
+      <div class="contact-row"><strong>Per-customer DPA</strong><a href="mailto:legal@trillet.ai">legal@trillet.ai</a></div>
+      <div class="contact-row"><strong>Sales-routed compliance Q&amp;A</strong><a href="#">Map your enterprise deployment →</a></div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-mark">
+      <img src="assets/trillet-footer.svg" alt="Trillet">
+      <p>Same compliance posture in due-diligence as on this page. Updated as the posture changes.</p>
+    </div>
+    <div class="footer-col"><h4>Platform</h4><ul><li><a href="platform.html">Overview</a></li><li><a href="enterprise.html">Enterprise</a></li><li><a href="agency.html">Agency</a></li><li><a href="agent.html">AI Agent</a></li><li><a href="agency-pricing.html">Pricing</a></li></ul></div>
+    <div class="footer-col"><h4>Trust</h4><ul><li><a href="trust.html">Compliance posture</a></li><li><a href="customers.html">Customers</a></li><li><a href="#">Sub-processors</a></li><li><a href="#">DPA</a></li></ul></div>
+    <div class="footer-col"><h4>Company</h4><ul><li><a href="#">About</a></li><li><a href="#">Careers</a></li><li><a href="#">Contact</a></li><li><a href="#">Privacy</a></li></ul></div>
+    <div class="footer-col"><h4>Resources</h4><ul><li><a href="https://docs.trillet.ai/v1/api-reference/introduction">Docs</a></li><li><a href="#">Changelog</a></li><li><a href="#">Blog</a></li><li><a href="#">Status</a></li></ul></div>
+  </div>
+  <div class="footer-bar">
+    <div>© 2026 Trillet. All rights reserved.</div>
+    <nav><a href="#">Privacy</a><a href="#">Terms</a><a href="trust.html">Security</a></nav>
+  </div>
+</footer>
+
+<div class="option-footer" style="background: #022f6a;">
+  <strong style="color: white;">📄 /trust PAGE MOCKUP · NEW BUILD · DOCUMENT-CODED REGISTER DEPARTURE</strong> · 7-section spine: Hero (LIGHT, narrow column, NO dark panel — register departure to signal 'document, not pitch', last-updated date pill + 'Download as PDF' via window.print()) → Compliance ledger (3 sub-sections grouped by status: Live/In active build/Not yet asserted, 5+2+3=10 cards) → Sub-processor table (vendor + category + region + DPA link, BAA confirmation per Ming Apr 11 verbal — written attestation list still pending) → Deployment + residency (TINT) → Audit + observability (2-col, diagram pending design pass F4) → Security incidents (3-step process, NO uptime SLA claim per evt_015) → Contact (DPO contact pending Laurence per D5).
+  <p style="margin-top: 8px;">[LOCKED per Ori]: Last-updated date = static-in-source const. PDF generation = print-CSS auto-rendered via window.print(). Sub-processor list + DPO + DPA template + SLA language all pending Bucket D sign-off (D3-D6).</p>
+</div>
+
+</body>
+</html>

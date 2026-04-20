@@ -1,0 +1,2640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Trillet · Homepage · Precision Operator</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Urbanist:wght@300;400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link href="shared.css" rel="stylesheet">
+<style>
+  /* ========== HERO · from Option 01: dark navy panel inside light page + orb (brand staple preserved) ========== */
+  .lb-hero-wrap {
+    padding: 40px 32px 96px;
+    background: linear-gradient(to bottom, #FFFFFF 0%, #F7FAFF 100%);
+  }
+  .lb-panel {
+    max-width: 1360px; margin: 0 auto;
+    background: var(--bg-dark);
+    border-radius: 28px;
+    padding: 64px 56px;
+    position: relative; overflow: hidden;
+    display: grid; grid-template-columns: 1.15fr 0.85fr;
+    gap: 56px; align-items: center;
+    min-height: 540px;
+    box-shadow: 0 40px 80px rgba(2, 58, 132, 0.18);
+  }
+  .lb-panel::before {
+    content: ''; position: absolute; inset: 0; pointer-events: none;
+    background:
+      radial-gradient(ellipse 55% 45% at 78% 18%, rgba(131, 228, 255, 0.22) 0%, transparent 55%),
+      radial-gradient(ellipse 45% 45% at 12% 88%, rgba(2, 58, 132, 0.55) 0%, transparent 55%),
+      radial-gradient(ellipse 30% 30% at 75% 75%, rgba(39, 163, 253, 0.20) 0%, transparent 60%),
+      radial-gradient(ellipse 25% 30% at 35% 35%, rgba(2, 58, 132, 0.30) 0%, transparent 70%);
+  }
+  .lb-panel::after {
+    content: ''; position: absolute; inset: 0; pointer-events: none;
+    background-image:
+      radial-gradient(rgba(255,255,255,0.04) 1px, transparent 1px);
+    background-size: 32px 32px;
+    opacity: 0.6;
+    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 75%);
+  }
+  .lb-left { position: relative; z-index: 1; display: flex; flex-direction: column; gap: 24px; }
+  .lb-h1 { font-size: clamp(40px, 5.5vw, 72px); font-weight: 600; }
+  .lb-pills { display: flex; flex-wrap: wrap; gap: 8px; }
+  .lb-ctas { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 12px; }
+
+  /* Voice agent card with orb (brand staple) */
+  .va-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 20px;
+    padding: 32px;
+    position: relative; z-index: 1;
+    backdrop-filter: blur(10px);
+  }
+  .va-status {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 24px;
+    font-size: 12px; color: var(--text-on-dark-body);
+  }
+  .va-status .dot {
+    width: 6px; height: 6px; border-radius: 50%; background: var(--status-live);
+    margin-right: 6px; display: inline-block; box-shadow: 0 0 6px var(--status-live);
+  }
+  .orb-wrap {
+    display: flex; justify-content: center; align-items: center;
+    padding: 24px 0 8px; position: relative; min-height: 240px;
+  }
+  .orb-aura {
+    position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+    width: 200px; height: 200px; border-radius: 50%;
+    pointer-events: none;
+  }
+  .orb-aura::before, .orb-aura::after {
+    content: ''; position: absolute; inset: 0; border-radius: 50%;
+    border: 1px solid rgba(131, 228, 255, 0.20);
+    animation: orbRing 3.6s ease-in-out infinite;
+  }
+  .orb-aura::after {
+    inset: -28px; animation-delay: 1.2s;
+    border-color: rgba(39, 163, 253, 0.16);
+  }
+  .orb-ring-3 {
+    position: absolute; left: 50%; top: 50%;
+    transform: translate(-50%, -50%);
+    width: 280px; height: 280px; border-radius: 50%;
+    border: 1px solid rgba(2, 58, 132, 0.5);
+    animation: orbRing 3.6s ease-in-out infinite; animation-delay: 2.4s;
+    pointer-events: none;
+  }
+  @keyframes orbRing {
+    0%, 100% { opacity: 0; transform: translate(-50%, -50%) scale(0.92); }
+    50% { opacity: 1; transform: translate(-50%, -50%) scale(1.04); }
+  }
+  .orb {
+    width: 180px; height: 180px; border-radius: 50%;
+    background:
+      radial-gradient(circle at 35% 30%, rgba(255,255,255,0.7) 0%, rgba(184, 229, 255, 0.0) 25%),
+      radial-gradient(circle at 35% 30%, #B8E5FF 0%, #83E4FF 22%, #27A3FD 55%, #0062E9 85%, #023A84 100%);
+    box-shadow:
+      inset 0 -10px 30px rgba(2, 58, 132, 0.55),
+      inset 0 8px 24px rgba(255, 255, 255, 0.55),
+      inset 0 0 0 1px rgba(131, 228, 255, 0.20),
+      0 16px 56px rgba(39, 163, 253, 0.50),
+      0 0 0 1px rgba(255, 255, 255, 0.06);
+    position: relative;
+    z-index: 1;
+  }
+  .orb::after {
+    /* highlight reflection */
+    content: ''; position: absolute;
+    top: 18%; left: 22%;
+    width: 38%; height: 28%; border-radius: 50%;
+    background: radial-gradient(ellipse, rgba(255,255,255,0.45) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  /* audio bar visualizer below the orb (v2 SMBHero pattern) */
+  .audio-bars {
+    display: flex; gap: 5px; align-items: center; justify-content: center;
+    height: 36px; margin: 16px 0 4px;
+    position: relative; z-index: 1;
+  }
+  .audio-bars span {
+    display: inline-block; width: 4px;
+    background: linear-gradient(to top, var(--brand-secondary) 0%, var(--brand-highlight) 100%);
+    border-radius: 4px;
+    box-shadow: 0 0 10px rgba(131, 228, 255, 0.45);
+    animation: audioBar 1.2s ease-in-out infinite;
+  }
+  .audio-bars span:nth-child(1) { animation-delay: 0s; }
+  .audio-bars span:nth-child(2) { animation-delay: 0.15s; }
+  .audio-bars span:nth-child(3) { animation-delay: 0.3s; }
+  .audio-bars span:nth-child(4) { animation-delay: 0.45s; }
+  .audio-bars span:nth-child(5) { animation-delay: 0.6s; }
+  .audio-bars span:nth-child(6) { animation-delay: 0.45s; }
+  .audio-bars span:nth-child(7) { animation-delay: 0.3s; }
+  .audio-bars span:nth-child(8) { animation-delay: 0.15s; }
+  .audio-bars span:nth-child(9) { animation-delay: 0s; }
+  @keyframes audioBar {
+    0%, 100% { height: 6px; opacity: 0.55; }
+    50% { height: 32px; opacity: 1; }
+  }
+  .va-transcript {
+    margin-top: 24px; display: flex; flex-direction: column; gap: 8px;
+    font-size: 13px; line-height: 1.5;
+  }
+  .va-transcript .line { display: flex; gap: 12px; }
+  .va-transcript .role {
+    font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--text-on-dark-muted); min-width: 44px;
+  }
+  .va-transcript .text { color: var(--text-on-dark-body); }
+  .va-controls {
+    display: flex; gap: 10px; align-items: center; padding-top: 20px;
+    border-top: 1px solid var(--border-dark); margin-top: 20px;
+  }
+  .va-controls .talk {
+    flex: 1; padding: 12px; border-radius: 10px;
+    background: var(--brand-primary); color: white;
+    font-size: 13px; font-weight: 600; text-align: center;
+  }
+  /* Hero door: tertiary link below VA card routing to /agent (the third operating shape, evt_2026_04_17_011).
+     No price in hero -- infrastructure-positioning precedent (Stripe/Anthropic reserve hero for frame). */
+  .va-door-link {
+    display: block; margin-top: 16px; text-align: center;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px; font-weight: 500;
+    color: var(--text-on-dark-body);
+    letter-spacing: 0.01em;
+    transition: color 160ms ease;
+  }
+  .va-door-link:hover { color: var(--brand-highlight); }
+  .va-door-link span { transition: transform 160ms ease; display: inline-block; }
+  .va-door-link:hover span { transform: translateX(2px); }
+
+  /* ========== "OPERATING LAYER, LIVE" · from Option 01: operator console intro ========== */
+  .lb-intro-section { padding: 96px 32px; background: white; }
+
+  /* OVERRIDE · operator console uses midway brand-blue tone derived from hero bloom math.
+     Hero base #0A0F1E + brand-deep bloom rgba(2,58,132,0.45) ≈ #0B2959.
+     We push toward the bloom end so the box feels part of the hero family,
+     not a disconnected dark slab. Plus complex layered texture matching the hero. */
+  .lb-intro .op-console {
+    background:
+      radial-gradient(ellipse 60% 50% at 80% 20%, rgba(131, 228, 255, 0.10) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 60% at 15% 90%, rgba(39, 163, 253, 0.10) 0%, transparent 65%),
+      linear-gradient(135deg, #0F1E47 0%, #1A3068 100%);
+    border-color: rgba(131, 228, 255, 0.16);
+    box-shadow:
+      0 32px 80px rgba(2, 58, 132, 0.32),
+      inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  }
+  .lb-intro .op-console-head {
+    background: rgba(255, 255, 255, 0.025);
+    border-bottom-color: rgba(255, 255, 255, 0.07);
+  }
+  .lb-intro .op-row {
+    border-bottom-color: rgba(255, 255, 255, 0.05);
+  }
+  .lb-intro {
+    max-width: 1360px; margin: 0 auto;
+    display: grid; grid-template-columns: 0.9fr 1.1fr;
+    gap: 48px; align-items: start;
+  }
+  .lb-intro h2 {
+    font-family: 'Urbanist', sans-serif; font-weight: 600;
+    font-size: clamp(32px, 4vw, 52px);
+    letter-spacing: -0.025em; line-height: 1.05;
+    color: var(--text-primary); margin: 0 0 20px 0;
+  }
+  .lb-intro .eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--brand-primary); margin-bottom: 18px;
+  }
+  .lb-intro .eyebrow::before { content: ''; width: 24px; height: 1px; background: currentColor; }
+  .lb-intro p {
+    font-size: 16px; color: var(--text-body); line-height: 1.65; margin: 0 0 12px 0;
+  }
+
+  /* ========== PROOF LEDGER · TINT bg + DARK cards — evt_2026_04_17_008: section demoted to light-surface with dark proof cards; full-dark reserved for Close finale ========== */
+  .lb-proof { padding: 112px 32px; background: var(--bg-tint); position: relative; overflow: hidden; }
+  .lb-proof-inner { max-width: 1360px; margin: 0 auto; position: relative; z-index: 1; }
+  /* Counter "moment": soft brand-blue radial aura behind the head block so the 1.4M+ has presence in tint space */
+  .lb-proof-head {
+    position: relative;
+    margin-bottom: 56px;
+    padding: 12px 0 24px;
+    text-align: center;
+  }
+  .lb-proof-head::before {
+    content: ''; position: absolute;
+    top: -20px; bottom: -20px;
+    left: 50%; transform: translateX(-50%);
+    width: min(720px, 90%);
+    background:
+      radial-gradient(ellipse 60% 80% at 50% 50%, rgba(39, 163, 253, 0.16) 0%, transparent 70%),
+      radial-gradient(ellipse 30% 60% at 50% 50%, rgba(2, 58, 132, 0.10) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: -1;
+  }
+  .lb-proof-head .eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--brand-primary); margin-bottom: 14px;
+  }
+  .lb-proof-head .eyebrow::before {
+    content: ''; width: 6px; height: 6px; border-radius: 50%;
+    background: var(--status-live); box-shadow: 0 0 8px var(--status-live);
+  }
+  .lb-counter {
+    font-family: 'JetBrains Mono', monospace; font-weight: 700;
+    font-size: clamp(64px, 9vw, 108px);
+    line-height: 1; letter-spacing: -0.04em;
+    background: linear-gradient(135deg, var(--brand-deep) 0%, var(--brand-primary) 100%);
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .lb-counter-label {
+    font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 700;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--text-muted); margin-top: 10px;
+  }
+  .lb-proof-cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .lb-proof-card {
+    padding: 24px;
+    background: var(--bg-dark);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 12px;
+    display: flex; flex-direction: column; gap: 10px;
+    box-shadow: 0 12px 32px rgba(2, 58, 132, 0.14), 0 2px 6px rgba(2, 58, 132, 0.08);
+    position: relative; overflow: hidden;
+  }
+  /* Subtle internal bloom in each card so they don't read flat against tint */
+  .lb-proof-card::before {
+    content: ''; position: absolute; inset: 0; pointer-events: none;
+    background: radial-gradient(ellipse 60% 50% at 100% 0%, rgba(39, 163, 253, 0.14) 0%, transparent 60%);
+  }
+  .lb-proof-card > * { position: relative; z-index: 1; }
+  .proof-status {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.14em; text-transform: uppercase;
+  }
+  .proof-status.live { color: #34D399; }
+  .proof-status .dot { width: 5px; height: 5px; border-radius: 50%; background: #34D399; box-shadow: 0 0 6px #34D399; }
+  .proof-name {
+    font-family: 'Urbanist', sans-serif; font-weight: 600;
+    font-size: 15px; color: white; line-height: 1.3;
+  }
+  .proof-metric {
+    font-family: 'JetBrains Mono', monospace; font-weight: 700;
+    font-size: 28px; line-height: 1;
+    color: var(--brand-highlight); letter-spacing: -0.02em;
+    margin-top: 4px;
+  }
+  .proof-metric-label {
+    font-size: 11px; color: rgba(255,255,255,0.56);
+    letter-spacing: 0.10em; text-transform: uppercase;
+  }
+  .proof-desc {
+    font-size: 13px; line-height: 1.55;
+    color: rgba(255,255,255,0.72);
+    margin: auto 0 0 0;
+  }
+
+  /* ========== ANATOMY OF A CALL · phase strip + operator console as visual anchor — restores canonical spine Section 4 ========== */
+  .lb-anatomy { padding: 112px 32px; background: white; }
+  .lb-anatomy-inner { max-width: 1360px; margin: 0 auto; }
+  .lb-anatomy-head { text-align: center; margin-bottom: 56px; }
+  .lb-anatomy-head .eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--brand-primary); margin-bottom: 18px;
+  }
+  .lb-anatomy-head h2 {
+    font-family: 'Urbanist', sans-serif; font-weight: 600;
+    font-size: clamp(32px, 4vw, 52px);
+    letter-spacing: -0.025em; line-height: 1.05;
+    color: var(--text-primary); margin: 0 0 16px 0;
+  }
+  .lb-anatomy-head p {
+    font-size: 16px; color: var(--text-body); line-height: 1.65;
+    max-width: 640px; margin: 0 auto;
+  }
+  /* Thin flow-line band — subordinated connective tissue (2026-04-17): was full section-presence phase diagram; now reads as a labeled rail before the load-bearing cards + console below. Preserves three-abstraction-level pattern (concept → exemplar → live) without competing for stature. */
+  .lb-phase-band {
+    position: relative; margin: 0 auto 36px;
+    max-width: 880px; height: 80px;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 8px;
+  }
+  .lb-phase-band::before {
+    content: ''; position: absolute; left: 20px; right: 20px; top: 50%;
+    height: 1px; transform: translateY(-0.5px);
+    background: linear-gradient(to right,
+      rgba(0,98,233,0.18) 0%,
+      rgba(39,163,253,0.42) 50%,
+      rgba(131,228,255,0.55) 100%);
+  }
+  .lb-phase-pip {
+    position: relative; z-index: 1;
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 6px 14px 6px 10px;
+    background: white;
+    border-radius: 999px;
+    border: 1px solid rgba(0,98,233,0.18);
+  }
+  .lb-phase-pip .dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--brand-secondary);
+    box-shadow: 0 0 0 3px rgba(0,98,233,0.10);
+  }
+  .lb-phase-pip .name {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; font-weight: 700; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--brand-primary);
+  }
+  .lb-phase-cards {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
+    max-width: 1160px; margin: 0 auto 48px;
+  }
+  .lb-phase-card {
+    padding: 20px;
+    background: var(--bg-tint);
+    border-radius: 12px;
+  }
+  .lb-phase-card h4 {
+    font-family: 'Urbanist', sans-serif; font-weight: 600;
+    font-size: 14px; color: var(--text-primary); margin: 0 0 6px 0;
+  }
+  .lb-phase-card .ex {
+    font-size: 12px; line-height: 1.55;
+    color: var(--text-body); font-style: italic; margin: 0;
+  }
+  .lb-anatomy-console-wrap { max-width: 1160px; margin: 0 auto; }
+  /* Contrast eyebrow — implies differentiation without naming competitors (2026-04-17). Sits between the phase-pip concept rail + examples and the live production console below. */
+  .lb-anatomy-contrast {
+    max-width: 1160px; margin: 0 auto 18px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .lb-anatomy-contrast .rule {
+    flex: 1; height: 1px;
+    background: linear-gradient(to right, transparent, rgba(2,58,132,0.12));
+  }
+  .lb-anatomy-contrast .rule.right {
+    background: linear-gradient(to left, transparent, rgba(2,58,132,0.12));
+  }
+  .lb-anatomy-contrast .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--brand-primary);
+    white-space: nowrap;
+  }
+  .lb-anatomy .op-console {
+    background:
+      radial-gradient(ellipse 60% 50% at 80% 20%, rgba(131, 228, 255, 0.10) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 60% at 15% 90%, rgba(39, 163, 253, 0.10) 0%, transparent 65%),
+      linear-gradient(135deg, #0F1E47 0%, #1A3068 100%);
+    border-color: rgba(131, 228, 255, 0.16);
+    box-shadow: 0 32px 80px rgba(2, 58, 132, 0.32), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  }
+  .lb-anatomy .op-console-head {
+    background: rgba(255, 255, 255, 0.025);
+    border-bottom-color: rgba(255, 255, 255, 0.07);
+    padding: 20px 28px;
+  }
+  .lb-anatomy .op-console-head .title {
+    display: flex; flex-direction: column; gap: 2px;
+  }
+  .lb-anatomy .op-title-main {
+    font-size: 13px; font-weight: 600; color: var(--text-on-dark);
+    letter-spacing: 0.02em;
+  }
+  .lb-anatomy .op-title-sub {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; font-weight: 700; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--text-on-dark-muted);
+  }
+  /* Summary metrics band */
+  .op-metrics {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    padding: 14px 28px;
+    background: rgba(255, 255, 255, 0.02);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    gap: 20px;
+  }
+  .op-metric { display: flex; flex-direction: column; gap: 4px; }
+  .op-metric-value {
+    font-family: 'JetBrains Mono', monospace; font-weight: 700;
+    font-size: 20px; color: var(--text-on-dark);
+    font-variant-numeric: tabular-nums; letter-spacing: -0.01em;
+  }
+  .op-metric-label {
+    font-size: 10px; font-weight: 700; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--text-on-dark-muted);
+  }
+  /* Column headers */
+  .op-rows-head {
+    display: grid;
+    grid-template-columns: 16px 1.4fr 1.4fr 2.2fr 60px;
+    gap: 16px; align-items: center;
+    padding: 10px 28px;
+    background: rgba(255, 255, 255, 0.015);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; font-weight: 700; letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-on-dark-muted);
+  }
+  .op-rows-head > div:first-child { /* matches the 16px pulse column */ }
+  /* New enriched row */
+  .op-row-v2 {
+    display: grid;
+    grid-template-columns: 16px 1.4fr 1.4fr 2.2fr 60px;
+    gap: 16px; align-items: center;
+    padding: 16px 28px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  }
+  .op-row-v2:last-child { border-bottom: none; }
+  .op-row-pulse {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: #10B981;
+    box-shadow: 0 0 8px rgba(16, 185, 129, 0.6);
+    position: relative;
+  }
+  .op-row-pulse::before {
+    content: ''; position: absolute; inset: 0; border-radius: 50%;
+    background: #10B981; opacity: 0.4;
+    animation: opPulse 1.8s cubic-bezier(0,0,0.2,1) infinite;
+  }
+  @keyframes opPulse {
+    0% { transform: scale(1); opacity: 0.4; }
+    100% { transform: scale(2.4); opacity: 0; }
+  }
+  .op-row-caller { display: flex; flex-direction: column; gap: 3px; }
+  .op-row-phone {
+    font-family: 'JetBrains Mono', monospace; font-size: 13px;
+    color: var(--text-on-dark); font-variant-numeric: tabular-nums;
+    letter-spacing: -0.01em;
+  }
+  .op-row-dir {
+    font-family: 'JetBrains Mono', monospace; font-size: 10px;
+    color: var(--text-on-dark-muted); letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .op-row-dep { display: flex; flex-direction: column; gap: 3px; }
+  .op-row-dep-name {
+    font-family: 'JetBrains Mono', monospace; font-size: 12px;
+    color: var(--text-on-dark-body); letter-spacing: -0.01em;
+  }
+  .op-row-dep-tag {
+    font-family: 'JetBrains Mono', monospace; font-size: 10px;
+    color: var(--brand-highlight); letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .op-row-status-col {
+    display: flex; flex-direction: row; align-items: center; gap: 12px;
+    min-width: 0;
+  }
+  .op-row-wave {
+    display: inline-flex; gap: 2px; align-items: center; height: 14px;
+    width: 36px; flex-shrink: 0;
+  }
+  .op-row-wave span {
+    display: inline-block; width: 2px;
+    background: linear-gradient(to top, rgba(131, 228, 255, 0.4), rgba(131, 228, 255, 0.95));
+    border-radius: 2px;
+    animation: opWave 1.6s ease-in-out infinite;
+  }
+  .op-row-wave span:nth-child(1) { animation-delay: 0s; }
+  .op-row-wave span:nth-child(2) { animation-delay: 0.12s; }
+  .op-row-wave span:nth-child(3) { animation-delay: 0.24s; }
+  .op-row-wave span:nth-child(4) { animation-delay: 0.36s; }
+  .op-row-wave span:nth-child(5) { animation-delay: 0.48s; }
+  .op-row-wave span:nth-child(6) { animation-delay: 0.36s; }
+  .op-row-wave span:nth-child(7) { animation-delay: 0.24s; }
+  .op-row-wave span:nth-child(8) { animation-delay: 0.12s; }
+  @keyframes opWave {
+    0%, 100% { height: 4px; opacity: 0.55; }
+    50% { height: 14px; opacity: 1; }
+  }
+  .op-row-status-line {
+    display: flex; gap: 10px; align-items: center;
+    font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    letter-spacing: 0.08em; min-width: 0; flex: 1;
+  }
+  .op-row-status-line .op-row-context {
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  }
+  .op-row-status-line .status {
+    font-weight: 700;
+    padding: 2px 8px; border-radius: 999px;
+    font-size: 10px; letter-spacing: 0.14em;
+  }
+  .op-row-status-line .status.verify {
+    color: #FBBF24;
+    background: rgba(245, 158, 11, 0.14);
+    border: 1px solid rgba(245, 158, 11, 0.28);
+  }
+  .op-row-status-line .status.ground {
+    color: #34D399;
+    background: rgba(16, 185, 129, 0.14);
+    border: 1px solid rgba(16, 185, 129, 0.30);
+  }
+  .op-row-status-line .status.act {
+    color: #83E4FF;
+    background: rgba(131, 228, 255, 0.12);
+    border: 1px solid rgba(131, 228, 255, 0.28);
+  }
+  .op-row-status-line .status.followthrough {
+    color: #C4B5FD;
+    background: rgba(139, 92, 246, 0.14);
+    border: 1px solid rgba(139, 92, 246, 0.30);
+  }
+  .op-row-context {
+    color: var(--text-on-dark-body);
+    font-weight: 500; letter-spacing: 0.01em; text-transform: none;
+    font-size: 11px;
+  }
+  .op-row-dur-v2 {
+    font-family: 'JetBrains Mono', monospace; font-size: 13px;
+    color: var(--text-on-dark-body); font-variant-numeric: tabular-nums;
+    text-align: right;
+  }
+  /* Hide the legacy .op-row class styling from this operator console since we use op-row-v2 */
+  .lb-anatomy .op-row { display: none; }
+
+  /* ========== COMPLIANCE · expanded section (per 2026-04-17 Sprinto content integration — 3-row: frame / pill clusters / sub-processors + actions) ========== */
+  .lb-compliance {
+    padding: 96px 32px;
+    background: var(--bg-tint);
+    border-top: 1px solid var(--border-light);
+    border-bottom: 1px solid var(--border-light);
+  }
+  .lb-compliance-inner {
+    max-width: 1160px; margin: 0 auto;
+    display: flex; flex-direction: column; gap: 40px;
+  }
+  .lb-compliance-head {
+    display: flex; flex-direction: column; gap: 12px;
+    max-width: 720px;
+  }
+  .lb-compliance .eyebrow {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--brand-primary);
+  }
+  .lb-compliance-head h2 {
+    font-family: 'Urbanist', sans-serif; font-weight: 600;
+    font-size: clamp(28px, 3vw, 40px); line-height: 1.15;
+    letter-spacing: -0.015em;
+    color: var(--text-primary);
+    margin: 0;
+  }
+  .lb-compliance-head p {
+    font-size: 16px; line-height: 1.55;
+    color: var(--text-subtle);
+    margin: 0; max-width: 620px;
+  }
+  .lb-compliance-clusters {
+    display: flex; flex-direction: column; gap: 20px;
+    padding: 28px 0;
+    border-top: 1px solid rgba(2,58,132,0.08);
+    border-bottom: 1px solid rgba(2,58,132,0.08);
+  }
+  .lb-compliance-cluster { display: flex; flex-direction: column; gap: 12px; }
+  .lb-compliance-cluster-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; font-weight: 700; letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-subtle);
+  }
+  .lb-compliance-pills {
+    display: flex; gap: 8px; flex-wrap: wrap;
+  }
+  .compliance-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 7px 13px; border-radius: 999px;
+    font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 700;
+    letter-spacing: 0.08em;
+    background: white; border: 1px solid var(--border-light);
+  }
+  .compliance-pill.live {
+    color: #047857;
+    border-color: rgba(16, 185, 129, 0.25);
+  }
+  .compliance-pill.live::before {
+    content: ''; width: 6px; height: 6px; border-radius: 50%; background: #10B981;
+  }
+  .compliance-pill.flight {
+    color: #B45309;
+    border-color: rgba(245, 158, 11, 0.25);
+  }
+  .compliance-pill.flight::before {
+    content: ''; width: 6px; height: 6px; border-radius: 50%; background: #F59E0B;
+  }
+  .lb-compliance-foot {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 32px;
+    align-items: end;
+  }
+  .lb-compliance-subprocessors {
+    display: flex; flex-direction: column; gap: 10px;
+  }
+  .lb-compliance-subprocessors .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; font-weight: 700; letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-subtle);
+  }
+  .lb-compliance-subprocessors .list {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 0;
+    font-size: 14px; color: var(--text-primary);
+    font-weight: 500;
+  }
+  .lb-compliance-subprocessors .list span { display: inline-flex; align-items: center; }
+  .lb-compliance-subprocessors .list span:not(:last-child)::after {
+    content: '·'; color: var(--border-medium);
+    margin: 0 12px;
+  }
+  .lb-compliance-actions {
+    display: flex; align-items: center; gap: 20px;
+    flex-wrap: wrap; justify-content: flex-end;
+  }
+  .lb-compliance-link {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 12px 20px; border-radius: 10px;
+    background: var(--brand-primary); color: white;
+    font-size: 14px; font-weight: 600;
+    transition: background 160ms ease;
+    white-space: nowrap;
+  }
+  .lb-compliance-link:hover { background: var(--brand-deep); color: white; }
+  .lb-compliance-link-muted {
+    font-size: 14px; color: var(--text-subtle); font-weight: 500;
+    display: inline-flex; align-items: center; gap: 4px; white-space: nowrap;
+    transition: color 160ms ease;
+  }
+  .lb-compliance-link-muted:hover { color: var(--brand-primary); }
+
+  /* ========== CLOSE · DARK, H + body + CTAs + trust anchors — restores canonical spine Section 7 ========== */
+  .lb-close { padding: 112px 32px 96px; background: var(--bg-dark); color: white; position: relative; overflow: hidden; }
+  .lb-close::before {
+    content: ''; position: absolute; inset: 0; pointer-events: none;
+    background:
+      radial-gradient(ellipse 40% 50% at 85% 80%, rgba(131, 228, 255, 0.14) 0%, transparent 65%),
+      radial-gradient(ellipse 50% 60% at 15% 20%, rgba(2, 58, 132, 0.40) 0%, transparent 60%);
+  }
+  .lb-close-inner {
+    max-width: 1160px; margin: 0 auto; position: relative; z-index: 1;
+  }
+  .lb-close-row {
+    display: grid; grid-template-columns: 1.2fr 0.9fr; gap: 56px; align-items: center;
+    margin-bottom: 56px;
+  }
+  .lb-close .eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--brand-highlight); margin-bottom: 18px;
+  }
+  .lb-close .eyebrow::before {
+    content: ''; width: 6px; height: 6px; border-radius: 50%;
+    background: var(--status-eval);
+    box-shadow: 0 0 8px var(--status-eval);
+  }
+  .lb-close h2 {
+    font-family: 'Urbanist', sans-serif; font-weight: 600;
+    font-size: clamp(32px, 4vw, 52px);
+    letter-spacing: -0.025em; line-height: 1.05;
+    color: white; margin: 0 0 16px 0;
+  }
+  .lb-close p {
+    font-size: 17px; line-height: 1.65;
+    color: rgba(255,255,255,0.82); margin: 0;
+  }
+  .lb-close .ctas {
+    display: flex; flex-direction: column; gap: 12px; align-items: flex-end;
+  }
+  .lb-close-anchors {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 12px; overflow: hidden;
+  }
+  .lb-close-anchor {
+    background: var(--bg-dark);
+    padding: 20px 24px;
+  }
+  .lb-close-anchor .name {
+    font-family: 'Urbanist', sans-serif; font-weight: 600;
+    font-size: 14px; color: white; margin-bottom: 6px;
+  }
+  .lb-close-anchor .desc {
+    font-size: 12px; line-height: 1.55;
+    color: rgba(255,255,255,0.66); margin: 0;
+  }
+  /* Agency-routing sub-line below trust anchors — rescues page-end scrollers
+     who missed Deployment Paths door (evt_2026_04_17_016, qualification-preserve gesture). */
+  .lb-close-agency-line {
+    margin-top: 32px;
+    padding-top: 18px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    text-align: center;
+    font-size: 13px; color: rgba(255,255,255,0.56);
+  }
+  .lb-close-agency-line a {
+    color: var(--brand-highlight);
+    margin-left: 8px; font-weight: 500;
+    transition: color 160ms ease;
+  }
+  .lb-close-agency-line a:hover { color: white; text-decoration: underline; }
+
+  /* ========== DEPLOYMENT PATHS · split card (Enterprise dominant + Agency first-class) — restores canonical spine Section 5 ========== */
+  .lb-deploy { padding: 112px 32px; background: white; }
+  .lb-deploy-inner { max-width: 1160px; margin: 0 auto; }
+  .lb-deploy-head { text-align: center; margin-bottom: 56px; }
+  .lb-deploy-head .eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--brand-primary); margin-bottom: 20px;
+  }
+  .lb-deploy-head h2 {
+    font-family: 'Urbanist', sans-serif; font-weight: 600;
+    font-size: clamp(32px, 4vw, 52px);
+    letter-spacing: -0.025em; line-height: 1.05;
+    color: var(--text-primary); margin: 0 0 16px 0;
+  }
+  .lb-deploy-head p {
+    font-size: 16px; color: var(--text-body); line-height: 1.65;
+    max-width: 640px; margin: 0 auto;
+  }
+  .lb-deploy-grid {
+    display: grid; grid-template-columns: 1.25fr 0.75fr;
+    gap: 24px;
+  }
+  .lb-deploy-card {
+    border-radius: 20px;
+    padding: 44px 40px;
+    display: flex; flex-direction: column; gap: 20px;
+    position: relative; overflow: hidden;
+    min-height: 480px;
+  }
+  .lb-deploy-card.enterprise {
+    background: #0A1630;
+    color: white;
+  }
+  .lb-deploy-card.enterprise::before {
+    content: ''; position: absolute; inset: 0; pointer-events: none;
+    background:
+      radial-gradient(ellipse 60% 50% at 85% 15%, rgba(131, 228, 255, 0.14) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 50% at 15% 90%, rgba(2, 58, 132, 0.40) 0%, transparent 60%);
+  }
+  .lb-deploy-card.enterprise::after {
+    content: ''; position: absolute; inset: 0; pointer-events: none;
+    background-image: radial-gradient(rgba(255,255,255,0.035) 1px, transparent 1px);
+    background-size: 28px 28px; opacity: 0.7;
+    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 80%);
+  }
+  .lb-deploy-card.agency {
+    background: white;
+    border: 1px solid var(--border-light);
+  }
+  .lb-deploy-card .card-eyebrow {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase;
+    position: relative; z-index: 1;
+  }
+  .lb-deploy-card.enterprise .card-eyebrow { color: var(--brand-highlight); }
+  .lb-deploy-card.agency .card-eyebrow { color: var(--brand-primary); }
+  .lb-deploy-card .card-eyebrow .icon {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 20px; height: 20px;
+  }
+  .lb-deploy-card h3 {
+    font-family: 'Urbanist', sans-serif; font-weight: 600;
+    font-size: clamp(22px, 2.4vw, 30px);
+    letter-spacing: -0.02em; line-height: 1.15;
+    margin: 0;
+    position: relative; z-index: 1;
+    max-width: 20ch;
+  }
+  .lb-deploy-card.enterprise h3 { color: white; }
+  .lb-deploy-card.agency h3 { color: var(--text-primary); }
+  .lb-deploy-card .card-body {
+    font-size: 15px; line-height: 1.65; margin: 0;
+    position: relative; z-index: 1;
+    max-width: 520px;
+  }
+  .lb-deploy-card.enterprise .card-body { color: rgba(255,255,255,0.82); }
+  .lb-deploy-card.agency .card-body { color: var(--text-body); }
+  .lb-deploy-card ul {
+    list-style: none; padding: 0; margin: 0;
+    display: flex; flex-direction: column; gap: 10px;
+    position: relative; z-index: 1;
+  }
+  .lb-deploy-card ul li {
+    font-size: 13px; line-height: 1.55;
+    padding-left: 18px; position: relative;
+  }
+  .lb-deploy-card ul li::before {
+    content: ''; position: absolute; left: 0; top: 7px;
+    width: 6px; height: 6px; border-radius: 50%;
+  }
+  .lb-deploy-card.enterprise ul li { color: rgba(255,255,255,0.82); }
+  .lb-deploy-card.enterprise ul li::before { background: var(--brand-highlight); }
+  .lb-deploy-card.agency ul li { color: var(--text-body); }
+  .lb-deploy-card.agency ul li::before { background: var(--brand-secondary); }
+  .lb-deploy-card .card-ctas {
+    margin-top: auto; padding-top: 8px;
+    display: flex; gap: 10px; flex-wrap: wrap;
+    position: relative; z-index: 1;
+  }
+
+  @media (max-width: 1024px) {
+    .lb-panel { grid-template-columns: 1fr; }
+    .lb-intro { grid-template-columns: 1fr; }
+    .lb-deploy-grid { grid-template-columns: 1fr; }
+    .lb-deploy-card { min-height: auto; }
+    .lb-proof-cards { grid-template-columns: repeat(2, 1fr); }
+    .lb-phase-cards { grid-template-columns: repeat(2, 1fr); }
+    .lb-phase-band { height: auto; padding: 8px 0; flex-wrap: wrap; gap: 8px; justify-content: center; }
+    .lb-phase-band::before { display: none; }
+    .lb-compliance-foot { grid-template-columns: 1fr; gap: 24px; align-items: start; }
+    .lb-compliance-actions { justify-content: flex-start; }
+    .lb-close-row { grid-template-columns: 1fr; }
+    .lb-close .ctas { align-items: flex-start; }
+    .lb-close-anchors { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 640px) {
+    .lb-proof-cards { grid-template-columns: 1fr; }
+  }
+
+  /* ========== OPTION A · SINGLE-CALL SPINE ==========
+     Replaces the canonical Anatomy section (band + definition cards + operator console).
+     A single caller — +1 (415) 555-0482 on retail-banking-v3 — is walked through
+     Verify → Ground → Act → Follow-through. Sticky caller card on the left,
+     4 phase panels stacked on the right. IntersectionObserver updates the sticky
+     card's active-phase chip as you scroll.
+     ===================================================================== */
+  .lb-story {
+    background: white; padding: 120px 32px 140px;
+    position: relative;
+  }
+  .lb-story-inner { max-width: 1280px; margin: 0 auto; }
+  .lb-story-head { max-width: 720px; margin: 0 auto 80px; text-align: center; }
+  .lb-story-head .eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--brand-primary); margin-bottom: 18px;
+  }
+  .lb-story-head .eyebrow::before {
+    content: ''; width: 6px; height: 6px; border-radius: 50%;
+    background: var(--status-live); box-shadow: 0 0 8px var(--status-live);
+  }
+  .lb-story-head h2 {
+    font-family: 'Urbanist', sans-serif; font-weight: 600;
+    font-size: clamp(32px, 4vw, 52px);
+    letter-spacing: -0.025em; line-height: 1.05;
+    color: var(--text-primary); margin: 0 0 16px 0;
+  }
+  .lb-story-head p {
+    font-size: 17px; color: var(--text-body); line-height: 1.6;
+    margin: 0;
+  }
+
+  /* 2-col grid: sticky caller card + scroll-through phase stack */
+  .lb-story-grid {
+    display: grid; grid-template-columns: 0.85fr 1.15fr;
+    gap: 64px; align-items: start;
+  }
+  /* Caller card — rolls naturally with the page (per 2026-04-17 user feedback: sticky pinning created stasis; rolling reads as "you and the caller move through the call together") */
+  /* Caller column — caller scrolls naturally with the page (Option 2 per 2026-04-17) */
+  .lb-story-caller-col { position: relative; }
+  .lb-story-caller {
+    will-change: transform;
+    background:
+      radial-gradient(ellipse 60% 50% at 80% 20%, rgba(131, 228, 255, 0.12) 0%, transparent 55%),
+      radial-gradient(ellipse 50% 60% at 15% 90%, rgba(39, 163, 253, 0.12) 0%, transparent 60%),
+      linear-gradient(135deg, #0A1938 0%, #14265A 100%);
+    border: 1px solid rgba(131, 228, 255, 0.18);
+    border-radius: 20px;
+    padding: 28px;
+    box-shadow: 0 32px 80px rgba(2, 58, 132, 0.28);
+    color: white;
+  }
+  .lb-story-caller-head {
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 11px; color: var(--text-on-dark-muted);
+    letter-spacing: 0.04em;
+    padding-bottom: 18px; margin-bottom: 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .lb-story-caller-head .dot {
+    width: 6px; height: 6px; border-radius: 50%; background: var(--status-live);
+    display: inline-block; margin-right: 6px; box-shadow: 0 0 8px var(--status-live);
+  }
+  .lb-story-caller-id {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 16px; font-weight: 700; color: white;
+    letter-spacing: 0.02em;
+  }
+  .lb-story-caller-meta {
+    display: flex; flex-direction: column; gap: 2px;
+    margin-top: 6px; font-size: 12px; color: var(--text-on-dark-body);
+  }
+  .lb-story-caller-meta .deployment {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    color: var(--brand-highlight); letter-spacing: 0.04em;
+  }
+  .lb-story-orb-wrap {
+    display: flex; justify-content: center; align-items: center;
+    padding: 28px 0 20px; position: relative; min-height: 220px;
+  }
+  /* Reuse the orb styling but scoped smaller */
+  .lb-story-caller .orb-aura {
+    width: 170px; height: 170px;
+  }
+  .lb-story-caller .orb-aura::after { inset: -22px; }
+  .lb-story-caller .orb-ring-3 {
+    width: 236px; height: 236px;
+  }
+  .lb-story-caller .orb {
+    width: 150px; height: 150px;
+  }
+  .lb-story-phase-chip {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 16px; border-radius: 12px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.18em;
+    text-transform: uppercase;
+    transition: all 400ms ease;
+  }
+  .lb-story-phase-chip .label {
+    display: flex; align-items: center; gap: 10px;
+    color: white;
+  }
+  .lb-story-phase-chip .label .active-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--status-live);
+    box-shadow: 0 0 10px var(--status-live);
+    animation: pulseDot 1.6s ease-in-out infinite;
+  }
+  @keyframes pulseDot {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.6; transform: scale(0.85); }
+  }
+  .lb-story-phase-chip[data-phase="verify"] { border-color: rgba(246, 196, 83, 0.45); }
+  .lb-story-phase-chip[data-phase="verify"] .label { color: #F6C453; }
+  .lb-story-phase-chip[data-phase="ground"] { border-color: rgba(72, 207, 132, 0.45); }
+  .lb-story-phase-chip[data-phase="ground"] .label { color: #48CF84; }
+  .lb-story-phase-chip[data-phase="act"] { border-color: rgba(131, 228, 255, 0.45); }
+  .lb-story-phase-chip[data-phase="act"] .label { color: #83E4FF; }
+  .lb-story-phase-chip[data-phase="follow"] { border-color: rgba(168, 132, 255, 0.45); }
+  .lb-story-phase-chip[data-phase="follow"] .label { color: #A884FF; }
+  .lb-story-phase-chip .counter {
+    color: var(--text-on-dark-muted); font-weight: 500; letter-spacing: 0.12em;
+  }
+  .lb-story-timer {
+    margin-top: 14px;
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 11px; color: var(--text-on-dark-muted);
+    padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.06);
+  }
+  .lb-story-timer .elapsed {
+    font-family: 'JetBrains Mono', monospace; font-size: 13px;
+    font-weight: 700; color: white; letter-spacing: 0.08em;
+  }
+
+  /* Scroll column — phase panels stacked vertically */
+  .lb-story-phases { display: flex; flex-direction: column; gap: 64px; }
+  .lb-story-phase {
+    min-height: 520px;
+    display: flex; flex-direction: column; gap: 20px;
+    scroll-margin-top: 80px;
+  }
+  .lb-story-phase-header {
+    display: flex; align-items: center; gap: 14px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+  .lb-story-phase-num {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 32px; height: 32px; border-radius: 8px;
+    font-size: 12px; font-weight: 700; letter-spacing: 0;
+    background: var(--bg-tint); color: var(--brand-primary);
+  }
+  .lb-story-phase[data-phase="verify"] .lb-story-phase-num { background: rgba(246, 196, 83, 0.14); color: #B4831A; }
+  .lb-story-phase[data-phase="ground"] .lb-story-phase-num { background: rgba(72, 207, 132, 0.14); color: #1F8B52; }
+  .lb-story-phase[data-phase="act"] .lb-story-phase-num { background: rgba(2, 98, 233, 0.12); color: var(--brand-primary); }
+  .lb-story-phase[data-phase="follow"] .lb-story-phase-num { background: rgba(168, 132, 255, 0.14); color: #6C4DD6; }
+  .lb-story-phase-header .name { color: var(--text-primary); font-weight: 700; }
+  .lb-story-phase-header .sep { color: var(--border-medium); }
+  .lb-story-phase-header .pledge { color: var(--text-subtle); }
+  .lb-story-phase h3 {
+    font-family: 'Urbanist', sans-serif; font-weight: 600;
+    font-size: clamp(26px, 2.6vw, 36px);
+    line-height: 1.15; letter-spacing: -0.018em;
+    color: var(--text-primary); margin: 0;
+    max-width: 540px;
+  }
+  .lb-story-phase > p {
+    font-size: 16px; line-height: 1.65; color: var(--text-body);
+    max-width: 540px; margin: 0;
+  }
+
+  /* Evidence card — the right-side visual showing what's happening on Trillet's side */
+  .lb-story-evidence {
+    margin-top: 12px;
+    background:
+      linear-gradient(135deg, #0A1938 0%, #14265A 100%);
+    border: 1px solid rgba(131, 228, 255, 0.12);
+    border-radius: 16px;
+    padding: 24px;
+    color: white;
+    box-shadow: 0 24px 60px rgba(2, 58, 132, 0.20);
+  }
+  .lb-story-evidence-head {
+    display: flex; justify-content: space-between; align-items: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; font-weight: 700; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--text-on-dark-muted);
+    padding-bottom: 14px; margin-bottom: 16px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .lb-story-evidence-title { color: var(--brand-highlight); }
+
+  /* Phase-specific evidence layouts */
+  /* Verify: 2FA challenge */
+  .ev-verify {
+    display: grid; grid-template-columns: 1fr; gap: 14px;
+  }
+  .ev-verify-step {
+    display: grid; grid-template-columns: 20px 1fr auto; gap: 12px; align-items: center;
+    padding: 12px 14px; border-radius: 10px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.05);
+    font-size: 13px; color: var(--text-on-dark-body);
+  }
+  .ev-verify-step .check {
+    width: 18px; height: 18px; border-radius: 50%;
+    background: rgba(72, 207, 132, 0.18);
+    border: 1px solid rgba(72, 207, 132, 0.5);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .ev-verify-step .check svg { width: 10px; height: 10px; color: #48CF84; }
+  .ev-verify-step .time {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    color: var(--text-on-dark-muted);
+  }
+  .ev-verify-code {
+    display: flex; gap: 8px; justify-content: center;
+    padding: 16px; border-radius: 10px;
+    background: rgba(131, 228, 255, 0.06);
+    border: 1px dashed rgba(131, 228, 255, 0.2);
+  }
+  .ev-verify-code span {
+    width: 36px; height: 46px;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-family: 'JetBrains Mono', monospace; font-size: 22px; font-weight: 700;
+    color: white; background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1); border-radius: 8px;
+  }
+
+  /* Ground: live data reads */
+  .ev-ground {
+    display: grid; grid-template-columns: 1fr; gap: 10px;
+  }
+  .ev-ground-row {
+    display: grid; grid-template-columns: 140px 1fr 12px; gap: 14px; align-items: center;
+    padding: 10px 14px; border-radius: 10px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.05);
+    font-size: 12px;
+  }
+  .ev-ground-row .source {
+    font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--brand-highlight);
+  }
+  .ev-ground-row .value { color: var(--text-on-dark-body); font-size: 13px; }
+  .ev-ground-row .pulse {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: #48CF84; box-shadow: 0 0 8px #48CF84;
+  }
+
+  /* Act: actions executed */
+  .ev-act {
+    display: grid; grid-template-columns: 1fr; gap: 10px;
+  }
+  .ev-act-step {
+    display: grid; grid-template-columns: 28px 1fr auto; gap: 12px; align-items: center;
+    padding: 12px 14px; border-radius: 10px;
+    background: rgba(131, 228, 255, 0.04);
+    border: 1px solid rgba(131, 228, 255, 0.12);
+    font-size: 13px; color: var(--text-on-dark-body);
+  }
+  .ev-act-step .icon {
+    width: 24px; height: 24px; border-radius: 6px;
+    background: rgba(131, 228, 255, 0.12);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--brand-highlight);
+  }
+  .ev-act-step .status {
+    font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.14em; padding: 4px 8px; border-radius: 6px;
+    background: rgba(72, 207, 132, 0.14); color: #48CF84;
+    border: 1px solid rgba(72, 207, 132, 0.3);
+  }
+  .ev-act-step .label-sub {
+    font-size: 11px; color: var(--text-on-dark-muted);
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  /* Follow-through: queued + written + routed */
+  .ev-follow {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+  }
+  .ev-follow-item {
+    padding: 14px; border-radius: 10px;
+    background: rgba(168, 132, 255, 0.05);
+    border: 1px solid rgba(168, 132, 255, 0.18);
+  }
+  .ev-follow-item .kind {
+    font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: #A884FF; margin-bottom: 8px;
+  }
+  .ev-follow-item .what {
+    font-size: 13px; color: var(--text-on-dark-body); line-height: 1.45;
+  }
+
+  /* Where most voice agents stop — callout that appears BETWEEN Act and Follow-through
+     (contrast moment: industry ends the call after Act; Trillet's follow-through is where the differentiation lives) */
+  .lb-story-stop-callout {
+    position: relative;
+    margin: 8px auto;
+    padding: 28px 24px 20px;
+    max-width: 580px;
+    text-align: center;
+  }
+  .lb-story-stop-callout::before,
+  .lb-story-stop-callout::after {
+    content: ''; position: absolute; left: 50%; transform: translateX(-50%);
+    width: 1px; height: 28px;
+    background: linear-gradient(to bottom, transparent, rgba(2,58,132,0.3));
+  }
+  .lb-story-stop-callout::before { top: 0; }
+  .lb-story-stop-callout::after {
+    bottom: 0; background: linear-gradient(to top, transparent, rgba(2,58,132,0.3));
+  }
+  .lb-story-stop-callout .line {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--brand-primary);
+    margin-bottom: 6px;
+  }
+  .lb-story-stop-callout .text {
+    font-family: 'Urbanist', sans-serif; font-weight: 500;
+    font-size: 18px; color: var(--text-primary); line-height: 1.35;
+    letter-spacing: -0.01em;
+  }
+  .lb-story-stop-callout .text em {
+    font-style: normal; color: var(--brand-primary);
+  }
+
+  /* PHASE PROGRESS STRIP — in-flow rhythm element (Option 2 per 2026-04-17: no sticky, sits naturally above story grid) */
+  .lb-story-progress-wrap {
+    position: relative; z-index: 1;
+    margin: 40px auto 48px;
+    max-width: 920px;
+    /* sticky needs a container that defines the flow context */
+  }
+  .lb-story-progress {
+    display: flex; gap: 0; align-items: stretch;
+    border-radius: 14px;
+    border: 1px solid var(--border-soft);
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    overflow: hidden;
+    font-family: 'JetBrains Mono', monospace;
+    box-shadow: 0 8px 32px rgba(2,58,132,0.06);
+  }
+  .lb-story-progress-step {
+    flex: 1;
+    display: flex; align-items: center; gap: 12px;
+    padding: 16px 20px;
+    border-right: 1px solid var(--border-soft);
+    transition: background 350ms ease, color 350ms ease;
+    position: relative;
+  }
+  .lb-story-progress-step:last-child { border-right: none; }
+  .lb-story-progress-num {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 26px; height: 26px; border-radius: 7px;
+    font-size: 11px; font-weight: 700;
+    background: var(--bg-tint); color: var(--text-subtle);
+    transition: all 350ms ease;
+  }
+  .lb-story-progress-label {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--text-subtle);
+    transition: color 350ms ease;
+  }
+  /* active step gets phase color */
+  .lb-story-progress-step.is-active[data-phase="verify"] { background: rgba(246,196,83,0.08); }
+  .lb-story-progress-step.is-active[data-phase="verify"] .lb-story-progress-num { background: rgba(246,196,83,0.2); color: #B4831A; }
+  .lb-story-progress-step.is-active[data-phase="verify"] .lb-story-progress-label { color: #B4831A; }
+  .lb-story-progress-step.is-active[data-phase="ground"] { background: rgba(72,207,132,0.08); }
+  .lb-story-progress-step.is-active[data-phase="ground"] .lb-story-progress-num { background: rgba(72,207,132,0.2); color: #1F8B52; }
+  .lb-story-progress-step.is-active[data-phase="ground"] .lb-story-progress-label { color: #1F8B52; }
+  .lb-story-progress-step.is-active[data-phase="act"] { background: rgba(2,98,233,0.08); }
+  .lb-story-progress-step.is-active[data-phase="act"] .lb-story-progress-num { background: rgba(2,98,233,0.18); color: var(--brand-primary); }
+  .lb-story-progress-step.is-active[data-phase="act"] .lb-story-progress-label { color: var(--brand-primary); }
+  .lb-story-progress-step.is-active[data-phase="follow"] { background: rgba(168,132,255,0.08); }
+  .lb-story-progress-step.is-active[data-phase="follow"] .lb-story-progress-num { background: rgba(168,132,255,0.2); color: #6C4DD6; }
+  .lb-story-progress-step.is-active[data-phase="follow"] .lb-story-progress-label { color: #6C4DD6; }
+  /* completed steps — checkmark instead of number */
+  .lb-story-progress-step.is-done .lb-story-progress-num {
+    background: rgba(72,207,132,0.18); color: #1F8B52;
+  }
+
+  /* CALLER CARD ENRICHMENT — per-phase transcript snippet that swaps as user scrolls */
+  .lb-story-caller-transcript {
+    margin-top: 14px;
+    padding: 12px 14px;
+    background: rgba(255,255,255,0.04);
+    border-left: 2px solid rgba(131, 228, 255, 0.5);
+    border-radius: 0 8px 8px 0;
+    font-size: 12px; line-height: 1.5;
+    color: var(--text-on-dark-body);
+    min-height: 56px;
+    transition: opacity 280ms ease;
+  }
+  .lb-story-caller-transcript .speaker {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; font-weight: 700; letter-spacing: 0.14em;
+    color: var(--brand-highlight);
+    text-transform: uppercase;
+    display: block; margin-bottom: 4px;
+  }
+  .lb-story-caller-transcript.is-changing { opacity: 0; }
+  /* Tiny activity row beneath transcript — changes per phase */
+  .lb-story-caller-activity {
+    margin-top: 12px;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 10px 12px;
+    background: rgba(0,0,0,0.18);
+    border-radius: 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .lb-story-caller-activity .left { color: var(--text-on-dark-muted); }
+  .lb-story-caller-activity .right { color: white; font-weight: 700; }
+  .lb-story-caller-activity .pulse {
+    display: inline-block; width: 6px; height: 6px; border-radius: 50%;
+    margin-right: 6px; vertical-align: 1px;
+    background: var(--brand-highlight);
+    box-shadow: 0 0 6px var(--brand-highlight);
+    animation: pulseDot 1.4s ease-in-out infinite;
+  }
+
+  /* CLOSURE CARD — appended after follow-through evidence; "WRAPPED · 04:23" beat that closes the loop emotionally */
+  .lb-story-closure {
+    margin-top: 32px;
+    padding: 22px 24px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, rgba(72,207,132,0.06) 0%, rgba(2,98,233,0.04) 100%);
+    border: 1px solid rgba(72,207,132,0.22);
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 20px;
+  }
+  .lb-story-closure-left { display: flex; align-items: center; gap: 14px; }
+  .lb-story-closure-icon {
+    width: 36px; height: 36px; border-radius: 10px;
+    background: rgba(72,207,132,0.18);
+    display: inline-flex; align-items: center; justify-content: center;
+    color: #1F8B52;
+  }
+  .lb-story-closure-text {
+    font-family: 'Urbanist', sans-serif; font-weight: 500;
+    font-size: 16px; color: var(--text-primary);
+  }
+  .lb-story-closure-text strong { font-weight: 700; color: #1F8B52; }
+  .lb-story-closure-time {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px; font-weight: 700; letter-spacing: 0.14em;
+    color: #1F8B52;
+    padding: 8px 14px; border-radius: 8px;
+    background: rgba(72,207,132,0.12);
+  }
+
+  /* Scale-out bridge line — transitions from "one call" to "1.4M calls" */
+  .lb-story-scale {
+    margin-top: 80px; text-align: center;
+    padding: 32px 20px 0;
+    border-top: 1px solid rgba(2,58,132,0.08);
+  }
+  .lb-story-scale .lead {
+    font-family: 'Urbanist', sans-serif; font-weight: 500;
+    font-size: clamp(20px, 2vw, 26px);
+    color: var(--text-primary); line-height: 1.4;
+    letter-spacing: -0.01em; max-width: 640px; margin: 0 auto;
+  }
+  .lb-story-scale .lead em {
+    font-style: normal; color: var(--brand-primary); font-weight: 600;
+  }
+
+  @media (max-width: 1024px) {
+    .lb-story-grid { grid-template-columns: 1fr; }
+    .lb-story-caller-col { position: static; }
+    .lb-story-phase { min-height: auto; }
+    .ev-follow { grid-template-columns: 1fr; }
+  }
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+   * DIRECTION 01 · PRECISION OPERATOR
+   * Override layer — re-skins the existing structure with operator-grade tokens.
+   * Applied 2026-04-17. Retires Urbanist → Inter display. Introduces JetBrains Mono
+   * for labels/numerics/traces. Cooler palette, sharper geometry, tabular numerics.
+   * Preserves brand blue, preserves the dark/light rhythm.
+   * ═══════════════════════════════════════════════════════════════════════════ */
+
+  /* Token overrides */
+  :root {
+    --brand-deep: #003BB0;
+    --brand-primary: #0048D6;
+    --brand-secondary: #2B7FFF;
+    --brand-highlight: #79B0FF;
+
+    --bg-white: #FFFFFF;
+    --bg-rest: #F5F7FB;
+    --bg-tint: #EEF3FB;
+    --bg-dark: #0B1220;
+    --bg-dark-deeper: #070D1A;
+
+    --text-primary: #0B1220;
+    --text-body: #3D4557;
+    --text-muted: #6B7489;
+    --hair: #E4E8F0;
+    --hair-2: #D6DBE6;
+    --border-light: #E4E8F0;
+
+    --accent-ok: #00B26A;
+    --accent-warn: #E67E00;
+
+    --mono: 'JetBrains Mono', ui-monospace, monospace;
+    --radius: 10px;
+  }
+
+  body { color: var(--text-primary); font-size: 15.5px; }
+
+  /* DISPLAY TYPE — retire Urbanist, Inter 550 with tighter tracking */
+  .h1-display, .h2-display {
+    font-family: 'Inter', system-ui, sans-serif !important;
+    font-weight: 600 !important;
+    letter-spacing: -0.035em !important;
+    line-height: 1.0 !important;
+    font-feature-settings: "ss01", "cv11";
+  }
+  .lb-h1 { font-size: clamp(40px, 5.6vw, 68px) !important; }
+
+  /* NAV — tighter, flatter */
+  .site-nav { height: 64px; border-bottom: 1px solid var(--hair); top: 0 !important; }
+  .site-nav nav a { font-size: 13.5px; font-weight: 500; color: var(--text-body); }
+  .site-nav .cta { border-radius: 8px; font-size: 13.5px; padding: 9px 16px; font-weight: 500; }
+
+  /* HERO — sharper corners, remove soft box-shadow, add instrument grid rhythm */
+  .lb-hero-wrap { padding: 32px 32px 80px; background: linear-gradient(180deg, #FFFFFF 0%, #F8FAFD 100%); }
+  .lb-panel {
+    border-radius: 18px !important;
+    padding: 56px 52px !important;
+    box-shadow: 0 30px 60px -28px rgba(10,18,32,0.35) !important;
+    background: var(--bg-dark) !important;
+    border: 1px solid rgba(121,176,255,0.08);
+  }
+  .lb-panel::before {
+    background:
+      radial-gradient(ellipse 55% 45% at 82% 15%, rgba(121,176,255,0.14) 0%, transparent 60%),
+      radial-gradient(ellipse 45% 45% at 10% 85%, rgba(0,72,214,0.28) 0%, transparent 60%) !important;
+  }
+  .lb-panel::after {
+    background-image: linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px) !important;
+    background-size: 40px 40px !important;
+    mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, black 30%, transparent 75%);
+  }
+
+  /* EYEBROWS / KICKERS → monospaced operator-grade */
+  .status-pill,
+  .lb-hero-wrap .status-pill,
+  .lb-story .lb-story-kicker,
+  .lb-proof-kicker,
+  .lb-deploy-kicker,
+  .lb-compliance-kicker,
+  .lb-close-kicker {
+    font-family: var(--mono) !important;
+    font-weight: 500 !important;
+    font-size: 11px !important;
+    letter-spacing: 0.12em !important;
+    text-transform: uppercase;
+  }
+
+  /* BUTTONS — sharper, mono-labeled primary */
+  .cta-primary, .cta-secondary {
+    border-radius: 8px !important;
+    font-weight: 500 !important;
+    letter-spacing: 0 !important;
+    padding: 11px 18px !important;
+    font-size: 13.5px !important;
+  }
+  .cta-primary { background: var(--brand-primary) !important; }
+  .cta-primary:hover { background: var(--brand-deep) !important; transform: none !important; }
+  .cta-primary.on-dark { background: white !important; color: var(--bg-dark) !important; }
+
+  /* TRIFECTA PILLS (hero) — flatter, monospaced */
+  .tri-pill {
+    border-radius: 6px !important;
+    font-family: var(--mono) !important;
+    font-size: 11.5px !important;
+    letter-spacing: 0.04em !important;
+    padding: 5px 10px !important;
+    text-transform: lowercase;
+    font-weight: 500 !important;
+  }
+
+  /* OPERATOR CONSOLE — already dark, just sharpen */
+  .op-console {
+    border-radius: 12px !important;
+    border: 1px solid rgba(121,176,255,0.12) !important;
+    box-shadow: 0 20px 48px -20px rgba(0,72,214,0.25) !important;
+  }
+  .op-console-head .live-pill {
+    font-family: var(--mono) !important;
+    background: rgba(121,176,255,0.1) !important;
+    color: var(--brand-highlight) !important;
+    border-color: rgba(121,176,255,0.2) !important;
+    box-shadow: none !important;
+    border-radius: 999px !important;
+  }
+
+  /* STORY SPINE — phase numerals as mono, rules instead of soft cards */
+  .lb-story-phase-num {
+    font-family: var(--mono) !important;
+    font-weight: 600 !important;
+    color: var(--brand-primary) !important;
+  }
+  .lb-story-phase-title {
+    font-family: 'Inter', system-ui, sans-serif !important;
+    font-weight: 600 !important;
+    letter-spacing: -0.02em !important;
+  }
+  .lb-story-phase { border-top: 1px solid var(--hair) !important; }
+  .lb-story-phase:last-child { border-bottom: 1px solid var(--hair); }
+
+  /* STORY PROGRESS STRIP — measured ruler style */
+  .lb-story-progress-wrap { border: 1px solid var(--hair); border-radius: 12px; background: white; padding: 14px 18px; }
+  .lb-story-progress { gap: 0 !important; }
+  .lb-story-progress-step {
+    font-family: var(--mono) !important;
+    font-size: 11px !important;
+    letter-spacing: 0.1em !important;
+    padding: 8px 14px !important;
+    border-right: 1px solid var(--hair);
+  }
+  .lb-story-progress-step:last-child { border-right: none; }
+  .lb-story-progress-step.is-active { color: var(--brand-primary) !important; background: rgba(0,72,214,0.06) !important; }
+  .lb-story-progress-step.is-done { color: var(--accent-ok) !important; }
+
+  /* CALLER CARD — keep dark but sharpen */
+  .lb-story-caller {
+    border-radius: 14px !important;
+    border: 1px solid rgba(121,176,255,0.18) !important;
+    box-shadow: 0 24px 56px -26px rgba(10,18,32,0.4) !important;
+  }
+
+  /* METRIC COUNTERS / PROOF LEDGER — convert soft cards to operator metrics */
+  .lb-proof-counter, .lb-proof {
+    background: var(--bg-tint) !important;
+  }
+  .lb-proof-counter-big {
+    font-family: 'Inter', system-ui, sans-serif !important;
+    font-feature-settings: "tnum";
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.04em !important;
+  }
+  .lb-proof-card {
+    border-radius: 12px !important;
+    background: var(--bg-dark) !important;
+    border: 1px solid rgba(121,176,255,0.1) !important;
+  }
+
+  /* DEPLOYMENT PATHS — flatten, give mono labels */
+  .lb-deploy-card {
+    border-radius: 14px !important;
+    border: 1px solid var(--hair) !important;
+    box-shadow: none !important;
+  }
+  .lb-deploy-card h3 {
+    font-family: 'Inter', system-ui, sans-serif !important;
+    font-weight: 600 !important;
+    letter-spacing: -0.025em !important;
+  }
+
+  /* COMPLIANCE PILLS — mono-labeled precision chips */
+  .lb-compliance-pill {
+    font-family: var(--mono) !important;
+    font-size: 11.5px !important;
+    border-radius: 6px !important;
+    letter-spacing: 0.04em !important;
+  }
+
+  /* CLOSE SECTION */
+  .lb-close { background: var(--bg-dark) !important; }
+  .lb-close h2 {
+    font-family: 'Inter', system-ui, sans-serif !important;
+    font-weight: 600 !important;
+    letter-spacing: -0.03em !important;
+  }
+
+  /* FOOTER */
+  .site-footer { background: var(--bg-rest) !important; border-top: 1px solid var(--hair); }
+
+  /* SECTION KICKERS (any stray .h2-display eyebrow text) */
+  .section-pad h1, .section-pad h2 { letter-spacing: -0.03em; }
+
+  /* TABULAR NUMERICS everywhere metric-like */
+  .lb-proof-counter-big,
+  .lb-proof-card-value,
+  .op-row .phone,
+  .op-row .duration,
+  .lb-story-caller [data-metric] { font-variant-numeric: tabular-nums; }
+
+  /* GENERIC refinements */
+  html { scroll-behavior: smooth; }
+  ::selection { background: rgba(0,72,214,0.18); }
+
+  /* Hide dev preview banner for design pass */
+  .preview-banner { display: none !important; }
+  .site-nav { top: 0 !important; }
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+   * PRECISION OPERATOR · NEW HERO
+   * Replaces soft orb hero with an instrument-console hero.
+   * ═══════════════════════════════════════════════════════════════════════════ */
+  .po-hero {
+    background:
+      linear-gradient(180deg, #FFFFFF 0%, #F6F8FC 100%);
+    border-bottom: 1px solid var(--hair);
+    padding: 0 0 72px;
+  }
+  .po-hero-inner { max-width: 1360px; margin: 0 auto; padding: 0 32px; }
+
+  /* Telemetry ruler */
+  .po-ruler {
+    display: grid; grid-template-columns: repeat(12, 1fr);
+    border-top: 1px solid var(--bg-dark);
+    border-bottom: 1px solid var(--hair);
+    margin: 0 0 44px;
+    font-family: var(--mono); font-size: 10.5px; color: var(--text-muted);
+    letter-spacing: 0.1em;
+  }
+  .po-ruler-tick {
+    padding: 8px 0 8px 8px; border-right: 1px solid var(--hair);
+    position: relative; min-height: 28px;
+  }
+  .po-ruler-tick:last-child { border-right: none; }
+  .po-ruler-tick::before {
+    content: ''; position: absolute; top: 0; left: 0; width: 1px; height: 5px;
+    background: var(--bg-dark);
+  }
+  .po-ruler-tick.t0::before { height: 9px; }
+  .po-ruler-tick .n { color: var(--text-primary); font-weight: 600; }
+  .po-ruler-cursor { background: rgba(0,72,214,0.05); }
+  .po-ruler-cursor .n { color: var(--brand-primary); }
+
+  .po-hero-grid {
+    display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 56px; align-items: start;
+  }
+
+  .po-marker {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-family: var(--mono); font-size: 10.5px; color: var(--brand-primary);
+    letter-spacing: 0.14em; text-transform: uppercase;
+    padding: 5px 10px 5px 10px;
+    border: 1px solid var(--brand-primary); background: rgba(0,72,214,0.04);
+    border-radius: 0;
+    margin-bottom: 28px;
+  }
+  .po-marker-dot {
+    width: 6px; height: 6px; border-radius: 50%; background: var(--brand-primary);
+    box-shadow: 0 0 0 3px rgba(0,72,214,0.15);
+    animation: po-pulse 1.8s ease-in-out infinite;
+  }
+  @keyframes po-pulse { 50% { opacity: 0.5; } }
+
+  .po-h1 {
+    margin: 0 0 24px;
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: clamp(40px, 5.4vw, 66px);
+    font-weight: 600;
+    letter-spacing: -0.04em;
+    line-height: 1.02;
+    color: var(--text-primary);
+    text-wrap: balance;
+  }
+  .po-h1-accent { color: var(--brand-primary); }
+  .po-h1-light {
+    color: transparent;
+    -webkit-text-stroke: 1.2px var(--text-primary);
+    font-weight: 500;
+  }
+
+  .po-lede {
+    margin: 0 0 28px; max-width: 560px;
+    font-size: 17px; line-height: 1.55; color: var(--text-body);
+  }
+  .po-lede strong { color: var(--text-primary); font-weight: 600; }
+
+  .po-actions { display: flex; gap: 10px; margin-bottom: 40px; flex-wrap: wrap; }
+  .po-btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 11px 16px;
+    font-family: var(--mono); font-size: 12px; font-weight: 500;
+    letter-spacing: 0.04em;
+    border-radius: 2px;
+    border: 1px solid transparent;
+    cursor: pointer; transition: all 150ms ease;
+  }
+  .po-btn-primary { background: var(--brand-primary); color: white; border-color: var(--brand-primary); }
+  .po-btn-primary:hover { background: var(--brand-deep); border-color: var(--brand-deep); }
+  .po-btn-ghost { background: transparent; color: var(--text-primary); border-color: var(--hair-2); }
+  .po-btn-ghost:hover { border-color: var(--bg-dark); }
+  .po-btn-arrow { font-size: 14px; }
+
+  /* Inline hero readouts */
+  .po-readouts {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    border-top: 1px solid var(--hair);
+    border-bottom: 1px solid var(--hair);
+  }
+  .po-readout { padding: 14px 14px 14px 0; border-right: 1px solid var(--hair); }
+  .po-readout:last-child { border-right: none; padding-right: 0; }
+  .po-readout-label {
+    font-family: var(--mono); font-size: 10px; color: var(--text-muted);
+    letter-spacing: 0.12em; margin-bottom: 6px;
+  }
+  .po-readout-value {
+    font-size: 22px; font-weight: 600; letter-spacing: -0.02em;
+    color: var(--text-primary); font-variant-numeric: tabular-nums;
+  }
+  .po-readout-value .u { font-size: 13px; color: var(--text-muted); font-weight: 400; margin-left: 2px; }
+
+  /* INSTRUMENT CONSOLE (right) */
+  .po-console {
+    background: linear-gradient(180deg, #070D1A 0%, #0B1220 100%);
+    border: 1px solid rgba(121,176,255,0.16);
+    box-shadow:
+      inset 0 0 0 1px rgba(121,176,255,0.08),
+      0 30px 72px -32px rgba(0,72,214,0.4);
+    font-family: var(--mono); color: rgba(255,255,255,0.92);
+    font-size: 12px;
+  }
+  .po-console-head {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 12px 16px;
+    border-bottom: 1px solid rgba(121,176,255,0.16);
+    background: rgba(121,176,255,0.04);
+  }
+  .po-console-title {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 11px; letter-spacing: 0.14em; color: var(--brand-highlight); font-weight: 600;
+  }
+  .po-live-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: #6AE8A1;
+    box-shadow: 0 0 0 3px rgba(106,232,161,0.2);
+    animation: po-blink 1.4s ease-in-out infinite;
+  }
+  @keyframes po-blink { 50% { opacity: 0.45; } }
+  .po-console-meta { font-size: 10.5px; color: rgba(255,255,255,0.5); letter-spacing: 0.1em; }
+
+  .po-scope {
+    height: 110px; position: relative;
+    border-bottom: 1px solid rgba(121,176,255,0.12);
+    background:
+      repeating-linear-gradient(0deg, rgba(121,176,255,0.04) 0px, rgba(121,176,255,0.04) 1px, transparent 1px, transparent 20px),
+      repeating-linear-gradient(90deg, rgba(121,176,255,0.04) 0px, rgba(121,176,255,0.04) 1px, transparent 1px, transparent 30px);
+    overflow: hidden;
+  }
+  .po-scope svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .po-scope-labels {
+    position: absolute; inset: 0; padding: 6px 10px;
+    display: flex; justify-content: space-between;
+    font-size: 9.5px; color: rgba(255,255,255,0.4); letter-spacing: 0.1em;
+    pointer-events: none;
+  }
+
+  .po-phases {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    border-bottom: 1px solid rgba(121,176,255,0.12);
+  }
+  .po-phase {
+    padding: 13px 14px 11px;
+    border-right: 1px solid rgba(121,176,255,0.08);
+    font-size: 10.5px; letter-spacing: 0.12em; color: rgba(255,255,255,0.5);
+    position: relative;
+  }
+  .po-phase:last-child { border-right: none; }
+  .po-phase .n { color: var(--brand-highlight); margin-right: 6px; font-weight: 700; }
+  .po-phase.done { color: rgba(255,255,255,0.85); background: rgba(106,232,161,0.03); }
+  .po-phase.done::after { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: #6AE8A1; }
+  .po-phase.active { color: var(--brand-highlight); background: rgba(121,176,255,0.08); }
+  .po-phase.active::after { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--brand-highlight); animation: po-blink 2s ease-in-out infinite; }
+
+  .po-console-readouts {
+    display: grid; grid-template-columns: 1fr 1fr;
+    border-bottom: 1px solid rgba(121,176,255,0.12);
+  }
+  .po-console-readout { padding: 12px 16px; border-right: 1px solid rgba(121,176,255,0.08); }
+  .po-console-readout:last-child { border-right: none; }
+  .po-console-readout-label {
+    font-size: 9.5px; letter-spacing: 0.14em; color: rgba(255,255,255,0.5);
+    margin-bottom: 5px; text-transform: uppercase;
+  }
+  .po-console-readout-value {
+    font-size: 22px; font-weight: 600; color: white; letter-spacing: -0.02em;
+    font-variant-numeric: tabular-nums;
+  }
+  .po-console-readout-value.po-ok { color: #6AE8A1; }
+  .po-console-readout-value .u { font-size: 11px; color: rgba(255,255,255,0.5); font-weight: 400; margin-left: 3px; }
+
+  .po-log { padding: 14px 16px 16px; font-size: 11px; line-height: 1.55; }
+  .po-log-row { display: grid; grid-template-columns: 48px 1fr; gap: 10px; margin-bottom: 6px; }
+  .po-log-row .t { color: rgba(255,255,255,0.4); }
+  .po-log-row .m { color: rgba(255,255,255,0.85); }
+  .po-log-row .po-log-caller { color: var(--brand-highlight); }
+  .po-log-row .po-log-tool { color: rgba(255,255,255,0.5); font-style: italic; }
+  .po-log-row .po-log-action { color: #6AE8A1; }
+
+  /* mobile */
+  @media (max-width: 1024px) {
+    .po-hero-grid { grid-template-columns: 1fr; gap: 32px; }
+    .po-readouts { grid-template-columns: repeat(2, 1fr); }
+    .po-ruler { grid-template-columns: repeat(6, 1fr); }
+    .po-ruler-tick:nth-child(n+7) { display: none; }
+  }
+
+</style>
+</head>
+<body>
+
+<a href="#main" class="skip-link">Skip to main content</a>
+
+<div class="preview-banner" style="background: #3B1F68;">
+  <div class="label">🧪 OPTION A · Single-call spine — narrative alternative to v2 locked baseline</div>
+  <div class="links">
+    <a href="homepage-v2.html">← v2 baseline</a>
+    <a class="active" href="homepage-v2-option-a.html">Option A</a>
+  </div>
+</div>
+
+<header class="site-nav">
+  <a href="locked-baseline.html" class="wordmark"><img src="assets/trillet-logo.svg" alt="Trillet"></a>
+  <nav>
+    <a href="../2026-04-16-page-mockups/platform.html">Platform</a>
+    <a href="../2026-04-16-page-mockups/enterprise.html">Enterprise</a>
+    <a href="../2026-04-16-page-mockups/agency.html">Agency</a>
+    <a href="../2026-04-16-page-mockups/agent.html">Agent</a>
+    <a href="#">Sign in</a>
+    <a href="#" class="cta">Get started</a>
+  </nav>
+</header>
+
+<!-- HERO · PRECISION OPERATOR · instrument console + telemetry header (Direction 01 pass 2026-04-17) -->
+<main id="main">
+<section class="po-hero">
+  <div class="po-hero-inner">
+    <!-- Telemetry ruler at top -->
+    <div class="po-ruler">
+      <span class="po-ruler-tick t0"><span class="n">00:00</span></span>
+      <span class="po-ruler-tick"></span>
+      <span class="po-ruler-tick"></span>
+      <span class="po-ruler-tick t0"><span class="n">00:15</span></span>
+      <span class="po-ruler-tick"></span>
+      <span class="po-ruler-tick"></span>
+      <span class="po-ruler-tick t0"><span class="n">00:30</span></span>
+      <span class="po-ruler-tick po-ruler-cursor"><span class="n">00:34</span></span>
+      <span class="po-ruler-tick"></span>
+      <span class="po-ruler-tick"></span>
+      <span class="po-ruler-tick t0"><span class="n">00:45</span></span>
+      <span class="po-ruler-tick"></span>
+    </div>
+
+    <div class="po-hero-grid">
+      <!-- LEFT: editorial claim -->
+      <div class="po-hero-left">
+        <div class="po-marker"><span class="po-marker-dot"></span><span>POSITION / LIVE CALL · DR. CHEN'S OFFICE</span></div>
+
+        <h1 class="po-h1">
+          The voice operating layer —
+          <span class="po-h1-accent">instrumented,</span><br>
+          <span class="po-h1-light">measured, policy-gated.</span>
+        </h1>
+
+        <p class="po-lede">
+          Voice agents that <strong>verify the caller</strong>, ground every turn against your systems of record, <strong>take authorized action</strong>, and follow through after hangup. Every call runs the same four-phase spine. Every step logged, reversible, auditable.
+        </p>
+
+        <!-- Operator-grade action row -->
+        <div class="po-actions">
+          <a href="#" class="po-btn po-btn-primary">
+            <span class="po-btn-label">MAP_YOUR_WORKFLOW</span>
+            <span class="po-btn-arrow">→</span>
+          </a>
+          <a href="#" class="po-btn po-btn-ghost">
+            <span class="po-btn-label">HEAR_A_REAL_CALL</span>
+          </a>
+        </div>
+
+        <!-- Hero metric strip: inline operator readouts -->
+        <div class="po-readouts">
+          <div class="po-readout">
+            <div class="po-readout-label">CALLS / WEEK</div>
+            <div class="po-readout-value">48,200<span class="u"></span></div>
+          </div>
+          <div class="po-readout">
+            <div class="po-readout-label">FIRST-CALL RESOLUTION</div>
+            <div class="po-readout-value">87.4<span class="u">%</span></div>
+          </div>
+          <div class="po-readout">
+            <div class="po-readout-label">P95 LATENCY</div>
+            <div class="po-readout-value">780<span class="u">ms</span></div>
+          </div>
+          <div class="po-readout">
+            <div class="po-readout-label">DEPLOYMENTS</div>
+            <div class="po-readout-value">340<span class="u">+</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: Instrument console — live call trace with scope + phase strip + turn log -->
+      <aside class="po-console">
+        <div class="po-console-head">
+          <div class="po-console-title">
+            <span class="po-live-dot"></span>
+            <span>CALL_TRACE · CH_01</span>
+          </div>
+          <div class="po-console-meta">+1·415·555·0142 · 00:34</div>
+        </div>
+
+        <!-- Waveform scope -->
+        <div class="po-scope">
+          <svg viewBox="0 0 640 100" preserveAspectRatio="none" aria-hidden="true">
+            <g stroke="#79B0FF" stroke-width="1.1" fill="none" opacity="0.9">
+              <path d="M0,50 L12,48 L24,52 L36,32 L48,68 L60,28 L72,72 L84,42 L96,58 L108,24 L120,76 L132,38 L144,62 L156,46 L168,54 L180,32 L192,68 L204,34 L216,66 L228,50 L240,46 L252,54 L264,30 L276,70 L288,40 L300,60 L312,48 L324,52 L336,36 L348,64 L360,44 L372,56 L384,32 L396,68 L408,42 L420,58 L432,50 L444,50 L456,28 L468,72 L480,38 L492,62 L504,48 L516,52 L528,32 L540,68 L552,40 L564,60 L576,46 L588,54 L600,34 L612,66 L624,44 L640,50" />
+            </g>
+            <line x1="0" y1="50" x2="640" y2="50" stroke="rgba(121,176,255,0.2)" stroke-dasharray="2,4" />
+            <line x1="380" y1="0" x2="380" y2="100" stroke="#E67E00" stroke-width="1.2" />
+            <circle cx="380" cy="50" r="3.5" fill="#E67E00" />
+          </svg>
+          <div class="po-scope-labels">
+            <span>−1.0</span><span>CH_01 · 16kHz · PCM</span><span>+1.0</span>
+          </div>
+        </div>
+
+        <!-- Phase strip -->
+        <div class="po-phases">
+          <div class="po-phase done"><span class="n">01</span>VERIFY</div>
+          <div class="po-phase done"><span class="n">02</span>GROUND</div>
+          <div class="po-phase active"><span class="n">03</span>ACT</div>
+          <div class="po-phase"><span class="n">04</span>FOLLOW</div>
+        </div>
+
+        <!-- Twin readouts -->
+        <div class="po-console-readouts">
+          <div class="po-console-readout">
+            <div class="po-console-readout-label">TURN_LATENCY_P95</div>
+            <div class="po-console-readout-value">780<span class="u">ms</span></div>
+          </div>
+          <div class="po-console-readout">
+            <div class="po-console-readout-label">GROUND_CONFIDENCE</div>
+            <div class="po-console-readout-value po-ok">0.94<span class="u">σ</span></div>
+          </div>
+        </div>
+
+        <!-- Live turn log -->
+        <div class="po-log">
+          <div class="po-log-row"><span class="t">00:28</span><span class="m po-log-caller">CALLER → "move my Thursday to next week"</span></div>
+          <div class="po-log-row"><span class="t">00:29</span><span class="m po-log-tool">tool: ehr.patient.get(8102)</span></div>
+          <div class="po-log-row"><span class="t">00:30</span><span class="m po-log-tool">tool: cal.availability(chen)</span></div>
+          <div class="po-log-row"><span class="t">00:31</span><span class="m">AGENT → "2:30 Tue or 10:00 Wed?"</span></div>
+          <div class="po-log-row"><span class="t">00:33</span><span class="m po-log-caller">CALLER → "Tuesday works"</span></div>
+          <div class="po-log-row"><span class="t">00:34</span><span class="m po-log-action">→ cal.move(44812, tue_2_30) · OK</span></div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- PROOF LEDGER · TINT bg + DARK cards — lifetime counter with brand-blue aura + 4 dark proof cards (evt_2026_04_17_008) -->
+<section class="lb-proof">
+  <div class="lb-proof-inner">
+    <div class="lb-proof-head">
+      <div class="eyebrow">Production signal</div>
+      <div class="lb-counter" data-target="1400000">1.4M+</div>
+      <div class="lb-counter-label">Calls handled across customer deployments</div>
+    </div>
+    <div class="lb-proof-cards">
+      <div class="lb-proof-card">
+        <div class="proof-status live"><span class="dot"></span>Live</div>
+        <div class="proof-name">Debt recovery · Overflow hours</div>
+        <div class="proof-metric">$338K+</div>
+        <div class="proof-metric-label">Recovered (aggregate)</div>
+        <p class="proof-desc">Recovery volume during overflow hours. 10× reduction in abandonment. Real-time verification before any payment path.</p>
+      </div>
+      <div class="lb-proof-card">
+        <div class="proof-status live"><span class="dot"></span>Live</div>
+        <div class="proof-name">Healthcare intake · Multi-practice</div>
+        <div class="proof-metric">78%</div>
+        <div class="proof-metric-label">Calls converted to bookings</div>
+        <p class="proof-desc">Patient context captured during the call, carried into booking, triage, and follow-up. Intake rules per practice.</p>
+      </div>
+      <div class="lb-proof-card">
+        <div class="proof-status live"><span class="dot"></span>Live</div>
+        <div class="proof-name">Wireless retail · After-hours</div>
+        <div class="proof-metric">$1.2M+</div>
+        <div class="proof-metric-label">After-hours revenue captured</div>
+        <p class="proof-desc">After-hours and overflow handled with live plan data, store routing, and continuous context across the call. Verizon TCC precedent for on-premise Docker.</p>
+      </div>
+      <div class="lb-proof-card">
+        <div class="proof-status live"><span class="dot"></span>Live</div>
+        <div class="proof-name">Financial services · Identity-first</div>
+        <div class="proof-metric">100%</div>
+        <div class="proof-metric-label">Identity-verified before account action</div>
+        <p class="proof-desc">Live identity verification before any account-touching action. Compliance-cleared deployment.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DEPLOYMENT PATHS · split card (Enterprise dominant + Agency first-class) — moved up per 2026-04-17 iteration: agency ICPs need the door early to avoid bouncing through Platform + Anatomy -->
+<section class="lb-deploy">
+  <div class="lb-deploy-inner">
+    <div class="lb-deploy-head">
+      <div class="eyebrow">Deployment paths</div>
+      <h2>Same layer. Different operating shape.</h2>
+      <p>Deploy inside your own environment, or across many clients with your brand on each.</p>
+    </div>
+    <div class="lb-deploy-grid">
+      <div class="lb-deploy-card enterprise">
+        <div class="card-eyebrow">
+          <span class="icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </span>
+          Enterprise
+        </div>
+        <h3>For regulated, controlled, system-bound environments.</h3>
+        <p class="card-body">When the call surface touches sensitive systems, strict operating boundaries, identity requirements, or infrastructure that cannot be treated as a normal SaaS rollout.</p>
+        <ul>
+          <li>On-premise Docker, private-cloud, or managed enterprise deployment</li>
+          <li>Configurable data residency by geography</li>
+          <li>Audited identity + access + deployment-boundary controls</li>
+          <li>Integration with the systems your business already runs on</li>
+        </ul>
+        <div class="card-ctas">
+          <a href="#" class="cta-primary on-dark">
+            Review enterprise fit
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </a>
+          <a href="#" class="cta-secondary on-dark">Map your enterprise deployment</a>
+        </div>
+      </div>
+      <div class="lb-deploy-card agency">
+        <div class="card-eyebrow">
+          <span class="icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+          </span>
+          Agency
+        </div>
+        <h3>Your brand on every call. Many clients, one platform.</h3>
+        <p class="card-body">White-label the brand surface, keep the operating layer underneath, deploy clients in days not months.</p>
+        <ul>
+          <li>White-label brand + custom domain per client</li>
+          <li>Multi-tenant operator console</li>
+          <li>Per-client margin economics</li>
+          <li>Deploy new clients in days, not months</li>
+        </ul>
+        <div class="card-ctas">
+          <a href="#" class="cta-primary">
+            Explore agency deployment
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OPTION A · SINGLE-CALL SPINE · replaces Anatomy section. One caller walked through V/G/A/FT with sticky-left + scroll-phases-right. -->
+<section class="lb-story" aria-labelledby="story-heading">
+  <div class="lb-story-inner">
+
+    <div class="lb-story-head">
+      <div class="eyebrow">One call, end to end</div>
+      <h2 id="story-heading">Watch a single call go the distance.</h2>
+      <p>Most voice agents stop at the conversation. Trillet runs on your live business systems — verifying, grounding, acting, and following through on every call.</p>
+    </div>
+
+    <!-- PHASE PROGRESS STRIP — sticky skimmer aid; IO marks active step + completes prior steps -->
+    <div class="lb-story-progress-wrap">
+      <div class="lb-story-progress" role="progressbar" aria-label="Call progress">
+        <div class="lb-story-progress-step is-active" data-phase="verify">
+          <span class="lb-story-progress-num">01</span>
+          <span class="lb-story-progress-label">Verify</span>
+        </div>
+        <div class="lb-story-progress-step" data-phase="ground">
+          <span class="lb-story-progress-num">02</span>
+          <span class="lb-story-progress-label">Ground</span>
+        </div>
+        <div class="lb-story-progress-step" data-phase="act">
+          <span class="lb-story-progress-num">03</span>
+          <span class="lb-story-progress-label">Act</span>
+        </div>
+        <div class="lb-story-progress-step" data-phase="follow">
+          <span class="lb-story-progress-num">04</span>
+          <span class="lb-story-progress-label">Follow-through</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="lb-story-grid">
+
+      <!-- STICKY · the caller that is being traced throughout -->
+      <div class="lb-story-caller-col">
+        <div class="lb-story-caller">
+          <div class="lb-story-caller-head">
+            <span><span class="dot"></span>Live call · in progress</span>
+            <span id="lb-story-duration">00:34</span>
+          </div>
+          <div class="lb-story-caller-id">+1 (415) 555 · 0482</div>
+          <div class="lb-story-caller-meta">
+            <span>Inbound · U.S. retail banking customer</span>
+            <span class="deployment">retail-banking-v3 · enterprise</span>
+          </div>
+          <div class="lb-story-orb-wrap">
+            <div class="orb-aura"></div>
+            <div class="orb-ring-3"></div>
+            <div class="orb"></div>
+          </div>
+          <div class="lb-story-phase-chip" data-phase="verify" id="lb-story-chip">
+            <span class="label"><span class="active-dot"></span><span id="lb-story-chip-label">Verifying</span></span>
+            <span class="counter" id="lb-story-chip-counter">01 / 04</span>
+          </div>
+          <!-- Transcript snippet — swaps per phase via JS -->
+          <div class="lb-story-caller-transcript" id="lb-story-transcript">
+            <span class="speaker" id="lb-story-transcript-who">Caller</span>
+            <span id="lb-story-transcript-text">"Hi — I need to reset my password. I can't get into my account."</span>
+          </div>
+          <!-- Activity row — what the agent is doing right now -->
+          <div class="lb-story-caller-activity" id="lb-story-activity">
+            <span class="left"><span class="pulse"></span><span id="lb-story-activity-left">Verifying identity</span></span>
+            <span class="right" id="lb-story-activity-right">2FA · 6-digit</span>
+          </div>
+          <div class="lb-story-timer">
+            <span>Intent</span>
+            <span class="elapsed">Password reset</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- SCROLL · 4 phase panels -->
+      <div class="lb-story-phases">
+
+        <!-- 01 · VERIFY -->
+        <section class="lb-story-phase" data-phase="verify" id="phase-verify">
+          <div class="lb-story-phase-header">
+            <span class="lb-story-phase-num">01</span>
+            <span class="name">Verify</span>
+            <span class="sep">·</span>
+            <span class="pledge">no action before identity</span>
+          </div>
+          <h3>Before anything else happens, the caller is who they say they are.</h3>
+          <p>Trillet authenticates against your CRM record — 2FA out of band, voice biometrics, or whatever your compliance layer requires. No account-touching action begins until verification completes.</p>
+          <div class="lb-story-evidence">
+            <div class="lb-story-evidence-head">
+              <span class="lb-story-evidence-title">Identity challenge</span>
+              <span>retail-banking-v3</span>
+            </div>
+            <div class="ev-verify">
+              <div class="ev-verify-step">
+                <span class="check"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 6l3 3 5-6"/></svg></span>
+                <span>CRM record matched · account #8842</span>
+                <span class="time">00:04</span>
+              </div>
+              <div class="ev-verify-step">
+                <span class="check"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 6l3 3 5-6"/></svg></span>
+                <span>2FA code sent to mobile ending 4217</span>
+                <span class="time">00:09</span>
+              </div>
+              <div class="ev-verify-code">
+                <span>6</span><span>3</span><span>8</span><span>0</span><span>1</span><span>2</span>
+              </div>
+              <div class="ev-verify-step">
+                <span class="check"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 6l3 3 5-6"/></svg></span>
+                <span>Code confirmed · identity verified</span>
+                <span class="time">00:31</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 02 · GROUND -->
+        <section class="lb-story-phase" data-phase="ground" id="phase-ground">
+          <div class="lb-story-phase-header">
+            <span class="lb-story-phase-num">02</span>
+            <span class="name">Ground</span>
+            <span class="sep">·</span>
+            <span class="pledge">on your live systems</span>
+          </div>
+          <h3>The agent reads your systems the way a good rep would<br>&mdash; live, not from a stale extract.</h3>
+          <p>Account history, open tickets, per-product rules, calendar availability. Trillet grounds the conversation in whatever your business already runs, so the answers match what your CRM says right now.</p>
+          <div class="lb-story-evidence">
+            <div class="lb-story-evidence-head">
+              <span class="lb-story-evidence-title">Live context · read</span>
+              <span>4 sources · 120ms</span>
+            </div>
+            <div class="ev-ground">
+              <div class="ev-ground-row">
+                <span class="source">CRM</span>
+                <span class="value">account tier · platinum · 6y customer</span>
+                <span class="pulse"></span>
+              </div>
+              <div class="ev-ground-row">
+                <span class="source">Auth policy</span>
+                <span class="value">password reset · requires recent 2FA (✓)</span>
+                <span class="pulse"></span>
+              </div>
+              <div class="ev-ground-row">
+                <span class="source">Ticket history</span>
+                <span class="value">0 open · last issue resolved 2 weeks ago</span>
+                <span class="pulse"></span>
+              </div>
+              <div class="ev-ground-row">
+                <span class="source">Fraud signal</span>
+                <span class="value">clean · device + number match on file</span>
+                <span class="pulse"></span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- CONTRAST CALLOUT · where most voice agents stop -->
+        <div class="lb-story-stop-callout">
+          <div class="line">Where most voice agents stop</div>
+          <div class="text">The conversation ends. Nothing is <em>written</em>, <em>scheduled</em>, or <em>routed</em>. A human picks up the work after the call.</div>
+        </div>
+
+        <!-- 03 · ACT -->
+        <section class="lb-story-phase" data-phase="act" id="phase-act">
+          <div class="lb-story-phase-header">
+            <span class="lb-story-phase-num">03</span>
+            <span class="name">Act</span>
+            <span class="sep">·</span>
+            <span class="pledge">inside your systems, with scope</span>
+          </div>
+          <h3>Trillet takes the action the caller asked for<br>&mdash; on your systems, inside the scope you granted.</h3>
+          <p>Password reset issued, calendar event booked, ticket created, CRM updated. Every action runs against your live backend with an auditable trail, not an export.</p>
+          <div class="lb-story-evidence">
+            <div class="lb-story-evidence-head">
+              <span class="lb-story-evidence-title">Actions executed</span>
+              <span>3 actions · all succeeded</span>
+            </div>
+            <div class="ev-act">
+              <div class="ev-act-step">
+                <span class="icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
+                <span><div>Password reset · email + SMS sent</div><div class="label-sub">POST /accounts/8842/reset</div></span>
+                <span class="status">200 OK</span>
+              </div>
+              <div class="ev-act-step">
+                <span class="icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 13h6M9 17h3"/></svg></span>
+                <span><div>CRM summary written · interaction logged</div><div class="label-sub">PATCH /contacts/c-8842/interactions</div></span>
+                <span class="status">201 Created</span>
+              </div>
+              <div class="ev-act-step">
+                <span class="icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg></span>
+                <span><div>Fraud alert suppressed · signal clean</div><div class="label-sub">POST /risk/review/skip</div></span>
+                <span class="status">200 OK</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 04 · FOLLOW-THROUGH -->
+        <section class="lb-story-phase" data-phase="follow" id="phase-follow">
+          <div class="lb-story-phase-header">
+            <span class="lb-story-phase-num">04</span>
+            <span class="name">Follow-through</span>
+            <span class="sep">·</span>
+            <span class="pledge">what happens after the call ends</span>
+          </div>
+          <h3>The call wraps, and the work keeps moving — on its own.</h3>
+          <p>Confirmation queued. Next-best-action written into the CRM. Escalation routed to the right human if something needs one. The post-call layer is where most voice products quietly hand the work back to your team. Trillet doesn't.</p>
+          <div class="lb-story-evidence">
+            <div class="lb-story-evidence-head">
+              <span class="lb-story-evidence-title">Post-call queue</span>
+              <span>04 items · all dispatched</span>
+            </div>
+            <div class="ev-follow">
+              <div class="ev-follow-item">
+                <div class="kind">Email summary</div>
+                <div class="what">Sent to customer · "Your password has been reset. Full interaction log attached."</div>
+              </div>
+              <div class="ev-follow-item">
+                <div class="kind">CRM next-step</div>
+                <div class="what">30-day check-in scheduled · assigned to account owner Rachel L.</div>
+              </div>
+              <div class="ev-follow-item">
+                <div class="kind">SMS confirmation</div>
+                <div class="what">Queued for 09:00 tomorrow · "Your account is secure. Anything else we can help with?"</div>
+              </div>
+              <div class="ev-follow-item">
+                <div class="kind">Escalation</div>
+                <div class="what">None required · intent satisfied · confidence 0.97 · no hot signal flagged</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- CLOSURE BEAT — closes the loop emotionally; chip flips to WRAPPED in the caller card too via JS -->
+          <div class="lb-story-closure">
+            <div class="lb-story-closure-left">
+              <span class="lb-story-closure-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+              </span>
+              <span class="lb-story-closure-text"><strong>Call wrapped.</strong> All four post-call actions dispatched. Customer notified.</span>
+            </div>
+            <span class="lb-story-closure-time">04:23 · END</span>
+          </div>
+        </section>
+
+      </div>
+    </div>
+
+    <!-- SCALE-OUT bridge into Proof Ledger -->
+    <div class="lb-story-scale">
+      <div class="lead">One call. Every night Trillet runs this same loop <em>47 more times</em> on this deployment alone &mdash; and millions of times across every customer.</div>
+    </div>
+
+  </div>
+</section>
+
+<script>
+  /* Option A · single-call spine
+     - IntersectionObserver updates the caller chip + transcript + activity row + phase progress strip
+     - Timer ticks up so the call feels live
+     - When user fully scrolls past Follow-through, closure mode kicks in (chip → WRAPPED)
+  */
+  (function () {
+    const phases = [
+      { id: 'phase-verify',  key: 'verify',  label: 'Verifying',           counter: '01 / 04',
+        transcript: { who: 'Caller', text: '"Hi — I need to reset my password. I can\'t get into my account."' },
+        activity:   { left: 'Verifying identity', right: '2FA · 6-digit' } },
+      { id: 'phase-ground',  key: 'ground',  label: 'Grounded',            counter: '02 / 04',
+        transcript: { who: 'Trillet', text: '"Thanks Sarah. I see you on the platinum tier — your last issue was resolved two weeks ago. Let\'s get you back in."' },
+        activity:   { left: 'Reading systems', right: '4 sources · 120ms' } },
+      { id: 'phase-act',     key: 'act',     label: 'Act · in progress',   counter: '03 / 04',
+        transcript: { who: 'Trillet', text: '"Resetting now. New temporary password sent to the email on file. You\'ll be prompted to change it on login."' },
+        activity:   { left: 'Writing actions', right: '2 systems · 2 OK' } },
+      { id: 'phase-follow',  key: 'follow',  label: 'Follow-through',      counter: '04 / 04',
+        transcript: { who: 'Trillet', text: '"Confirmation email sent. I\'ve scheduled a 30-day check-in with Rachel, your account owner. Anything else today?"' },
+        activity:   { left: 'Wrap queue', right: '4 items · dispatching' } }
+    ];
+    const wrappedState = { label: 'Wrapped', counter: '✓ COMPLETE',
+      transcript: { who: 'End of call', text: 'All four post-call actions dispatched. Customer notified. Loop closed without human handoff.' },
+      activity:   { left: 'Loop complete', right: '04:23 · END' } };
+
+    const chip          = document.getElementById('lb-story-chip');
+    const chipLabel     = document.getElementById('lb-story-chip-label');
+    const chipCounter   = document.getElementById('lb-story-chip-counter');
+    const timerEl       = document.getElementById('lb-story-duration');
+    const transcriptEl  = document.getElementById('lb-story-transcript');
+    const transcriptWho = document.getElementById('lb-story-transcript-who');
+    const transcriptTxt = document.getElementById('lb-story-transcript-text');
+    const activityLeft  = document.getElementById('lb-story-activity-left');
+    const activityRight = document.getElementById('lb-story-activity-right');
+    const progressSteps = document.querySelectorAll('.lb-story-progress-step');
+    if (!chip || !chipLabel || !chipCounter || !timerEl) return;
+
+    function fmt(sec) {
+      const m = Math.floor(sec / 60).toString().padStart(2, '0');
+      const s = Math.floor(sec % 60).toString().padStart(2, '0');
+      return m + ':' + s;
+    }
+    function applyState(state, phaseKey) {
+      // chip
+      chip.setAttribute('data-phase', phaseKey || 'follow');
+      chipLabel.textContent = state.label;
+      chipCounter.textContent = state.counter;
+      // transcript with quick fade
+      transcriptEl.classList.add('is-changing');
+      setTimeout(() => {
+        transcriptWho.textContent = state.transcript.who;
+        transcriptTxt.textContent = state.transcript.text;
+        activityLeft.textContent  = state.activity.left;
+        activityRight.textContent = state.activity.right;
+        transcriptEl.classList.remove('is-changing');
+      }, 200);
+    }
+    function updateProgress(activeKey) {
+      const order = ['verify','ground','act','follow'];
+      const activeIdx = order.indexOf(activeKey);
+      progressSteps.forEach((step) => {
+        const stepKey = step.dataset.phase;
+        const stepIdx = order.indexOf(stepKey);
+        step.classList.remove('is-active', 'is-done');
+        if (stepIdx < activeIdx) step.classList.add('is-done');
+        else if (stepIdx === activeIdx) step.classList.add('is-active');
+      });
+    }
+
+    // track which phase is currently "most in view"
+    let currentKey = 'verify';
+    let isWrapped = false;
+    const callerEl = document.querySelector('.lb-story-caller');
+    // Caller is sticky-pinned via CSS; no transform manipulation needed.
+    function rollCallerContinuous() { /* no-op — caller is CSS-sticky */ }
+    function rollCallerTo(_phaseKey) { /* no-op */ }
+    // Scroll-driven activation — picks the phase whose top crosses the viewport's upper-third.
+    // More reliable than IntersectionObserver when phases are tall and user scrolls at variable speed.
+    function pickActivePhase() {
+      const trigger = window.innerHeight * 0.35; // activation line at 35% from top
+      let active = phases[0].key;
+      phases.forEach((p) => {
+        const el = document.getElementById(p.id);
+        if (!el) return;
+        const top = el.getBoundingClientRect().top;
+        if (top <= trigger) active = p.key;
+      });
+      return active;
+    }
+    function syncToScroll() {
+      // Roll caller every tick for smooth pace-with-scroll motion.
+      if (!isWrapped) rollCallerContinuous();
+      if (isWrapped) return;
+      const key = pickActivePhase();
+      if (key !== currentKey) {
+        currentKey = key;
+        const phase = phases.find(p => p.key === key);
+        if (phase) {
+          applyState(phase, phase.key);
+          updateProgress(phase.key);
+        }
+      }
+    }
+    let rafId = null;
+    window.addEventListener('scroll', () => {
+      if (rafId) return;
+      rafId = requestAnimationFrame(() => { syncToScroll(); rafId = null; });
+    }, { passive: true });
+    // Initial sync in case page loads mid-section
+    syncToScroll();
+
+    phases.forEach(p => {
+      const el = document.getElementById(p.id);
+      // phases observed via scroll handler, no IO needed here
+      void el;
+    });
+
+    // Closure detection — when the closure card itself enters the viewport, flip to WRAPPED
+    const closureEl = document.querySelector('.lb-story-closure');
+    if (closureEl) {
+      const closureObs = new IntersectionObserver((entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting && !isWrapped) {
+            isWrapped = true;
+            applyState(wrappedState, 'follow');
+            updateProgress('follow');
+            rollCallerTo('follow');
+            // mark all steps done
+            progressSteps.forEach(step => {
+              step.classList.remove('is-active');
+              step.classList.add('is-done');
+            });
+          }
+        });
+      }, { threshold: 0.5 });
+      closureObs.observe(closureEl);
+    }
+
+    // Timer — advance based on which phase we're in
+    const baseTimes = { verify: 34, ground: 78, act: 142, follow: 218 };
+    let tick = baseTimes.verify;
+    setInterval(() => {
+      if (isWrapped) {
+        timerEl.textContent = '04:23';
+        return;
+      }
+      const target = baseTimes[currentKey] + 20;
+      if (tick < target) tick += 1;
+      else tick += 0.2;
+      timerEl.textContent = fmt(tick);
+    }, 1000);
+  })();
+</script>
+
+<!-- COMPLIANCE · expanded (per 2026-04-17 Sprinto content integration). Pills now reflect Sprinto's actual posture: HIPAA BAA + encryption + PII redaction + audit log + HITL + SLA live; ISO/SOC2 in audit. On-prem Docker + residency kept per user confirmation 2026-04-17. -->
+<section class="lb-compliance">
+  <div class="lb-compliance-inner">
+
+    <!-- Row 1 — frame -->
+    <div class="lb-compliance-head">
+      <div class="eyebrow">Compliance</div>
+      <h2>Compliance posture, before any contract.</h2>
+      <p>Every control below is either live today or in active audit. Nothing is aspirational. If it's not here, it's on the full posture page.</p>
+    </div>
+
+    <!-- Row 2 — pill clusters -->
+    <div class="lb-compliance-clusters">
+      <div class="lb-compliance-cluster">
+        <span class="lb-compliance-cluster-label">Active today</span>
+        <div class="lb-compliance-pills">
+          <span class="compliance-pill live">HIPAA · BAA available</span>
+          <span class="compliance-pill live">Encryption in transit + at rest</span>
+          <span class="compliance-pill live">Automated PII redaction</span>
+          <span class="compliance-pill live">Full audit log · 90-day retention</span>
+          <span class="compliance-pill live">Human-in-the-loop</span>
+          <span class="compliance-pill live">99.99% stability SLA</span>
+          <span class="compliance-pill live">On-premise Docker available</span>
+          <span class="compliance-pill live">Configurable residency</span>
+        </div>
+      </div>
+      <div class="lb-compliance-cluster">
+        <span class="lb-compliance-cluster-label">In audit</span>
+        <div class="lb-compliance-pills">
+          <span class="compliance-pill flight">ISO 27001 · audit in progress</span>
+          <span class="compliance-pill flight">SOC 2 Type II · audit in progress</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Row 3 — sub-processors + actions -->
+    <div class="lb-compliance-foot">
+      <div class="lb-compliance-subprocessors">
+        <span class="label">Built on</span>
+        <div class="list">
+          <span>Google (Gemini)</span>
+          <span>ElevenLabs</span>
+          <span>Stripe</span>
+          <span>Twilio</span>
+          <span>Sprinto</span>
+        </div>
+      </div>
+      <div class="lb-compliance-actions">
+        <a href="#" class="lb-compliance-link-muted">Read the full AI posture →</a>
+        <a href="https://trust.trillet.ai" class="lb-compliance-link">
+          View live security posture
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CLOSE · DARK, enterprise working session (agency determination removed per Ori 2026-04-17 — agencies self-serve via /agency/pricing, they don't need a pre-session) -->
+<section class="lb-close">
+  <div class="lb-close-inner">
+    <div class="lb-close-row">
+      <div>
+        <div class="eyebrow">For enterprise</div>
+        <h2>Call one: the<br>working session.</h2>
+        <p>90 minutes with Trillet engineering. We review your call paths, identity requirements, system integrations, residency constraints, and deployment mode. You leave with three things: the deployment shape called, the integration scope mapped, and a written proposal for what ships first. Not a pitch. Not a generic quote.</p>
+      </div>
+      <div class="ctas">
+        <a href="#" class="cta-primary on-dark">
+          Book the working session
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </a>
+        <a href="#" class="cta-secondary on-dark">Read the trust posture</a>
+      </div>
+    </div>
+    <!-- 3-anchor trust grid removed 2026-04-17: each anchor duplicated upstream sections (Proof Ledger / Deployment Paths / Compliance). Close is the commit moment, not a recap. Agency routing line preserved to avoid the dead-zone problem. -->
+    <div class="lb-close-agency-line">
+      <span>Running an agency?</span>
+      <a href="../2026-04-16-page-mockups/agency-pricing.html">Start at agency pricing <span aria-hidden="true">→</span></a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- FOOTER · with brand mark -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-mark">
+      <img src="assets/trillet-footer.svg" alt="Trillet">
+      <p>The voice operating layer. Voice agents that verify the caller, run on your live business systems, and take authorized action.</p>
+    </div>
+    <div class="footer-col"><h4>Platform</h4><ul><li><a href="#">Overview</a></li><li><a href="#">Enterprise</a></li><li><a href="#">Agency</a></li><li><a href="../2026-04-16-page-mockups/agent.html">Agent</a></li><li><a href="#">Pricing</a></li></ul></div>
+    <div class="footer-col"><h4>Product</h4><ul><li><a href="#">How it works</a></li><li><a href="#">Integrations</a></li><li><a href="#">Changelog</a></li><li><a href="#">API</a></li></ul></div>
+    <div class="footer-col"><h4>Company</h4><ul><li><a href="#">About</a></li><li><a href="#">Careers</a></li><li><a href="#">Contact</a></li><li><a href="#">Privacy</a></li></ul></div>
+    <div class="footer-col"><h4>Resources</h4><ul><li><a href="#">Docs</a></li><li><a href="#">Guides</a></li><li><a href="#">Blog</a></li><li><a href="#">Status</a></li></ul></div>
+  </div>
+  <div class="footer-bar">
+    <div>© 2026 Trillet. All rights reserved.</div>
+    <nav><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Security</a></nav>
+  </div>
+</footer>
+
+<div class="option-footer" style="background: #3B1F68;">
+  <strong style="color: white;">🧪 OPTION A · Single-call spine · 2026-04-17</strong> · Narrative alternative to the locked v2 baseline. Trades the capability-bucket Anatomy section for a scroll-driven story that walks one caller (<code>+1 (415) 555-0482</code>, <code>retail-banking-v3</code>, password reset) through Verify → Ground → Act → Follow-through. Sticky caller card on the left; 4 phase panels + live evidence cards on the right. IntersectionObserver updates the chip as each phase scrolls into view, so the caller card feels live.
+  <p style="margin-top: 8px;"><strong>What changed from v2:</strong> Anatomy section's phase band + definition cards + operator console are replaced by a single-call narrative. The operator console (4 parallel calls) is retired here — this page only shows <em>one</em> call. "Where most voice agents stop" becomes a callout between Act and Follow-through, so the contrast lives at the exact moment of differentiation. A bridge line into Proof Ledger ("47 more times on this deployment alone") handles the scale-out.</p>
+  <p style="margin-top: 8px;"><strong>Risks to evaluate:</strong> (a) favors the generic enterprise reader over TopDown composable-MSP agency reader; (b) requires a more ambitious visual build than the baseline; (c) the single-call pattern is brand-distinctive but untested with regulated buyers who may prefer the operator-console "many calls at once" proof. See v2 baseline side-by-side: <a href="homepage-v2.html" style="color: #83E4FF;">← homepage-v2.html</a>.</p>
+</div>
+
+<script>
+// Animated counter for the 1.4M+ Proof Ledger metric.
+// Triggers on scroll-into-view via IntersectionObserver; falls back to immediate animation
+// if IO is unavailable. Respects prefers-reduced-motion (jumps straight to final value).
+(function() {
+  var counter = document.querySelector('.lb-counter');
+  if (!counter) return;
+
+  var target = parseInt(counter.getAttribute('data-target'), 10) || 0;
+  var duration = 1800;
+  var prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var finalText = counter.textContent;
+  var triggered = false;
+
+  function formatNumber(n) {
+    if (n >= 1000000) return (n / 1000000).toFixed(1) + 'M+';
+    if (n >= 1000) return Math.floor(n / 1000) + 'K+';
+    return Math.floor(n).toString();
+  }
+
+  function animate() {
+    if (triggered) return;
+    triggered = true;
+    if (prefersReducedMotion) {
+      counter.textContent = finalText;
+      return;
+    }
+    counter.textContent = '0';
+    var start = performance.now();
+    function tick(now) {
+      var elapsed = now - start;
+      var progress = Math.min(elapsed / duration, 1);
+      var eased = 1 - Math.pow(1 - progress, 3); // ease-out cubic
+      if (progress < 1) {
+        counter.textContent = formatNumber(target * eased);
+        requestAnimationFrame(tick);
+      } else {
+        counter.textContent = finalText;
+      }
+    }
+    requestAnimationFrame(tick);
+  }
+
+  // Primary trigger: IntersectionObserver with low threshold + root margin so it fires
+  // reliably as soon as any part of the counter enters the viewport.
+  if ('IntersectionObserver' in window) {
+    var observer = new IntersectionObserver(function(entries) {
+      for (var i = 0; i < entries.length; i++) {
+        if (entries[i].isIntersecting) {
+          animate();
+          observer.disconnect();
+          break;
+        }
+      }
+    }, { threshold: 0.01, rootMargin: '0px 0px -10% 0px' });
+    observer.observe(counter);
+  } else {
+    // Fallback: animate immediately (older browsers without IO support)
+    animate();
+  }
+
+  // Safety fallback: if somehow nothing has triggered after 3 seconds AND the counter
+  // is already in the viewport, trigger directly. Covers edge cases where IO may be
+  // throttled or the element is already visible on load without scroll.
+  setTimeout(function() {
+    if (triggered) return;
+    var rect = counter.getBoundingClientRect();
+    if (rect.top < window.innerHeight && rect.bottom > 0) {
+      animate();
+    }
+  }, 3000);
+})();
+</script>
+
+</body>
+</html>
